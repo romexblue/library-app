@@ -1,0 +1,10 @@
+NPM installs
+    -express cors mysql2
+    -nodemon
+    -sequelize sequelize-cli
+
+npx sequelize init
+
+npm install react-router-dom
+npm install axios
+npm install jsonwebtoken
