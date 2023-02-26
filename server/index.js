@@ -15,6 +15,9 @@ app.use("/record", recordRouter);
 const usersRouter = require("./routes/Users");
 app.use("/auth", usersRouter);
 
+const floorRouter = require('./routes/Floor');
+app.use("/floor", floorRouter);
+
 db.sequelize.sync().then(()=>{
     app.listen(port, ()=> {
         console.log(`Server running on port ${port}`)
