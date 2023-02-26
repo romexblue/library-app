@@ -1,4 +1,4 @@
-import '../App.css'
+import '../styles/LoginForm.css'
 import React, {useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../helpers/AuthContext';
