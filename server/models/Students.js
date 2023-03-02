@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       course: {
          type: DataTypes.STRING,
          allowNull: false
+      },
+      year: {
+         type: DataTypes.ENUM('1st', '2nd', '3rd', '4th', '5th'),
+         allowNull: false
       }
    }, { timestamps: false });
 

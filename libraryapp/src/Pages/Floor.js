@@ -1,5 +1,4 @@
-import '../styles/LoginForm.css'
-import React, {useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../helpers/AuthContext';
 import FloorButtons from './FloorButtons';
@@ -15,8 +14,7 @@ const Floor = () => {
   }, [navigate, authContext]);
 
   return (
-    <div>
-      Choose Floor
+    <div>      
       <FloorButtons />
     </div>
 

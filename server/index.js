@@ -18,6 +18,9 @@ app.use("/auth", usersRouter);
 const floorRouter = require('./routes/Floor');
 app.use("/floor", floorRouter);
 
+const studentsRouter = require('./routes/Students');
+app.use("/student", studentsRouter);
+
 db.sequelize.sync().then(()=>{
     app.listen(port, ()=> {
         console.log(`Server running on port ${port}`)
