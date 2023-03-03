@@ -1,6 +1,8 @@
 import '../styles/Button.css'
 import axios from "axios"
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../helpers/AuthContext';
 import ConfModal from './ConfModal';
 import InfoPage from './InfoPage';
 
@@ -10,6 +12,8 @@ const FloorButtons = () => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [studentID, setStudentID] = useState('');
     const [floorID, setFloorID] = useState('');
+    const navigate = useNavigate();
+    const authContext = useContext(AuthContext);
 
     const handleConfirm = () => {
         const today = new Date();
@@ -43,12 +47,13 @@ const FloorButtons = () => {
             .then((response) => {
                 if (response.data.error) {
                     console.log(response.data.error)
+                    navigate('/')
+                    authContext.logout()
                 } else {
                     setButtonData(response.data)
                 }
             })
-
-    }, []);
+    }, [navigate, authContext]);
 
     useEffect(() => {
         buttonRefs.current[0]?.focus(); // set initial focus on first button if there are buttons

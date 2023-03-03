@@ -33,10 +33,8 @@ const Login = () => {
   };
 
   useEffect(() => {
-    
     //for page refresh if already logged in
     if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id")) {
-
       axios.get("http://localhost:5000/auth/allow", {
         headers: {
           accessToken: sessionStorage.getItem("accessToken"),
@@ -52,7 +50,7 @@ const Login = () => {
         })
     }
 
-    if (authContext.isLoggedIn) { navigate('/floor') }
+    if (authContext.isLoggedIn) { navigate('/choose') }
 
 
   }, [navigate, authContext])

@@ -1,9 +1,10 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Login from './Pages/Login';
-import Floor from './Pages/Floor';
 import { useState } from 'react';
+import Login from './Pages/Login';
+import FloorButtons from './Pages/FloorButtons';
 import AuthContext from './helpers/AuthContext';
+import Chooser from './Pages/Chooser';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,7 +36,8 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" exact element={<Login />} />
-            <Route path="/floor" exact element={<Floor />} />
+            <Route path="/choose" exact element={<Chooser />} />
+            <Route path="/entry" exact element={<FloorButtons />} />
           </Routes>
         </div>
       </Router>
