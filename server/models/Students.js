@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.STRING,
          allowNull: false
       }, 
-      schoold_id: {
+      school_id: {
          type: DataTypes.INTEGER,
          allowNull: false
       },

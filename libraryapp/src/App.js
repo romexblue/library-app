@@ -5,6 +5,7 @@ import Login from './Pages/Login';
 import FloorButtons from './Pages/FloorButtons';
 import AuthContext from './helpers/AuthContext';
 import Chooser from './Pages/Chooser';
+import Exit from './Pages/Exit';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,6 +39,7 @@ function App() {
             <Route path="/" exact element={<Login />} />
             <Route path="/choose" exact element={<Chooser />} />
             <Route path="/entry" exact element={<FloorButtons />} />
+            <Route path="/exit" exact element={<Exit />} />
           </Routes>
         </div>
       </Router>

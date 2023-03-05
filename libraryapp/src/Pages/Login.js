@@ -28,13 +28,15 @@ const Login = () => {
         sessionStorage.setItem("accessToken", response.data.accessToken)
         sessionStorage.setItem("id", response.data.userId)
         authContext.login(response.data.userId, response.data.accessToken)
+        navigate('/choose')
       }
     })
   };
 
   useEffect(() => {
+    
     //for page refresh if already logged in
-    if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id")) {
+    if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
       axios.get("http://localhost:5000/auth/allow", {
         headers: {
           accessToken: sessionStorage.getItem("accessToken"),

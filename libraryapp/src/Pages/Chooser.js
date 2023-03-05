@@ -32,10 +32,11 @@ const Chooser = () => {
         navigate('/entry');
         break;
       case 1:
-        console.log("Exit Module Chosen");
+        navigate('/exit');
         break;
       case 2:
         console.log("Reservation Module Chosen");
+        console.log(authContext)
         break;
       default:
         console.log("Default");

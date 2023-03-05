@@ -8,9 +8,13 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.TIME
       },
       time_out: {
-         type: DataTypes.TIME
+         type: DataTypes.TIME,
+         allowNull: true
       }
-   }, { timestamps: false });
+   }, {
+      timestamps: false
+   }
+   );
 
    return Records
 }

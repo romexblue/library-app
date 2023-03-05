@@ -1,12 +1,20 @@
 import '../styles/InfoPage.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-const InfoPage = ({setStudentID}) => {
+const InfoPage = ({studentID, setStudentID}) => {
     const [value, setValue] = useState(''); //value of input
     const [searchResult, setSearchResult] = useState(''); //value of result
     const [userData, setUserData] = useState([]);
     
+    useEffect(()=>{
+        if(!studentID){
+            setValue('');
+            setSearchResult('')
+            setUserData([]);
+        }
+    },[studentID]);
+
     const handleChange = (event) => {
         const newValue = event.target.value;
         setValue(newValue);

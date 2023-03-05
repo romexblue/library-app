@@ -19,13 +19,18 @@ const FloorButtons = () => {
         const today = new Date();
         const formattedDate = today.toISOString().slice(0, 10);
         const formattedTime = today.toLocaleTimeString('en-US', { hour12: false });
-        console.log(`Current Date is ${formattedDate} and Current Time is ${formattedTime}`);
+        //console.log(`Current Date is ${formattedDate} and Current Time is ${formattedTime}`);
         const data = { date: formattedDate, time_in: formattedTime, StudentId: studentID, FloorId: floorID, }
-        console.log(data)
+        
         axios.post("http://localhost:5000/record/", data,
             { headers: { accessToken: sessionStorage.getItem("accessToken") } },
         ).then((response) => {
-            console.log("Add Record Successful")
+            if(response.data.error){
+                console.log(response.data.error)
+            }else{
+                console.log(response.data)
+                console.log("Add Record Successful")
+            }
         })
 
         setStudentID('');
@@ -35,6 +40,8 @@ const FloorButtons = () => {
 
     const handleCancel = () => {
         console.log('Cancelled!');
+        setStudentID('');
+        setFloorID('');
         setShowConfirmation(false);
     };
 
@@ -46,11 +53,11 @@ const FloorButtons = () => {
         })
             .then((response) => {
                 if (response.data.error) {
-                    console.log(response.data.error)
                     navigate('/')
                     authContext.logout()
                 } else {
                     setButtonData(response.data)
+                    authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
                 }
             })
     }, [navigate, authContext]);
@@ -103,7 +110,7 @@ const FloorButtons = () => {
                 {showConfirmation && (
                     <ConfModal
                         title="Confirm or Cancel?"
-                        message="Are you sure you want to perform this action?"
+                        message={`Are you sure you want to go to Floor: ${floorID}`}
                         confirmText="Confirm"
                         cancelText="Cancel"
                         onConfirm={handleConfirm}
