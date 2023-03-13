@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import AuthContext from '../helpers/AuthContext';
 import axios from 'axios';
@@ -7,6 +7,7 @@ const Exit = () => {
     const [value, setValue] = useState("");
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
+    const inputRef = useRef(null);
 
     useEffect(() => {
         //for page refresh
@@ -14,6 +15,7 @@ const Exit = () => {
             axios.get("http://localhost:5000/auth/allow", {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken"),
+                    userId: sessionStorage.getItem("id")
                 },
             })
                 .then((response) => {
@@ -29,15 +31,28 @@ const Exit = () => {
 
         if (!authContext.isLoggedIn) {
             navigate('/')
-        }
+        };
 
+        const interval = setInterval(() => {
+            checkFocus();
+        }, 3000);
+
+        return () => clearInterval(interval);
     }, [navigate, authContext])
+
+    function checkFocus() {
+        if (document.activeElement === document.body) {
+            inputRef.current.focus();
+            console.log("HELLODS");
+        }   
+    }
 
     function handleChange(event) {
         setValue(event.target.value);
     }
 
-    function handleClick() {
+    function handleSubmit(event){
+        event.preventDefault();
         const studentID = value;
         const today = new Date();
         const formattedTime = today.toLocaleTimeString('en-US', { hour12: false });
@@ -48,6 +63,7 @@ const Exit = () => {
                 axios.put(`http://localhost:5000/record/find/${encodedValue}`, data, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken"),
+                        userId: sessionStorage.getItem("id")
                     },
                 })
                     .then((response) => {
@@ -69,14 +85,15 @@ const Exit = () => {
 
     return (
         <div>
-            <label htmlFor="textInput">Enter School ID:</label>
+            <form onSubmit={handleSubmit}>
+            <label htmlFor="textInput">Scan School ID:</label>
             <input
-                type="number"
+                type="text"
                 value={value}
                 onChange={handleChange}
+                ref={inputRef}
             />
-            <br></br>
-            <button onClick={handleClick}>Time Out</button>
+            </form>
         </div>
     );
 }

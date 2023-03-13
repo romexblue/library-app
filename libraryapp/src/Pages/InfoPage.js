@@ -2,18 +2,18 @@ import '../styles/InfoPage.css'
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const InfoPage = ({studentID, setStudentID}) => {
+const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, inputRef}) => {
     const [value, setValue] = useState(''); //value of input
     const [searchResult, setSearchResult] = useState(''); //value of result
     const [userData, setUserData] = useState([]);
     
     useEffect(()=>{
-        if(!studentID){
+        if(!studentRFID && !studentID){
             setValue('');
             setSearchResult('')
             setUserData([]);
         }
-    },[studentID]);
+    },[studentID, studentRFID]);
 
     const handleChange = (event) => {
         const newValue = event.target.value;
@@ -24,22 +24,26 @@ const InfoPage = ({studentID, setStudentID}) => {
                 axios.get(`http://localhost:5000/student/find/${encodedValue}`, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken"),
+                        userId: sessionStorage.getItem("id")
                     },
                 })
                     .then((response) => {
                         if (response.data.error) {
                             setSearchResult('User Not Found');
                             setUserData([]);
-                            setStudentID('')
+                            setStudentID('');
+                            setStudentRFID('');
                         } else {
                             setSearchResult('User Found');
                             setUserData(response.data);
-                            setStudentID(response.data.id)
+                            setStudentID(response.data.id);
+                            setStudentRFID(response.data.rfid);
                         }
                     })
             } else {
                 setSearchResult('');
-                setStudentID('')
+                setStudentID('');
+                setStudentRFID('');
             }
         } catch (error) {
             console.error(error);
@@ -48,10 +52,11 @@ const InfoPage = ({studentID, setStudentID}) => {
 
     return (
         <div>
-            <label htmlFor="textInput">Enter School ID:</label>
+            <label htmlFor="textInput">Scan School ID:</label>
             <input
-                type="number"
+                type="text"
                 id="textInput"
+                ref={inputRef}
                 value={value}
                 onChange={handleChange}
             />

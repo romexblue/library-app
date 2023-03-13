@@ -11,31 +11,33 @@ router.get('/', async (req, res) => {
 
 //for time in
 router.post('/', validateToken, async (req, res) => {
-    const rec = req.body;
-  
-    Records.findAll({
-        where: { 
-            StudentId: rec.StudentId, // Replace 123 with the actual StudentId you want to query
-            time_out: null 
-         }
-    }).then(async (records) => {
-        if (records.length > 0) {
-            res.json({error:"You are currently Timed In. Please Time Out"});
-        } else {
-            await Records.create(rec);
-            res.json(rec);
-        }
-    }).catch((error) => {
-        console.error(error);
-    });
+    const { rfid, ...rec } = req.body;
+    
+        await Students.findAll({
+            where: { rfid: rfid },
+            include: {
+                model: Records,
+                where: { time_out: null }
+            }
+        }).then(async (records) => {
+            if (records.length > 0) {
+                res.json({ error: "You are currently Timed In. Please Time Out" });
+            } else {
+                await Records.create(rec);
+                res.json(rec);
+            }
+        }).catch((error) => {
+            res.json({ error: error });
+        });
+    
 })
 
 //for timeout
 router.put('/find/:school_id', validateToken, async (req, res) => {
-    const school_id = req.params.school_id;
-    const rec = req.body  
-    
-    const user = await Students.findOne({ where: { school_id } }); //to get userId
+    const rfid = req.params.school_id;
+    const rec = req.body
+
+    const user = await Students.findOne({ where: { rfid } }); //to get userId
     if (user) {
         try {
             const newRecord = await Records.update({
@@ -53,7 +55,7 @@ router.put('/find/:school_id', validateToken, async (req, res) => {
                 res.json({ error: "Not Timed In" });
             }
         } catch (err) {
-            res.json({error:err})
+            res.json({ error: err })
         }
     } else {
         res.json({ error: "No existing record" })

@@ -13,8 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       }
    }, {
       timestamps: false
-   }
-   );
+   });
+
+    Records.associate = (models) => {
+      Records.belongsTo(models.Students, {
+         foreignKey: 'StudentId'
+      });
+   };
 
    return Records
 }

@@ -4,9 +4,13 @@ module.exports = (sequelize, DataTypes) => {
       name: {
          type: DataTypes.STRING,
          allowNull: false
-      }, 
+      },
       school_id: {
-         type: DataTypes.INTEGER,
+         type: DataTypes.STRING,
+         allowNull: false
+      },
+      rfid: {
+         type: DataTypes.STRING,
          allowNull: false
       },
       course: {
@@ -22,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
    Students.associate = (models) => {
       Students.hasMany(models.Records, {
          onDelete: "cascade",
-      })
+      });
+      Students.belongsToMany(models.Reservation, { through: 'ReservationStudents', timestamps: false, });
    };
 
    return Students

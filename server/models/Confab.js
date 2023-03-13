@@ -1,24 +1,25 @@
 module.exports = (sequelize, DataTypes) => {
 
-    const Floor = sequelize.define("Floor", {
+    const Confab = sequelize.define("Confab", {
         name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        current_count: {
-            type: DataTypes.INTEGER,
-            allowNull: true
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        status:{
+        status: {
             type: DataTypes.ENUM('Open', 'Closed'),
             allowNull: false
         }
     }, { timestamps: false });
-    Floor.associate = (models) => {
-        Floor.hasMany(models.Records, {
+
+    Confab.associate = (models) => {
+        Confab.hasMany(models.Reservation, {
             onDelete: "cascade",
         })
     };
 
-    return Floor
+    return Confab
 } 

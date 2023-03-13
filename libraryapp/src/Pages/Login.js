@@ -40,6 +40,7 @@ const Login = () => {
       axios.get("http://localhost:5000/auth/allow", {
         headers: {
           accessToken: sessionStorage.getItem("accessToken"),
+          userId: sessionStorage.getItem("id")
         },
       })
         .then((response) => {
