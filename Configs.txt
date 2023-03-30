@@ -10,3 +10,4 @@ npm install axios
 npm install jsonwebtoken
 npm install react-bootstrap bootstrap //removed
 npm install react-datepicker
+npm install react-paginate

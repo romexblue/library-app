@@ -24,6 +24,9 @@ app.use("/student", studentsRouter);
 const reservationRouter = require('./routes/Reservation');
 app.use("/reservation", reservationRouter);
 
+const confabRouter = require('./routes/Confab');
+app.use("/confab", confabRouter);
+
 db.sequelize.sync().then(()=>{
     app.listen(port, ()=> {
         console.log(`Server running on port ${port}`)

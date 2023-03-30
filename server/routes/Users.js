@@ -17,7 +17,7 @@ router.post("/login", async (req, res) => {
             secretkey
         )
 
-        res.json({ accessToken: accessToken, userId: user.id })
+        res.json({ accessToken: accessToken, userId: user.id, type: user.type })
     }}catch(err){
         res.json({error:err})
     }

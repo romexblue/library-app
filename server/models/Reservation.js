@@ -3,12 +3,10 @@ module.exports = (sequelize, DataTypes) => {
        date: {
           type: DataTypes.DATEONLY,
           allowNull: false,
-          unique: 'compositeIndex' //handles reservation of same date and start time
        },
        start_time:{
          type: DataTypes.TIME,
          allowNull: false,
-         unique: 'compositeIndex' 
        },
        end_time:{
          type: DataTypes.TIME,
@@ -28,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
 
     Reservation.associate = (models) => {
         Reservation.belongsToMany(models.Students, { through: 'ReservationStudents', timestamps: false });
+        Reservation.belongsTo(models.Confab, {
+         foreignKey: 'ConfabId'
+      });
       };
  
     return Reservation

@@ -43,7 +43,6 @@ const Exit = () => {
     function checkFocus() {
         if (document.activeElement === document.body) {
             inputRef.current.focus();
-            console.log("HELLODS");
         }   
     }
 
@@ -60,7 +59,7 @@ const Exit = () => {
         try {
             if (studentID.trim() !== '') { //handle blank space when deleting all
                 const encodedValue = encodeURIComponent(studentID.trim()); //handle special chars to prevent error
-                axios.put(`http://localhost:5000/record/find/${encodedValue}`, data, {
+                axios.patch(`http://localhost:5000/record/find/${encodedValue}`, data, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken"),
                         userId: sessionStorage.getItem("id")

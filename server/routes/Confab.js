@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { Floor } = require('../models')
+const { Confab } = require('../models')
 const { validateToken } = require("../middlewares/AuthMiddleware")
 
 router.post('/', validateToken, async (req, res) => {
-    const floor = req.body
+    const confab = req.body
     try {
-        await Floor.create(floor);
-        res.status(200).json({success: "Create Floor Successful"});
+        await Confab.create(floor);
+        res.status(200).json({success: "Create Confab Successful"});
     } catch (err) {
         res.status(500).json({ error: err })
     }
@@ -15,8 +15,8 @@ router.post('/', validateToken, async (req, res) => {
 
 router.get('/all', validateToken, async (req, res) => {
     try {
-        const listOfFloors = await Floor.findAll()
-        res.json(listOfFloors)
+        const listOfConfabs = await Confab.findAll()
+        res.json(listOfConfabs)
     } catch (err) {
         res.status(500).json({ error: err })
     }
@@ -24,8 +24,8 @@ router.get('/all', validateToken, async (req, res) => {
 
 router.get('/', validateToken, async (req, res) => {
     try {
-        const listOfFloors = await Floor.findAll({ where: { status: 'Open' } })
-        res.json(listOfFloors)
+        const listOfConfabs = await Confab.findAll({ where: { status: 'Open' } })
+        res.json(listOfConfabs)
     } catch (err) {
         res.status(500).json({ error: err })
     }
@@ -35,14 +35,14 @@ router.patch('/:id', validateToken, async (req, res) => {
     const { id } = req.params;
     const data = req.body;
     try {
-        const floor = await Floor.findOne({ where: { id } });
-        if (floor) {
+        const confab = await Confab.findOne({ where: { id } });
+        if (confab) {
             // Dynamically update the user object with the new data
             Object.keys(data).forEach(key => {
-                floor[key] = data[key];
+                confab[key] = data[key];
             });
 
-            await floor.save();
+            await Confab.save();
             res.status(200).json({ success: "Update Success" })
         } else {
             res.status(404).json({ error: "Not Found" })
@@ -55,7 +55,7 @@ router.patch('/:id', validateToken, async (req, res) => {
 router.delete('/:id', validateToken, async (req, res) => {
     const { id } = req.params
     try {
-        await Floor.destroy({ where: { id } });
+        await Confab.destroy({ where: { id } });
         res.status(204).json({ success: "Deletion Successful" });
     } catch (err) {
         res.status(500).json({ error: err });

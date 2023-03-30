@@ -3,7 +3,7 @@ const router = express.Router();
 const { Records, Students } = require('../models')
 const { validateToken } = require("../middlewares/AuthMiddleware")
 
-router.get('/', async (req, res) => {
+router.get('/', validateToken, async (req, res) => {
     const listOfRecords = await Records.findAll()
     res.json(listOfRecords)
 });
@@ -12,28 +12,28 @@ router.get('/', async (req, res) => {
 //for time in
 router.post('/', validateToken, async (req, res) => {
     const { rfid, ...rec } = req.body;
-    
-        await Students.findAll({
-            where: { rfid: rfid },
-            include: {
-                model: Records,
-                where: { time_out: null }
-            }
-        }).then(async (records) => {
-            if (records.length > 0) {
-                res.json({ error: "You are currently Timed In. Please Time Out" });
-            } else {
-                await Records.create(rec);
-                res.json(rec);
-            }
-        }).catch((error) => {
-            res.json({ error: error });
-        });
-    
+
+    await Students.findAll({
+        where: { rfid: rfid },
+        include: {
+            model: Records,
+            where: { time_out: null }
+        }
+    }).then(async (records) => {
+        if (records.length > 0) {
+            res.json({ error: "You are currently Timed In. Please Time Out" });
+        } else {
+            await Records.create(rec);
+            res.json(rec);
+        }
+    }).catch((error) => {
+        res.json({ error: error });
+    });
+
 })
 
 //for timeout
-router.put('/find/:school_id', validateToken, async (req, res) => {
+router.patch('/find/:school_id', validateToken, async (req, res) => {
     const rfid = req.params.school_id;
     const rec = req.body
 

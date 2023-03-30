@@ -62,7 +62,7 @@ const FloorButtons = () => {
         if (document.activeElement === document.body) {
             inputRef.current.focus();
             console.log("HELLODS");
-        }
+        }   
     }
 
     useEffect(() => {
@@ -93,7 +93,7 @@ const FloorButtons = () => {
         }, 3000);
 
         return () => clearInterval(interval);
-    }, [navigate, authContext]);
+    }, [navigate, authContext,]);
 
     const handleKeyDown = (event, index, id, name) => {
         const buttonCount = buttonData.length;
@@ -146,8 +146,6 @@ const FloorButtons = () => {
                     <ConfModal
                         title="Confirm or Cancel?"
                         message={`Are you sure you want to go to ${floorName}`}
-                        confirmText="Confirm"
-                        cancelText="Cancel"
                         onConfirm={handleConfirm}
                         onCancel={handleCancel}
                     />

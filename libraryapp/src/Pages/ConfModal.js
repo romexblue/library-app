@@ -1,7 +1,7 @@
 import '../styles/Modal.css'
 import React, { useState, useEffect, useRef } from "react";
 
-const ConfModal = ({title, message, confirmText, cancelText, onConfirm, onCancel}) => {
+const ConfModal = ({title, message, onConfirm, onCancel}) => {
   const [showModal, setShowModal] = useState(true);
   const confirmButtonRef = useRef(null);
   const cancelButtonRef = useRef(null);
@@ -39,8 +39,8 @@ const ConfModal = ({title, message, confirmText, cancelText, onConfirm, onCancel
             <p>{message}</p>
           </div>
           <div className="modal-footer">
-            <button className="cancel-btn" ref={cancelButtonRef} onClick={handleCancel}>{cancelText}</button>
-            <button className="confirm-btn" ref={confirmButtonRef} onClick={handleConfirm}>{confirmText}</button>
+            <button className="cancel-btn" ref={cancelButtonRef} onClick={handleCancel}>Cancel</button>
+            <button className="confirm-btn" ref={confirmButtonRef} onClick={handleConfirm}>Confirm</button>
           </div>
         </div>
       </div>
