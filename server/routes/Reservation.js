@@ -51,7 +51,7 @@ router.get('/:confId/:date', async (req, res) => {
 });
 
 router.post('/', validateToken, async (req, res) => {
-  const { list, ...rec } = req.body; //separate student list from the request
+  const { guestList, ...rec } = req.body; //separate guest list from the request
   let newId; //for record deletion if error in student list
 
   const start_time = moment(req.body.start_time, 'HH:mm:ss');
@@ -148,14 +148,12 @@ router.post('/', validateToken, async (req, res) => {
       const newReservation = await Reservation.create(rec);
       newId = newReservation.id; //take ID for record deletion if error in student info
 
-      for (let i = 0; i < list.length; i++) {
-        const rfid = list[i];
-        const student = await Students.findOne({ where: { rfid } });
-
-        await ReservationStudent.create({ reservationId: newId, studentId: student.id });
-        //}
-        res.json({ success: "reservation successful" })
+      for (let i = 0; i < guestList.length; i++) {
+        const school_id = guestList[i];
+        const student = await Students.findOne({ where: { school_id } });
+        await ReservationStudent.create({ reservationId: newId, studentId: student.id }); //add data to ReservationStudent
       }
+      res.json({ success: `reservation successful. Reservation ID is ${newReservation.id}`, reservationId: newReservation.id })
     }
   } catch (error) {
     if (error.name === 'SequelizeUniqueConstraintError') {

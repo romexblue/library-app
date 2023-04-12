@@ -1,16 +1,20 @@
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    gap: 10px;
-  }
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 10px;
+}
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   width: 100px;
   margin: 0 auto;
+}
+
+.Inputs {
+  display: flex;
 }

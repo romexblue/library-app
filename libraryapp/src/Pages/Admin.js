@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../helpers/AuthContext";
 import AEFModal from "./AEFModal";
+import Stats from './Stats'
 
 const Admin = () => {
     const navigate = useNavigate();
@@ -13,6 +14,11 @@ const Admin = () => {
     const [hoveredRow, setHoveredRow] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const [action, setAction] = useState('Delete');
+    const [isVisible, setIsVisible] = useState(false);
+
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+    };
 
     useEffect(() => {
         //to check token then check if admin
@@ -164,6 +170,11 @@ const Admin = () => {
                     action={action}
                 />
             )}
+            <br />
+            <button onClick={toggleVisibility}>
+                {isVisible ? 'Hide Statistics' : 'Show Statistics'}
+            </button>
+            {isVisible && <Stats />}
         </div>
     );
 }

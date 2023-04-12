@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
        confirmation_status:{
          type: DataTypes.ENUM('Confirmed', 'Cancelled', 'Pending'),
          allowNull: false
+       },
+       phone:{
+         type: DataTypes.STRING,
+         allowNull: false
        }
     }, {
        timestamps: false
@@ -29,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
         Reservation.belongsTo(models.Confab, {
          foreignKey: 'ConfabId'
       });
+      Reservation.belongsTo(models.Users, {
+         foreignKey: {
+            name: 'confirmed_by'
+         }
+     });
       };
  
     return Reservation

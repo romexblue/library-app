@@ -13,14 +13,14 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.STRING,
          allowNull: false
       },
-      course: {
-         type: DataTypes.STRING,
+      type: {
+         type: DataTypes.ENUM('Student', 'Faculty', 'Staff'),
          allowNull: false
       },
-      year: {
-         type: DataTypes.ENUM('1st', '2nd', '3rd', '4th', '5th'),
-         allowNull: false
-      }
+      date_of_expiry: {
+         type: DataTypes.DATEONLY,
+         allowNull: false,
+      },
    }, { timestamps: false });
 
    Students.associate = (models) => {
