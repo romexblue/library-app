@@ -1,5 +1,6 @@
 import '../styles/Modal.css'
 import React, { useState, useEffect, useRef } from "react";
+import image1 from '../images/Confirm_Icon.png';
 
 const ConfModal = ({title, message, onConfirm, onCancel}) => {
   const [showModal, setShowModal] = useState(true);
@@ -33,6 +34,7 @@ const ConfModal = ({title, message, onConfirm, onCancel}) => {
       <div className="modal" onKeyDown={handleKeyDown}>
         <div className="modal-content">
           <div className="modal-header">
+              <img src={image1}/>
             <h3>{title}</h3>
           </div>
           <div className="modal-body">

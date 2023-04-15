@@ -13,8 +13,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: true
         },
+        level: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        label:{
+            type: DataTypes.ENUM('Bldg1', 'Bldg2'),
+            allowNull: false
+        },
         status:{
-            type: DataTypes.ENUM('Open', 'Closed'),
+            type: DataTypes.ENUM('Open', 'Closed', 'Full'),
             allowNull: false
         }
     }, { timestamps: false });

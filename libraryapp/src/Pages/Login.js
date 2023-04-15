@@ -63,20 +63,19 @@ const Login = () => {
   }, [navigate, authContext])
 
   return (
-    <div className="login-form-container">
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={handleUsernameChange} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={handlePasswordChange} />
-        </label>
-        <br />
-        <button type="submit">Log In</button>
-      </form>
+    <div className="login-page">
+    <form onSubmit={handleSubmit}>
+        <h1>LOGIN</h1>
+        <div className="form-group">
+            <label htmlFor="">Email</label>
+            <input type="text" className="form-control" value={username} onChange={handleUsernameChange} required />
+        </div>
+        <div className="form-group">
+            <label htmlFor="">Password</label>
+            <input type="password" className="form-control" value={password} onChange={handlePasswordChange} required />
+        </div>
+        <input type="submit" className="btn" value="SUBMIT"/>
+    </form>
     </div>
   )
 }

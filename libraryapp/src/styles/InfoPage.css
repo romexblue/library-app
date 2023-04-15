@@ -3,3 +3,161 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none !important;
   margin: 0 !important;
 }
+
+body{
+
+  zoom: 100%;
+  min-height: 100vh;
+  display: flex;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: none;
+  background-color: #F3F3F3;
+  overflow: hidden;
+}
+.Sections{
+  height: 100%;
+  width: 100%;
+}
+.sec1{
+  display: inline-block;
+  height: 20%;
+  width: 100%;
+}
+.Back{
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  justify-content: center;
+  position: absolute;
+  width: 100px;
+  height: 80px;
+  left: 40px;
+  top: 40px;
+}
+.Back p{
+  font-size: 12px;
+}
+.Back img{
+  height: 50px;
+  width: 50px;
+}
+.LogoutBtn{
+  float: right;
+  padding-right: 70px;
+  padding-top: 40px;
+}
+.btn {
+  font-size: 18px;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
+  color: #3D3C3C;
+  color: #283971;
+  border: solid 2px #283971;   
+  width: 120px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 10px;
+
+}
+
+.btn:hover {
+  background: #283971;
+  color: white;
+  }
+
+
+.sec2{
+  margin-top: 30px;
+  font-family: 'Ubuntu', sans-serif;
+  display: inline-block;
+  height: 20%;
+  width: 100%;
+}
+.RFID-Icon{
+  display: flex;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+}
+.RFID-Icon img{
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+.TapMessage{
+  margin-top: 30px;
+  font-size: 25px;
+  color: #323131;
+  text-align: center;
+}
+.sec3{
+  font-family: 'Ubuntu', sans-serif;
+  width: 100%;
+  height: 100px;
+}
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 25px;
+}
+.IdInput{
+  padding-top: 20px;
+  margin: auto;
+  width: 400px;
+  font-size: 16px;
+}
+.sec4{
+  display: inline-block;
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+.LibrarySeal {
+  margin-left: 20px;
+  position: absolute;
+  height: auto;
+  width: 240px;
+}
+.LibrarySeal img{
+  width: 100%;
+}
+.systemtime{
+  color: #283971;
+  font-family: 'Ubuntu', sans-serif;
+  position: absolute;
+  right: 0;
+  width: 200px;
+}
+/*TIME JS FORMAT*/
+.display-date{
+  font-size: 20px;
+}
+.display-time{
+  font-weight: 600;
+  font-size: 30px;
+}
+
+/* Media queries */
+
+@media screen and (max-height: 700px) {
+  /* Apply these styles when the viewport is shorter than 600px */
+  .TapMessage{
+      margin-top: 10px;
+  }
+  .RFID-Icon img{
+      margin-left: auto;
+      margin-right: auto;
+      width: 320px;
+  }
+}

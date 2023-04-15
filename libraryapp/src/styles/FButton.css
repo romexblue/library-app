@@ -1,0 +1,599 @@
+.info{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: #F8F8F8;
+}
+.left-panel{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+}
+.right-panel{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+}
+.info-student{
+    font-family: 'Ubuntu', sans-serif;
+    display: block;
+    margin: 10px 5px 10px 10px;
+    background-color: white;
+    width: auto;
+    height: 70%;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+.note-display{
+    margin: auto 5px 10px 10px;
+    border-radius: 10px;
+    width: auto;
+    height: 25%;
+    display: block;
+}
+#uppernote{
+    display: flex;
+    width: auto;
+    height: 60%;
+}
+.time{
+    margin-top: 26px;
+    width: 30%;
+    height: 100%;
+}
+.reminder img{
+    height: 20px;
+    width: 20px;
+}
+.reminder{
+    margin-top: 26px;
+    display: flex;
+}
+.note-div{
+    font-size: 26px;
+    margin-top: 30px;
+    width: 94%;
+}
+.note-icon{
+    margin-top: 10px;
+    }
+
+.systemtitle{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    color: #373737;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    font-size: 30px;
+    width: 100%;
+    background-color: red;
+}
+/*=====TIME SETTINGS=====*/
+.systemtime2{
+    position: absolute;
+    margin-top: 25px;
+    margin-left: 10px;
+    color: #283971;
+    font-family: 'Ubuntu', sans-serif;
+    width: 200px;
+    left: 0;
+}
+/*TIME JS FORMAT*/
+.display-date{
+    font-size: 20px;
+}
+.display-time{
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.reminder{
+    width: 70%;
+    height: 100%;
+}
+#lowernote{
+    width: auto;
+    height: 40%;
+}
+#lowernote .cancelbtn{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    color: #385DBB;
+    height: 50px;
+    width: 150px;
+    border: 2px solid #264083;
+    border-radius: 10px;
+    margin: 0 10px 0;
+    margin-top: 20px;
+}
+#sec1-a{
+    width: 100%;
+    height: 30px;
+}
+/* TITLE OF INPUTS */
+#sec2-a{
+    display: flex;
+    width: 100%;
+    height: 35px;
+}
+#comp1{
+    margin-left: 30px;
+    height: 100%;
+    width: 40px;
+}
+#comp1 img{
+    height: 100%;
+}
+#comp2{
+    margin-left: 40px;
+    height: 100%;
+    width: 200px;
+}
+#comp2 img{
+    height: 100%;
+}
+#comp3{
+    margin-left: auto;
+    margin-right: 50px;
+    height: 100%;
+    width: 40px;
+}
+
+/* START OF INPUTS */
+#sec3-a{
+    margin: 60px 60px 0;
+    width: auto;
+    height: 75px;
+}
+#comp4{ /*LABEL STYLES*/
+    font-weight: 500;
+    font-size: 18px;
+    height: 25px;
+}
+#comp5{ /* INPUT STYLES */
+    height: 50px;
+}
+#comp5 .id-number{
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    padding: 20px;
+    text-align: left;
+    border-style: none;
+    pointer-events: none;
+}
+#sec4-a{
+    margin: 0px 100px 0;
+    display: relative;
+    width: auto;
+    height: 0.2px;
+    background-color: black;
+    
+}
+#sec5-a{
+    margin: 10px 60px 0;
+    width: auto;
+    height: 75px;
+}
+#comp6{ /*LABEL STYLES*/
+    font-weight: 500;
+    font-size: 18px;
+    height: 25px;
+}
+#comp7{ /* INPUT STYLES */
+    height: 50px;
+}
+#comp7 .last-name{
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    padding: 20px;
+    text-align: left;
+    border-style: none;
+    pointer-events: none;
+}
+#sec6-a{
+    display: flex;
+    margin: 10px 60px 0;
+    width: auto;
+    height: 75px;
+}
+.partition{
+    height: 100%;
+}
+#part1{
+    width: 400px;
+}
+#comp8{
+    font-weight: 500;
+    font-size: 18px;
+    height: 25px;
+}
+#comp9{
+    height: 50px;
+}
+
+#comp9 .first-name{
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    padding: 20px;
+    text-align: left;
+    border-style: none;
+
+}
+#part2{
+    width: 100px;
+}
+#comp10{
+    font-weight: 500;
+    font-size: 18px;
+    height: 25px;
+}
+#comp11{
+    height: 50px;
+}
+
+#comp11 .first-name{
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    padding: 20px;
+    text-align: left;
+    border-style: none;
+
+}
+#sec7-a{
+    margin: 0 100px 0;
+    display: relative;
+    width: auto;
+    height: 0.2px;
+    background-color: black;  
+}
+#sec8-a{
+    display: flex;
+    margin: 10px 60px 0;
+    width: auto;
+    height: 75px;
+}
+#part3{
+    width: 200px;
+}
+#comp12{
+    font-weight: 500;
+    font-size: 18px;
+    height: 25px;
+}
+#comp13{
+    height: 50px;
+}
+
+#comp13 .gender{
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    padding: 20px;
+    text-align: left;
+    border-style: none;
+}
+#part4{
+    width: 550px;
+}
+#comp14{
+    font-weight: 500;
+    font-size: 18px;
+    height: 25px;
+}
+#comp15{
+    height: 50px;
+}
+
+#comp15 .course{
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    padding: 20px;
+    text-align: left;
+    border-style: none;
+}
+#part6{
+    width: 250px;
+}
+#comp16{
+    font-weight: 500;
+    font-size: 18px;
+    height: 25px;
+}
+#comp17{
+    height: 50px;
+}
+
+#comp17 .year{
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    padding: 20px;
+    text-align: left;
+    border-style: none;
+}
+.note-display{
+
+}
+.building-select{
+    margin: 10px 10px 10px 5px;
+    background-color: white;
+    width: auto;
+    height: 97%;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+.submit-info{
+    margin: 10px 10px 10px 5px;
+    background-color: white;
+    width: auto;
+    height: 35%;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+/* ======================== RIGHT PANEL ======================== */
+
+#sec1-b{
+    width: 100%;
+    height: 30px;
+}
+/* TITLE OF INPUTS */
+#sec2-b{
+    display: flex;
+    width: 100%;
+    height: 35px;
+    pointer-events: none
+}
+#comp18{
+    margin-left: 30px;
+    height: 100%;
+    width: 40px;
+}
+#comp18 img{
+    height: 100%;
+}
+#comp19{
+    margin-left: 40px;
+    height: 100%;
+    width: 200px;
+}
+#comp19 img{
+    height: 100%;
+}
+#comp20{
+    margin-left: auto;
+    margin-right: 50px;
+    height: 100%;
+    width: 40px;
+}
+/* ====================  FLOOR BUTTON  =====================*/
+.building-option{
+    display: flex;
+    margin: 15px 100px 0;
+    width: auto;
+    height: 85px;
+    border-radius: 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    position: relative;
+}
+.building-option:focus{
+    background-color: #979CAB;
+}
+.building-option:focus h1{
+    color: white;
+}
+.building-option:focus h2{
+    color: white;
+}
+#tag1{
+    color: #484848;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 70px;
+}
+#tag1 h1{
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center; /* center vertically */
+    height: 100%;
+    font-style: italic;
+    width: 100%;
+    font-size: 40px;
+    margin: auto;
+}
+#tag2{
+    color: #484848;
+    margin-right: auto;
+    height: 100%;
+    width: 170px;
+    display: block;
+}
+.division{
+    font-family: 'Ubuntu', sans-serif;
+    width: 100%;
+    height: 40%;
+}
+#divup h2{
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+#divdown h2{
+    position: relative;
+    font-size: 14px;
+    font-weight: 400;
+}
+#tag3{
+    height: 100%;
+    width: 100px;
+    display: block;
+}
+
+#label-div{
+    width: 100%;
+    height: 50%;
+}
+#labelc{
+    width: 30px;
+    height: 20px;
+    margin: 10px 40px 10px;
+    position: absolute;
+    border-radius: 10px;
+}
+#stat-div{
+    width: 100%;
+    height: 50%;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#stat-div p{
+    font-size: 14px;
+    font-weight: 400;
+}
+#sec3-b{
+    margin-top: 18px;
+}
+
+/* ====================  FLOOR BUTTON  =====================*/
+
+/* ======================== DOWN RIGHT PANEL ======================== */
+.note-div{
+    font-size: 20px;
+}
+#sec1-c{
+    width: 100%;
+    height: 30px;
+}
+/* TITLE OF INPUTS */
+#sec2-c{
+    display: flex;
+    width: 100%;
+    height: 35px;
+}
+#comp21{
+    margin-left: 30px;
+    height: 100%;
+    width: 40px;
+}
+#comp21 img{
+    height: 100%;
+}
+#comp22{
+    margin-left: 40px;
+    height: 100%;
+    width: 200px;
+}
+#comp22 img{
+    height: 100%;
+}
+#comp20{
+    margin-left: auto;
+    margin-right: 50px;
+    height: 100%;
+    width: 40px;
+}
+#sec3-c{
+    width: 100%;
+    height: 50px;
+}
+#sec4-c{
+    width: 100%;
+    height: 80px;
+    display: flex;
+}
+#holder1{
+    height: 100%;
+    width: 200px;
+    margin: 0 10px 0 auto;
+}
+#holder2{
+    height: 100%;
+    width: 200px;
+    margin: 0 auto 0 10px;
+}
+
+.submit-info1 .submitbtn{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    height: 60px;
+    width: 180px;
+    background-color: #385DBB;
+    color: white;
+    border-style: none;
+    border-radius: 10px;
+}
+
+.cancelbtn:hover{
+    cursor: pointer;
+}
+.submitbtn:hover{
+    cursor: pointer;
+    background-color: #264083;
+}
+
+@media screen and (max-height: 700px) {
+    /* Apply these styles when the viewport is shorter than 600px */
+    .time{
+        margin-top: 0;
+        width: 30%;
+        height: 100%;
+    }
+    .reminder{
+        margin-top: 0;
+        display: flex;
+    }
+    .info-student{
+        height: 70%;
+    }
+    #sec3-a{
+        margin: 20px 60px 0;
+    }
+    /* ==================== VV FLOOR BUTTON VV =====================*/
+    #sec3-b{
+        margin-top: 15px;
+    }
+    .building-option{
+        margin: 10px 120px 0;
+        width: auto;
+        height: 70px;
+    }
+    .buildings{
+        height: 400px;
+    }
+    /* ==================== ^^ FLOOR BUTTON ^^ =====================*/
+    #lowernote .cancelbtn{
+        margin-top: 0;
+    }
+}
