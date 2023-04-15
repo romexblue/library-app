@@ -15,11 +15,14 @@
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    max-width: 400px;
+    height: 300px;
+    width: 400px;
     text-align: center;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   }
-  
+  .modal-footer{
+    margin-top: 30px;
+  }
   .confirm-btn,
   .cancel-btn {
     padding: 10px 20px;
@@ -30,14 +33,32 @@
   }
   
   .confirm-btn {
-    background-color: #4CAF50;
+    background-color: #283971;
     color: white;
     border: none;
   }
-  
+  .cancelbtn{
+    color: rgb(205, 205, 205)
+  }
   .cancel-btn {
-    background-color: #f44336;
-    color: white;
+    border: 1px solid #283971;
+    background-color: white;
+    color: #283971;
     border: none;
   }
+  .cancel-btn:hover{
+    background-color: #a9a9a9;
+    color: white;
+  }
   
+  h3{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+  }
+  .modal-header img{
+    margin-top: 20px;
+    height: 40px;
+    width: 40px;
+  }
