@@ -5,6 +5,51 @@ const router = express.Router();
 const { Reservation, ReservationStudent, Students, Confab } = require('../models')
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
+router.get('/requests/find-by/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const reservation = await Reservation.findOne({
+      where: { id },
+      include: [
+        {
+          model: Students,
+          attributes: ['school_id'],
+          through: {
+            attributes: [] // exclude join table attributes from the result
+          }
+        }
+      ]
+    });
+    res.json({ reservation })
+  } catch (err) {
+    res.status(400).json({ error: err });
+  }
+});
+
+router.get('/requests/:confId/:status', async (req, res) => {
+  try {
+    const { confId, status } = req.params;
+    const reservations = await Reservation.findAll({
+      where: {
+        ConfabId: confId,
+        confirmation_status: status
+      },
+      include: [
+        {
+          model: Students,
+          attributes: ['school_id'],
+          through: {
+            attributes: [] // exclude join table attributes from the result
+          }
+        }
+      ]
+    });
+    res.json({ reservations })
+  } catch (err) {
+    res.status(400).json({ error: err });
+  }
+});
+
 router.get('/:confId/:date', async (req, res) => {
   if (!req.params.confId || !req.params.date) {
     res.status(500).json({ error: "Date and ConfabId is required" })

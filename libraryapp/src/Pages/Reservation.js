@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import '../styles/Reservation.css';
+import "react-datepicker/dist/react-datepicker.css";
+import React, { useState, useEffect, useCallback, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthContext from '../helpers/AuthContext';
 import DatePicker from "react-datepicker";
 import axios from "axios";
 import ReservationUsers from "./ReservationUsers";
-import '../styles/Reservation.css';
-import "react-datepicker/dist/react-datepicker.css";
 import ConfModal from './ConfModal';
 
 const TIMES = {
@@ -46,6 +48,8 @@ function TimeSelect({ label, options, value, onChange }) {
 }
 
 function Reservation() {
+  const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
   const [startTime, setStartTime] = useState(Object.keys(TIMES)[0]);
   const [endTime, setEndTime] = useState(TIMES[startTime][1]); //set two hours on load
   const [selectedDate, setSelectedDate] = useState(new Date()); //set it to today date
@@ -57,6 +61,37 @@ function Reservation() {
   const [studentList, setStudentList] = useState();
   const [showForm, setShowForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  const handleConfirm = () => {
+    const date = selectedDate.toISOString().slice(0, 10);
+    const start = convertTo24Hour(startTime);
+    const end = convertTo24Hour(endTime);
+    const purpose = reason;
+    const phone = phoneNumber;
+    const confId = selectedConfab.id;
+    const guestList = [...studentList];
+
+    const data = { date: date, start_time: start, end_time: end, confirmation_status: "Pending", reason: purpose, ConfabId: confId, phone: phone, guestList: guestList }
+    axios
+      .post(`http://localhost:5000/reservation`, data, {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken"),
+          userId: sessionStorage.getItem("id"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+        console.log(data)
+      });
+  };
+
+  const handleCancel = () => {
+    setShowConfirmation(false);
+  };
 
   const handlePhoneNumberChange = (event) => {
     const inputValue = event.target.value;
@@ -68,7 +103,7 @@ function Reservation() {
 
   const setList = useCallback((list) => {
     setStudentList(list);
-  },[]);
+  }, []);
 
   const getAvailableTime = useCallback(() => {
     const conId = selectedConfab.id;
@@ -123,8 +158,29 @@ function Reservation() {
   };
 
   useEffect(() => {
+    if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
+      axios.get("http://localhost:5000/auth/allow", {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken"),
+          userId: sessionStorage.getItem("id")
+        },
+      })
+        .then((response) => {
+          if (response.data.error) {
+            authContext.logout()
+            navigate('/')
+          } else {
+            authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
+            navigate('/reservation')
+          }
+        })
+    }
+
+    if (!authContext.isLoggedIn) {
+      navigate('/')
+    };
     getConfabs();
-  }, [getConfabs]);
+  }, [getConfabs, authContext, navigate]);
 
   useEffect(() => {
     getAvailableTime();
@@ -167,33 +223,24 @@ function Reservation() {
   const endTimeOptions = TIMES[startTime];
 
   const submitRec = () => {
-    const date = selectedDate.toISOString().slice(0, 10);
-    const start = convertTo24Hour(startTime);
-    const end = convertTo24Hour(endTime);
-    const purpose = reason;
     const phone = phoneNumber;
-    const confId = selectedConfab.id;
     const guestList = [...studentList];
     const regex = /^09\d{9}$/;
 
-    if (purpose !== "" && !confId && guestList.length !== 0 && regex.test(phone)) {
-      console.log("Please check required fields")
+    if (guestList.length === 0 || !regex.test(phone)) {
+      setErrorMessage("Please Enter A Valid Phone Number and Fill Up User List")
     } else {
-      const data = { date: date, start_time: start, end_time: end, confirmation_status: "Pending", reason: purpose, ConfabId: confId, phone: phone, guestList: guestList }
-      axios
-        .post(`http://localhost:5000/reservation`, data, {
-          headers: {
-            accessToken: sessionStorage.getItem("accessToken"),
-            userId: sessionStorage.getItem("id"),
-          },
-        })
-        .then((response) => {
-          console.log(response.data)  
-        })
-        .catch((error) => {
-            console.log(error.response.data)
-            console.log(data)
-        });
+      setErrorMessage("")
+      setShowConfirmation(true);
+    }
+  };
+
+  const nextPage = () => {
+    if (reason !== "" && selectedConfab) {
+      setErrorMessage("");
+      setShowForm(!showForm);
+    } else {
+      setErrorMessage("Please Select Confab and Fill Purpose Field");
     }
   };
 
@@ -261,7 +308,7 @@ function Reservation() {
       )}
       {!showForm && (
         <>
-           <label htmlFor="phone-number-input">Phone Number:</label>
+          <label htmlFor="phone-number-input">Phone Number:</label>
           <input
             type="tel"
             id="phone-number-input"
@@ -273,11 +320,20 @@ function Reservation() {
           <ReservationUsers capacity={selectedConfab.max_capacity ?? 0} updateData={setList} />
         </>
       )}
-      <button onClick={() => setShowForm(!showForm)}>
+      <p>{errorMessage}</p>
+      <button onClick={() => nextPage()}>
         {showForm ? 'Next' : 'Back'}
       </button>
       {!showForm && (
         <button onClick={() => submitRec()}>Submit</button>
+      )}
+      {showConfirmation && (
+        <ConfModal
+          title="Reservation Confirmation"
+          message={`Confab: ${selectedConfab.name} Time: ${startTime}-${endTime} Users: ${studentList.join(", ")}`} //Pending pani kay di ma format
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
       )}
     </div>
   );

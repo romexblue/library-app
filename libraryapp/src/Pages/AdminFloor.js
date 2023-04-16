@@ -1,70 +1,14 @@
-import '../styles/Admin.css';
-import { useEffect, useContext, useState } from "react"
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../helpers/AuthContext";
-import AEFModal from "./AEFModal";
-import Stats from './Stats'
-import AdminFloor from './AdminFloor';
-import AdminReservation from './AdminReservation';
+import '../styles/AdminFloor.module.css';
+import { useEffect, useState } from 'react'
+import axios from 'axios';
+import AEFModal from './AEFModal'
 
-const Admin = () => {
-    const navigate = useNavigate();
-    const authContext = useContext(AuthContext);
+const AdminFloor = () => {
     const [floors, setFloors] = useState([]);
     const [floorData, setFloorData] = useState({});
     const [hoveredRow, setHoveredRow] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const [action, setAction] = useState('Delete');
-    const [isVisible, setIsVisible] = useState(false);
-    const [activeComponent, setActiveComponent] = useState('AdminFloor'); // initialize with 'Stats' as the default active component
-
-    const handleNavClick = (component) => {
-      setActiveComponent(component);
-    }
-    const toggleVisibility = () => {
-        setIsVisible(!isVisible);
-    };
-
-    useEffect(() => {
-        //to check token then check if admin
-        if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
-            axios.get("http://localhost:5000/auth/allow", {
-                headers: {
-                    accessToken: sessionStorage.getItem("accessToken"),
-                    userId: sessionStorage.getItem("id")
-                },
-            })
-                .then((response) => {
-                    if (response.data.error) {
-                        authContext.logout();
-                        navigate('/');
-                    } else {
-                        authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
-                        axios.get(`http://localhost:5000/auth/admin-auth/${sessionStorage.getItem("id")}`, {
-                            headers: {
-                                accessToken: sessionStorage.getItem("accessToken"),
-                                userId: sessionStorage.getItem("id")
-                            },
-                        }).then((response) => {
-                            if (response.data.error) {
-                                //if not admin
-                                navigate('/choose')
-                            } else {
-                                //if admin
-                                navigate('/admin')
-                            }
-                        })
-
-                    }
-                })
-        } else {
-            if (!sessionStorage.getItem("accessToken") && !sessionStorage.getItem("id")) {
-                navigate('/')
-            }
-        }
-
-    }, [authContext, navigate]);
 
     const serverReq = () => {
         axios.get("http://localhost:5000/floor/all", {
@@ -79,11 +23,9 @@ const Admin = () => {
             .catch(error => {
             });
     };
-
-    //query database if correct user
     useEffect(() => {
         serverReq();
-    }, []);
+    },[])
 
     const handleMouseEnter = (index) => {
         setHoveredRow(index);
@@ -176,23 +118,8 @@ const Admin = () => {
                     action={action}
                 />
             )}
-            <br />
-            <button onClick={toggleVisibility}>
-                {isVisible ? 'Hide Statistics' : 'Show Statistics'}
-            </button>
-            {isVisible && <Stats />}
-            <nav>
-                <ul>
-                    <li onClick={() => handleNavClick('AdminReservation')}>AdminReservation</li>
-                    <li onClick={() => handleNavClick('AdminFloor')}>AdminFloor</li>
-                </ul>
-            </nav>
-            <div>
-                {activeComponent === 'AdminReservation' && <AdminReservation />}
-                {activeComponent === 'AdminFloor' && <AdminFloor />}
-            </div>
         </div>
-    );
+    )
 }
 
-export default Admin
+export default AdminFloor

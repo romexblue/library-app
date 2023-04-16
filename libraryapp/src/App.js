@@ -8,7 +8,7 @@ import Chooser from './Pages/Chooser';
 import Exit from './Pages/Exit';
 import Admin from './Pages/Admin';
 import Reservation from './Pages/Reservation';
-import Stats from './Pages/Stats';
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
@@ -42,9 +42,8 @@ function App() {
             <Route path="/choose" exact element={<Chooser />} />
             <Route path="/entry" exact element={<FloorButtons />} />
             <Route path="/exit" exact element={<Exit />} />
-            <Route path="/reservation" exact element={<Reservation/>} />
-            <Route path="/admin" exact element={<Admin/>} />
-            <Route path="/stats" exact element={<Stats/>} />
+            <Route path="/reservation" exact element={<Reservation />} />
+            <Route path="/admin" exact element={<Admin />}/>
           </Routes>
         </div>
       </Router>
