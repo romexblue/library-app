@@ -1,8 +1,12 @@
-import '../styles/Button.css'
 import React, { useRef, useEffect, useContext } from 'react';
+import '../styles/Button.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from '../helpers/AuthContext';
+import image1 from '../images/Logout_Icon.png';
+import image2 from '../images/Entry_Icon.png';
+import image3 from '../images/Exit_Icon.png';
+import image4 from '../images/Sched_Icon.png';
 
 const Chooser = () => {
   const buttonsRef = useRef([]);
@@ -29,7 +33,7 @@ const Chooser = () => {
           }
         })
     }
-    
+       
     if (!authContext.isLoggedIn) {
       navigate('/')
     }
@@ -62,14 +66,50 @@ const Chooser = () => {
         break;
     }
   };
-
+  
   return (
-    <div className='button-container'>
-      <h1>Choose A Destination</h1>
-      <button className='button' ref={(el) => (buttonsRef.current[0] = el)} onKeyDown={(event) => handleKeyDown(event, 0)} onClick={() => chooseDes(0)} >Entry</button>
-      <button className='button' ref={(el) => (buttonsRef.current[1] = el)} onKeyDown={(event) => handleKeyDown(event, 1)} onClick={() => chooseDes(1)} >Exit</button>
-      <button className='button' ref={(el) => (buttonsRef.current[2] = el)} onKeyDown={(event) => handleKeyDown(event, 2)} onClick={() => chooseDes(2)} >Reservation</button>
+
+<div className="main_div">  
+          <div className="Logout">
+            <button className="back-icon" style={{cursor: "pointer"}} onClick={()=>authContext.logout()}>
+              <img className="BackIcon" id="BackBtn" alt="" src={image1}/>
+              <p>LOGOUT</p>
+            </button>
+          </div>
+          <div className="title" >
+            <div className="text">
+                <h1>OPERATION MODE</h1>
+                <h3>Please select a mode</h3>
+            </div>
+          </div>
+        <div className="container">
+          <button className="box" style={{cursor: "pointer"}} ref={(el) => (buttonsRef.current[0] = el)} onKeyDown={(event) => handleKeyDown(event, 0)} onClick={() => chooseDes(0)}>
+            <div className="box-icon">
+              <img className="Btn" id="EntryBtn" alt="" src={image2}/>
+            </div>
+            <div className="box-text">
+              <h3>ENTRY</h3>
+            </div> 
+          </button>
+          <button className="box" style={{cursor: "pointer"}}  ref={(el) => (buttonsRef.current[1] = el)} onKeyDown={(event) => handleKeyDown(event, 1)} onClick={() => chooseDes(1)}>
+            <div className="box-icon">
+              <img className="Btn" id="EntryBtn" alt="" src={image3}/>
+            </div>
+            <div className="box-text">
+              <h3>EXIT</h3>
+            </div>
+          </button>
+          <button className="box" style={{cursor: "pointer"}}  ref={(el) => (buttonsRef.current[2] = el)} onKeyDown={(event) => handleKeyDown(event, 2)} onClick={() => chooseDes(2)}>
+            <div className="box-icon">
+              <img className="Btn" id="EntryBtn" alt="" src={image4}/>
+            </div>
+            <div className="box-text">
+              <h3>RESERVATIONS</h3>
+            </div>
+          </button>
+        </div>
     </div>
+
   );
 }
 
