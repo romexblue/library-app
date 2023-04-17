@@ -31,8 +31,8 @@ const FloorButtons = () => {
         const today = new Date();
         const formattedDate = today.toISOString().slice(0, 10);
         const formattedTime = today.toLocaleTimeString('en-US', { hour12: false });
-        const data = { date: formattedDate, time_in: formattedTime, StudentId: studentID, FloorId: floorID, rfid:studentRFID }
-    
+        const data = { date: formattedDate, time_in: formattedTime, StudentId: studentID, FloorId: floorID, rfid: studentRFID }
+
         axios.post("http://localhost:5000/record/", data,
             {
                 headers: {
@@ -59,20 +59,20 @@ const FloorButtons = () => {
 
     const formatDate = (date) => {
         return date.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric"
+            month: "long",
+            day: "numeric",
+            year: "numeric"
         });
-      };
-    
-      const formatTime = (date) => {
+    };
+
+    const formatTime = (date) => {
         return date.toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
-          second: "numeric",
-          hour12: true
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true
         });
-      };
+    };
     const handleCancel = () => {
         console.log('Cancelled!');
         setFloorID('');
@@ -84,7 +84,7 @@ const FloorButtons = () => {
         if (document.activeElement === document.body) {
             //inputRef.current.focus();
             console.log("HELLODS");
-        }   
+        }
     }
 
     useEffect(() => {
@@ -148,177 +148,177 @@ const FloorButtons = () => {
 
     return (
         <>
-        {!studentID && (
-            <InfoPage
-                studentID={studentID} setStudentID={setStudentID}
-                studentRFID={studentRFID} setStudentRFID={setStudentRFID}
-                setStudentData={setStudentData}
+            {!studentID && (
+                <InfoPage
+                    studentID={studentID} setStudentID={setStudentID}
+                    studentRFID={studentRFID} setStudentRFID={setStudentRFID}
+                    setStudentData={setStudentData}
                 // inputRef={inputRef} 
                 />
-        )}
-            
-    {studentID && (
-        
-    <div className="info">
-        <div className="left-panel">
-            <div className="info-student">
-                <div className="stud-info" id="sec1-a">
-                </div>
-                <div className="stud-info1" id="sec2-a">
-                    <div className="comp" id="comp1">
-                        <img src={image1}/>
-                    </div>
-                    <div className="comp" id="comp2">
-                        <img src={image2}/>
-                    </div>
-                    <div className="comp" id="comp3">
-               </div>
+            )}
 
-                </div>
-                <div className="stud-info" id="sec3-a">
-                    <div className="comp" id="comp4">
-                        ID Number:
-                    </div>
-                    <div className="comp" id="comp5">
-                        {studentData.school_id}
-                    </div>
-                </div>
-                <div className="stud-info" id="sec4-a">
-                </div>
-                <div className="stud-info" id="sec5-a">
-                    <div className="comp" id="comp6">
-                        Last Name:
-                    </div>
-                    <div className="comp" id="comp7">
-                        Sobiono
-                    </div>
-                </div>
-                <div className="stud-info" id="sec6-a">
-                    <div className="partition" id="part1">
-                        <div className="comp" id="comp8">
-                            First Name:
-                        </div>
-                        <div className="comp" id="comp9">
-                            Kassandra Erika
-                        </div>
-                    </div>
-                    <div className="partition" id="part2">
-                        <div className="comp" id="comp10">
-                            Mid Initial:
-                        </div>
-                        <div className="comp" id="comp11">
-                            T
-                        </div>
-                    </div>
-                </div>
-                <div className="stud-info" id="sec7-a">
-                </div>
-                <div className="stud-info" id="sec8-a">
-                    <div className="partition" id="part3">
-                        <div className="comp" id="comp12">
-                            Gender:
-                        </div>
-                        <div className="comp" id="comp13">
-                            Female
-                        </div>
-                    </div>
-                    <div className="partition" id="part4">
-                        <div className="comp" id="comp14">
-                            Course:
-                        </div>
-                        <div className="comp" id="comp15">
-                            BSIT
-                        </div>
-                    </div>
-                    <div className="partition" id="part6">
-                        <div className="comp" id="comp16">
-                            Year:
-                        </div>
-                        <div className="comp" id="comp17">
-                            4
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="note-display">
-                <div className="note-up" id="uppernote">
-                    <div className="time">
-                        <div className="systemtime2">
-                            <div className="display-date">
-                                <span id="month">{formatDate(date)}</span>      
-                            </div>
-                            <div className="display-time">{formatTime(date)}</div>
-                        </div>
-                    </div>
-                    <div className="reminder">
-                        <div className="note-div">
-                        <p>Please confirm that all information
-                            are correct before clicking SUBMIT.</p>
-                        </div>
-                        <div className="note-icon">
-                            <img src={image7}/>
-                        </div>
-                    </div>
-                </div>
-                <div className="note-down" id="lowernote">
-                    <button className="cancelbtn" onClick={()=>setStudentID('')}>BACK</button>
-                </div>
-            </div>
-        </div>
-        <div className="right-panel">
-            <div className='building-select'>
-            <div className="building-select1" id="sec1-b"></div>
-                <div className="building-select2" id="sec2-b">
-                    <div className="comp" id="comp18">
-                        <img src={image3}/>
-                    </div>
-                    <div className="comp" id="comp19">
-                        <img src={image4}/>
-                    </div>
-                    <div className="comp" id="comp20">
-                    </div>
-                </div>
-                <div className='buildings'>
-                {buttonData.map((buttonObj, index)=> (
-                <div className='building-option' 
-                tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => chooseFloor(buttonObj.id, buttonObj.name)}>
-                        <div className="label" id="tag1">
-                            <h1>L{buttonObj.level}</h1> 
-                        </div>
-                        <div className="label" id="tag2">
-                            <div className="division" id="divup">
-                                <h2 className="building-text">{buttonObj.name}</h2>
-                            </div>
-                            <div className="division" id="divdown">
-                                <h2 className="building-text">Current Capacity: {buttonObj.current_count}</h2>
-                            </div>
-                        </div>
-                        <div className="label" id="tag3">
-                            <div className="division" id="label-div">
-                                <div className='labelcolor' id='labelc' style={{ backgroundColor: buttonObj.label === "Bldg1" ? "rgb(205, 205, 205)" : "rgb(31, 82, 158)" }}>
+            {studentID && (
 
+                <div className="info">
+                    <div className="left-panel">
+                        <div className="info-student">
+                            <div className="stud-info" id="sec1-a">
+                            </div>
+                            <div className="stud-info1" id="sec2-a">
+                                <div className="comp" id="comp1">
+                                    <img src={image1} alt='Img' />
+                                </div>
+                                <div className="comp" id="comp2">
+                                    <img src={image2} alt='Img' />
+                                </div>
+                                <div className="comp" id="comp3">
+                                </div>
+
+                            </div>
+                            <div className="stud-info" id="sec3-a">
+                                <div className="comp" id="comp4">
+                                    ID Number:
+                                </div>
+                                <div className="comp" id="comp5">
+                                    {studentData.school_id}
                                 </div>
                             </div>
-                            <div className="division" id="stat-div">
-                                <p>Status: {buttonObj.status}</p>
+                            <div className="stud-info" id="sec4-a">
                             </div>
-                        </div>  
-                    </div>    
-                ))}
+                            <div className="stud-info" id="sec5-a">
+                                <div className="comp" id="comp6">
+                                    Last Name:
+                                </div>
+                                <div className="comp" id="comp7">
+                                    Sobiono
+                                </div>
+                            </div>
+                            <div className="stud-info" id="sec6-a">
+                                <div className="partition" id="part1">
+                                    <div className="comp" id="comp8">
+                                        First Name:
+                                    </div>
+                                    <div className="comp" id="comp9">
+                                        Kassandra Erika
+                                    </div>
+                                </div>
+                                <div className="partition" id="part2">
+                                    <div className="comp" id="comp10">
+                                        Mid Initial:
+                                    </div>
+                                    <div className="comp" id="comp11">
+                                        T
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="stud-info" id="sec7-a">
+                            </div>
+                            <div className="stud-info" id="sec8-a">
+                                <div className="partition" id="part3">
+                                    <div className="comp" id="comp12">
+                                        Gender:
+                                    </div>
+                                    <div className="comp" id="comp13">
+                                        Female
+                                    </div>
+                                </div>
+                                <div className="partition" id="part4">
+                                    <div className="comp" id="comp14">
+                                        Course:
+                                    </div>
+                                    <div className="comp" id="comp15">
+                                        BSIT
+                                    </div>
+                                </div>
+                                <div className="partition" id="part6">
+                                    <div className="comp" id="comp16">
+                                        Year:
+                                    </div>
+                                    <div className="comp" id="comp17">
+                                        4
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="note-display">
+                            <div className="note-up" id="uppernote">
+                                <div className="time">
+                                    <div className="systemtime2">
+                                        <div className="display-date">
+                                            <span id="month">{formatDate(date)}</span>
+                                        </div>
+                                        <div className="display-time">{formatTime(date)}</div>
+                                    </div>
+                                </div>
+                                <div className="reminder">
+                                    <div className="note-div">
+                                        <p>Please confirm that all information
+                                            are correct before clicking SUBMIT.</p>
+                                    </div>
+                                    <div className="note-icon">
+                                        <img src={image7} alt='Img' />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="note-down" id="lowernote">
+                                <button className="cancelbtn" onClick={() => setStudentID('')}>BACK</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="right-panel">
+                        <div className='building-select'>
+                            <div className="building-select1" id="sec1-b"></div>
+                            <div className="building-select2" id="sec2-b">
+                                <div className="comp" id="comp18">
+                                    <img src={image3} alt='Img' />
+                                </div>
+                                <div className="comp" id="comp19">
+                                    <img src={image4} alt='Img' />
+                                </div>
+                                <div className="comp" id="comp20">
+                                </div>
+                            </div>
+                            <div className='buildings'>
+                                {buttonData.map((buttonObj, index) => (
+                                    <div className='building-option'
+                                        tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => chooseFloor(buttonObj.id, buttonObj.name)}>
+                                        <div className="label" id="tag1">
+                                            <h1>L{buttonObj.level}</h1>
+                                        </div>
+                                        <div className="label" id="tag2">
+                                            <div className="division" id="divup">
+                                                <h2 className="building-text">{buttonObj.name}</h2>
+                                            </div>
+                                            <div className="division" id="divdown">
+                                                <h2 className="building-text">Current Capacity: {buttonObj.current_count}</h2>
+                                            </div>
+                                        </div>
+                                        <div className="label" id="tag3">
+                                            <div className="division" id="label-div">
+                                                <div className='labelcolor' id='labelc' style={{ backgroundColor: buttonObj.label === "Bldg1" ? "rgb(205, 205, 205)" : "rgb(31, 82, 158)" }}>
+
+                                                </div>
+                                            </div>
+                                            <div className="division" id="stat-div">
+                                                <p>Status: {buttonObj.status}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            </div>   
-        </div>
-     )}
-     {showConfirmation && (
-        <ConfModal
-            title="CONFIRM"
-            message={`Visiting Level: ${floorName}`}
-            onConfirm={handleConfirm}
-            onCancel={handleCancel}
-            />
-     )}
-    </>
+            )}
+            {showConfirmation && (
+                <ConfModal
+                    title="CONFIRM"
+                    message={`Visiting Level: ${floorName}`}
+                    onConfirm={handleConfirm}
+                    onCancel={handleCancel}
+                />
+            )}
+        </>
     );
 }
 

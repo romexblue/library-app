@@ -72,7 +72,7 @@ const Chooser = () => {
 <div className="main_div">  
           <div className="Logout">
             <button className="back-icon" style={{cursor: "pointer"}} onClick={()=>authContext.logout()}>
-              <img className="BackIcon" id="BackBtn" alt="" src={image1}/>
+              <img className="BackIcon" id="BackBtn" alt="img" src={image1}/>
               <p>LOGOUT</p>
             </button>
           </div>
@@ -85,7 +85,7 @@ const Chooser = () => {
         <div className="container">
           <button className="box" style={{cursor: "pointer"}} ref={(el) => (buttonsRef.current[0] = el)} onKeyDown={(event) => handleKeyDown(event, 0)} onClick={() => chooseDes(0)}>
             <div className="box-icon">
-              <img className="Btn" id="EntryBtn" alt="" src={image2}/>
+              <img className="Btn" id="EntryBtn" alt="img" src={image2}/>
             </div>
             <div className="box-text">
               <h3>ENTRY</h3>
@@ -93,7 +93,7 @@ const Chooser = () => {
           </button>
           <button className="box" style={{cursor: "pointer"}}  ref={(el) => (buttonsRef.current[1] = el)} onKeyDown={(event) => handleKeyDown(event, 1)} onClick={() => chooseDes(1)}>
             <div className="box-icon">
-              <img className="Btn" id="EntryBtn" alt="" src={image3}/>
+              <img className="Btn" id="EntryBtn" alt="img" src={image3}/>
             </div>
             <div className="box-text">
               <h3>EXIT</h3>
@@ -101,7 +101,7 @@ const Chooser = () => {
           </button>
           <button className="box" style={{cursor: "pointer"}}  ref={(el) => (buttonsRef.current[2] = el)} onKeyDown={(event) => handleKeyDown(event, 2)} onClick={() => chooseDes(2)}>
             <div className="box-icon">
-              <img className="Btn" id="EntryBtn" alt="" src={image4}/>
+              <img className="Btn" id="EntryBtn" alt="img" src={image4}/>
             </div>
             <div className="box-text">
               <h3>RESERVATIONS</h3>

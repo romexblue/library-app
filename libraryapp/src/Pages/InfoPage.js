@@ -80,7 +80,7 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
         <div className="sec1">
             <div className="Back" onClick={()=>navigate('/')}>
                 <button className="back-icon" >
-                  <img className="BackIcon" id="BackBtn" src={image1} alt=""/>
+                  <img className="BackIcon" id="BackBtn" src={image1} alt="img"/>
                   <p>BACK</p>
                 </button>
             </div>
@@ -90,7 +90,7 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
         </div>
         <div className="sec2">
             <div className="RFID-Icon">
-                <img src={image2} alt=""/>
+                <img src={image2} alt="img"/>
             </div>
             <div className="TapMessage">
                 <h1>TAP YOUR ID NOW</h1>
@@ -104,7 +104,7 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
         </div>
         <div className="sec4">
             <div className="LibrarySeal">
-                <img src={image3} alt=""/>
+                <img src={image3} alt="img"/>
             </div>
             <div className="systemtime">
                 <div className="display-date">

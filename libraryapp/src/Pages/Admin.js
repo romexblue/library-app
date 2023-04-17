@@ -133,58 +133,11 @@ const Admin = () => {
     return (
         <div>
             <h5> Hello Admin</h5>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Current Count</th>
-                        <th>Capacity</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {floors.map((floor, index) => (
-                        <tr
-                            key={floor.id}
-                            onMouseEnter={() => handleMouseEnter(index)}
-                            onMouseLeave={handleMouseLeave}
-                        >
-                            <td>{floor.name}</td>
-                            <td>{floor.current_count}</td>
-                            <td>{floor.max_capacity}</td>
-                            <td>{floor.status}</td>
-                            <td style={{ border: 'none' }}>
-                                {hoveredRow === index && (
-                                    <>
-                                        <button onClick={() => handleClick(floor, "Edit")}>Edit</button>
-                                        <button onClick={() => handleClick(floor, "Delete")}>Delete</button>
-                                    </>
-                                )}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <button onClick={() => handleClick([], "Add")}>Add Floors</button>
-            {showEditModal && (
-                <AEFModal
-                    title={`${action} Floor`}
-                    data={floorData}
-                    update={handleConfirmFloor}
-                    cancel={handleCancelFloor}
-                    updateUi={serverReq}
-                    action={action}
-                />
-            )}
-            <br />
-            <button onClick={toggleVisibility}>
-                {isVisible ? 'Hide Statistics' : 'Show Statistics'}
-            </button>
-            {isVisible && <Stats />}
+           
             <nav>
                 <ul>
-                    <li onClick={() => handleNavClick('AdminReservation')}>AdminReservation</li>
-                    <li onClick={() => handleNavClick('AdminFloor')}>AdminFloor</li>
+                    <li onClick={() => handleNavClick('AdminReservation')}>Reservations</li>
+                    <li onClick={() => handleNavClick('AdminFloor')}>Floor Plan</li>
                 </ul>
             </nav>
             <div>

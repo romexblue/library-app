@@ -74,7 +74,6 @@ const AdminFloor = () => {
 
     return (
         <div>
-            <h5> Hello Admin</h5>
             <table>
                 <thead>
                     <tr>
