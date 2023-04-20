@@ -5,7 +5,7 @@ const router = express.Router();
 const { Reservation, ReservationStudent, Students, Confab } = require('../models')
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.get('/requests/find-by/:id', async (req, res) => {
+router.get('/requests/find-by/:id', validateToken, async (req, res) => {
   try {
     const { id } = req.params;
     const reservation = await Reservation.findOne({
@@ -26,13 +26,34 @@ router.get('/requests/find-by/:id', async (req, res) => {
   }
 });
 
-router.get('/requests/:confId/:status', async (req, res) => {
+router.patch('/requests/find-by/:id', validateToken, async (req, res) => {
+  const reservationId = req.params.id;
+  const { confirmed_by, confirmation_status } = req.body;
+
   try {
-    const { confId, status } = req.params;
-    const reservations = await Reservation.findAll({
+    const reservation = await Reservation.findByPk(reservationId);
+    if (!reservation) {
+      return res.status(404).json({error:'Reservation not found'});
+    }
+
+    await reservation.update({ confirmed_by: confirmed_by,  confirmation_status: confirmation_status });
+    return res.status(200).json({success:'Reservation updated successfully'});
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({error:'Something went wrong'});
+  }
+});
+
+router.get('/requests/:confId/:status/:date/:page', validateToken, async (req, res) => {
+  try {
+    const { confId, status, date, page } = req.params;
+    const limit = 10; // limit number of records per page
+    const offset = (page - 1) * limit; // calculate offset based on current page
+    const reservations = await Reservation.findAndCountAll({
       where: {
         ConfabId: confId,
-        confirmation_status: status
+        confirmation_status: status,
+        date: date
       },
       include: [
         {
@@ -42,15 +63,20 @@ router.get('/requests/:confId/:status', async (req, res) => {
             attributes: [] // exclude join table attributes from the result
           }
         }
-      ]
+      ],
+      limit: limit,
+      offset: offset
     });
-    res.json({ reservations })
+    const pageCount = Math.ceil(reservations.count / limit); // calculate number of pages
+    res.json({ reservations: reservations.rows, pageCount: pageCount })
   } catch (err) {
     res.status(400).json({ error: err });
   }
 });
 
-router.get('/:confId/:date', async (req, res) => {
+
+
+router.get('/:confId/:date', validateToken, async (req, res) => {
   if (!req.params.confId || !req.params.date) {
     res.status(500).json({ error: "Date and ConfabId is required" })
   }
@@ -66,26 +92,26 @@ router.get('/:confId/:date', async (req, res) => {
     });
 
     const availableSlots = [];
-    let lastEndTime = moment('08:00:00', 'HH:mm:ss');
+    let lastEndTime = moment('08:00', 'HH:mm');
 
     reservations.forEach((reservation) => {
-      const startTime = moment(reservation.start_time, 'HH:mm:ss');
-      const endTime = moment(reservation.end_time, 'HH:mm:ss');
+      const startTime = moment(reservation.start_time, 'HH:mm');
+      const endTime = moment(reservation.end_time, 'HH:mm');
 
       if (lastEndTime.isBefore(startTime)) {
         availableSlots.push({
-          start: lastEndTime.format('HH:mm:ss'),
-          end: startTime.format('HH:mm:ss'),
+          start: lastEndTime.format('HH:mm'),
+          end: startTime.format('HH:mm'),
         });
       }
 
       lastEndTime = moment.max(lastEndTime, endTime);
     });
 
-    if (lastEndTime.isBefore(moment('19:00:00', 'HH:mm:ss'))) {
+    if (lastEndTime.isBefore(moment('19:00', 'HH:mm'))) {
       availableSlots.push({
-        start: lastEndTime.format('HH:mm:ss'),
-        end: moment('19:00:00', 'HH:mm:ss').format('HH:mm:ss'),
+        start: lastEndTime.format('HH:mm'),
+        end: moment('19:00', 'HH:mm').format('HH:mm'),
       });
     }
 
@@ -94,6 +120,7 @@ router.get('/:confId/:date', async (req, res) => {
     res.status(400).json({ error: err });
   }
 });
+
 
 router.post('/', validateToken, async (req, res) => {
   const { guestList, ...rec } = req.body; //separate guest list from the request

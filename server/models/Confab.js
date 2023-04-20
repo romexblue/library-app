@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         status: {
             type: DataTypes.ENUM('Open', 'Closed'),
             allowNull: false
+        },
+        level: {
+            type: DataTypes.INTEGER,
+            allowNull: true
         }
     }, { timestamps: false });
 

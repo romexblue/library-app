@@ -3,28 +3,20 @@ import { useEffect, useContext, useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../helpers/AuthContext";
-import AEFModal from "./AEFModal";
-import Stats from './Stats'
 import AdminFloor from './AdminFloor';
 import AdminReservation from './AdminReservation';
+import AdminConfab from './AdminConfab';
+import AdminStudent from './AdminStudent';
+import AdminUsers from './AdminUsers';
 
 const Admin = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
-    const [floors, setFloors] = useState([]);
-    const [floorData, setFloorData] = useState({});
-    const [hoveredRow, setHoveredRow] = useState(null);
-    const [showEditModal, setShowEditModal] = useState(false);
-    const [action, setAction] = useState('Delete');
-    const [isVisible, setIsVisible] = useState(false);
-    const [activeComponent, setActiveComponent] = useState('AdminFloor'); // initialize with 'Stats' as the default active component
+    const [activeComponent, setActiveComponent] = useState('AdminReservation');
 
     const handleNavClick = (component) => {
-      setActiveComponent(component);
+        setActiveComponent(component);
     }
-    const toggleVisibility = () => {
-        setIsVisible(!isVisible);
-    };
 
     useEffect(() => {
         //to check token then check if admin
@@ -66,83 +58,25 @@ const Admin = () => {
 
     }, [authContext, navigate]);
 
-    const serverReq = () => {
-        axios.get("http://localhost:5000/floor/all", {
-            headers: {
-                accessToken: sessionStorage.getItem("accessToken"),
-                userId: sessionStorage.getItem("id")
-            },
-        })
-            .then(response => {
-                setFloors(response.data);
-            })
-            .catch(error => {
-            });
-    };
-
-    //query database if correct user
-    useEffect(() => {
-        serverReq();
-    }, []);
-
-    const handleMouseEnter = (index) => {
-        setHoveredRow(index);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredRow(null);
-    };
-
-    const handleClick = (floor, type) => {
-        if (type === "Delete") {
-            axios.delete(`http://localhost:5000/floor/${floor.id}`, {
-                headers: {
-                    accessToken: sessionStorage.getItem("accessToken"),
-                    userId: sessionStorage.getItem("id")
-                },
-            })
-                .then(response => {
-                    serverReq();
-                })
-                .catch(error => {
-                });
-        }
-        if (type === "Add") {
-            setFloorData([]);
-            setAction(type);
-            setShowEditModal(true);
-
-        }
-        if (type === "Edit") {
-            setFloorData(floor);
-            setAction(type);
-            setShowEditModal(true);
-        }
-    };
-
-    const handleConfirmFloor = () => {
-        setFloorData({});
-        setShowEditModal(false);
-    };
-
-    const handleCancelFloor = () => {
-        setShowEditModal(false);
-        setAction('');
-    };
-
     return (
         <div>
             <h5> Hello Admin</h5>
-           
+
             <nav>
                 <ul>
                     <li onClick={() => handleNavClick('AdminReservation')}>Reservations</li>
                     <li onClick={() => handleNavClick('AdminFloor')}>Floor Plan</li>
+                    <li onClick={() => handleNavClick('AdminConfab')}>Confab Plan</li>
+                    <li onClick={() => handleNavClick('AdminStudent')}>Student List</li>
+                    <li onClick={() => handleNavClick('AdminUsers')}>Users List</li>
                 </ul>
             </nav>
             <div>
                 {activeComponent === 'AdminReservation' && <AdminReservation />}
                 {activeComponent === 'AdminFloor' && <AdminFloor />}
+                {activeComponent === 'AdminConfab' && <AdminConfab />}
+                {activeComponent === 'AdminStudent' && <AdminStudent />}
+                {activeComponent === 'AdminUsers' && <AdminUsers />}
             </div>
         </div>
     );
