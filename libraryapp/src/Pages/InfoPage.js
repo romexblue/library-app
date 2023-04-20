@@ -1,5 +1,5 @@
 import '../styles/InfoPage.css'
-import { useState, useEffect, useContext, useRef} from "react";
+import { useState, useEffect, useRef} from "react";
 import axios from "axios";
 import image1 from '../images/Back_Icon.png';
 import image2 from '../images/Rfid_Icon.png';
@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStudentData}) => {
     const [value, setValue] = useState(''); //value of input
     const [searchResult, setSearchResult] = useState(''); //value of result
-    const [userData, setUserData] = useState([]);
     const [date, setDate] = useState(new Date());
     const navigate = useNavigate();
     const inputRef = useRef(null);

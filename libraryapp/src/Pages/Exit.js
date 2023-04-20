@@ -52,6 +52,7 @@ const Exit = () => {
     }
 
     function handleChange(event) {
+        setResponse('')
         setValue(event.target.value);
     }
 
@@ -75,7 +76,7 @@ const Exit = () => {
                            setResponse(response.data.error);
                             setValue('');
                         } else {
-                           setResponse(response.data);
+                           setResponse(response.data.success);
                             setValue('');
                         }
                     })
@@ -135,7 +136,7 @@ const Exit = () => {
             <div className="LibrarySeal">
                 <img src={image3} alt="img"/>
             </div>
-            <div className="feedback" ><p>{response}</p></div>
+            <div className="feedback" ><p style={{color: response === "Time Out Successful" ? "#385DBB" : ""}}>{response}</p></div>
             <div className="systemtime">
                 <div className="display-date">
                     <span id="month">{formatDate(date)}</span>
