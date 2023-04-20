@@ -253,7 +253,7 @@ const FloorButtons = () => {
                                 </div>
                             </div>
                             <div className="note-down" id="lowernote">
-                                <button className="cancelbtn" onClick={() => setStudentID('')}>BACK</button>
+                                <button className="cancelbtn" onClick={() => {setStudentID(''); setStudentRFID('');}}>Back</button>
                             </div>
                         </div>
                     </div>

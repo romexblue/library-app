@@ -103,15 +103,17 @@
     height: 40%;
 }
 #lowernote .cancelbtn{
+    position: absolute;
     font-family: 'Ubuntu', sans-serif;
     font-size: 20px;
     color: #385DBB;
-    height: 50px;
-    width: 150px;
+    height: 40px;
+    width: 120px;
     border: 2px solid #264083;
     border-radius: 10px;
     margin: 0 10px 0;
-    margin-top: 20px;
+    bottom: 20px;
+    left: 10px;
 }
 #sec1-a{
     width: 100%;
@@ -545,8 +547,8 @@
 .submit-info1 .submitbtn{
     font-family: 'Ubuntu', sans-serif;
     font-size: 20px;
-    height: 60px;
-    width: 180px;
+    height: 40px;
+    width: 140px;
     background-color: #385DBB;
     color: white;
     border-style: none;

@@ -35,39 +35,16 @@ body{
   position: absolute;
   width: 100px;
   height: 80px;
-  left: 40px;
-  top: 40px;
+  left: 10px;
+  top: 20px;
 }
 .Back p{
   font-size: 12px;
 }
 .Back img{
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
 }
-.LogoutBtn{
-  float: right;
-  padding-right: 70px;
-  padding-top: 40px;
-}
-.btn {
-  font-size: 18px;
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 500;
-  color: #3D3C3C;
-  color: #283971;
-  border: solid 2px #283971;   
-  width: 120px;
-  height: 50px;
-  cursor: pointer;
-  border-radius: 10px;
-
-}
-
-.btn:hover {
-  background: #283971;
-  color: white;
-  }
 
 
 .sec2{
@@ -89,9 +66,10 @@ body{
   width: 400px;
 }
 .TapMessage{
+  font-family: 'Ubuntu', sans-serif;  
   margin-top: 30px;
   font-size: 25px;
-  color: #323131;
+  color: #283971;
   text-align: center;
 }
 .sec3{
@@ -105,7 +83,7 @@ input[type=text] {
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
   box-sizing: border-box;
   font-size: 25px;
 }
@@ -115,12 +93,15 @@ input[type=text] {
   width: 400px;
   font-size: 16px;
 }
+input:focus{
+  outline: none;
+  border: solid 1px;
+}
 .sec4{
-  display: inline-block;
   width: 100%;
-  height: 60px;
-  position: absolute;
-  bottom: 0;
+  height: 10%;
+  position: relative;
+  margin-top: 5px;
   margin-bottom: 20px;
 }
 .LibrarySeal {
@@ -128,15 +109,28 @@ input[type=text] {
   position: absolute;
   height: auto;
   width: 240px;
+  bottom: 0;
 }
 .LibrarySeal img{
   width: 100%;
+}
+.feedback{
+  text-align: center;
+  color: red;
+  font-family: 'Ubuntu', sans-serif;
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
 }
 .systemtime{
   color: #283971;
   font-family: 'Ubuntu', sans-serif;
   position: absolute;
   right: 0;
+  bottom: 0;
   width: 200px;
 }
 /*TIME JS FORMAT*/
@@ -147,6 +141,7 @@ input[type=text] {
   font-weight: 600;
   font-size: 30px;
 }
+
 
 /* Media queries */
 
@@ -159,5 +154,8 @@ input[type=text] {
       margin-left: auto;
       margin-right: auto;
       width: 320px;
+  }
+  .sec4{
+    height: 14%;
   }
 }

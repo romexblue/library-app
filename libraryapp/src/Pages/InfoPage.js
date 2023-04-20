@@ -1,10 +1,9 @@
 import '../styles/InfoPage.css'
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef} from "react";
 import axios from "axios";
 import image1 from '../images/Back_Icon.png';
 import image2 from '../images/Rfid_Icon.png';
 import image3 from '../images/XuLib.png';
-import AuthContext from '../helpers/AuthContext';
 import { useNavigate } from "react-router-dom";
 
 const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStudentData}) => {
@@ -12,17 +11,24 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
     const [searchResult, setSearchResult] = useState(''); //value of result
     const [userData, setUserData] = useState([]);
     const [date, setDate] = useState(new Date());
-    const authContext = useContext(AuthContext);
     const navigate = useNavigate();
+    const inputRef = useRef(null);
     useEffect(()=>{
+        inputRef.current.focus();
         if(!studentRFID && !studentID){
             setValue('');
             setSearchResult('')
             setStudentData([]);
         }
-        const timer = setInterval(() => setDate(new Date()), 1000);
+        const timer = setInterval(() => {
+        setDate(new Date())
+        if (!inputRef.current.contains(document.activeElement)) {
+            inputRef.current.focus();
+          } 
+    },1000);
     return () => clearInterval(timer);
     },[studentID, studentRFID, setStudentData]);
+
     const formatDate = (date) => {
         return date.toLocaleDateString("en-US", {
           month: "long",
@@ -39,9 +45,10 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
           hour12: true
         });
       };
-    const handleChange = (event) => {
-        const newValue = event.target.value;
-        setValue(newValue);
+      const handleSubmit = (event) => {
+        console.log(searchResult)
+        event.preventDefault();
+        const newValue = value;
         try {
             if (newValue.trim() !== '') { //handle blank space when deleting all
                 const encodedValue = encodeURIComponent(newValue.trim()); //handle special chars to prevent error
@@ -53,10 +60,11 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
                 })
                     .then((response) => {
                         if (response.data.error) {
-                            setSearchResult('User Not Found');
+                            setSearchResult('User not found');
                             setStudentData([]);
                             setStudentID('');
                             setStudentRFID('');
+                            setValue('');
                         } else {
                             setSearchResult('User Found');
                             setStudentData(response.data);
@@ -72,6 +80,12 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
         } catch (error) {
             console.error(error);
         }
+      }
+    const handleChange = (event) => {
+        setSearchResult('');
+        const newValue = event.target.value;
+        setValue(newValue);
+        
     }
 
     return (
@@ -84,28 +98,30 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
                   <p>BACK</p>
                 </button>
             </div>
-            <div className="LogoutBtn" onClick={()=>authContext.logout()}>
-                <button className="btn logout">Logout</button>
-            </div>
         </div>
         <div className="sec2">
             <div className="RFID-Icon">
                 <img src={image2} alt="img"/>
             </div>
             <div className="TapMessage">
-                <h1>TAP YOUR ID NOW</h1>
+                <h1>TAP YOUR ID TO ENTER</h1>
             </div>
         </div>
         <div className="sec3">
+            <form onSubmit={handleSubmit}>
             <div className="IdInput">
-                <label htmlFor="fname">ID NUMBER:</label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name.." value={value} onChange={handleChange}/>
+                <label htmlFor="fname">Library User</label>
+                <input type="text"  ref={inputRef} id="fname"  placeholder="Tap Your ID" value={value} onChange={handleChange}
+                style={{ borderColor: searchResult === "User not found" ? "red" : "",
+                         backgroundColor: searchResult === "User not found" ? "rgb(255, 251, 251)" : "" }}/>
             </div>
+            </form>
         </div>
         <div className="sec4">
             <div className="LibrarySeal">
                 <img src={image3} alt="img"/>
             </div>
+            <div className="feedback" ><p>{searchResult}</p></div>
             <div className="systemtime">
                 <div className="display-date">
                     <span id="month">{formatDate(date)}</span>
