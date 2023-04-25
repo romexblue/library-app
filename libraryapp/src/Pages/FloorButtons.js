@@ -23,7 +23,6 @@ const FloorButtons = () => {
     const [studentData, setStudentData] = useState([]);
     const [floorID, setFloorID] = useState('');
     const [floorName, setFloorName] = useState('');
-    const inputRef = useRef(null);
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const [date, setDate] = useState(new Date());
@@ -79,13 +78,6 @@ const FloorButtons = () => {
         setFloorName('');
         setShowConfirmation(false);
     };
-
-    function checkFocus() {
-        if (document.activeElement === document.body) {
-            //inputRef.current.focus();
-            console.log("HELLODS");
-        }
-    }
 
     useEffect(() => {
         //inputRef.current.focus();

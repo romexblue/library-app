@@ -6,7 +6,7 @@ const { validateToken } = require("../middlewares/AuthMiddleware")
 router.post('/', validateToken, async (req, res) => {
     const confab = req.body
     try {
-        await Confab.create(floor);
+        await Confab.create(confab);
         res.status(200).json({success: "Create Confab Successful"});
     } catch (err) {
         res.status(500).json({ error: err })
@@ -42,7 +42,7 @@ router.patch('/:id', validateToken, async (req, res) => {
                 confab[key] = data[key];
             });
 
-            await Confab.save();
+            await confab.save();
             res.status(200).json({ success: "Update Success" })
         } else {
             res.status(404).json({ error: "Not Found" })

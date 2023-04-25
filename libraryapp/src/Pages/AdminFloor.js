@@ -77,9 +77,11 @@ const AdminFloor = () => {
             <table>
                 <thead>
                     <tr>
+                        <th>Level</th>
                         <th>Name</th>
                         <th>Current Count</th>
                         <th>Capacity</th>
+                        <th>Building No.</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -90,9 +92,11 @@ const AdminFloor = () => {
                             onMouseEnter={() => handleMouseEnter(index)}
                             onMouseLeave={handleMouseLeave}
                         >
+                            <td>{floor.level}</td>
                             <td>{floor.name}</td>
                             <td>{floor.current_count}</td>
                             <td>{floor.max_capacity}</td>
+                            <td>{floor.label}</td>
                             <td>{floor.status}</td>
                             <td style={{ border: 'none' }}>
                                 {hoveredRow === index && (
