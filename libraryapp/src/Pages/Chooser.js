@@ -88,7 +88,7 @@ const Chooser = () => {
               <img className="Btn" id="EntryBtn" alt="img" src={image2}/>
             </div>
             <div className="box-text">
-              <h3>ENTRY</h3>
+              <h3>Entry</h3>
             </div> 
           </button>
           <button className="box" style={{cursor: "pointer"}}  ref={(el) => (buttonsRef.current[1] = el)} onKeyDown={(event) => handleKeyDown(event, 1)} onClick={() => chooseDes(1)}>
@@ -96,7 +96,7 @@ const Chooser = () => {
               <img className="Btn" id="EntryBtn" alt="img" src={image3}/>
             </div>
             <div className="box-text">
-              <h3>EXIT</h3>
+              <h3>Exit</h3>
             </div>
           </button>
           <button className="box" style={{cursor: "pointer"}}  ref={(el) => (buttonsRef.current[2] = el)} onKeyDown={(event) => handleKeyDown(event, 2)} onClick={() => chooseDes(2)}>
@@ -104,7 +104,7 @@ const Chooser = () => {
               <img className="Btn" id="EntryBtn" alt="img" src={image4}/>
             </div>
             <div className="box-text">
-              <h3>RESERVATIONS</h3>
+              <h3>Reservation</h3>
             </div>
           </button>
         </div>

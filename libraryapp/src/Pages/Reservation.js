@@ -7,6 +7,8 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 import ReservationUsers from "./ReservationUsers";
 import ConfModal from './ConfModal';
+import image1 from '../images/Home.png';
+
 
 const TIMES = {
   "8:00am": ["9:00am", "10:00am"],
@@ -245,97 +247,162 @@ function Reservation() {
   };
 
   return (
-    <div>
-      {showForm && (
-        <>
-          Choose a Date:
-          <DatePicker
-            selected={selectedDate}
-            onChange={date => setDate(date)}
-            minDate={new Date()}
-            popperPlacement="bottom"
-          />
-          <div>
-            <label htmlFor="reason">Purpose:</label>
-            <textarea id="reason" value={reason} onChange={(event) => setReason(event.target.value)}></textarea>
-          </div>
-          Choose a Confab:
-          <select value={selectedConfab.id ?? ''} onChange={handleConfabChange}>
-            <option value="">Select a confab</option>
-            {confabs.map(confab => (
-              <option key={confab.id} value={confab.id}>{confab.name}</option>
-            ))}
-          </select>
-          <h3>Available Time</h3>
-          <table style={{ margin: "0 auto" }}>
-            <thead>
-              <tr>
-                <th>From</th>
-                <th>Until</th>
-              </tr>
-            </thead>
-            <tbody>
-              {availableSlots.length > 0 ? (
-                availableSlots.map(slot => (
-                  <tr key={slot.start}>
-                    <td>{convertTo12Hour(slot.start)}</td>
-                    <td>{convertTo12Hour(slot.end)}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="2" style={{ textAlign: "center" }}>
-                    {selectedConfab ? "Fully Booked" : "Choose a Confab"}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+    <div className="maindiv">
+    <div className="centerdiv">
+        <div className="left-panel">
+            <div className="floor-label">
+                <div className="panel-title">
+                    <p className="pan-title">Confab Rooms</p>
+                </div>
+                <div className="f-label" id="fl-1">
+                    <p className="floor-title">5th Floor</p>
+                </div>
+                <div className="f-label" id="fl-2">
+                    <p className="floor-title">4th Floor</p>
+                </div>
+                <div className="f-label" id="fl-3">
+                    <p className="floor-title">3rd Floor</p>
+                </div>
+            </div>
+            <div className="conf-buttons">
+                <div className="square-button">
+                    <div className="conf-number">
+                        <p>5</p>
+                    </div>
+                    <div className="conf-name">
+                        <p className="floor-title">CONFAB</p>
+                    </div>
+                </div>
+                <div className="square-button">
+                    <div className="conf-number">
+                        <p>6</p>
+                    </div>
+                    <div className="conf-name">
+                        <p className="floor-title">CONFAB</p>
+                    </div>
+                </div>
+                <div className="square-button">
+                    <div className="conf-number">
+                        <p>3</p>
+                    </div>
+                    <div className="conf-name">
+                        <p className="floor-title">CONFAB</p>
+                    </div>
+                </div>
+                <div className="square-button">
+                    <div className="conf-number">
+                        <p>4</p>
+                    </div>
+                    <div className="conf-name">
+                        <p className="floor-title">CONFAB</p>
+                    </div>
+                </div>
+                <div className="square-button">
+                    <div className="conf-number">
+                        <p>1</p>
+                    </div>
+                    <div className="conf-name">
+                        <p className="floor-title">CONFAB</p>
+                    </div>
+                </div>
+                <div className="square-button">
+                    <div className="conf-number">
+                        <p>2</p>
+                    </div>
+                    <div className="conf-name">
+                        <p className="floor-title">CONFAB</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="divider">
 
-          <TimeSelect
-            label="Start Time"
-            options={Object.keys(TIMES)}
-            value={startTime}
-            onChange={handleStartTimeChange}
-          />
-          <TimeSelect
-            label="End Time"
-            options={endTimeOptions}
-            value={endTime}
-            onChange={handleEndTimeChange}
-          />
-        </>
-      )}
-      {!showForm && (
-        <>
-          <label htmlFor="phone-number-input">Phone Number:</label>
-          <input
-            type="tel"
-            id="phone-number-input"
-            name="phone-number"
-            value={phoneNumber}
-            placeholder="09xxxxxxx"
-            onChange={handlePhoneNumberChange}
-          />
-          <ReservationUsers capacity={selectedConfab.max_capacity ?? 0} updateData={setList} />
-        </>
-      )}
-      <p>{errorMessage}</p>
-      <button onClick={() => nextPage()}>
-        {showForm ? 'Next' : 'Back'}
-      </button>
-      {!showForm && (
-        <button onClick={() => submitRec()}>Submit</button>
-      )}
-      {showConfirmation && (
-        <ConfModal
-          title="Reservation Confirmation"
-          message={`Confab: ${selectedConfab.name} Time: ${startTime}-${endTime} Users: ${studentList.join(", ")}`} //Pending pani kay di ma format
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
-        />
-      )}
+        </div>
+        <div className="right-panel">
+            <div className="section" id="sec1">
+                <div className="comp" id="comp1">
+                    <p>Usage</p>
+                </div>
+                <div className="comp" id="comp2">
+                    <img src={image1} alt=""/>
+                </div>
+            </div>
+            <div className="section" id="sec2">
+            </div>
+            <div className="section" id="sec3">
+                <div className="table-header">
+                    <div className="header" id="header1">No.</div>
+                    <div className="header" id="header2">From</div>
+                    <div className="header" id="header3">Until</div>
+                    <div className="header" id="header4">Notes</div>
+                </div>
+            </div>
+            <div className="section" id="sec4">
+                <div className="table">
+                    <div className="table-content">
+                        <div className="column" id="column1">1</div>
+                        <div className="column" id="column2">8:00 am</div>
+                        <div className="column" id="column3">10:00 am</div>
+                        <div className="column" id="column4">10 pax</div>
+                    </div>
+                    <div className="table-content">
+                        <div className="column" id="column1">1</div>
+                        <div className="column" id="column2">8:00 am</div>
+                        <div className="column" id="column3">10:00 am</div>
+                        <div className="column" id="column4">10 pax</div>
+                    </div>
+                </div>
+            </div>
+            <div className="section" id="sec5">
+                <div className="comp" id="drop3">
+                    <div className="label">
+                        Start Time
+                    </div>
+                    <div className="drop-down">                          
+                        <input className="dropdown2" list="browsers" name="browser" placeholder="8:00 am"/>
+                        <datalist id="browsers">
+                          <option value="8:00 am"/>
+                          <option value="9:00 am"/>
+                          <option value="10:00 am"/>
+                          <option value="11:00 am"/>
+                          <option value="12:00 pm"/>
+                          <option value="1:00 pm"/>
+                          <option value="2:00 pm"/>
+                          <option value="3:00 pm"/>
+                          <option value="4:00 pm"/>
+                          <option value="5:00 pm"/>
+                          <option value="6:00 pm"/>
+                        </datalist>                          
+                      </div>
+                </div>
+                <div className="comp" id="drop4">
+                    <div className="label">
+                        End Time
+                    </div>
+                    <div className="drop-down">
+                          <input className="dropdown2" list="browsers" name="browser" placeholder="8:00 am"/>
+                          <datalist id="browsers">
+                            <option value="8:00 am"/>
+                            <option value="9:00 am"/>
+                            <option value="10:00 am"/>
+                            <option value="11:00 am"/>
+                            <option value="12:00 pm"/>
+                            <option value="1:00 pm"/>
+                          </datalist>                          
+                    </div>
+                </div>
+            </div>
+            
+            <div className="section" id="sec6">
+                <div className="btn-holder" id="holder1">
+                    <button className="cancelbtn" >Cancel</button>
+                    <button className="submitbtn">Next</button>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
   );
 }
 

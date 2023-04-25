@@ -13,7 +13,7 @@
     color: #3D3C3C;
 }
 .text h3{
-    font-weight: 400;
+    font-weight: 300;
 }
 .container {
     margin:auto;
@@ -33,7 +33,7 @@
     width: 250px;
     height: 250px;
     background-color: #ffffff;
-    border: 3px solid #283971;
+    border: 1px solid #283971;
     box-sizing: border-box;
     border-radius: 10px;
 }
@@ -45,9 +45,10 @@
     width: 150px;
     margin-top: 30px;
 }
-.box-text{
-    font-size: 25px;
-    font-family: 'Source Code Pro', monospace; /*Icon Font Styles*/
+.box-text h3{
+    font-size: 20px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     color: #555353;
 }
 .Logout{

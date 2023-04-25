@@ -1,3 +1,446 @@
-.react-datepicker__input-container input {
-    width: 70px;
+.maindiv{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.centerdiv{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 90%;
+    width: 95%;
+    border-radius: 10px;
+    background-color: white;
+    display: flex; 
+    align-items: center; 
+}
+.left-panel{
+    float: left;
+    height: 100%;
+    width: 50%;
+    display: flex;
+}
+.floor-label{
+    padding-left: 10px;
+    height: 100%;
+    width: 120px;
+}
+.panel-title{
+    height: 80px;
+    width: 400px;
+    z-index: 1;
+}
+.pan-title{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 25px;
+    margin-top: 20px;
+    margin-left: 30px;
+    color: #162451;
+}
+.f-label{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80px;
+}
+#fl-1{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: 30px;
+    color: #434343;
+}
+#fl-2{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: 90px;
+    color: #434343;
+}
+#fl-3{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: 90px;
+    color: #434343;
+
+}
+.conf-buttons{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 100px;
+    padding-bottom: 40px;
+}
+.right-panel{
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+}
+.divider{
+    position: absolute;
+    height: 80%;
+    width: .2px;
+    background-color: rgb(154, 154, 154);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.square-button {
+    width: calc(50% - 20px);
+    height: calc(33.33% - 20px);
+    background-color: #283971;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.square-button:hover{
+    background-color: #0c1534;
+    cursor: pointer;
+}
+.conf-number{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 80px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    width: 100%;
+}
+.conf-name{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    width: 100%;
+    color: white;
+}
+
+
+/*================================= RIGHT PANEL ===================================*/
+
+#sec1{
+    font-family: 'Ubuntu', sans-serif;
+    width: 100%;
+    height: 65px;
+    display: flex;
+}
+#comp1{
+    font-size: 25px;
+    padding-top: 20px;
+    padding-left: 30px;
+    color: #162451;
+}
+#comp2{
+    margin-left: auto;
+    height: 100%;
+    width: 100px;
+}
+#comp2 img{
+    height: 50px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+#sec2{
+    width: 100%;
+    height: 20px;
+    display: flex;
+}
+
+#drop3{
+    height: 100%;
+    width: 50%;
+}
+#drop3 .label{
+    padding-left: 30px;
+}
+#drop4{
+    height: 100%;
+    width: 50%;
+}
+#drop4 .label{
+    padding-left: 30px;
+}
+#sec3{
+    width: 100%;
+    height: 40px;
+    display: flex;
+}
+.table-header{
+    margin: 0 30px 0;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px;
+}
+.header{
+    height: 100%;
+}
+#header1{
+    width: 120px;
+    text-align: center;
+    margin: 10px 0 10px;
+}
+#header2{
+    width: 130px;
+    text-align: center;
+    margin: 10px 0 10px;
+}
+#header3{
+    width: 140px;
+    text-align: center;
+    margin: 10px 0 10px;
+}
+#header4{
+    width: 120px;
+    text-align: center;
+    margin: 10px 0 10px;
+}
+
+
+#sec4{
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 270px;
+}
+.table{
+    margin: 10px 30px 0;
+    width: 100%;
+    height: 350px;
+    border-radius: 10px;
+    background-color: rgb(227, 227, 227);
+    display: block;
+}
+.table-content{
+    display: flex;
+    position: relative;
+    margin: 10px 10px 0;
+    width: 95%;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+}
+.column{
+    height: 100%;
+}
+#column1{
+    width: 100px;
+    text-align: center;
+    margin: 10px 0 10px;
+}
+#column2{
+    width: 150px;
+    text-align: center;
+    margin: 10px 0 10px;
+}
+#column3{
+    width: 120px;
+    text-align: center;
+    margin: 10px 0 10px;
+}
+#column4{
+    width: 140px;
+    text-align: center;
+    margin: 10px 0 10px;
+}
+#sec5{
+    margin-top: 120px;
+    position: relative;
+    width: 100%;
+    height: 70px;
+    display: flex;
+}
+#sec6{
+    margin-top: 15px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+#holder1{
+    margin-top: 20px;
+    width: 300px;
+    display: flex;
+    background-color: red;
+  }
+#sec6 .submitbtn{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+    height: 40px;
+    width: 120px;
+    background-color: #385DBB;
+    color: white;
+    border-style: none;
+    border-radius: 10px;
+    margin: 0 40px 0;
+    position: absolute;
+    right: 0;
+  }
+#sec6 .cancelbtn{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+    color: #385DBB;
+    height: 40px;
+    width: 120px;
+    border: 1px solid #385DBB;
+    border-radius: 10px;
+    position: absolute;
+    right: 180px;
+}
+#browsers option:checked {
+    background-color: #f9f9f9;
+  }
+
+/*============================ DROPDOWN ===========================*/
+.drop-down {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown2 {
+    padding: 10px;
+    margin: 0 30px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+    background-color: #fff;
+  }
+  
+  /* Style the dropdown arrow */
+  .dropdown2::after {
+    content: "\25BC";
+    font-size: 16px;
+    color: #aaa;
+    margin-left: 5px;
+  }
+  
+  /* Style the dropdown list */
+  #browsers {
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    width: 150px;
+    margin-top: 5px;
+  }
+  
+  #browsers option {
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  /* Style the selected option */
+
+@media screen and (max-height: 700px) {
+    .square-button {
+        padding-bottom: 20px;
+        padding-top: 10px;
+    }
+    .f-label{
+        font-family: 'Ubuntu', sans-serif;
+        width: 100%;
+        height: 80px;
+    
+    }
+    #fl-1{
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        margin-top: 28px;
+        
+    }
+    #fl-2{
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        margin-top: 56px;
+    }
+    #fl-3{
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        margin-top: 56px;
+    }
+    .conf-number{
+        font-size:70px;
+        font-weight: 500;
+    }
+    .conf-name{
+        font-size: 20px;
+    }
+    .table{
+        height: 250px;
+    }
+    #sec5{
+        margin-top: 20px;
+
+    }
+    #sec6{
+        margin-top: 30px;
+        width: 100%;
+        height: 200px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    #holder1{
+        flex: 1;
+        height: 100%;
+        width: 100px;
+    }
+    #holder2{
+        flex: 1;
+        height: 100%;
+        width: 200px;
+    }
+    #sec6 .submitbtn{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
+        height: 60px;
+        width: 180px;
+        background-color: #385DBB;
+        color: white;
+        border-style: none;
+        border-radius: 10px;
+      }
+    #sec6 .cancelbtn{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
+        color: #385DBB;
+        height: 60px;
+        width: 180px;
+        border: 2px solid #385DBB;
+        border-radius: 10px;
+    }
 }
