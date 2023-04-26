@@ -1,4 +1,4 @@
-import '../styles/AdminFloor.module.css';
+import flo from '../styles/AdminFloor.module.css';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import AEFModal from './AEFModal'

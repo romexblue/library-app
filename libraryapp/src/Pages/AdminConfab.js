@@ -1,4 +1,4 @@
-import '../styles/AdminConfab.module.css';
+import con from '../styles/AdminConfab.module.css';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import AECModal from './AECModal'

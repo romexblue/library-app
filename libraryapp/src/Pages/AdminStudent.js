@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import AESModal from './AESModal';
+import stu from '../styles/AdminStudent.module.css';
+
 
 const AdminStudent = () => {
   const [students, setStudents] = useState([]);

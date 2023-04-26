@@ -355,9 +355,14 @@
 #rscomp19{
   height: 100%;
   width: 50%;
+  background-color: red;
 }
-#rscomp19 .label{
-  padding-left: 30px;
+
+#compo1{
+
+}
+#compo2{
+  
 }
 #rssec11{
   display: flex;

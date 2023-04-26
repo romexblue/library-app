@@ -220,23 +220,36 @@ function ReservationUsers({ capacity, updateData }) {
             <div className="section" id="rssec10">
 
             </div>
+            <div className="section" id="rssec6">
+                USAGE
+            </div>
             <div className="section" id="rssec11">
                 <div className="comp" id="rscomp19">
-                    <div className="label">
-                        Pax
+                    <div className="component" id='compo1'>
+                        <div className='label' id='plabel'>
+                            
+                        </div>
+                        <div className='purpose' id='pinput'>
+
+                        </div>
                     </div>
-                    <div className="drop-down">                          
-                        <input className="dropdown2" list="browsers" name="browser" placeholder="3"/>
-                        <datalist id="browsers">
-                        <option value="3"/>
-                        <option value="4"/>
-                        <option value="5"/>
-                        <option value="6"/>
-                        <option value="7"/>
-                        <option value="8"/>
-                        <option value="9"/>
-                        <option value="10"/>
-                        </datalist>                          
+                    <div className="component" id="compo2">
+                        <div className="label" id='dlabel'>
+                            Pax
+                        </div>
+                        <div className="drop-down">                          
+                            <input className="dropdown2" list="browsers" name="browser" placeholder="3"/>
+                            <datalist id="browsers">
+                            <option value="3"/>
+                            <option value="4"/>
+                            <option value="5"/>
+                            <option value="6"/>
+                            <option value="7"/>
+                            <option value="8"/>
+                            <option value="9"/>
+                            <option value="10"/>
+                            </datalist>                          
+                        </div>
                     </div>
                 </div>
             </div>
