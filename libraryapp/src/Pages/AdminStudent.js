@@ -9,7 +9,8 @@ const AdminStudent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [hoveredRow, setHoveredRow] = useState(null);
   const [action, setAction] = useState('Delete');
-
+  const [showEditModal, setShowEditModal] = useState(false);
+  
   const fetchStudents = async (page) => {
     await axios.get(`http://localhost:5000/student/all/${page}`, {
       headers: {
@@ -39,9 +40,9 @@ const AdminStudent = () => {
   const handleMouseLeave = () => {
     setHoveredRow(null);
   };
-  const handleClick = (floor, type) => {
+  const handleClick = (student, type) => {
     if (type === "Delete") {
-      axios.delete(`http://localhost:5000/floor/${floor.id}`, {
+      axios.delete(`http://localhost:5000/floor/${student.id}`, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken"),
           userId: sessionStorage.getItem("id")
@@ -54,20 +55,34 @@ const AdminStudent = () => {
         });
     }
     if (type === "Add") {
-      setFloorData([]);
+      setStudents([]);
       setAction(type);
       setShowEditModal(true);
 
     }
     if (type === "Edit") {
-      setFloorData(floor);
+      setStudentData(student);
       setAction(type);
       setShowEditModal(true);
     }
   };
 
+  const serverReq = () => {
+    axios.get("http://localhost:5000/floor/all", {
+      headers: {
+        accessToken: sessionStorage.getItem("accessToken"),
+        userId: sessionStorage.getItem("id")
+      },
+    })
+      .then(response => {
+        
+      })
+      .catch(error => {
+      });
+  };
+
   const handleConfirmFloor = () => {
-    setFloorData({});
+    setStudentData({});
     setShowEditModal(false);
   };
 
