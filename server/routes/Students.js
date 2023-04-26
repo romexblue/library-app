@@ -38,4 +38,45 @@ router.get('/all/:page', validateToken, async (req, res) => {
     }
 });
 
+router.post('/', validateToken, async (req, res) => {
+    const student = req.body
+    try {
+        await Students.create(student);
+        res.status(200).json({success: "Create Student Successful"});
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+});
+
+router.patch('/:id', validateToken, async (req, res) => {
+    const { id } = req.params;
+    const data = req.body;
+    try {
+        const student = await Students.findOne({ where: { id } });
+        if (student) {
+            // Dynamically update the user object with the new data
+            Object.keys(data).forEach(key => {
+                student[key] = data[key];
+            });
+
+            await student.save();
+            res.status(200).json({ success: "Update Success" })
+        } else {
+            res.status(404).json({ error: "Not Found" })
+        }
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+});
+
+router.delete('/:id', validateToken, async (req, res) => {
+    const { id } = req.params
+    try {
+        await Students.destroy({ where: { id } });
+        res.status(204).json({ success: "Deletion Successful" });
+    } catch (err) {
+        res.status(500).json({ error: err });
+    };
+});
+
 module.exports = router;

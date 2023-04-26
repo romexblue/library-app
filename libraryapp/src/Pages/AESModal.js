@@ -4,16 +4,16 @@ import axios from 'axios';
 
 const StudentModal = ({ title, data, update, cancel, updateUi, action }) => {
     const [name, setName] = useState(data.name ?? "");
-    const [schoolId, setSchoolId] = useState(data.max_capacity ?? 0);
-    const [rfid, setRfid] = useState(data.status ?? "Open");
-    const [type, setType] = useState(data.level ?? 0);
-    const [dateOfExpiry, setDateOfExpiry] = useState(data.bldg ?? "Bldg1")
+    const [schoolId, setSchoolId] = useState(data.school_id ?? "");
+    const [rfid, setRfid] = useState(data.rfid ?? "");
+    const [type, setType] = useState(data.type ?? "Student");
+    const [dateOfExpiry, setDateOfExpiry] = useState(data.date_of_expiry ?? "2022-01-14")
     const [showModal, setShowModal] = useState(true);
 
     const handleConfirm = () => {
         if (action === "Edit") {
             const dataChanged = { name: name, school_id: schoolId, rfid: rfid, type: type, date_of_expiry: dateOfExpiry };
-            axios.patch(`http://localhost:5000/floor/${data.id}`, dataChanged, {
+            axios.patch(`http://localhost:5000/student/${data.id}`, dataChanged, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken"),
                     userId: sessionStorage.getItem("id")
@@ -23,13 +23,13 @@ const StudentModal = ({ title, data, update, cancel, updateUi, action }) => {
                     if (response.data.error) {
                         //pass
                     } else {
-                        updateUi();
+                        updateUi(1);
                     }
                 });
         }
         if (action === "Add") {
             const dataAdd = { name: name, school_id: schoolId, rfid: rfid, type: type, date_of_expiry: dateOfExpiry };
-            axios.post("http://localhost:5000/floor/", dataAdd, {
+            axios.post("http://localhost:5000/student/", dataAdd, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken"),
                     userId: sessionStorage.getItem("id")
@@ -39,14 +39,15 @@ const StudentModal = ({ title, data, update, cancel, updateUi, action }) => {
                     if (response.data.error) {
                         //pass 
                     } else {
-                        updateUi();
+                        updateUi(1);
                     }
                 });
         }
         setName('');
-        setMaxCapacity('');
-        setStatus('Open');
-        setShowModal(false);
+        setSchoolId('');
+        setRfid('');
+        setType('');
+        setDateOfExpiry('');
         update();
     };
 
@@ -64,19 +65,22 @@ const StudentModal = ({ title, data, update, cancel, updateUi, action }) => {
                     </div>
                     <div className="modal-body">
                         <p>Name: <input type="text" value={name} onChange={(event) => { setName(event.target.value) }} /></p>
-                        <p>Max Capacity: <input type="number" value={maxCapacity} onChange={(event) => { setMaxCapacity(event.target.value) }} /></p>
-                        <p>Level: <input type="number" value={level} onChange={(event) => { setLevel(event.target.value) }} /></p>
-                        <p>Bldg No:
-                            <select className="Bldg" value={bldg} onChange={(event) => setBldg(event.target.value)}>
-                                <option value="Bldg1"> 1</option>
-                                <option value="Bldg2"> 2</option>
+                        <p>School ID: <input type="text" value={schoolId} onChange={(event) => { setSchoolId(event.target.value) }} /></p>
+                        <p>RFID: <input type="text" value={rfid} onChange={(event) => { setRfid(event.target.value) }} /></p>
+                        <p>Type:
+                            <select className="Type" value={type} onChange={(event) => setType(event.target.value)}>
+                                <option value="Student"> Student</option>
+                                <option value="Faculty"> Faculty</option>
+                                <option value="Staff"> Staff </option>
                             </select>
                         </p>
-                        <p>Status:
-                            <select className="status" value={status} onChange={(event) => setStatus(event.target.value)}>
-                                <option value="Open">Open</option>
-                                <option value="Closed">Closed</option>
-                            </select>
+                        <p>Date of Expiriy <input
+                            type="date"
+                            value={dateOfExpiry}
+                            onChange={(event) => setDateOfExpiry(event.target.value)}
+                            pattern="\d{4}-\d{2}-\d{2}"
+                            required
+                        />
                         </p>
                     </div>
                     <div className="modal-footer">
