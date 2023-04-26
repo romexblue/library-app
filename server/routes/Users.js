@@ -3,23 +3,25 @@ const router = express.Router();
 const { Users } = require('../models')
 const { sign } = require('jsonwebtoken');
 const { validateToken } = require('../middlewares/AuthMiddleware');
+const { Op } = require('sequelize');
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
-    try{
-    const user = await Users.findOne({ where: { username: username, password: password } });
+    try {
+        const user = await Users.findOne({ where: { username: username, password: password } });
 
-    if (!user) { res.json({ error: "Wrong password or username" }) }
-    else {
-        const secretkey = user.id.toString();
-        const accessToken = sign(
-            { username: user.username, id: user.id },
-            secretkey
-        )
+        if (!user) { res.json({ error: "Wrong password or username" }) }
+        else {
+            const secretkey = user.id.toString();
+            const accessToken = sign(
+                { username: user.username, id: user.id },
+                secretkey
+            )
 
-        res.json({ accessToken: accessToken, userId: user.id, type: user.type })
-    }}catch(err){
-        res.json({error:err})
+            res.json({ accessToken: accessToken, userId: user.id, type: user.type })
+        }
+    } catch (err) {
+        res.json({ error: err })
     }
 })
 
@@ -28,11 +30,11 @@ router.get('/admin-auth/:id', validateToken, async (req, res) => {
     const user = await Users.findOne({
         where: {
             id: user_id,
-            type: 'Admin'
+            [Op.or]: [{ type: 'Admin' }, { type: 'Assistant' }]
         }
     });
     if (user) {
-        res.json({ success: "Admin Verified" })
+        res.json({ success: "Admin Verified", type: user.type })
     } else {
         res.json({ error: "Admin Not Verified" })
     }

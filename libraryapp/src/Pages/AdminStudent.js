@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
+import AESModal from './AESModal';
 
 const AdminStudent = () => {
   const [students, setStudents] = useState([]);
@@ -10,7 +11,7 @@ const AdminStudent = () => {
   const [hoveredRow, setHoveredRow] = useState(null);
   const [action, setAction] = useState('Delete');
   const [showEditModal, setShowEditModal] = useState(false);
-  
+
   const fetchStudents = async (page) => {
     await axios.get(`http://localhost:5000/student/all/${page}`, {
       headers: {
@@ -40,58 +41,45 @@ const AdminStudent = () => {
   const handleMouseLeave = () => {
     setHoveredRow(null);
   };
+
   const handleClick = (student, type) => {
+
     if (type === "Delete") {
-      axios.delete(`http://localhost:5000/floor/${student.id}`, {
+      axios.delete(`http://localhost:5000/student/${student.id}`, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken"),
           userId: sessionStorage.getItem("id")
         },
       })
         .then(response => {
-          serverReq();
+          fetchStudents(currentPage);
         })
         .catch(error => {
         });
     }
     if (type === "Add") {
-      setStudents([]);
+      setStudentData([]);
       setAction(type);
       setShowEditModal(true);
 
     }
+
     if (type === "Edit") {
       setStudentData(student);
       setAction(type);
       setShowEditModal(true);
     }
-  };
+  }
 
-  const serverReq = () => {
-    axios.get("http://localhost:5000/floor/all", {
-      headers: {
-        accessToken: sessionStorage.getItem("accessToken"),
-        userId: sessionStorage.getItem("id")
-      },
-    })
-      .then(response => {
-        
-      })
-      .catch(error => {
-      });
-  };
-
-  const handleConfirmFloor = () => {
+  const handleConfirmStudent = () => {
     setStudentData({});
     setShowEditModal(false);
   };
 
-  const handleCancelFloor = () => {
+  const handleCancelStudent = () => {
     setShowEditModal(false);
     setAction('');
   };
-
-
   return (
     <div>
       <table>
@@ -145,6 +133,17 @@ const AdminStudent = () => {
         containerClassName="pagination"
         activeClassName="active"
       />
+      <button onClick={() => handleClick([], "Add")}>Add Student</button>
+      {showEditModal && (
+        <AESModal
+          title={`${action} Student`}
+          data={studentData}
+          update={handleConfirmStudent}
+          cancel={handleCancelStudent}
+          updateUi={fetchStudents}
+          action={action}
+        />
+      )}
     </div>
   )
 }

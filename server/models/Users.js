@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
          allowNull: false
       },
       type: {
-         type: DataTypes.ENUM('Admin', 'Librarian', 'Guard'),
+         type: DataTypes.ENUM('Admin', 'Librarian', 'Guard', 'Assistant'),
          allowNull: false
       },
       password: {
