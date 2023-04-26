@@ -13,10 +13,12 @@ const Admin = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const [activeComponent, setActiveComponent] = useState('AdminReservation');
+    const [activeNavItem, setActiveNavItem] = useState('AdminReservation');
 
-    const handleNavClick = (component) => {
-        setActiveComponent(component);
-    }
+    const handleTabClick = (component) => {
+    setActiveComponent(component);
+    setActiveNavItem(component);
+};
 
     useEffect(() => {
         //to check token then check if admin
@@ -59,26 +61,100 @@ const Admin = () => {
     }, [authContext, navigate]);
 
     return (
-        <div>
-            <h5> Hello Admin</h5>
 
-            <nav>
+        <div className="main">
+        <div className="sidebar">
+            <div className='section' id='accountInfo'>
+
+            </div>
+            <div className='section' id='dashBtns'>
                 <ul>
-                    <li onClick={() => handleNavClick('AdminReservation')}>Reservations</li>
-                    <li onClick={() => handleNavClick('AdminFloor')}>Floor Plan</li>
-                    <li onClick={() => handleNavClick('AdminConfab')}>Confab Plan</li>
-                    <li onClick={() => handleNavClick('AdminStudent')}>Student List</li>
-                    <li onClick={() => handleNavClick('AdminUsers')}>Users List</li>
+                    <li>
+                        <div className='button' id='btn1'>
+                            <button
+                            className={activeNavItem === 'AdminReservation' ? 'active' : ''}
+                            onClick={() => handleTabClick('AdminReservation')} id='button1' >
+                            Reservations
+                            </button>
+                        </div>
+                    </li>
+                    <li>
+                        <div className='button' id='btn2'>
+                            <button
+                            className={activeNavItem === 'AdminFloor' ? 'active' : ''}
+                            onClick={() => handleTabClick('AdminFloor')} id='button2'>
+                            Floor Manager
+                            </button>
+                        </div>
+                    </li>
+                    <li>
+                        <div className='button' id='btn3'>
+                            <button
+                            className={activeNavItem === 'AdminConfab' ? 'active' : ''}
+                            onClick={() => handleTabClick('AdminConfab')} id='button3'>
+                            Space Manager
+                            </button>
+                        </div>
+                    </li>
+                    <li>
+                        <div className='button' id='btn4'>
+                            <button
+                            className={activeNavItem === 'AdminStudent' ? 'active' : ''}
+                            onClick={() => handleTabClick('AdminStudent')} id='button4'>
+                            Students
+                            </button>
+                        </div>
+                    </li>
+                    <li>
+                        <div className='button' id='btn5'>
+                            <button
+                            className={activeNavItem === 'AdminUsers' ? 'active' : ''}
+                            onClick={() => handleTabClick('AdminUsers')} id='button5'>
+                            Users
+                            </button>
+                        </div>
+                    </li>
                 </ul>
-            </nav>
-            <div>
-                {activeComponent === 'AdminReservation' && <AdminReservation />}
-                {activeComponent === 'AdminFloor' && <AdminFloor />}
-                {activeComponent === 'AdminConfab' && <AdminConfab />}
-                {activeComponent === 'AdminStudent' && <AdminStudent />}
-                {activeComponent === 'AdminUsers' && <AdminUsers />}
+            </div>
+            <div className='section' id='sTime'>
+
             </div>
         </div>
+        <div className="pagecontainer">
+            <div className="navbar">
+
+                </div>
+            <div className='page-window'>
+                <div className='pages'>
+                    {activeComponent === 'AdminReservation' && (
+                        <div>
+                        <AdminReservation/>
+                        </div>
+                    )}
+                    {activeComponent === 'AdminFloor' && (
+                        <div>
+                        <AdminFloor/>
+                        </div>
+                    )}
+                    {activeComponent === 'AdminConfab' && (
+                        <div>
+                        <AdminConfab/>
+                        </div>
+                    )}
+                    {activeComponent === 'AdminStudent' && (
+                        <div>
+                        <AdminStudent/>
+                        </div>
+                    )}
+                    {activeComponent === 'AdminUsers' && (
+                        <div>
+                        <AdminUsers/>
+                        </div>
+                    )}
+                </div>
+            </div> 
+        </div>
+      </div>
     );
 }
 

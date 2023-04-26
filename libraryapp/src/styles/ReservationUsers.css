@@ -1,20 +1,489 @@
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  gap: 10px;
+.rsmaindiv{
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
-
-.containerInputs {
+.rscenterdiv{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 90%;
+  width: 95%;
+  border-radius: 10px;
+  background-color: white;
+  display: inline-block;
+  display: flex; 
+  align-items: center; 
+}
+.rsleft-panel{
   display: flex;
   flex-direction: column;
-  width: 100px;
-  margin: 0 auto;
+  float: left;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  color: #323131;
+
+}
+.divider{
+  position: absolute;
+  height: 80%;
+  width: .2px;
+  background-color: rgb(154, 154, 154);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.rsright-panel{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50%;
+}
+#rssec1{
+  width: 100%;
+  height: 10px;
+  margin-top: 40px;
+  margin-left: 40px;
+}
+#rssec1 p{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+#rssec2{
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+}
+#rssec2 p{
+  color: #424242;
+  margin-left: 60px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+}
+#rssec3{
+  margin-top: 20px;
+  width: 100%;
+  height: 10px;
+}
+#rssec3 p{
+  margin-left: 40px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+#rssec4{
+  display: flex;
+  margin: 15px 60px 0;
+  width: auto;
+  height: 60px;
+}
+#part1{
+  width: 400px;
+}
+#rscomp1{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  height: 20px;
+}
+#rscomp2{
+  height: 30px;
 }
 
-.Inputs {
+#rscomp2 .conf{
+  font-size: 30px;
+  font-weight: 400;
+  color: #424242;
+  width: 100%;
+  height: 40px;
+  max-width: 100%;
+  max-height: 250px;
+  padding: 0;
+  text-align: left;
+  border-style: none;
+}
+#part2{
+  width: 250px;
+}
+#rscomp3{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  height: 20px;
+}
+#rscomp4{
+  height: 30px;
+}
+
+#rscomp4 .from{
+  font-size: 30px;
+  font-weight: 400;
+  color: #424242;
+  width: 100%;
+  height: 40px;
+  max-width: 100%;
+  max-height: 250px;
+  text-align: left;
+  border-style: none;
+}
+#part3{
+  width: 250px;
+}
+#rscomp5{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  height: 20px;
+}
+#rscomp6{
+  height: 30px;
+
+}
+#rscomp6 input{
+  font-size: 30px;
+  font-weight: 400;
+  color: #424242;
+  width: 100%;
+  height: 40px;
+  max-width: 100%;
+  max-height: 250px;
+  padding: 0;
+  text-align: left;
+  border-style: none;
+}
+#rssec5{
+  margin: 20px 100px 20px;
+  display: relative;
+  width: auto;
+  height: 0.2px;
+  background-color: black;  
+}
+#rssec6{
+  margin-left: 40px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+#rssec7{
   display: flex;
+  margin: 10px 60px 0;
+  width: auto;
+  height: 60px;
+}
+#part4{
+  height: 100%;
+  width: 400px;
+}
+#part5{
+  height: 100%;
+  width: 200px;
+}
+#rscomp7{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  height: 20px;
+}
+#rscomp8{
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+}
+.idnumber{
+  background-color: rgb(232, 232, 232);
+  border-style: none;
+  border-radius: 10px;
+  font-size: 25px;
+  width: 100%;
+  height: 40px;
+  max-width: 100%;
+  max-height: 250px;
+  padding-left: 20px;
+  text-align: left;
+}
+#idnum:focus{
+  border: 1px solid gray;
+}
+#idnum::placeholder{
+  color: gray;
+  font-size: 25px;
+}
+#rscomp9{
+  width: 100%;
+  height: 30px;
+}
+#rscomp9 img{
+  position: absolute;
+  margin-left: 120px;
+  height: 15px;
+  width: auto;
+}
+#rscomp10 .scanid{
+  height: 40px;
+  width: 80px;
+  margin: 0 40px 0;
+  border-radius: 10px;
+  border-style: none;
+  color: white;
+  background-color: #385DBB;
+}
+
+#rssec8{
+  display: flex;
+  margin: 15px 60px 0;
+  width: auto;
+  height: 60px;
+}
+#part6{
+  width: 400px;
+}
+#rscomp11{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  height: 20px;
+}
+#rscomp12{
+  height: 30px;
+}
+
+#rscomp12 .name{
+  font-size: 30px;
+  font-weight: 400;
+  color: #424242;
+  width: 100%;
+  height: 40px;
+  max-width: 100%;
+  max-height: 250px;
+  padding: 0;
+  text-align: left;
+  border-style: none;
+}
+
+#rssec9{
+  display: flex;
+  margin: 15px 60px 0;
+  width: auto;
+  height: 60px;
+}
+#part7{
+  width: 180px;
+
+}
+#rscomp13{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  height: 20px;
+}
+#rscomp14{
+  height: 30px;
+}
+
+#rscomp14 .course{
+  font-size: 30px;
+  font-weight: 400;
+  color: #424242;
+  width: 100px;
+  height: 40px;
+  max-width: 110px;
+  max-height: 250px;
+  text-align: left;
+  border-style: none;
+}
+#part8{
+  width: 180px;
+}
+#rscomp15{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  height: 20px;
+}
+#rscomp16{
+  height: 30px;
+}
+
+#rscomp16 .year{
+  font-size: 30px;
+  font-weight: 400;
+  color: #424242;
+  width: 100px;
+  height: 40px;
+  max-width: 110px;
+  max-height: 250px;
+  padding: 0;
+  text-align: left;
+  border-style: none;
+}
+#rscomp17{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  height: 20px;
+}
+#rscomp18{
+  height: 30px;
+}
+
+#rscomp18 .contact{
+  background-color: rgb(232, 232, 232);
+  border-style: none;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 100%;
+  height: 40px;
+  max-width: 100%;
+  max-height: 250px;
+  padding-left: 20px;
+  text-align: left;
+}
+#contactno::placeholder{
+  color: gray;
+  font-size: 16px;
+}
+
+#rssec10{
+  margin: 20px 100px 0;
+  display: relative;
+  width: auto;
+  height: 0.2px;
+  background-color: black;  
+}
+
+
+#rscomp19{
+  height: 100%;
+  width: 50%;
+}
+#rscomp19 .label{
+  padding-left: 30px;
+}
+#rssec11{
+  display: flex;
+  margin: 10px 30px 0;
+  width: 40px;
+  height: 60px;
+  
+}
+.drop-down {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown2 {
+  padding: 10px;
+  margin: 10px 30px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100px;
+  background-color: #fff;
+}
+
+/* Style the dropdown arrow */
+.dropdown2::after {
+  content: "\25BC";
+  font-size: 16px;
+  color: #aaa;
+  margin-left: 5px;
+}
+
+/* Style the dropdown list */
+#browsers {
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  width: 150px;
+  margin-top: 5px;
+}
+
+#browsers option {
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+#rssec12{
+  width: 100%;
+  height: 40px;
+  background-color: blue;
+}
+#rssec13{
+  height: 600px;
+  margin: 0 60px 0;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: red;
+}
+
+#rssec14{
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: flex-end;
+}
+#holder1{
+  margin-top: 20px;
+  width: 300px;
+  display: flex;
+}
+#rssec14 .submitbtn{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  height: 40px;
+  width: 120px;
+  background-color: #385DBB;
+  color: white;
+  border-style: none;
+  border-radius: 10px;
+  margin: 0 40px 0;
+  position: absolute;
+  right: 0;
+}
+#rssec14 .cancelbtn{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  color: #385DBB;
+  height: 40px;
+  width: 120px;
+  border: 1px solid #385DBB;
+  border-radius: 10px;
+  position: absolute;
+  right: 180px;
+}
+
+@media screen and (max-height: 700px) {
+
+  #rssec1{
+      width: 100%;
+      height: 10px;
+      margin-top: 20px;
+      margin-left: 40px;
+  }
+  #rssec2{
+      margin-top: 10px;
+      height: 40px;
+  }
+  #rssec3{
+      margin-top: 20px;
+      width: 100%;
+      height: 10px;
+  }
+  #rssec5{
+      margin: 0 100px 0; 
+  }
+  #rssec6{
+      margin-top: 10px;
+  }
 }

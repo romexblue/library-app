@@ -119,11 +119,146 @@ function ReservationUsers({ capacity, updateData }) {
   };
 
   return (
-    <div>
-      <div className="container">
-        {inputFields}
-      </div>
+    <div className="rsmaindiv">
+    <div className="rscenterdiv">
+        <div className="rsleft-panel">
+            <div className="section" id="rssec1">
+                <p>RESERVATION DATE</p>
+            </div>
+            <div className="section" id="rssec2">
+                <p>April 10, 2023</p>
+            </div>
+            <div className="section" id="rssec3">
+                <p>ROOM ASSIGNMENT</p>
+            </div>
+            <div className="section" id="rssec4">
+                <div className="rspartition" id="part1">
+                    <div className="comp" id="rscomp1">
+                        Confab Room
+                    </div>
+                    <div className="comp" id="rscomp2">
+                        <input type="text" className="conf" required value=""/>
+                    </div>
+                </div>
+                <div className="rspartition" id="part2">
+                    <div className="comp" id="rscomp3">
+                        From
+                    </div>
+                    <div className="comp" id="rscomp4">
+                        <input type="text" className="from" required/>
+                    </div>
+                </div>
+                <div className="rspartition" id="part3">
+                    <div className="comp" id="rscomp5">
+                        Until
+                    </div>
+                    <div className="comp" id="rscomp6">
+                        <input type="text" className="until" required/>
+                    </div>
+                </div>
+            </div>
+            <div className="section" id="rssec5">
+
+            </div>
+            <div className="section" id="rssec6">
+                GROUP REPRESENTATIVE
+            </div>
+            <div className="section" id="rssec7">
+                <div className="partition" id="part4">
+                    <div className="comp" id="rscomp7">
+                        Id Number ( Tap your XU ID )
+                    </div>
+                    <div className="comp" id="rscomp8">
+                        <input type="text" className="idnumber" id="idnum" required placeholder="XU ID Number"/>
+                    </div>
+                </div>
+                <div className="partition" id="part5">
+                    <div className="comp" id="rscomp9">
+                        <img className="info_icon" src="images/Reminder_Icon.png" alt="note"/>
+                    </div>
+                    <div className="comp" id="rscomp10">
+                        <button className="scanid" onclick="focusInput()" >SCAN</button>
+                    </div>
+                </div>
+            </div>
+            <div className="section" id="rssec8">
+                <div className="partition" id="part6">
+                    <div className="comp" id="rscomp11">
+                        Name
+                    </div>
+                    <div className="comp" id="rscomp12">
+                        <input type="text" className="name" required/>
+                    </div>
+                </div>
+            </div>
+            <div className="section" id="rssec9">
+                <div className="partition" id="part7">
+                    <div className="comp" id="comp13">
+                        Course
+                    </div>
+                    <div className="comp" id="rscomp14">
+                        <input type="text" className="course" required/>
+                    </div>
+                </div>
+                <div className="partition" id="part8">
+                    <div className="comp" id="rscomp15">
+                        Year
+                    </div>
+                    <div className="comp" id="rscomp16">
+                        <input type="text" className="year" required/>
+                    </div>
+                </div>
+                <div className="partition" id="part9">
+                    <div className="comp" id="rscomp17">
+                        Contact No.
+                    </div>
+                    <div className="comp" id="rscomp18">
+                        <input type="text" className="contact" id="contactno" placeholder="+63912345678" required/>
+                    </div>
+                </div>
+            </div>
+            <div className="section" id="rssec10">
+
+            </div>
+            <div className="section" id="rssec11">
+                <div className="comp" id="rscomp19">
+                    <div className="label">
+                        Pax
+                    </div>
+                    <div className="drop-down">                          
+                        <input className="dropdown2" list="browsers" name="browser" placeholder="3"/>
+                        <datalist id="browsers">
+                        <option value="3"/>
+                        <option value="4"/>
+                        <option value="5"/>
+                        <option value="6"/>
+                        <option value="7"/>
+                        <option value="8"/>
+                        <option value="9"/>
+                        <option value="10"/>
+                        </datalist>                          
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="divider">
+
+        </div>
+        <div className="rsright-panel">
+            <div className="section" id="rssec12"></div>
+            <div id="rssec13">
+                
+            </div>
+              
+            <div className="section" id="rssec14">
+                <div className="btn-holder" id="holder1">
+                    <button className="cancelbtn" >Cancel</button>
+                    <button className="submitbtn">Next</button>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
   );
 }
 

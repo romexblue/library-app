@@ -257,7 +257,7 @@ const FloorButtons = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="right-panel">
+                    <div className="fright-panel">
                         <div className='building-select'>
                             <div className="building-select1" id="sec1-b"></div>
                             <div className="building-select2" id="sec2-b">

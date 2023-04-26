@@ -11,7 +11,7 @@
     height: 100%;
     width: 50%;
 }
-.right-panel{
+.fright-panel{
     position: absolute;
     top: 0;
     right: 0;
@@ -20,7 +20,7 @@
 }
 .info-student{
     font-family: 'Ubuntu', sans-serif;
-    display: block;
+    display: blockx;
     margin: 10px 5px 10px 10px;
     background-color: white;
     width: auto;

@@ -1,14 +1,82 @@
-table {
-  border-collapse: collapse;
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: #F7F7F7;
 }
 
-th,
-td {
-  border: 1px solid black;
-  padding: 8px;
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #394867;
+  color: #fff;
+  width: 20%;
 }
-
-th {
-  background-color: #f2f2f2;
+#accountInfo{
+  width: 100%;
+  height: 8%;
+  background-color: red;
+}
+#dashBtns{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 84%;
+  background-color: pink;
+}
+#dashBtns button{
+  border-style: none;
+  border-radius: 0 20px 20px 0;
+  padding-left: 30px;
   text-align: left;
+  font-size: 16px;
+  width: 90%;
+  height: 60px;
+}
+.active{
+  background-color: red;
+}
+#button1{
+  margin-top: 40px;
+}
+#sTime{
+  width: 100%;
+  height: 8%;
+  background-color: aqua;
+}
+ul li{
+  list-style-type: none;
+}
+.sidebar h1 {
+  margin: 0 0 20px
+}
+.pagecontainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 80%;
+  height: 100%;
+}
+.navbar{
+  height: 8%;
+  width: 100%;
+  background-color: white;
+  margin-bottom: 10px;
+}
+.page-window{
+  padding: 0 10px 10px;
+  height: 90%;
+  width: 100%;
+  bottom: 0;
+}
+.pages{
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  padding: 0 10px 10px;
+  border-radius: 10px;
 }

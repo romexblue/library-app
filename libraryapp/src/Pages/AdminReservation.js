@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import ReactPaginate from 'react-paginate';
 import axios from 'axios';
+import a from '../styles/AdminReservation.module.css';
 
 const AdminReservation = () => {
     const [value, setValue] = useState('');
@@ -74,6 +75,7 @@ const AdminReservation = () => {
     };
 
     const getReservationById = () => {
+        if(!value){return;}
         setSearching(true);
         axios.get(`http://localhost:5000/reservation/requests/find-by/${value}`, {
             headers: {
@@ -135,7 +137,7 @@ const AdminReservation = () => {
                     <option key={confab.id} value={confab.id}>{confab.name}</option>
                 ))}
             </select>
-            <select disabled={searching} id="status-select" onChange={handleStatusSelectChange}>
+            <select className={a.tab} disabled={searching} id="status-select" onChange={handleStatusSelectChange}>
                 <option>Pending</option>
                 <option>Confirmed</option>
                 <option>Cancelled</option>
