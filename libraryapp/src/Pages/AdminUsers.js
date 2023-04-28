@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react'
+import us from '../styles/AdminUsers.module.css';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import AEUModal from './AEUModal';
-
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState({});
