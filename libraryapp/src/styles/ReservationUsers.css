@@ -62,11 +62,11 @@
   height: 40px;
 }
 #rssec2 p{
-  color: #424242;
+  color: #797979;
   margin-left: 60px;
   font-family: 'Open Sans', sans-serif;
   font-size: 30px;
-  font-weight: 700;
+  font-weight: 500;
 }
 #rssec3{
   margin-top: 20px;
@@ -75,13 +75,13 @@
 }
 #rssec3 p{
   margin-left: 40px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Verdana, sans-serif;
   font-size: 16px;
   font-weight: 700;
 }
 #rssec4{
   display: flex;
-  margin: 15px 60px 0;
+  margin: 20px 60px 0;
   width: auto;
   height: 60px;
 }
@@ -89,7 +89,7 @@
   width: 400px;
 }
 #rscomp1{
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
   height: 20px;
 }
@@ -98,11 +98,12 @@
 }
 
 #rscomp2 .conf{
-  font-size: 30px;
+  font-family: Verdana, sans-serif;
+  font-size:20px;
   font-weight: 400;
-  color: #424242;
+  color: #797979;
   width: 100%;
-  height: 40px;
+  height: 30px;
   max-width: 100%;
   max-height: 250px;
   padding: 0;
@@ -113,7 +114,7 @@
   width: 250px;
 }
 #rscomp3{
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
   height: 20px;
 }
@@ -122,11 +123,12 @@
 }
 
 #rscomp4 .from{
-  font-size: 30px;
+  font-family: Verdana, sans-serif;
+  font-size: 20px;
   font-weight: 400;
-  color: #424242;
+  color: #797979;
   width: 100%;
-  height: 40px;
+  height: 30px;
   max-width: 100%;
   max-height: 250px;
   text-align: left;
@@ -136,7 +138,7 @@
   width: 250px;
 }
 #rscomp5{
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
   height: 20px;
 }
@@ -145,11 +147,11 @@
 
 }
 #rscomp6 input{
-  font-size: 30px;
-  font-weight: 400;
-  color: #424242;
+  font-family: Verdana, sans-serif;
+  font-size: 20px;
+  color: #797979;
   width: 100%;
-  height: 40px;
+  height: 30px;
   max-width: 100%;
   max-height: 250px;
   padding: 0;
@@ -157,7 +159,7 @@
   border-style: none;
 }
 #rssec5{
-  margin: 20px 100px 20px;
+  margin: 10px 100px 20px;
   display: relative;
   width: auto;
   height: 0.2px;
@@ -184,20 +186,21 @@
   width: 200px;
 }
 #rscomp7{
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
   height: 20px;
 }
 #rscomp8{
-  margin-top: 10px;
+  margin-top: 4px;
   width: 100%;
   height: 40px;
 }
 .idnumber{
-  background-color: rgb(232, 232, 232);
+  font-family: Verdana, sans-serif;
+  background-color: rgb(243, 243, 243);
   border-style: none;
-  border-radius: 10px;
-  font-size: 25px;
+  border-radius: 5px;
+  font-size: 20px;
   width: 100%;
   height: 40px;
   max-width: 100%;
@@ -209,12 +212,13 @@
   border: 1px solid gray;
 }
 #idnum::placeholder{
+  font-family: Verdana, sans-serif;
   color: gray;
-  font-size: 25px;
+  font-size: 20px;
 }
 #rscomp9{
   width: 100%;
-  height: 30px;
+  height: 23px;
 }
 #rscomp9 img{
   position: absolute;
@@ -234,15 +238,16 @@
 
 #rssec8{
   display: flex;
-  margin: 15px 60px 0;
+  margin: 10px 60px 0;
   width: auto;
   height: 60px;
 }
 #part6{
   width: 400px;
+  height: 50px;
 }
 #rscomp11{
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
   height: 20px;
 }
@@ -251,11 +256,12 @@
 }
 
 #rscomp12 .name{
-  font-size: 30px;
-  font-weight: 400;
-  color: #424242;
+  font-family: Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 100;
+  color: #797979;
   width: 100%;
-  height: 40px;
+  height: 30px;
   max-width: 100%;
   max-height: 250px;
   padding: 0;
@@ -265,7 +271,7 @@
 
 #rssec9{
   display: flex;
-  margin: 15px 60px 0;
+  margin: 0 60px 0;
   width: auto;
   height: 60px;
 }
@@ -274,7 +280,7 @@
 
 }
 #rscomp13{
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
   height: 20px;
 }
@@ -283,11 +289,12 @@
 }
 
 #rscomp14 .course{
-  font-size: 30px;
+  font-family: Verdana, sans-serif;
+  font-size: 20px;
   font-weight: 400;
-  color: #424242;
+  color: #797979;
   width: 100px;
-  height: 40px;
+  height: 30px;
   max-width: 110px;
   max-height: 250px;
   text-align: left;
@@ -297,7 +304,7 @@
   width: 180px;
 }
 #rscomp15{
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
   height: 20px;
 }
@@ -306,11 +313,12 @@
 }
 
 #rscomp16 .year{
-  font-size: 30px;
+  font-family: Verdana, sans-serif;
+  font-size: 20px;
   font-weight: 400;
-  color: #424242;
+  color: #797979;
   width: 100px;
-  height: 40px;
+  height: 30px;
   max-width: 110px;
   max-height: 250px;
   padding: 0;
@@ -318,7 +326,7 @@
   border-style: none;
 }
 #rscomp17{
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
   height: 20px;
 }
@@ -327,12 +335,12 @@
 }
 
 #rscomp18 .contact{
-  background-color: rgb(232, 232, 232);
+  background-color: rgb(243, 243, 243);
   border-style: none;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 16px;
   width: 100%;
-  height: 40px;
+  height: 30px;
   max-width: 100%;
   max-height: 250px;
   padding-left: 20px;
@@ -344,31 +352,61 @@
 }
 
 #rssec10{
-  margin: 20px 100px 0;
+  margin: 10px 100px 0;
   display: relative;
   width: auto;
   height: 0.2px;
   background-color: black;  
 }
 
-
+#rssec10_1{
+  margin-top: 10px;
+  margin-left: 40px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
 #rscomp19{
   height: 100%;
-  width: 50%;
-  background-color: red;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 30px;
 }
 
 #compo1{
-
+  width: 300px;
+}
+#plabel{
+  font-family: 'Rubik', sans-serif;
+  font-size: 14px;
+  height: 20px;
+}
+#dlabel{
+  font-family: 'Rubik', sans-serif;
+  font-size: 14px;
+  height: 20px;
 }
 #compo2{
-  
+  margin: 0 0 0 30px;
+  width: 60px;
+}
+#pinput textarea{
+  background-color: rgb(243, 243, 243);
+  height: 80px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  vertical-align: baseline;
+  resize: none;
 }
 #rssec11{
   display: flex;
   margin: 10px 30px 0;
-  width: 40px;
-  height: 60px;
+  width: 100%;
+  height: 100px;
   
 }
 .drop-down {
@@ -377,13 +415,12 @@
 }
 
 .dropdown2 {
-  padding: 10px;
-  margin: 10px 30px 0;
+  height: 40px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 4px;
   width: 100px;
-  background-color: #fff;
+  background-color: rgb(243, 243, 243);
 }
 
 /* Style the dropdown arrow */
@@ -400,41 +437,93 @@
   z-index: 1;
   top: 100%;
   left: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: rgb(243, 243, 243);
+  border: 1px solid #000000;
   border-top: none;
-  border-radius: 0 0 4px 4px;
   width: 150px;
-  margin-top: 5px;
+
 }
 
 #browsers option {
-  padding: 10px;
-  font-size: 16px;
+    font-size: 18px;
   color: #333;
-  background-color: #fff;
   cursor: pointer;
 }
 
 #rssec12{
   width: 100%;
   height: 40px;
-  background-color: blue;
+  font-size: 18px;
+  padding-left: 30px;
+  padding-top: 30px;
+  color: #283971 ;
+  
 }
 #rssec13{
-  height: 600px;
-  margin: 0 60px 0;
+  height: 360px;
+  margin: 10px 60px 0;
   width: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: space-between;
-  background-color: red;
+  justify-content: flex-start;
 }
-
-#rssec14{
+#inputbox{
+  width: 230px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 0;
+}
+.inputlabel{
+  font-size: 14px;
   width: 100%;
-  height: 100px;
+  height: 20px;
+}
+.userinput{
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+  height: 35px;
+  border: 0.5px solid rgb(56, 56, 56);
+  border-radius: 5px;
+  background-color: rgb(247, 247, 247);
+}
+.userinput{
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+  height: 35px;
+  border: 1.5px solid rgb(235, 0, 0);
+  border-radius: 5px;
+}
+.inputmessage{
+  font-size: 11px;
+  color: red;
+}
+#rssec14{
+  position: relative;
+  width: auto;
+  height: 80px;
+  margin: 0 60px 0;
+}
+.inputnotes{
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 10px;
+  color: rgb(73, 73, 73);
+}
+#rssec15{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
   display: flex;
   justify-content: flex-end;
 }
@@ -443,7 +532,7 @@
   width: 300px;
   display: flex;
 }
-#rssec14 .submitbtn{
+#rssec15 .submitbtn{
   font-family: 'Ubuntu', sans-serif;
   font-size: 14px;
   height: 40px;
@@ -456,7 +545,7 @@
   position: absolute;
   right: 0;
 }
-#rssec14 .cancelbtn{
+#rssec15 .cancelbtn{
   font-family: 'Ubuntu', sans-serif;
   font-size: 14px;
   color: #385DBB;
@@ -481,7 +570,7 @@
       height: 40px;
   }
   #rssec3{
-      margin-top: 20px;
+      margin-top: 10px;
       width: 100%;
       height: 10px;
   }

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../styles/ReservationUsers.css';
 import axios from 'axios';
+import image1 from '../images/Reminder_Icon.png';
 
 function ReservationUsers({ capacity, updateData }) {
   const [inputValues, setInputValues] = useState(Array(capacity).fill(''));
@@ -129,7 +130,7 @@ function ReservationUsers({ capacity, updateData }) {
                 <p>April 10, 2023</p>
             </div>
             <div className="section" id="rssec3">
-                <p>ROOM ASSIGNMENT</p>
+                <p>Room Assignment</p>
             </div>
             <div className="section" id="rssec4">
                 <div className="rspartition" id="part1">
@@ -137,7 +138,7 @@ function ReservationUsers({ capacity, updateData }) {
                         Confab Room
                     </div>
                     <div className="comp" id="rscomp2">
-                        <input type="text" className="conf" required value=""/>
+                        <input type="text" className="conf"  required/>
                     </div>
                 </div>
                 <div className="rspartition" id="part2">
@@ -161,7 +162,7 @@ function ReservationUsers({ capacity, updateData }) {
 
             </div>
             <div className="section" id="rssec6">
-                GROUP REPRESENTATIVE
+                Group Representative
             </div>
             <div className="section" id="rssec7">
                 <div className="partition" id="part4">
@@ -174,7 +175,7 @@ function ReservationUsers({ capacity, updateData }) {
                 </div>
                 <div className="partition" id="part5">
                     <div className="comp" id="rscomp9">
-                        <img className="info_icon" src="images/Reminder_Icon.png" alt="note"/>
+                        <img className="info_icon" src={image1} alt="note"/>
                     </div>
                     <div className="comp" id="rscomp10">
                         <button className="scanid" onclick="focusInput()" >SCAN</button>
@@ -193,7 +194,7 @@ function ReservationUsers({ capacity, updateData }) {
             </div>
             <div className="section" id="rssec9">
                 <div className="partition" id="part7">
-                    <div className="comp" id="comp13">
+                    <div className="comp" id="rscomp13">
                         Course
                     </div>
                     <div className="comp" id="rscomp14">
@@ -220,17 +221,17 @@ function ReservationUsers({ capacity, updateData }) {
             <div className="section" id="rssec10">
 
             </div>
-            <div className="section" id="rssec6">
-                USAGE
+            <div className="section" id="rssec10_1">
+                Usage
             </div>
             <div className="section" id="rssec11">
                 <div className="comp" id="rscomp19">
                     <div className="component" id='compo1'>
                         <div className='label' id='plabel'>
-                            
+                            Purpose
                         </div>
                         <div className='purpose' id='pinput'>
-
+                            <textarea className='purposebox' placeholder='Write the purpose of using the library space.'></textarea>
                         </div>
                     </div>
                     <div className="component" id="compo2">
@@ -238,17 +239,17 @@ function ReservationUsers({ capacity, updateData }) {
                             Pax
                         </div>
                         <div className="drop-down">                          
-                            <input className="dropdown2" list="browsers" name="browser" placeholder="3"/>
-                            <datalist id="browsers">
-                            <option value="3"/>
-                            <option value="4"/>
-                            <option value="5"/>
-                            <option value="6"/>
-                            <option value="7"/>
-                            <option value="8"/>
-                            <option value="9"/>
-                            <option value="10"/>
-                            </datalist>                          
+                            <select className="dropdown2" list="browsers" name="browser" placeholder="3" id="browsers" >
+                            <option disable selected>No. of users...</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            </select>                          
                         </div>
                     </div>
                 </div>
@@ -258,12 +259,107 @@ function ReservationUsers({ capacity, updateData }) {
 
         </div>
         <div className="rsright-panel">
-            <div className="section" id="rssec12"></div>
-            <div id="rssec13">
-                
+            <div className="section" id="rssec12">
+                Confab Users
             </div>
-              
-            <div className="section" id="rssec14">
+            <div className='section' id="rssec13">
+                <div className='inputcontainer' id='inputbox'>
+                    <label className='inputlabel'>
+                        User 2
+                    </label>
+                    <input className='userinput'>
+
+                    </input>
+                    <label className='inputmessage'>
+                        Invalid ID Number
+                    </label>
+                </div>
+                <div className='inputcontainer' id='inputbox'>
+                    <label className='inputlabel'>
+                        User 3
+                    </label>
+                    <input className='userinput'>
+
+                    </input>
+                    <label className='inputmessage'>
+                        Invalid ID Number
+                    </label>
+                </div>
+                <div className='inputcontainer' id='inputbox'>
+                    <label className='inputlabel'>
+                        User 4
+                    </label>
+                    <input className='userinput'>
+
+                    </input>
+                    <label className='inputmessage'>
+                        Invalid ID Number
+                    </label>
+                </div>
+                <div className='inputcontainer' id='inputbox'>
+                    <label className='inputlabel'>
+                        User 5
+                    </label>
+                    <input className='userinput'>
+
+                    </input>
+                    <label className='inputmessage'>
+                        Invalid ID Number
+                    </label>
+                </div>
+                <div className='inputcontainer' id='inputbox'>
+                    <label className='inputlabel'>
+                        User 6
+                    </label>
+                    <input className='userinput'>
+
+                    </input>
+                    <label className='inputmessage'>
+                        Invalid ID Number
+                    </label>
+                </div>
+                <div className='inputcontainer' id='inputbox'>
+                    <label className='inputlabel'>
+                        User 7
+                    </label>
+                    <input className='userinput'>
+
+                    </input>
+                    <label className='inputmessage'>
+                        Invalid ID Number
+                    </label>
+                </div>
+                <div className='inputcontainer' id='inputbox'>
+                    <label className='inputlabel'>
+                        User 8
+                    </label>
+                    <input className='userinput'>
+
+                    </input>
+                    <label className='inputmessage'>
+                        Invalid ID Number
+                    </label>
+                </div>
+                <div className='inputcontainer' id='inputbox'>
+                    <label className='inputlabel'>
+                        User 9
+                    </label>
+                    <input className='userinput'>
+
+                    </input>
+                    <label className='inputmessage'>
+                        Invalid ID Number
+                    </label>
+                </div>
+
+            </div>
+            <div className='section' id='rssec14'>
+                <div className="inputnotes">
+                    <p>You may select a field and tap your ID on the ID reader to add user. Alternately, you 
+                    may manually type the user’s school ID number.</p>
+                </div>
+            </div>
+            <div className="section" id="rssec15">
                 <div className="btn-holder" id="holder1">
                     <button className="cancelbtn" >Cancel</button>
                     <button className="submitbtn">Next</button>
