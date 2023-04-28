@@ -120,7 +120,7 @@ const AdminStudent = () => {
             })
           ) : (
             <tr>
-              <td colSpan="10" style={{ textAlign: "center" }}>No data found</td>
+              <td colSpan="6" style={{ textAlign: "center" }}>No data found</td>
             </tr>
           )}
         </tbody>
