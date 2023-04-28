@@ -54,6 +54,19 @@ const UserModal = ({ title, data, update, cancel, updateUi, action }) => {
         setShowModal(false);
     };
 
+    function generatePassword() {
+        const length = 12;
+        let pswd = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
+
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            pswd += characters[randomIndex];
+        }
+
+        setPassword(pswd);
+    }
+
     return (
         showModal && (
             <div className="modal">
@@ -73,10 +86,11 @@ const UserModal = ({ title, data, update, cancel, updateUi, action }) => {
                             </select>
                         </p>
                         <p>Password <input
-                            type="password"
+                            type="text"
                             value={password}
                             onChange={(event) => setPassword(event.target.value)}
                         />
+                        <button onClick={()=>generatePassword()}>Generate Random Password</button>
                         </p>
                     </div>
                     <div className="modal-footer">
