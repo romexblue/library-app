@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import us from '../styles/AdminUsers.module.css';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
