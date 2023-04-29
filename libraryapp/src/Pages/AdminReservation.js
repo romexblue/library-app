@@ -18,7 +18,7 @@ const AdminReservation = () => {
         getReservationByFilter(
             1,
             document.getElementById('status-select').value,
-            selectedDate,
+            new Date(),
             currentPage
         );
         axios.get(`http://localhost:5000/confab/all`, {
@@ -33,7 +33,31 @@ const AdminReservation = () => {
                 setConfabData(response.data)
             }
         })
-    }, [selectedDate, currentPage])
+    }, [currentPage])
+
+    const handleConfabSelectChange = (event) => {
+        const confId = event.target.value;
+        const status = document.getElementById('status-select').value;
+        getReservationByFilter(confId, status, selectedDate, currentPage);
+    };
+
+    const handleStatusSelectChange = (event) => {
+        const confId = document.getElementById('confab-select').value;
+        const status = event.target.value;
+        getReservationByFilter(confId, status, selectedDate, currentPage);
+    };
+
+    const handleDateChange = (date) => {
+        console.log("yawa")
+        setSelectedDate(date);
+        console.log(document.getElementById('confab-select').value,)
+        getReservationByFilter(
+            document.getElementById('confab-select').value,
+            document.getElementById('status-select').value,
+            date,
+            currentPage
+        );
+    };
 
     const getReservationByFilter = (confId, status, date, page) => {
         axios.get(`http://localhost:5000/reservation/requests/${confId}/${status}/${date.toISOString().slice(0, 10)}/${page}`, {
@@ -49,33 +73,12 @@ const AdminReservation = () => {
                 setReservationData(response.data.reservations);
                 setPageCount(response.data.pageCount);
             }
+            console.log(response.data.reservations)
         })
     };
 
-    const handleConfabSelectChange = (event) => {
-        const confId = event.target.value;
-        const status = document.getElementById('status-select').value;
-        getReservationByFilter(confId, status, selectedDate, currentPage);
-    };
-
-    const handleStatusSelectChange = (event) => {
-        const confId = document.getElementById('confab-select').value;
-        const status = event.target.value;
-        getReservationByFilter(confId, status, selectedDate, currentPage);
-    };
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-        getReservationByFilter(
-            document.getElementById('confab-select').value,
-            document.getElementById('status-select').value,
-            date,
-            currentPage
-        );
-    };
-
     const getReservationById = () => {
-        if(!value){return;}
+        if (!value) { return; }
         setSearching(true);
         axios.get(`http://localhost:5000/reservation/requests/find-by/${value}`, {
             headers: {
