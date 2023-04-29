@@ -15,12 +15,7 @@ const AdminReservation = () => {
     const [pageCount, setPageCount] = useState(0);
 
     useEffect(() => {
-        getReservationByFilter(
-            1,
-            document.getElementById('status-select').value,
-            new Date(),
-            currentPage
-        );
+        
         axios.get(`http://localhost:5000/confab/all`, {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken"),
@@ -30,7 +25,14 @@ const AdminReservation = () => {
             if (response.data.error) {
                 setConfabData([]);
             } else {
-                setConfabData(response.data)
+                setConfabData(response.data);
+                const firstConfabId = response.data[0].id ?? 0;
+                getReservationByFilter(
+                    firstConfabId,
+                    document.getElementById('status-select').value,
+                    new Date(),
+                    currentPage
+                );
             }
         })
     }, [currentPage])
