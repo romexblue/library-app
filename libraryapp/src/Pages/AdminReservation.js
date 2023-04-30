@@ -50,9 +50,7 @@ const AdminReservation = () => {
     };
 
     const handleDateChange = (date) => {
-        console.log("yawa")
         setSelectedDate(date);
-        console.log(document.getElementById('confab-select').value,)
         getReservationByFilter(
             document.getElementById('confab-select').value,
             document.getElementById('status-select').value,
@@ -75,7 +73,6 @@ const AdminReservation = () => {
                 setReservationData(response.data.reservations);
                 setPageCount(response.data.pageCount);
             }
-            console.log(response.data.reservations)
         })
     };
 
@@ -118,7 +115,6 @@ const AdminReservation = () => {
                 userId: sessionStorage.getItem("id")
             },
         }).then((response) => {
-            console.log(response.data.sucess)
             handleDateChange(selectedDate)
         })
     };
