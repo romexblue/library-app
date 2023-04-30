@@ -34,10 +34,9 @@ const TIMES = {
   "6:00pm": ["7:00pm"]
 };
 
-function TimeSelect({ label, options, value, onChange }) {
+function TimeSelect({ options, value, onChange }) {
   return (
     <div>
-      <label>{label}</label>
       <select value={value} onChange={onChange}>
         {options.map((option) => (
           <option key={option} value={option}>
@@ -239,8 +238,8 @@ function Reservation() {
 
   const nextPage = () => {
     //if (reason !== "" && selectedConfab) {
-      setErrorMessage("");
-      setShowForm(!showForm);
+    setErrorMessage("");
+    setShowForm(!showForm);
     // } else {
     //   setErrorMessage("Please Select Confab and Fill Purpose Field");
     // }
@@ -248,219 +247,127 @@ function Reservation() {
 
   return (
     <>
-    {showForm && (
-      <>
-    <div className="rmaindiv">
-    <div className="rcenterdiv">
-        <div className="rleft-panel">
-          <div className="component" id='c1'>
-            <p className="panel-title" id='pantitle1'>Spaces</p>
-          </div>
-          <div className="component" id='c2'>
-            <div className="conf-buttons">
-                <div className="square-button">
-                    <div className="room-name">
-                      <p className="roomName">Confab</p>
-                    </div>
-                    <div className="room-icon">
-                      <p className="roomIcon">1</p>
-                    </div>
-                    <div className="room-info">
-                      <p className="room-capacity">Capacity: <p className="rdata">10</p> pax</p>
-                      <p className="room-type">Type: <p className="rdata">Confab</p></p>
-                      <p className="room-loc">Location: <p className="rdata">2nd Floor</p></p>
-                    </div>
-                    <div className="room-reserve">
-                      <button className="reserve-btn" id="reservebtn">Reserve</button>
-                    </div>
+      {showForm && (
+        <>
+          <div className="rmaindiv">
+            <div className="rcenterdiv">
+              <div className="rleft-panel">
+                <div className="component" id='c1'>
+                  <p className="panel-title" id='pantitle1'>Spaces</p>
                 </div>
-                <div className="square-button">
-                    <div className="room-name">
-                      <p className="roomName">Confab</p>
+                <div className="component" id='c2'>
+                  <div className="conf-buttons">
+                 
+                    <div className="square-button">
+                      <div className="room-name">
+                        <p className="roomName">Confab</p>
+                      </div>
+                      <div className="room-icon">
+                        <p className="roomIcon">1</p>
+                      </div>
+                      <div className="room-info">
+                        <p className="room-capacity">Capacity: <p className="rdata">10</p> pax</p>
+                        <p className="room-type">Type: <p className="rdata">Confab</p></p>
+                        <p className="room-loc">Location: <p className="rdata">2nd Floor</p></p>
+                      </div>
+                      <div className="room-reserve">
+                        <button className="reserve-btn" id="reservebtn">Reserve</button>
+                      </div>
                     </div>
-                    <div className="room-icon">
-                      <p className="roomIcon">1</p>
-                    </div>
-                    <div className="room-info">
-                      <p className="room-capacity">Capacity: <p className="rdata">10</p> pax</p>
-                      <p className="room-type">Type: <p className="rdata">Confab</p></p>
-                      <p className="room-loc">Location: <p className="rdata">2nd Floor</p></p>
-                    </div>
-                    <div className="room-reserve">
-                      <button className="reserve-btn" id="reservebtn">Reserve</button>
-                    </div>
+                  </div>
                 </div>
-                <div className="square-button">
-                    <div className="room-name">
-                      <p className="roomName">Confab</p>
-                    </div>
-                    <div className="room-icon">
-                      <p className="roomIcon">1</p>
-                    </div>
-                    <div className="room-info">
-                      <p className="room-capacity">Capacity: <p className="rdata">10</p> pax</p>
-                      <p className="room-type">Type: <p className="rdata">Confab</p></p>
-                      <p className="room-loc">Location: <p className="rdata">2nd Floor</p></p>
-                    </div>
-                    <div className="room-reserve">
-                      <button className="reserve-btn" id="reservebtn">Reserve</button>
-                    </div>
-                </div>
-                <div className="square-button">
-                    <div className="room-name">
-                      <p className="roomName">Confab</p>
-                    </div>
-                    <div className="room-icon">
-                      <p className="roomIcon">1</p>
-                    </div>
-                    <div className="room-info">
-                      <p className="room-capacity">Capacity: <p className="rdata">10</p> pax</p>
-                      <p className="room-type">Type: <p className="rdata">Confab</p></p>
-                      <p className="room-loc">Location: <p className="rdata">2nd Floor</p></p>
-                    </div>
-                    <div className="room-reserve">
-                      <button className="reserve-btn" id="reservebtn">Reserve</button>
-                    </div>
-                </div>
-                <div className="square-button">
-                    <div className="room-name">
-                      <p className="roomName">Confab</p>
-                    </div>
-                    <div className="room-icon">
-                      <p className="roomIcon">1</p>
-                    </div>
-                    <div className="room-info">
-                      <p className="room-capacity">Capacity: <p className="rdata">10</p> pax</p>
-                      <p className="room-type">Type: <p className="rdata">Confab</p></p>
-                      <p className="room-loc">Location: <p className="rdata">2nd Floor</p></p>
-                    </div>
-                    <div className="room-reserve">
-                      <button className="reserve-btn" id="reservebtn">Reserve</button>
-                    </div>
-                </div>
-                <div className="square-button">
-                    <div className="room-name">
-                      <p className="roomName">Confab</p>
-                    </div>
-                    <div className="room-icon">
-                      <p className="roomIcon">1</p>
-                    </div>
-                    <div className="room-info">
-                      <p className="room-capacity">Capacity: <p className="rdata">10</p> pax</p>
-                      <p className="room-type">Type: <p className="rdata">Confab</p></p>
-                      <p className="room-loc">Location: <p className="rdata">2nd Floor</p></p>
-                    </div>
-                    <div className="room-reserve">
-                      <button className="reserve-btn" id="reservebtn">Reserve</button>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-        <div className="rdivider">
+              </div>
+              <div className="rdivider">
 
-        </div>
-        <div className="rright-panel">
-            <div className="section" id="rsec1">
-                <div className="comp" id="rcomp1">
+              </div>
+              <div className="rright-panel">
+                <div className="section" id="rsec1">
+                  <div className="comp" id="rcomp1">
                     <p>Usage</p>
+                  </div>
+                  <div className="comp" id="rcomp2">
+                    <img src={image1} alt="" />
+                  </div>
                 </div>
-                <div className="comp" id="rcomp2">
-                    <img src={image1} alt=""/>
+                <div className={"section"} id="rsec2">
+                  <div className="Infosec" id="isec1">
+                    <div className="Infolabel" id='ilabel1'>Date:</div>
+                    <div className="ConfInfo" id="roomInfo1"><DatePicker wrapperClassName="datePicker" showIcon selected={selectedDate}
+                      onChange={date => setDate(date)} minDate={new Date()} popperPlacement="bottom" required /></div>
+                  </div>
+                  <div className="Infosec" id="isec2">
+                    <div className="Infolabel" id='ilabel2'>Room:</div>
+                    <div className="ConfInfo" id="roomInfo2">Confab 1</div>
+                  </div>
+                  <div className="Infosec" id="isec3">
+                    <div className="Infolabel" id='ilabel3'>Type:</div>
+                    <div className="ConfInfo" id="roomInfo2">Confab Room</div>
+                  </div>
                 </div>
-            </div>
-            <div className={"section"} id="rsec2">
-                <div className="Infosec" id="isec1">
-                  <div className="Infolabel" id='ilabel1'>Date:</div>
-                  <div className="ConfInfo" id="roomInfo1"><DatePicker wrapperClassName="datePicker" showIcon selected={selectedDate}
-                    onChange={date => setDate(date)} minDate={new Date()} popperPlacement="bottom" required/></div>
-                </div>
-                <div className="Infosec" id="isec2">
-                  <div className="Infolabel" id='ilabel2'>Room:</div>
-                  <div className="ConfInfo" id="roomInfo2">Confab 1</div>
-                </div>
-                <div className="Infosec" id="isec3">
-                  <div className="Infolabel" id='ilabel3'>Type:</div>
-                  <div className="ConfInfo" id="roomInfo2">Confab Room</div>
-                </div>
-            </div>
-            <div className="section" id="rsec3">
-                <div className="table-header">
+                <div className="section" id="rsec3">
+                  <div className="table-header">
                     <div className="header" id="header1">No.</div>
                     <div className="header" id="header2">From</div>
                     <div className="header" id="header3">Until</div>
                     <div className="header" id="header4">Notes</div>
+                  </div>
                 </div>
-            </div>
-            <div className="section" id="rsec4">
-              <div className="wrapper">
-                <div className="table">
-                    <div className="table-content">
+                <div className="section" id="rsec4">
+                  <div className="wrapper">
+                    <div className="table">
+                      <div className="table-content">
                         <div className="column" id="column1">1</div>
                         <div className="column" id="column2">8:00 am</div>
                         <div className="column" id="column3">10:00 am</div>
                         <div className="column" id="column4">10 pax</div>
-                    </div>
-                    <div className="table-content">
+                      </div>
+                      <div className="table-content">
                         <div className="column" id="column1">1</div>
                         <div className="column" id="column2">8:00 am</div>
                         <div className="column" id="column3">10:00 am</div>
                         <div className="column" id="column4">10 pax</div>
+                      </div>
                     </div>
                   </div>
                 </div>
-            </div>
-            <div className="section" id="rsec5">
-                <div className="comp" id="drop3">
+                <div className="section" id="rsec5">
+                  <div className="comp" id="drop3">
                     <div className="label">
-                        Start Time
-                    </div>
-                    <div className="drop-down">                          
-                        <input className="rdropdown2" list="browsers" name="browser" placeholder="8:00 am"/>
-                        <datalist id="browsers">
-                          <option value="8:00 am"/>
-                          <option value="9:00 am"/>
-                          <option value="10:00 am"/>
-                          <option value="11:00 am"/>
-                          <option value="12:00 pm"/>
-                          <option value="1:00 pm"/>
-                          <option value="2:00 pm"/>
-                          <option value="3:00 pm"/>
-                          <option value="4:00 pm"/>
-                          <option value="5:00 pm"/>
-                          <option value="6:00 pm"/>
-                        </datalist>                          
-                      </div>
-                </div>
-                <div className="comp" id="drop4">
-                    <div className="label">
-                        End Time
+                      Start Time
                     </div>
                     <div className="drop-down">
-                          <input className="rdropdown2" list="browsers" name="browser" placeholder="8:00 am"/>
-                          <datalist id="browsers">
-                            <option value="8:00 am"/>
-                            <option value="9:00 am"/>
-                            <option value="10:00 am"/>
-                            <option value="11:00 am"/>
-                            <option value="12:00 pm"/>
-                            <option value="1:00 pm"/>
-                          </datalist>                          
+                      <TimeSelect
+                        options={Object.keys(TIMES)}
+                        value={startTime}
+                        onChange={handleStartTimeChange}
+                      />
                     </div>
+                  </div>
+                  <div className="comp" id="drop4">
+                    <div className="label">
+                      End Time
+                    </div>
+                    <div className="drop-down">
+                      <TimeSelect
+                        options={endTimeOptions}
+                        value={endTime}
+                        onChange={handleEndTimeChange}
+                      />
+                    </div>
+                  </div>
                 </div>
-            </div>
-            <div className="section" id="rsec6">
-                <div className="btn-holder" id="holder1">
+                <div className="section" id="rsec6">
+                  <div className="btn-holder" id="holder1">
                     <button className="cancelbtn" >Cancel</button>
-                    <button className="submitbtn" onClick={()=>nextPage()}>Next</button>
+                    <button className="submitbtn" onClick={() => nextPage()}>Next</button>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-    </div>
-    </>
-    )}
-    {!showForm && (
+          </div>
+        </>
+      )}
+      {!showForm && (
         <>
           <ReservationUsers capacity={selectedConfab.max_capacity ?? 0} updateData={setList} />
         </>
@@ -473,7 +380,7 @@ function Reservation() {
           onCancel={handleCancel}
         />
       )}
-</>
+    </>
   );
 }
 

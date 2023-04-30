@@ -15,12 +15,7 @@ const AdminReservation = () => {
     const [pageCount, setPageCount] = useState(0);
 
     useEffect(() => {
-        getReservationByFilter(
-            1,
-            document.getElementById('status-select').value,
-            selectedDate,
-            currentPage
-        );
+        
         axios.get(`http://localhost:5000/confab/all`, {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken"),
@@ -30,27 +25,17 @@ const AdminReservation = () => {
             if (response.data.error) {
                 setConfabData([]);
             } else {
-                setConfabData(response.data)
+                setConfabData(response.data);
+                const firstConfabId = response.data[0].id ?? 0;
+                getReservationByFilter(
+                    firstConfabId,
+                    document.getElementById('status-select').value,
+                    new Date(),
+                    currentPage
+                );
             }
         })
-    }, [selectedDate, currentPage])
-
-    const getReservationByFilter = (confId, status, date, page) => {
-        axios.get(`http://localhost:5000/reservation/requests/${confId}/${status}/${date.toISOString().slice(0, 10)}/${page}`, {
-            headers: {
-                accessToken: sessionStorage.getItem("accessToken"),
-                userId: sessionStorage.getItem("id")
-            },
-        }).then((response) => {
-            if (response.data.error) {
-                setReservationData([]);
-                setPageCount(0)
-            } else {
-                setReservationData(response.data.reservations);
-                setPageCount(response.data.pageCount);
-            }
-        })
-    };
+    }, [currentPage])
 
     const handleConfabSelectChange = (event) => {
         const confId = event.target.value;
@@ -74,8 +59,25 @@ const AdminReservation = () => {
         );
     };
 
+    const getReservationByFilter = (confId, status, date, page) => {
+        axios.get(`http://localhost:5000/reservation/requests/${confId}/${status}/${date.toISOString().slice(0, 10)}/${page}`, {
+            headers: {
+                accessToken: sessionStorage.getItem("accessToken"),
+                userId: sessionStorage.getItem("id")
+            },
+        }).then((response) => {
+            if (response.data.error) {
+                setReservationData([]);
+                setPageCount(0)
+            } else {
+                setReservationData(response.data.reservations);
+                setPageCount(response.data.pageCount);
+            }
+        })
+    };
+
     const getReservationById = () => {
-        if(!value){return;}
+        if (!value) { return; }
         setSearching(true);
         axios.get(`http://localhost:5000/reservation/requests/find-by/${value}`, {
             headers: {
@@ -113,7 +115,6 @@ const AdminReservation = () => {
                 userId: sessionStorage.getItem("id")
             },
         }).then((response) => {
-            console.log(response.data.sucess)
             handleDateChange(selectedDate)
         })
     };

@@ -28,8 +28,8 @@ const Login = () => {
         sessionStorage.setItem("accessToken", response.data.accessToken)
         sessionStorage.setItem("id", response.data.userId)
         authContext.login(response.data.userId, response.data.accessToken)
-        if(response.data.type === "Admin" || response.data.type === "Librarian"){
-          navigate('/admin')
+        if(response.data.type === "Admin" || response.data.type === "Librarian" || response.data.type === "Assistant"){
+          navigate('/admin', { state: { userType: response.data.type } })
         }else{
           navigate('/choose')
         }
