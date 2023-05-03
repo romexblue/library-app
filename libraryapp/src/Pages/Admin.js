@@ -13,12 +13,10 @@ const Admin = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const [activeComponent, setActiveComponent] = useState('AdminReservation');
-    const [activeNavItem, setActiveNavItem] = useState('AdminReservation');
     const location = useLocation();
     const [isAdmin, setIsAdmin] = useState((location.state || {}).userType === 'Admin' ? true : false);
     const handleTabClick = (component) => {
         setActiveComponent(component);
-        setActiveNavItem(component);
     };
 
     useEffect(() => {
@@ -66,7 +64,7 @@ const Admin = () => {
                         <li>
                             <div className='button' id='btn1'>
                                 <button
-                                    className={activeNavItem === 'AdminReservation' ? 'active' : ''}
+                                    className={activeComponent === 'AdminReservation' ? 'active' : ''}
                                     onClick={() => handleTabClick('AdminReservation')} id='button1' >
                                     Reservations
                                 </button>
@@ -77,7 +75,7 @@ const Admin = () => {
                                 <li>
                                     <div className='button' id='btn2'>
                                         <button
-                                            className={activeNavItem === 'AdminFloor' ? 'active' : ''}
+                                            className={activeComponent === 'AdminFloor' ? 'active' : ''}
                                             onClick={() => handleTabClick('AdminFloor')} id='button2'>
                                             Floor Manager
                                         </button>
@@ -86,7 +84,7 @@ const Admin = () => {
                                 <li>
                                     <div className='button' id='btn3'>
                                         <button
-                                            className={activeNavItem === 'AdminConfab' ? 'active' : ''}
+                                            className={activeComponent === 'AdminConfab' ? 'active' : ''}
                                             onClick={() => handleTabClick('AdminConfab')} id='button3'>
                                             Space Manager
                                         </button>
@@ -95,7 +93,7 @@ const Admin = () => {
                                 <li>
                                     <div className='button' id='btn4'>
                                         <button
-                                            className={activeNavItem === 'AdminStudent' ? 'active' : ''}
+                                            className={activeComponent === 'AdminStudent' ? 'active' : ''}
                                             onClick={() => handleTabClick('AdminStudent')} id='button4'>
                                             Students
                                         </button>
@@ -104,7 +102,7 @@ const Admin = () => {
                                 <li>
                                     <div className='button' id='btn5'>
                                         <button
-                                            className={activeNavItem === 'AdminUsers' ? 'active' : ''}
+                                            className={activeComponent === 'AdminUsers' ? 'active' : ''}
                                             onClick={() => handleTabClick('AdminUsers')} id='button5'>
                                             Users
                                         </button>

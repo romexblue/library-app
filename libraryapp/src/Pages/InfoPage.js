@@ -45,7 +45,6 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
         });
       };
       const handleSubmit = (event) => {
-        console.log(searchResult)
         event.preventDefault();
         const newValue = value;
         try {
@@ -67,7 +66,7 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
                         } else {
                             setSearchResult('User Found');
                             setStudentData(response.data);
-                            setStudentID(response.data.id);
+                            setStudentID(response.data.school_id);
                             setStudentRFID(response.data.rfid);
                         }
                     })

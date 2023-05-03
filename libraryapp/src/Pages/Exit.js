@@ -13,6 +13,7 @@ const Exit = () => {
     const authContext = useContext(AuthContext);
     const inputRef = useRef(null);
     const [date, setDate] = useState(new Date());
+
     useEffect(() => {
         //for page refresh
         if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
@@ -48,7 +49,7 @@ const Exit = () => {
     function checkFocus() {
         if (document.activeElement === document.body) {
             inputRef.current.focus();
-        }   
+        }
     }
 
     function handleChange(event) {
@@ -56,12 +57,12 @@ const Exit = () => {
         setValue(event.target.value);
     }
 
-    function handleSubmit(event){
+    function handleSubmit(event) {
         event.preventDefault();
         const studentID = value;
         const today = new Date();
         const formattedTime = today.toLocaleTimeString('en-US', { hour12: false });
-        const data = {time_out:formattedTime}
+        const data = { time_out: formattedTime }
         try {
             if (studentID.trim() !== '') { //handle blank space when deleting all
                 const encodedValue = encodeURIComponent(studentID.trim()); //handle special chars to prevent error
@@ -73,10 +74,10 @@ const Exit = () => {
                 })
                     .then((response) => {
                         if (response.data.error) {
-                           setResponse(response.data.error);
+                            setResponse(response.data.error);
                             setValue('');
                         } else {
-                           setResponse(response.data.success);
+                            setResponse(response.data.success);
                             setValue('');
                         }
                     })
@@ -89,62 +90,64 @@ const Exit = () => {
     }
     const formatDate = (date) => {
         return date.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric"
+            month: "long",
+            day: "numeric",
+            year: "numeric"
         });
-      };
-    
-      const formatTime = (date) => {
+    };
+
+    const formatTime = (date) => {
         return date.toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
-          second: "numeric",
-          hour12: true
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true
         });
-      };
+    };
     return (
-   
+
         <div className="Sections">
-        <div className="sec1">
-            <div className="Back" onClick={()=>navigate('/choose')}>
-                <button className="back-icon" >
-                  <img className="BackIcon" id="BackBtn" src={image1} alt="img"/>
-                  <p>BACK</p>
-                </button>
-            </div>
-        </div>
-        <div className="sec2">
-            <div className="RFID-Icon">
-                <img src={image2} alt="img"/>
-            </div>
-            <div className="TapMessage">
-                <h1>TAP YOUR ID TO EXIT</h1>
-            </div>
-        </div>
-        <div className="sec3">
-            <form onSubmit={handleSubmit}>
-            <div className="IdInput">
-                <label htmlFor="fname">Library User</label>
-                <input type="text"  ref={inputRef} id="fname"  placeholder="Tap Your ID" value={value} onChange={handleChange}
-                style={{ borderColor: response === "Not Timed In" || response === "No existing record"? "red" : "",
-                         backgroundColor: response === "Not Timed In" || response === "No existing record" ? "rgb(255, 251, 251)" : "" }}/>
-            </div>
-            </form>
-        </div>
-        <div className="sec4">
-            <div className="LibrarySeal">
-                <img src={image3} alt="img"/>
-            </div>
-            <div className="feedback" ><p style={{color: response === "Time Out Successful" ? "#385DBB" : ""}}>{response}</p></div>
-            <div className="systemtime">
-                <div className="display-date">
-                    <span id="month">{formatDate(date)}</span>
+            <div className="sec1">
+                <div className="Back" onClick={() => navigate('/choose')}>
+                    <button className="back-icon" >
+                        <img className="BackIcon" id="BackBtn" src={image1} alt="img" />
+                        <p>BACK</p>
+                    </button>
                 </div>
-            <div className="display-time">{formatTime(date)}</div>
+            </div>
+            <div className="sec2">
+                <div className="RFID-Icon">
+                    <img src={image2} alt="img" />
+                </div>
+                <div className="TapMessage">
+                    <h1>TAP YOUR ID TO EXIT</h1>
+                </div>
+            </div>
+            <div className="sec3">
+                <form onSubmit={handleSubmit}>
+                    <div className="IdInput">
+                        <label htmlFor="fname">Library User</label>
+                        <input type="text" ref={inputRef} id="fname" placeholder="Tap Your ID" value={value} onChange={handleChange}
+                            style={{
+                                borderColor: response === "Not Timed In" || response === "No existing record" ? "red" : "",
+                                backgroundColor: response === "Not Timed In" || response === "No existing record" ? "rgb(255, 251, 251)" : ""
+                            }} />
+                    </div>
+                </form>
+            </div>
+            <div className="sec4">
+                <div className="LibrarySeal">
+                    <img src={image3} alt="img" />
+                </div>
+                <div className="feedback" ><p style={{ color: response === "Time Out Successful" ? "#385DBB" : "" }}>{response}</p></div>
+                <div className="systemtime">
+                    <div className="display-date">
+                        <span id="month">{formatDate(date)}</span>
+                    </div>
+                    <div className="display-time">{formatTime(date)}</div>
+                </div>
             </div>
         </div>
-    </div>
     );
 }
 

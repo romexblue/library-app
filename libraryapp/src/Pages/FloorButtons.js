@@ -26,12 +26,13 @@ const FloorButtons = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const [date, setDate] = useState(new Date());
+
     const handleConfirm = () => {
         const today = new Date();
         const formattedDate = today.toISOString().slice(0, 10);
         const formattedTime = today.toLocaleTimeString('en-US', { hour12: false });
-        const data = { date: formattedDate, time_in: formattedTime, StudentId: studentID, FloorId: floorID, rfid: studentRFID }
-
+        const data = { date: formattedDate, time_in: formattedTime, StudentSchoolId: studentID, FloorId: floorID }
+        
         axios.post("http://localhost:5000/record/", data,
             {
                 headers: {
@@ -80,9 +81,9 @@ const FloorButtons = () => {
     };
 
     useEffect(() => {
-        //inputRef.current.focus();
-        if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id")) {
-            axios.get("http://localhost:5000/floor", {
+        //for page refresh
+        if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
+            axios.get("http://localhost:5000/auth/allow", {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken"),
                     userId: sessionStorage.getItem("id")
@@ -90,26 +91,51 @@ const FloorButtons = () => {
             })
                 .then((response) => {
                     if (response.data.error) {
-                        navigate('/')
                         authContext.logout()
+                        navigate('/')
                     } else {
-                        setButtonData(response.data)
                         authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
-                        navigate('/entry')
+                        navigate('/exit')
                     }
                 })
-        }
+        } axios.get("http://localhost:5000/floor", {
+            headers: {
+                accessToken: sessionStorage.getItem("accessToken"),
+                userId: sessionStorage.getItem("id")
+            },
+        })
+            .then((response) => {
+                if (response.data.error) {
+                    navigate('/')
+                    authContext.logout()
+                } else {
+                    setButtonData(response.data)
+                    authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
+                    navigate('/entry')
+                    getFloors()
+                }
+            })
 
-        if (!authContext.isLoggedIn) { navigate('/') }
+        if (!authContext.isLoggedIn) {
+            navigate('/')
+        };
 
-        // const interval = setInterval(() => {
-        //     checkFocus();
-        // }, 3000);
-
-        // return () => clearInterval(interval);
         const timer = setInterval(() => setDate(new Date()), 1000);
         return () => clearInterval(timer);
     }, [navigate, authContext,]);
+
+    const getFloors = () => {
+        console.log("floors called")
+        axios.get("http://localhost:5000/floor", {
+            headers: {
+                accessToken: sessionStorage.getItem("accessToken"),
+                userId: sessionStorage.getItem("id")
+            },
+        })
+            .then((response) => {
+                setButtonData(response.data)
+            })
+    };
 
     const handleKeyDown = (event, index, id, name) => {
         const buttonCount = buttonData.length;
@@ -182,7 +208,7 @@ const FloorButtons = () => {
                                     Last Name:
                                 </div>
                                 <div className="comp" id="comp7">
-                                    Sobiono
+                                    {studentData.last_name}
                                 </div>
                             </div>
                             <div className="stud-info" id="sec6-a">
@@ -191,15 +217,15 @@ const FloorButtons = () => {
                                         First Name:
                                     </div>
                                     <div className="comp" id="comp9">
-                                        Kassandra Erika
+                                        {studentData.first_name}
                                     </div>
                                 </div>
                                 <div className="partition" id="part2">
                                     <div className="comp" id="comp10">
-                                        Mid Initial:
+                                        Middle Name:
                                     </div>
                                     <div className="comp" id="comp11">
-                                        T
+                                        {studentData.type}
                                     </div>
                                 </div>
                             </div>
@@ -211,15 +237,15 @@ const FloorButtons = () => {
                                         Gender:
                                     </div>
                                     <div className="comp" id="comp13">
-                                        Female
+                                        {studentData.gender}
                                     </div>
                                 </div>
                                 <div className="partition" id="part4">
                                     <div className="comp" id="comp14">
-                                        Course:
+                                        College:
                                     </div>
                                     <div className="comp" id="comp15">
-                                        BSIT
+                                        {studentData.college}
                                     </div>
                                 </div>
                                 <div className="partition" id="part6">
@@ -227,7 +253,8 @@ const FloorButtons = () => {
                                         Year:
                                     </div>
                                     <div className="comp" id="comp17">
-                                        4
+                                        {/* Takes Year From (LAW_LPRO 2S1) Format */}
+                                        {studentData.year ? studentData.year.match(/\d+/)?.[0] || '' : ''}
                                     </div>
                                 </div>
                             </div>
@@ -253,7 +280,7 @@ const FloorButtons = () => {
                                 </div>
                             </div>
                             <div className="note-down" id="lowernote">
-                                <button className="cancelbtn" onClick={() => {setStudentID(''); setStudentRFID('');}}>Back</button>
+                                <button className="cancelbtn" onClick={() => { setStudentID(''); setStudentRFID(''); }}>Back</button>
                             </div>
                         </div>
                     </div>

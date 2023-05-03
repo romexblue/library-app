@@ -52,7 +52,7 @@ router.patch('/:id', validateToken, async (req, res) => {
     const { id } = req.params;
     const data = req.body;
     try {
-        const student = await Students.findOne({ where: { id } });
+        const student = await Students.findOne({ where: { school_id: id } });
         if (student) {
             // Dynamically update the user object with the new data
             Object.keys(data).forEach(key => {
@@ -72,7 +72,7 @@ router.patch('/:id', validateToken, async (req, res) => {
 router.delete('/:id', validateToken, async (req, res) => {
     const { id } = req.params
     try {
-        await Students.destroy({ where: { id } });
+        await Students.destroy({ where: { school_id } });
         res.status(204).json({ success: "Deletion Successful" });
     } catch (err) {
         res.status(500).json({ error: err });

@@ -106,12 +106,16 @@ function Reservation() {
     setStudentList(list);
   }, []);
 
-  const getAvailableTime = useCallback(() => {
-    const conId = selectedConfab.id;
-    const date = selectedDate.toISOString().slice(0, 10);
+  const getAvailableTime = (con, date) => {
+    const conId = con.id;
+    const newDate = date.toISOString().slice(0, 10);
+    setSelectedDate(date);
+    setSelectedConfab(con);
+    console.log("hello")
+    console.log(conId)
     if (conId && date) {
       axios
-        .get(`http://localhost:5000/reservation/${conId}/${date}`, {
+        .get(`http://localhost:5000/reservation/${conId}/${newDate}`, {
           headers: {
             accessToken: sessionStorage.getItem("accessToken"),
             userId: sessionStorage.getItem("id"),
@@ -124,7 +128,7 @@ function Reservation() {
           console.log(error);
         });
     }
-  }, [selectedConfab, selectedDate]);
+  };
 
   const getConfabs = useCallback(() => {
     axios
@@ -144,18 +148,6 @@ function Reservation() {
 
   const setDate = (date) => {
     setSelectedDate(date);
-  };
-
-  const handleConfabChange = (event) => {
-    console.log("HELLO")
-    const selectedConfabId = parseInt(event.target.value);
-    if (selectedConfabId) {
-      const selectedConfab = confabs.find((c) => c.id === selectedConfabId);
-      setSelectedConfab(selectedConfab);
-    } else {
-      setSelectedConfab("");
-      setAvailableSlots([]);
-    }
   };
 
   useEffect(() => {
@@ -182,10 +174,6 @@ function Reservation() {
     };
     getConfabs();
   }, [getConfabs, authContext, navigate]);
-
-  useEffect(() => {
-    getAvailableTime();
-  }, [getAvailableTime]);
 
   //converts to HH:mm:ss format
   function convertTo24Hour(params) {
@@ -257,23 +245,24 @@ function Reservation() {
                 </div>
                 <div className="component" id='c2'>
                   <div className="conf-buttons">
-                 
-                    <div className="square-button">
-                      <div className="room-name">
-                        <p className="roomName">Confab</p>
+                    {confabs.map(confab => (
+                      <div key={confab.id} className="square-button">
+                        <div className="room-name">
+                          <p className="roomName">Not database data</p>
+                        </div>
+                        <div className="room-icon">
+                          <p className="roomIcon">{confab.name}</p>
+                        </div>
+                        <div className="room-info">
+                          <p className="room-capacity">Capacity: <span className="rdata">{confab.max_capacity}</span> pax</p>
+                          <p className="room-type">Type: <span className="rdata">{confab.description}</span></p>
+                          <p className="room-loc">Location: <span className="rdata">Level {confab.level}</span></p>
+                        </div>
+                        <div className="room-reserve">
+                          <button onClick={()=> getAvailableTime(confab, selectedDate)} className="reserve-btn" id="reservebtn">Reserve</button>
+                        </div>
                       </div>
-                      <div className="room-icon">
-                        <p className="roomIcon">1</p>
-                      </div>
-                      <div className="room-info">
-                        <p className="room-capacity">Capacity: <p className="rdata">10</p> pax</p>
-                        <p className="room-type">Type: <p className="rdata">Confab</p></p>
-                        <p className="room-loc">Location: <p className="rdata">2nd Floor</p></p>
-                      </div>
-                      <div className="room-reserve">
-                        <button className="reserve-btn" id="reservebtn">Reserve</button>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -293,11 +282,11 @@ function Reservation() {
                   <div className="Infosec" id="isec1">
                     <div className="Infolabel" id='ilabel1'>Date:</div>
                     <div className="ConfInfo" id="roomInfo1"><DatePicker wrapperClassName="datePicker" showIcon selected={selectedDate}
-                      onChange={date => setDate(date)} minDate={new Date()} popperPlacement="bottom" required /></div>
+                      onChange={date => getAvailableTime(selectedConfab, date)} minDate={new Date()} popperPlacement="bottom" required /></div>
                   </div>
                   <div className="Infosec" id="isec2">
                     <div className="Infolabel" id='ilabel2'>Room:</div>
-                    <div className="ConfInfo" id="roomInfo2">Confab 1</div>
+                    <div className="ConfInfo" id="roomInfo2">{selectedConfab.name}</div>
                   </div>
                   <div className="Infosec" id="isec3">
                     <div className="Infolabel" id='ilabel3'>Type:</div>
@@ -306,27 +295,25 @@ function Reservation() {
                 </div>
                 <div className="section" id="rsec3">
                   <div className="table-header">
-                    <div className="header" id="header1">No.</div>
                     <div className="header" id="header2">From</div>
                     <div className="header" id="header3">Until</div>
-                    <div className="header" id="header4">Notes</div>
                   </div>
                 </div>
                 <div className="section" id="rsec4">
                   <div className="wrapper">
                     <div className="table">
-                      <div className="table-content">
-                        <div className="column" id="column1">1</div>
-                        <div className="column" id="column2">8:00 am</div>
-                        <div className="column" id="column3">10:00 am</div>
-                        <div className="column" id="column4">10 pax</div>
-                      </div>
-                      <div className="table-content">
-                        <div className="column" id="column1">1</div>
-                        <div className="column" id="column2">8:00 am</div>
-                        <div className="column" id="column3">10:00 am</div>
-                        <div className="column" id="column4">10 pax</div>
-                      </div>
+                      {availableSlots.length > 0 ? (
+                        availableSlots.map((slot, index) => (
+                          <div key={index} className="table-content">
+                            <div className="column" id="column1">{convertTo12Hour(slot.start)}</div>
+                            <div className="column" id="column2">{convertTo12Hour(slot.end)}</div>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="table-content">
+                          <div style={{ marginTop: "10px" }}>Choose a Confab</div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -358,7 +345,6 @@ function Reservation() {
                 </div>
                 <div className="section" id="rsec6">
                   <div className="btn-holder" id="holder1">
-                    <button className="cancelbtn" >Cancel</button>
                     <button className="submitbtn" onClick={() => nextPage()}>Next</button>
                   </div>
                 </div>
@@ -369,7 +355,7 @@ function Reservation() {
       )}
       {!showForm && (
         <>
-          <ReservationUsers capacity={selectedConfab.max_capacity ?? 0} updateData={setList} />
+          <ReservationUsers capacity={selectedConfab.max_capacity ?? 0} updateData={setList} cancel={nextPage}/>
         </>
       )}
       {showConfirmation && (

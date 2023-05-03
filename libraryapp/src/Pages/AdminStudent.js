@@ -4,7 +4,6 @@ import ReactPaginate from 'react-paginate';
 import AESModal from './AESModal';
 import stu from '../styles/AdminStudent.module.css';
 
-
 const AdminStudent = () => {
   const [students, setStudents] = useState([]);
   const [studentData, setStudentData] = useState({});
@@ -87,12 +86,15 @@ const AdminStudent = () => {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
             <th>School ID</th>
-            <th>RFID</th>
             <th>Type</th>
-            <th>Date Of Expiry</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>College</th>
+            <th>Year</th>
+            <th>RFID</th>
           </tr>
         </thead>
         <tbody>
@@ -103,12 +105,15 @@ const AdminStudent = () => {
                   onMouseEnter={() => handleMouseEnter(index)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <td>{studentObj?.id}</td>
-                  <td>{studentObj?.name}</td>
                   <td>{studentObj?.school_id}</td>
-                  <td>{studentObj?.rfid}</td>
                   <td>{studentObj?.type}</td>
-                  <td>{studentObj?.date_of_expiry}</td>
+                  <td>{studentObj?.first_name}</td>
+                  <td>{studentObj?.last_name}</td>
+                  <td>{studentObj?.gender}</td>
+                  <td>{studentObj?.email}</td>
+                  <td>{studentObj?.college}</td>
+                  <td>{studentObj?.year}</td>
+                  <td>{studentObj?.rfid}</td>
                   <td style={{ border: 'none' }}>
                     {hoveredRow === index && (
                       <>

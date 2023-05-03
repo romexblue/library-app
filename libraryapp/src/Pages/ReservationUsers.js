@@ -3,7 +3,7 @@ import '../styles/ReservationUsers.css';
 import axios from 'axios';
 import image1 from '../images/Reminder_Icon.png';
 
-function ReservationUsers({ capacity, updateData }) {
+function ReservationUsers({ capacity, updateData, cancel }) {
   const [inputValues, setInputValues] = useState(Array(capacity).fill(''));
   const inputRefs = useRef(Array(capacity).fill(null));
 
@@ -178,7 +178,7 @@ function ReservationUsers({ capacity, updateData }) {
                         <img className="info_icon" src={image1} alt="note"/>
                     </div>
                     <div className="comp" id="rscomp10">
-                        <button className="scanid" onclick="focusInput()" >SCAN</button>
+                        <button className="scanid" >SCAN</button>
                     </div>
                 </div>
             </div>
@@ -240,7 +240,7 @@ function ReservationUsers({ capacity, updateData }) {
                         </div>
                         <div className="drop-down">                          
                             <select className="dropdown2" list="browsers" name="browser" placeholder="3" id="browsers" >
-                            <option disable selected>No. of users...</option>
+                            <option >No. of users...</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
@@ -361,8 +361,8 @@ function ReservationUsers({ capacity, updateData }) {
             </div>
             <div className="section" id="rssec15">
                 <div className="btn-holder" id="holder1">
-                    <button className="cancelbtn" >Cancel</button>
-                    <button className="submitbtn">Next</button>
+                    <button className="cancelbtn" onClick={()=>cancel()} >Cancel</button>
+                    <button className="submitbtn">Submit</button>
                 </div>
             </div>
         </div>
