@@ -191,7 +191,7 @@ const FloorButtons = () => {
                                         First Name:
                                     </div>
                                     <div className="comp" id="comp9">
-                                        Kassandra Erika
+                                    {studentData.name}
                                     </div>
                                 </div>
                                 <div className="partition" id="part2">
@@ -243,17 +243,21 @@ const FloorButtons = () => {
                                     </div>
                                 </div>
                                 <div className="reminder">
-                                    <div className="note-div">
-                                        <p>Please confirm that all information
-                                            are correct before clicking SUBMIT.</p>
-                                    </div>
-                                    <div className="note-icon">
-                                        <img src={image7} alt='Img' />
+                                    <div className='reminderContent'>
+                                        <div className="note-div">
+                                            <p>Please confirm that all information
+                                                are correct before clicking SUBMIT.</p>
+                                        </div>
+                                        <div className="note-icon">
+                                            <img src={image7} alt='Img' />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="note-down" id="lowernote">
-                                <button className="cancelbtn" onClick={() => {setStudentID(''); setStudentRFID('');}}>Back</button>
+                                <div className='cancelBtnHolder' id='btnHoldercnl'>
+                                    <button className="cancelbtn" onClick={() => {setStudentID(''); setStudentRFID('');}}>Back</button>
+                                </div>
                             </div>
                         </div>
                     </div>

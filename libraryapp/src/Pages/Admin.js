@@ -15,12 +15,27 @@ const Admin = () => {
     const [activeComponent, setActiveComponent] = useState('AdminReservation');
     const [activeNavItem, setActiveNavItem] = useState('AdminReservation');
     const location = useLocation();
+    const [date, setDate] = useState(new Date());
     const [isAdmin, setIsAdmin] = useState((location.state || {}).userType === 'Admin' ? true : false);
     const handleTabClick = (component) => {
         setActiveComponent(component);
         setActiveNavItem(component);
     };
-
+    const formatDate = (date) => {
+        return date.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        });
+      };
+    
+      const formatTime = (date) => {
+        return date.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true
+        });
+      };
     useEffect(() => {
         //to check token then check if admin
         if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
@@ -51,22 +66,31 @@ const Admin = () => {
                 navigate('/')
             }
         }
-
-    }, [authContext, navigate]);
+        const timer = setInterval(() => {
+            setDate(new Date())
+            },1000);
+            return () => clearInterval(timer);
+        
+        }, [authContext, navigate]);
 
     return (
 
         <div className="main">
             <div className="sidebar">
                 <div className='section' id='accountInfo'>
+                    <div className='systemUser' id='userTag'>
+                        Chiong, M.
+                    </div>
+                </div>
+                <div className='section' id='boundary'>
 
                 </div>
                 <div className='section' id='dashBtns'>
                     <ul>
                         <li>
-                            <div className='button' id='btn1'>
+                            <div className='sideButton' id='btn1'>
                                 <button
-                                    className={activeNavItem === 'AdminReservation' ? 'active' : ''}
+                                    className={activeNavItem === 'AdminReservation' ? 'active' : 'buttonColor'}
                                     onClick={() => handleTabClick('AdminReservation')} id='button1' >
                                     Reservations
                                 </button>
@@ -75,36 +99,36 @@ const Admin = () => {
                         {isAdmin && (
                             <>
                                 <li>
-                                    <div className='button' id='btn2'>
+                                    <div className='sideButton' id='btn2'>
                                         <button
-                                            className={activeNavItem === 'AdminFloor' ? 'active' : ''}
+                                            className={activeNavItem === 'AdminFloor' ? 'active' : 'buttonColor'}
                                             onClick={() => handleTabClick('AdminFloor')} id='button2'>
                                             Floor Manager
                                         </button>
                                     </div>
                                 </li>
                                 <li>
-                                    <div className='button' id='btn3'>
+                                    <div className='sideButton' id='btn3'>
                                         <button
-                                            className={activeNavItem === 'AdminConfab' ? 'active' : ''}
+                                            className={activeNavItem === 'AdminConfab' ? 'active' : 'buttonColor'}
                                             onClick={() => handleTabClick('AdminConfab')} id='button3'>
                                             Space Manager
                                         </button>
                                     </div>
                                 </li>
                                 <li>
-                                    <div className='button' id='btn4'>
+                                    <div className='sideButton' id='btn4'>
                                         <button
-                                            className={activeNavItem === 'AdminStudent' ? 'active' : ''}
+                                            className={activeNavItem === 'AdminStudent' ? 'active' : 'buttonColor'}
                                             onClick={() => handleTabClick('AdminStudent')} id='button4'>
                                             Students
                                         </button>
                                     </div>
                                 </li>
                                 <li>
-                                    <div className='button' id='btn5'>
+                                    <div className='sideButton' id='btn5'>
                                         <button
-                                            className={activeNavItem === 'AdminUsers' ? 'active' : ''}
+                                            className={activeNavItem === 'AdminUsers' ? 'active' : 'buttonColor'}
                                             onClick={() => handleTabClick('AdminUsers')} id='button5'>
                                             Users
                                         </button>
@@ -114,15 +138,27 @@ const Admin = () => {
                         )}
                     </ul>
                 </div>
+                <div className='section' id='boundary'>
+                    
+                </div>
                 <div className='section' id='sTime'>
-
+                    <div className='comp' id='timeDiv'>
+                    <div className='comp' id='timeContainer'>
+                        <div className='dateData' id='dateD'>{formatDate(date)}</div>
+                        <div className='dateData' id='timeDivider'> | </div>
+                        <div className='dateData' id='timeD'> {formatTime(date)}</div>
+                    </div>
+                    </div>
                 </div>
             </div>
             <div className="pagecontainer">
                 <div className="navbar">
-
+                    <div className='systemName' id='sysname'>
+                        E-Lib Desk Mate
+                    </div>
                 </div>
                 <div className='page-window'>
+
                     <div className='pages'>
                         {activeComponent === 'AdminReservation' && (
                             <div>

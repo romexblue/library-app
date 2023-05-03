@@ -2,6 +2,7 @@ import flo from '../styles/AdminFloor.module.css';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import AEFModal from './AEFModal'
+import image1 from '../images/search_icon.png';
 
 const AdminFloor = () => {
     const [floors, setFloors] = useState([]);
@@ -73,9 +74,21 @@ const AdminFloor = () => {
     };
 
     return (
-        <div>
-            <table>
-                <thead>
+        <div className={flo.floorPage}>
+            <div className={flo.pageHeader}>
+                <div className={flo.section1}>
+                    <p>Floor</p>
+                </div>
+                <div className={flo.section2}>
+
+                </div>
+                <div className={flo.section3}>
+                    <button className={flo.addBtn} onClick={() => handleClick([], "Add")}><div className={flo.plusSign}
+                    >+</div> Add Floors</button>
+                </div>
+            </div>
+            <table className={flo.tableContainer}>
+                <thead className={flo.tableHeader}>
                     <tr>
                         <th>Level</th>
                         <th>Name</th>
@@ -85,7 +98,7 @@ const AdminFloor = () => {
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className={flo.tableContent}>
                     {floors.map((floor, index) => (
                         <tr
                             key={floor.id}
@@ -110,7 +123,6 @@ const AdminFloor = () => {
                     ))}
                 </tbody>
             </table>
-            <button onClick={() => handleClick([], "Add")}>Add Floors</button>
             {showEditModal && (
                 <AEFModal
                     title={`${action} Floor`}

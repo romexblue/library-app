@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker';
 import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 import res from '../styles/AdminReservation.module.css';
+import image1 from '../images/search_icon.png';
+import '../styles/AdminReservation.module.css';
 
 const AdminReservation = () => {
     const [value, setValue] = useState('');
@@ -133,26 +135,33 @@ const AdminReservation = () => {
 
     return (
         <div>
-            <select disabled={searching} id="confab-select" onChange={handleConfabSelectChange}>
-                {confabData.map((confab) => (
-                    <option key={confab.id} value={confab.id}>{confab.name}</option>
-                ))}
-            </select>
-            <select className={res.tab} disabled={searching} id="status-select" onChange={handleStatusSelectChange}>
-                <option>Pending</option>
-                <option>Confirmed</option>
-                <option>Cancelled</option>
-            </select>
-            <DatePicker
-                disabled={searching}
-                selected={selectedDate}
-                onChange={date => handleDateChange(date)}
-                popperPlacement="bottom"
-            />
-            <input type="number" placeholder="Find by ID" onChange={handleInputChange} value={value}></input>
-            <button onClick={() => getReservationById()}>Find By ID</button>
+            <div className={res.pageTop} id=''>
+                <div className={res.pageFilter1} id=''>
+                    <select className={res.selectInput} disabled={searching} id="confab-select" onChange={handleConfabSelectChange}>
+                    {confabData.map((confab) => (
+                    <option className={res.optionSelect} key={confab.id} value={confab.id}>{confab.name}</option>
+                    ))}
+                    </select>
+                </div>
+                <div className={res.pageFilter2} id=''>
+                    <div className={res.dateInput}>
+                    <DatePicker className={res.datePicker}
+                    disabled={searching}
+                    selected={selectedDate}
+                    onChange={date => handleDateChange(date)}
+                    popperPlacement="bottom" 
+                    />
+                    </div>
+                </div>
+                <div className={res.pageFilter3} id=''>
+                    <form className={res.searchForm}>
+                        <input className={res.searchInput}type="number" placeholder="Find by ID" onChange={handleInputChange} value={value}></input>
+                        <button className={res.searchBtnBox}onClick={() => getReservationById()}><img className={res.searchBtn} src={image1}></img></button>
+                    </form>
+                </div>
+            </div>
             <div>
-            <div className='reservationTable' id='reservetable'>
+            <div className={res.reservationTable} id='reservetable'>
                 <table>
                     <thead>
                     <tr>
