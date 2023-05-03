@@ -152,65 +152,70 @@ const AdminReservation = () => {
             <input type="number" placeholder="Find by ID" onChange={handleInputChange} value={value}></input>
             <button onClick={() => getReservationById()}>Find By ID</button>
             <div>
+            <div className='reservationTable' id='reservetable'>
                 <table>
                     <thead>
-                        <tr>
-                            <th>Reservation ID</th>
-                            <th>Users List</th>
-                            <th>Date</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Reason</th>
-                            <th>Phone</th>
-                            <th>Status</th>
-                            <th>Confab ID</th>
-                            <th>Handler</th>
-                        </tr>
+                    <tr>
+                        <th>Reservation ID</th>
+                        <th>Users List</th>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Reason</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Confab ID</th>
+                        <th>Handler</th>
+                        <th>Action</th>
+                    </tr>
                     </thead>
-                    <tbody>
-                        {reservationData && reservationData.length !== 0 ? (
-                            reservationData.map((resObj, index) => {
-                                return (
-                                    <tr key={index}
-                                        onMouseEnter={() => handleMouseEnter(index)}
-                                        onMouseLeave={handleMouseLeave}
-                                    >
-                                        <td>{resObj?.id}</td>
-                                        <td>
-                                            <select>
-                                                {resObj?.Students?.map((student, index) => (
-                                                    <option key={index} value={student.school_id}>{student.school_id}</option>
-                                                ))}
-                                            </select>
-                                        </td>
-                                        <td>{resObj?.date}</td>
-                                        <td>{resObj?.start_time}</td>
-                                        <td>{resObj?.end_time}</td>
-                                        <td>{resObj?.reason}</td>
-                                        <td>{resObj?.phone}</td>
-                                        <td>{resObj?.confirmation_status}</td>
-                                        <td>{resObj?.ConfabId}</td>
-                                        <td>{resObj?.confirmed_by}</td>
-                                        {resObj?.confirmation_status === 'Pending' && (
-                                            <td style={{ border: 'none' }}>
-                                                {hoveredRow === index && (
-                                                    <>
-                                                        <button onClick={() => handleClick(resObj?.id, 'Confirmed')}>Confirm</button>
-                                                        <button onClick={() => handleClick(resObj?.id, 'Cancelled')}>Cancel</button>
-                                                    </>
-                                                )}
-                                            </td>
-                                        )}
-                                    </tr>
-                                )
-                            })
-                        ) : (
-                            <tr>
-                                <td colSpan="10" style={{ textAlign: "center" }}>{searching ? 'No data found' : 'No Data Found'}</td>
-                            </tr>
-                        )}
-                    </tbody>
                 </table>
+                <div style={{ height: "370px", overflowY: "scroll" }}>
+                    <table>
+                        <tbody>
+                            {reservationData && reservationData.length !== 0 ? (
+                                reservationData.map((resObj, index) => {
+                                    return (
+                                        <tr key={index}
+                                            onMouseEnter={() => handleMouseEnter(index)}
+                                            onMouseLeave={handleMouseLeave}
+                                        >
+                                            <td>{resObj?.id}</td>
+                                            <td>
+                                                <select>
+                                                    {resObj?.Students?.map((student, index) => (
+                                                        <option key={index} value={student.school_id}>{student.school_id}</option>
+                                                    ))}
+                                                </select>
+                                            </td>
+                                            <td>{resObj?.date}</td>
+                                            <td>{resObj?.start_time}</td>
+                                            <td>{resObj?.end_time}</td>
+                                            <td>{resObj?.reason}</td>
+                                            <td>{resObj?.phone}</td>
+                                            <td>{resObj?.confirmation_status}</td>
+                                            <td>{resObj?.ConfabId}</td>
+                                            <td>{resObj?.confirmed_by}</td>
+                                            {resObj?.confirmation_status === 'Pending' && (
+                                                <td style={{ border: 'none' }}>
+                                                        <>
+                                                            <button onClick={() => handleClick(resObj?.id, 'Confirmed')}>Confirm</button>
+                                                            <button onClick={() => handleClick(resObj?.id, 'Cancelled')}>Cancel</button>
+                                                        </>
+                                                </td>
+                                            )}
+                                        </tr>
+                                    )
+                                })
+                            ) : (
+                                <tr>
+                                    <td colSpan="10" style={{ textAlign: "center" }}>{searching ? 'No data found' : 'No Data Found'}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
                 <ReactPaginate
                     pageCount={pageCount}
                     pageRangeDisplayed={5}
