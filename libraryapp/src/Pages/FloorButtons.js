@@ -26,13 +26,12 @@ const FloorButtons = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const [date, setDate] = useState(new Date());
-
     const handleConfirm = () => {
         const today = new Date();
         const formattedDate = today.toISOString().slice(0, 10);
         const formattedTime = today.toLocaleTimeString('en-US', { hour12: false });
-        const data = { date: formattedDate, time_in: formattedTime, StudentSchoolId: studentID, FloorId: floorID }
-        
+        const data = { date: formattedDate, time_in: formattedTime, StudentId: studentID, FloorId: floorID, rfid: studentRFID }
+
         axios.post("http://localhost:5000/record/", data,
             {
                 headers: {
@@ -82,9 +81,9 @@ const FloorButtons = () => {
     };
 
     useEffect(() => {
-        //for page refresh
-        if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
-            axios.get("http://localhost:5000/auth/allow", {
+        //inputRef.current.focus();
+        if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id")) {
+            axios.get("http://localhost:5000/floor", {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken"),
                     userId: sessionStorage.getItem("id")
@@ -92,35 +91,23 @@ const FloorButtons = () => {
             })
                 .then((response) => {
                     if (response.data.error) {
-                        authContext.logout()
                         navigate('/')
+                        authContext.logout()
                     } else {
+                        setButtonData(response.data)
                         authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
-                        navigate('/exit')
+                        navigate('/entry')
                     }
                 })
-        } axios.get("http://localhost:5000/floor", {
-            headers: {
-                accessToken: sessionStorage.getItem("accessToken"),
-                userId: sessionStorage.getItem("id")
-            },
-        })
-            .then((response) => {
-                if (response.data.error) {
-                    navigate('/')
-                    authContext.logout()
-                } else {
-                    setButtonData(response.data)
-                    authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
-                    navigate('/entry')
-                    getFloors()
-                }
-            })
+        }
 
-        if (!authContext.isLoggedIn) {
-            navigate('/')
-        };
+        if (!authContext.isLoggedIn) { navigate('/') }
 
+        // const interval = setInterval(() => {
+        //     checkFocus();
+        // }, 3000);
+
+        // return () => clearInterval(interval);
         const timer = setInterval(() => setDate(new Date()), 1000);
         return () => clearInterval(timer);
     }, [navigate, authContext,]);
@@ -167,31 +154,31 @@ const FloorButtons = () => {
 
     return (
         <>
-            {!studentID && (
-                <InfoPage
-                    studentID={studentID} setStudentID={setStudentID}
-                    studentRFID={studentRFID} setStudentRFID={setStudentRFID}
-                    setStudentData={setStudentData}
-                // inputRef={inputRef} 
-                />
-            )}
+        {!studentID && (
+            <InfoPage
+                studentID={studentID} setStudentID={setStudentID}
+                studentRFID={studentRFID} setStudentRFID={setStudentRFID}
+                setStudentData={setStudentData}
+            // inputRef={inputRef} 
+            />
+        )}
 
-            {studentID && (
+        {studentID && (
 
-                <div className="info">
-                    <div className="left-panel">
-                        <div className="info-student">
-                            <div className="stud-info" id="sec1-a">
+            <div className="info">
+                <div className="left-panel">
+                    <div className="info-student">
+                        <div className="stud-info" id="sec1-a">
+                        </div>
+                        <div className="stud-info1" id="sec2-a">
+                            <div className="comp" id="comp1">
+                                <img src={image1} alt='Img' />
                             </div>
-                            <div className="stud-info1" id="sec2-a">
-                                <div className="comp" id="comp1">
-                                    <img src={image1} alt='Img' />
-                                </div>
-                                <div className="comp" id="comp2">
-                                    <img src={image2} alt='Img' />
-                                </div>
-                                <div className="comp" id="comp3">
-                                </div>
+                            <div className="comp" id="comp2">
+                                <img src={image2} alt='Img' />
+                            </div>
+                            <div className="comp" id="comp3">
+                            </div>
 
                             </div>
                             <div className="stud-info" id="sec3-a">
@@ -320,28 +307,28 @@ const FloorButtons = () => {
                                             <div className="division" id="label-div">
                                                 <div className='labelcolor' id='labelc' style={{ backgroundColor: buttonObj.label === "Bldg1" ? "rgb(205, 205, 205)" : "rgb(31, 82, 158)" }}>
 
-                                                </div>
-                                            </div>
-                                            <div className="division" id="stat-div">
-                                                <p>Status: {buttonObj.status}</p>
                                             </div>
                                         </div>
+                                        <div className="division" id="stat-div">
+                                            <p>Status: {buttonObj.status}</p>
+                                        </div>
                                     </div>
-                                ))}
-                            </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
-            )}
-            {showConfirmation && (
-                <ConfModal
-                    title="CONFIRM"
-                    message={`Visiting Level: ${floorName}`}
-                    onConfirm={handleConfirm}
-                    onCancel={handleCancel}
-                />
-            )}
-        </>
+            </div>
+        )}
+        {showConfirmation && (
+            <ConfModal
+                title="CONFIRM"
+                message={`Visiting Level: ${floorName}`}
+                onConfirm={handleConfirm}
+                onCancel={handleCancel}
+            />
+        )}
+    </>
     );
 }
 

@@ -1,16 +1,98 @@
+.pageTop{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.pageFilter1{
+    margin: 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.selectInput{
+    font-size: 20px;
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.selectInput::after {
+    content: "\25BC";
+    font-size: 16px;
+    color: #a10404;
+    margin-left: 5px;
+}
+
+.optionSelect{
+    margin: 10px 0 10px;
+    font-size: 20px;
+}
+
+.pageFilter2{
+    margin: 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.dateInput{
+    width: 150px;
+    height: 40px;
+}
+
+
+.datePicker{
+    height: 40px !important;
+    border-radius: 10px !important;
+}
+.pageFilter3{
+    margin: 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.searchForm{
+    width: 250px;
+    height: 40px;
+    padding: 0 10px 0;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    border: 1px solid #283971;
+    border-radius: 10px;
+    z-index: 5;
+}
+.searchInput{
+    font-size: 18px;
+    height: 38px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    
+}
+.searchInput:focus{
+    outline: none;
+    border: none;
+}
+.searchBtn{
+    width: 20px;
+    height: auto;
+}
+.searchBtn:hover{
+    cursor: pointer;
+}
+.searchBtnBox{
+    background: none;
+    border: none;
+
+}
 .reservationTable{
-    background-color: red;
     height: 400px;
     width: 100%;
-}
-table{
-    border-collapse: collapse;
-    width: 100%;
-}
-tr:nth-child(even) {
-    background-color: #565656;
-    overflow: hidden;
-}
-td{
-    overflow: hidden;
 }

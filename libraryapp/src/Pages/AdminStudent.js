@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import AESModal from './AESModal';
 import stu from '../styles/AdminStudent.module.css';
+import image1 from '../images/search_icon.png'
 
 const AdminStudent = () => {
   const [students, setStudents] = useState([]);
@@ -83,6 +84,30 @@ const AdminStudent = () => {
   };
   return (
     <div>
+      <div className={stu.pageHeader}>
+                <div className={stu.section1}>
+                    <p>Space</p>
+                </div>
+                <div className={stu.section2}>
+                    <form className={stu.searchForm}>
+                        <input className={stu.searchInput}type="number" placeholder="Find by ID" ></input>
+                        <button className={stu.searchBtnBox} ><img className={stu.searchBtn} src={image1}></img></button>
+                    </form>
+                </div>
+                <div className={stu.section3}>
+                  <div className={stu.button1}>
+                      <button className={stu.addBtn} onClick={() => handleClick([], "Add")}><div className={stu.plusSign}
+                      >+</div><p>Add Space</p></button>
+                      </div>
+                  </div>
+                <div className={stu.section4}>
+                    <div className={stu.button2}>
+                    <button className={stu.addBtn} onClick={() => handleClick([], "Add")}><div className={stu.plusSign}
+                    >+</div><p>Add Space</p></button>
+                    </div>
+                </div>
+          </div>
+      <div>
       <table>
         <thead>
           <tr>
@@ -132,6 +157,7 @@ const AdminStudent = () => {
           )}
         </tbody>
       </table>
+      </div>
       <ReactPaginate
         pageCount={Math.ceil(count / 10)} // number of pages
         pageRangeDisplayed={5}
@@ -140,7 +166,6 @@ const AdminStudent = () => {
         containerClassName="pagination"
         activeClassName="active"
       />
-      <button onClick={() => handleClick([], "Add")}>Add Student</button>
       {showEditModal && (
         <AESModal
           title={`${action} Student`}
