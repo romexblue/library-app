@@ -13,13 +13,11 @@ const Admin = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const [activeComponent, setActiveComponent] = useState('AdminReservation');
-    const [activeNavItem, setActiveNavItem] = useState('AdminReservation');
     const location = useLocation();
     const [date, setDate] = useState(new Date());
     const [isAdmin, setIsAdmin] = useState((location.state || {}).userType === 'Admin' ? true : false);
     const handleTabClick = (component) => {
         setActiveComponent(component);
-        setActiveNavItem(component);
     };
     const formatDate = (date) => {
         return date.toLocaleDateString("en-US", {
@@ -90,7 +88,11 @@ const Admin = () => {
                         <li>
                             <div className='sideButton' id='btn1'>
                                 <button
+<<<<<<< HEAD
                                     className={activeNavItem === 'AdminReservation' ? 'active' : 'buttonColor'}
+=======
+                                   
+>>>>>>> 81081ee74af4a69913eae31b5b8e3c087b33530c
                                     onClick={() => handleTabClick('AdminReservation')} id='button1' >
                                     Reservations
                                 </button>
@@ -101,7 +103,11 @@ const Admin = () => {
                                 <li>
                                     <div className='sideButton' id='btn2'>
                                         <button
+<<<<<<< HEAD
                                             className={activeNavItem === 'AdminFloor' ? 'active' : 'buttonColor'}
+=======
+                                            
+>>>>>>> 81081ee74af4a69913eae31b5b8e3c087b33530c
                                             onClick={() => handleTabClick('AdminFloor')} id='button2'>
                                             Floor Manager
                                         </button>
@@ -110,7 +116,11 @@ const Admin = () => {
                                 <li>
                                     <div className='sideButton' id='btn3'>
                                         <button
+<<<<<<< HEAD
                                             className={activeNavItem === 'AdminConfab' ? 'active' : 'buttonColor'}
+=======
+                                           
+>>>>>>> 81081ee74af4a69913eae31b5b8e3c087b33530c
                                             onClick={() => handleTabClick('AdminConfab')} id='button3'>
                                             Space Manager
                                         </button>
@@ -119,7 +129,11 @@ const Admin = () => {
                                 <li>
                                     <div className='sideButton' id='btn4'>
                                         <button
+<<<<<<< HEAD
                                             className={activeNavItem === 'AdminStudent' ? 'active' : 'buttonColor'}
+=======
+                                            
+>>>>>>> 81081ee74af4a69913eae31b5b8e3c087b33530c
                                             onClick={() => handleTabClick('AdminStudent')} id='button4'>
                                             Students
                                         </button>
@@ -128,7 +142,11 @@ const Admin = () => {
                                 <li>
                                     <div className='sideButton' id='btn5'>
                                         <button
+<<<<<<< HEAD
                                             className={activeNavItem === 'AdminUsers' ? 'active' : 'buttonColor'}
+=======
+                                           
+>>>>>>> 81081ee74af4a69913eae31b5b8e3c087b33530c
                                             onClick={() => handleTabClick('AdminUsers')} id='button5'>
                                             Users
                                         </button>

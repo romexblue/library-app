@@ -52,39 +52,33 @@ function formatTime(timeMs) {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-
-
 //for time in
 router.post('/', validateToken, async (req, res) => {
     try {
-        const { rfid, ...rec } = req.body;
+        const rec = req.body;
+
         const floor = await Floor.findByPk(req.body.FloorId);
         if (floor.current_count === floor.max_capacity - 1) {
             await floor.update({ status: "Closed" }) //set to close if it is full capacity
         }
 
-        await Students.findAll({
+        const stud = await Students.findOne({
             where: {
-                [Op.or]: [
-                    { rfid: rfid },
-                    { school_id: rfid }
-                ]
+                school_id: rec.StudentSchoolId
             },
             include: {
                 model: Records,
                 where: { time_out: null }
             }
-        }).then(async (records) => {
-            if (records.length > 0) {
-                res.json({ error: "You are currently Timed In. Please Time Out" })
-            } else {
-                await Records.create(rec);
-                await Floor.increment('current_count', { where: { id: req.body.FloorId } });
-                res.json(rec);
-            }
-        }).catch((error) => {
-            res.json({ error: error });
-        });
+        })
+
+        if (stud) {
+            res.json({ error: "You are currently Timed In. Please Time Out" })
+        } else {
+            await Records.create(rec);
+            await Floor.increment('current_count', { where: { id: req.body.FloorId } });
+            res.json(rec);
+        }
     } catch (err) {
         res.status(400).json({ err: "Internal Server Error" })
     }
@@ -98,8 +92,8 @@ router.patch('/find/:school_id', validateToken, async (req, res) => {
     const user = await Students.findOne({
         where: {
             [Op.or]: [
-                { rfid: rfid },
-                { school_id: rfid }
+                { school_id: rfid },
+                { rfid: rfid }
             ]
         }
     }); //to get userId
@@ -107,7 +101,7 @@ router.patch('/find/:school_id', validateToken, async (req, res) => {
         try {
             const findRecord = await Records.findOne({ //find record to get floor id
                 where: {
-                    StudentId: user.id,
+                    StudentSchoolId: user.school_id,
                     time_out: null
                 },
                 limit: 1
@@ -117,7 +111,7 @@ router.patch('/find/:school_id', validateToken, async (req, res) => {
                     time_out: rec.time_out
                 }, {
                     where: {
-                        StudentId: user.id,
+                        StudentSchoolId: user.school_id,
                         time_out: null
                     },
                     limit: 1

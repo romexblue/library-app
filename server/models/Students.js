@@ -1,26 +1,39 @@
 module.exports = (sequelize, DataTypes) => {
 
    const Students = sequelize.define("Students", {
-      name: {
-         type: DataTypes.STRING,
-         allowNull: false
-      },
       school_id: {
          type: DataTypes.STRING,
-         allowNull: false
-      },
-      rfid: {
-         type: DataTypes.STRING,
-         allowNull: false
+         allowNull: false,
+         primaryKey: true
       },
       type: {
-         type: DataTypes.ENUM('Student', 'Faculty', 'Staff'),
+         type: DataTypes.ENUM('STUDENT', 'FACULTY', 'SHSFACULTY', 'SHSSTUDENT'),
          allowNull: false
       },
-      date_of_expiry: {
-         type: DataTypes.DATEONLY,
-         allowNull: false,
+      first_name: {
+         type: DataTypes.STRING(64),
+         allowNull: false
       },
+      last_name: {
+         type: DataTypes.STRING(64),
+         allowNull: false
+      },
+      gender: {
+         type: DataTypes.ENUM('M', 'F', 'U')
+      },
+      email: {
+         type: DataTypes.STRING(64),
+      },
+      college: {
+         type: DataTypes.STRING(24)
+      },
+      year: {
+         type: DataTypes.STRING(24)
+      },
+      rfid: {
+         type: DataTypes.STRING(24),
+         index: true
+      }
    }, { timestamps: false });
 
    Students.associate = (models) => {

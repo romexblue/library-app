@@ -182,7 +182,7 @@ const FloorButtons = () => {
                                     Last Name:
                                 </div>
                                 <div className="comp" id="comp7">
-                                    Sobiono
+                                    {studentData.last_name}
                                 </div>
                             </div>
                             <div className="stud-info" id="sec6-a">
@@ -191,15 +191,16 @@ const FloorButtons = () => {
                                         First Name:
                                     </div>
                                     <div className="comp" id="comp9">
+                                        {studentData.first_name}
                                     {studentData.name}
                                     </div>
                                 </div>
                                 <div className="partition" id="part2">
                                     <div className="comp" id="comp10">
-                                        Mid Initial:
+                                        Middle Name:
                                     </div>
                                     <div className="comp" id="comp11">
-                                        T
+                                        {studentData.type}
                                     </div>
                                 </div>
                             </div>
@@ -211,15 +212,15 @@ const FloorButtons = () => {
                                         Gender:
                                     </div>
                                     <div className="comp" id="comp13">
-                                        Female
+                                        {studentData.gender}
                                     </div>
                                 </div>
                                 <div className="partition" id="part4">
                                     <div className="comp" id="comp14">
-                                        Course:
+                                        College:
                                     </div>
                                     <div className="comp" id="comp15">
-                                        BSIT
+                                        {studentData.college}
                                     </div>
                                 </div>
                                 <div className="partition" id="part6">
@@ -227,7 +228,8 @@ const FloorButtons = () => {
                                         Year:
                                     </div>
                                     <div className="comp" id="comp17">
-                                        4
+                                        {/* Takes Year From (LAW_LPRO 2S1) Format */}
+                                        {studentData.year ? studentData.year.match(/\d+/)?.[0] || '' : ''}
                                     </div>
                                 </div>
                             </div>
@@ -258,6 +260,10 @@ const FloorButtons = () => {
                                 <div className='cancelBtnHolder' id='btnHoldercnl'>
                                     <button className="cancelbtn" onClick={() => {setStudentID(''); setStudentRFID('');}}>Back</button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                                <button className="cancelbtn" onClick={() => { setStudentID(''); setStudentRFID(''); }}>Back</button>
                             </div>
                         </div>
                     </div>

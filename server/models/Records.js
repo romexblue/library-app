@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Records.associate = (models) => {
       Records.belongsTo(models.Students, {
-         foreignKey: 'StudentId'
+         foreignKey: 'StudentSchoolId'
       });
    };
 
