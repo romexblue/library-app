@@ -96,14 +96,3 @@
     height: 400px;
     width: 100%;
 }
-table{
-    border-collapse: collapse;
-    width: 100%;
-}
-tr:nth-child(even) {
-    background-color: #565656;
-    overflow: hidden;
-}
-td{
-    overflow: hidden;
-}

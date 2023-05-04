@@ -73,8 +73,22 @@ const AdminConfab = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className={con.confabPage}>
+      <div className={con.pageHeader}>
+                <div className={con.section1}>
+                    <p>Space</p>
+                </div>
+                <div className={con.section2}>
+
+                </div>
+                <div className={con.section3}>
+                    <div className={con.button1}>
+                    <button className={con.addBtn} onClick={() => handleClick([], "Add")}><div className={con.plusSign}
+                    >+</div><p>Add Space</p></button>
+                    </div>
+                </div>
+          </div>
+        <div>
         <table>
           <thead>
             <tr>
@@ -109,7 +123,6 @@ const AdminConfab = () => {
             ))}
           </tbody>
         </table>
-        <button onClick={() => handleClick([], "Add")}>Add Confab</button>
         {showEditModal && (
           <AECModal
             title={`${action} Confab`}

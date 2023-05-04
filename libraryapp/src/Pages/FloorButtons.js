@@ -140,187 +140,177 @@ const FloorButtons = () => {
 
     return (
         <>
-            {!studentID && (
-                <InfoPage
-                    studentID={studentID} setStudentID={setStudentID}
-                    studentRFID={studentRFID} setStudentRFID={setStudentRFID}
-                    setStudentData={setStudentData}
-                // inputRef={inputRef} 
-                />
-            )}
+        {!studentID && (
+            <InfoPage
+                studentID={studentID} setStudentID={setStudentID}
+                studentRFID={studentRFID} setStudentRFID={setStudentRFID}
+                setStudentData={setStudentData}
+            // inputRef={inputRef} 
+            />
+        )}
 
-            {studentID && (
+        {studentID && (
 
-                <div className="info">
-                    <div className="left-panel">
-                        <div className="info-student">
-                            <div className="stud-info" id="sec1-a">
+            <div className="info">
+                <div className="left-panel">
+                    <div className="info-student">
+                        <div className="stud-info" id="sec1-a">
+                        </div>
+                        <div className="stud-info1" id="sec2-a">
+                            <div className="comp" id="comp1">
+                                <img src={image1} alt='Img' />
                             </div>
-                            <div className="stud-info1" id="sec2-a">
-                                <div className="comp" id="comp1">
-                                    <img src={image1} alt='Img' />
-                                </div>
-                                <div className="comp" id="comp2">
-                                    <img src={image2} alt='Img' />
-                                </div>
-                                <div className="comp" id="comp3">
-                                </div>
+                            <div className="comp" id="comp2">
+                                <img src={image2} alt='Img' />
+                            </div>
+                            <div className="comp" id="comp3">
+                            </div>
 
+                        </div>
+                        <div className="stud-info" id="sec3-a">
+                            <div className="comp" id="comp4">
+                                ID Number:
                             </div>
-                            <div className="stud-info" id="sec3-a">
-                                <div className="comp" id="comp4">
-                                    ID Number:
-                                </div>
-                                <div className="comp" id="comp5">
-                                    {studentData.school_id}
-                                </div>
+                            <div className="comp" id="comp5">
+                                {studentData.school_id}
                             </div>
-                            <div className="stud-info" id="sec4-a">
+                        </div>
+                        <div className="stud-info" id="sec4-a">
+                        </div>
+                        <div className="stud-info" id="sec5-a">
+                            <div className="comp" id="comp6">
+                                Last Name:
                             </div>
-                            <div className="stud-info" id="sec5-a">
-                                <div className="comp" id="comp6">
-                                    Last Name:
-                                </div>
-                                <div className="comp" id="comp7">
-                                    {studentData.last_name}
-                                </div>
+                            <div className="comp" id="comp7">
+                                Sobiono
                             </div>
-                            <div className="stud-info" id="sec6-a">
-                                <div className="partition" id="part1">
-                                    <div className="comp" id="comp8">
-                                        First Name:
-                                    </div>
-                                    <div className="comp" id="comp9">
-                                        {studentData.first_name}
-                                    {studentData.name}
-                                    </div>
+                        </div>
+                        <div className="stud-info" id="sec6-a">
+                            <div className="partition" id="part1">
+                                <div className="comp" id="comp8">
+                                    First Name:
                                 </div>
-                                <div className="partition" id="part2">
-                                    <div className="comp" id="comp10">
-                                        Middle Name:
-                                    </div>
-                                    <div className="comp" id="comp11">
-                                        {studentData.type}
-                                    </div>
+                                <div className="comp" id="comp9">
+                                    Kassandra Erika
                                 </div>
                             </div>
-                            <div className="stud-info" id="sec7-a">
-                            </div>
-                            <div className="stud-info" id="sec8-a">
-                                <div className="partition" id="part3">
-                                    <div className="comp" id="comp12">
-                                        Gender:
-                                    </div>
-                                    <div className="comp" id="comp13">
-                                        {studentData.gender}
-                                    </div>
+                            <div className="partition" id="part2">
+                                <div className="comp" id="comp10">
+                                    Mid Initial:
                                 </div>
-                                <div className="partition" id="part4">
-                                    <div className="comp" id="comp14">
-                                        College:
-                                    </div>
-                                    <div className="comp" id="comp15">
-                                        {studentData.college}
-                                    </div>
-                                </div>
-                                <div className="partition" id="part6">
-                                    <div className="comp" id="comp16">
-                                        Year:
-                                    </div>
-                                    <div className="comp" id="comp17">
-                                        {/* Takes Year From (LAW_LPRO 2S1) Format */}
-                                        {studentData.year ? studentData.year.match(/\d+/)?.[0] || '' : ''}
-                                    </div>
+                                <div className="comp" id="comp11">
+                                    T
                                 </div>
                             </div>
                         </div>
-                        <div className="note-display">
-                            <div className="note-up" id="uppernote">
-                                <div className="time">
-                                    <div className="systemtime2">
-                                        <div className="display-date">
-                                            <span id="month">{formatDate(date)}</span>
-                                        </div>
-                                        <div className="display-time">{formatTime(date)}</div>
-                                    </div>
+                        <div className="stud-info" id="sec7-a">
+                        </div>
+                        <div className="stud-info" id="sec8-a">
+                            <div className="partition" id="part3">
+                                <div className="comp" id="comp12">
+                                    Gender:
                                 </div>
-                                <div className="reminder">
-                                    <div className='reminderContent'>
-                                        <div className="note-div">
-                                            <p>Please confirm that all information
-                                                are correct before clicking SUBMIT.</p>
-                                        </div>
-                                        <div className="note-icon">
-                                            <img src={image7} alt='Img' />
-                                        </div>
-                                    </div>
+                                <div className="comp" id="comp13">
+                                    Female
                                 </div>
                             </div>
-                            <div className="note-down" id="lowernote">
-                                <div className='cancelBtnHolder' id='btnHoldercnl'>
-                                    <button className="cancelbtn" onClick={() => {setStudentID(''); setStudentRFID('');}}>Back</button>
+                            <div className="partition" id="part4">
+                                <div className="comp" id="comp14">
+                                    Course:
+                                </div>
+                                <div className="comp" id="comp15">
+                                    BSIT
+                                </div>
+                            </div>
+                            <div className="partition" id="part6">
+                                <div className="comp" id="comp16">
+                                    Year:
+                                </div>
+                                <div className="comp" id="comp17">
+                                    4
                                 </div>
                             </div>
                         </div>
                     </div>
-                                <button className="cancelbtn" onClick={() => { setStudentID(''); setStudentRFID(''); }}>Back</button>
+                    <div className="note-display">
+                        <div className="note-up" id="uppernote">
+                            <div className="time">
+                                <div className="systemtime2">
+                                    <div className="display-date">
+                                        <span id="month">{formatDate(date)}</span>
+                                    </div>
+                                    <div className="display-time">{formatTime(date)}</div>
+                                </div>
+                            </div>
+                            <div className="reminder">
+                                <div className="note-div">
+                                    <p>Please confirm that all information
+                                        are correct before clicking SUBMIT.</p>
+                                </div>
+                                <div className="note-icon">
+                                    <img src={image7} alt='Img' />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="fright-panel">
-                        <div className='building-select'>
-                            <div className="building-select1" id="sec1-b"></div>
-                            <div className="building-select2" id="sec2-b">
-                                <div className="comp" id="comp18">
-                                    <img src={image3} alt='Img' />
-                                </div>
-                                <div className="comp" id="comp19">
-                                    <img src={image4} alt='Img' />
-                                </div>
-                                <div className="comp" id="comp20">
-                                </div>
-                            </div>
-                            <div className='buildings'>
-                                {buttonData.map((buttonObj, index) => (
-                                    <div className='building-option'
-                                        tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => chooseFloor(buttonObj.id, buttonObj.name)}>
-                                        <div className="label" id="tag1">
-                                            <h1>L{buttonObj.level}</h1>
-                                        </div>
-                                        <div className="label" id="tag2">
-                                            <div className="division" id="divup">
-                                                <h2 className="building-text">{buttonObj.name}</h2>
-                                            </div>
-                                            <div className="division" id="divdown">
-                                                <h2 className="building-text">Current Capacity: {buttonObj.current_count}</h2>
-                                            </div>
-                                        </div>
-                                        <div className="label" id="tag3">
-                                            <div className="division" id="label-div">
-                                                <div className='labelcolor' id='labelc' style={{ backgroundColor: buttonObj.label === "Bldg1" ? "rgb(205, 205, 205)" : "rgb(31, 82, 158)" }}>
-
-                                                </div>
-                                            </div>
-                                            <div className="division" id="stat-div">
-                                                <p>Status: {buttonObj.status}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                        <div className="note-down" id="lowernote">
+                            <button className="cancelbtn" onClick={() => {setStudentID(''); setStudentRFID('');}}>Back</button>
                         </div>
                     </div>
                 </div>
-            )}
-            {showConfirmation && (
-                <ConfModal
-                    title="CONFIRM"
-                    message={`Visiting Level: ${floorName}`}
-                    onConfirm={handleConfirm}
-                    onCancel={handleCancel}
-                />
-            )}
-        </>
+                <div className="fright-panel">
+                    <div className='building-select'>
+                        <div className="building-select1" id="sec1-b"></div>
+                        <div className="building-select2" id="sec2-b">
+                            <div className="comp" id="comp18">
+                                <img src={image3} alt='Img' />
+                            </div>
+                            <div className="comp" id="comp19">
+                                <img src={image4} alt='Img' />
+                            </div>
+                            <div className="comp" id="comp20">
+                            </div>
+                        </div>
+                        <div className='buildings'>
+                            {buttonData.map((buttonObj, index) => (
+                                <div className='building-option'
+                                    tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => chooseFloor(buttonObj.id, buttonObj.name)}>
+                                    <div className="label" id="tag1">
+                                        <h1>L{buttonObj.level}</h1>
+                                    </div>
+                                    <div className="label" id="tag2">
+                                        <div className="division" id="divup">
+                                            <h2 className="building-text">{buttonObj.name}</h2>
+                                        </div>
+                                        <div className="division" id="divdown">
+                                            <h2 className="building-text">Current Capacity: {buttonObj.current_count}</h2>
+                                        </div>
+                                    </div>
+                                    <div className="label" id="tag3">
+                                        <div className="division" id="label-div">
+                                            <div className='labelcolor' id='labelc' style={{ backgroundColor: buttonObj.label === "Bldg1" ? "rgb(205, 205, 205)" : "rgb(31, 82, 158)" }}>
+
+                                            </div>
+                                        </div>
+                                        <div className="division" id="stat-div">
+                                            <p>Status: {buttonObj.status}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )}
+        {showConfirmation && (
+            <ConfModal
+                title="CONFIRM"
+                message={`Visiting Level: ${floorName}`}
+                onConfirm={handleConfirm}
+                onCancel={handleCancel}
+            />
+        )}
+    </>
     );
 }
 

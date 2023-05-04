@@ -88,11 +88,9 @@ const Admin = () => {
                         <li>
                             <div className='sideButton' id='btn1'>
                                 <button
-<<<<<<< HEAD
-                                    className={activeNavItem === 'AdminReservation' ? 'active' : 'buttonColor'}
-=======
-                                   
->>>>>>> 81081ee74af4a69913eae31b5b8e3c087b33530c
+
+                                    className={activeComponent === 'AdminReservation' ? 'active' : 'buttonColor'}
+
                                     onClick={() => handleTabClick('AdminReservation')} id='button1' >
                                     Reservations
                                 </button>
@@ -103,11 +101,9 @@ const Admin = () => {
                                 <li>
                                     <div className='sideButton' id='btn2'>
                                         <button
-<<<<<<< HEAD
-                                            className={activeNavItem === 'AdminFloor' ? 'active' : 'buttonColor'}
-=======
-                                            
->>>>>>> 81081ee74af4a69913eae31b5b8e3c087b33530c
+
+                                            className={activeComponent === 'AdminFloor' ? 'active' : 'buttonColor'}
+
                                             onClick={() => handleTabClick('AdminFloor')} id='button2'>
                                             Floor Manager
                                         </button>
@@ -116,11 +112,10 @@ const Admin = () => {
                                 <li>
                                     <div className='sideButton' id='btn3'>
                                         <button
-<<<<<<< HEAD
-                                            className={activeNavItem === 'AdminConfab' ? 'active' : 'buttonColor'}
-=======
+
+                                            className={activeComponent === 'AdminConfab' ? 'active' : 'buttonColor'}
+
                                            
->>>>>>> 81081ee74af4a69913eae31b5b8e3c087b33530c
                                             onClick={() => handleTabClick('AdminConfab')} id='button3'>
                                             Space Manager
                                         </button>
@@ -129,11 +124,8 @@ const Admin = () => {
                                 <li>
                                     <div className='sideButton' id='btn4'>
                                         <button
-<<<<<<< HEAD
-                                            className={activeNavItem === 'AdminStudent' ? 'active' : 'buttonColor'}
-=======
-                                            
->>>>>>> 81081ee74af4a69913eae31b5b8e3c087b33530c
+                                            className={activeComponent === 'AdminStudent' ? 'active' : 'buttonColor'}
+
                                             onClick={() => handleTabClick('AdminStudent')} id='button4'>
                                             Students
                                         </button>
@@ -142,11 +134,9 @@ const Admin = () => {
                                 <li>
                                     <div className='sideButton' id='btn5'>
                                         <button
-<<<<<<< HEAD
-                                            className={activeNavItem === 'AdminUsers' ? 'active' : 'buttonColor'}
-=======
-                                           
->>>>>>> 81081ee74af4a69913eae31b5b8e3c087b33530c
+
+                                            className={activeComponent === 'AdminUsers' ? 'active' : 'buttonColor'}
+
                                             onClick={() => handleTabClick('AdminUsers')} id='button5'>
                                             Users
                                         </button>

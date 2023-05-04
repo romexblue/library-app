@@ -83,8 +83,10 @@ const AdminFloor = () => {
 
                 </div>
                 <div className={flo.section3}>
+                    <div className={flo.button1}>
                     <button className={flo.addBtn} onClick={() => handleClick([], "Add")}><div className={flo.plusSign}
-                    >+</div> Add Floors</button>
+                    >+</div><p>Add Floor</p></button>
+                    </div>
                 </div>
             </div>
             <table className={flo.tableContainer}>
@@ -111,13 +113,9 @@ const AdminFloor = () => {
                             <td>{floor.max_capacity}</td>
                             <td>{floor.label}</td>
                             <td>{floor.status}</td>
-                            <td style={{ border: 'none' }}>
-                                {hoveredRow === index && (
-                                    <>
-                                        <button onClick={() => handleClick(floor, "Edit")}>Edit</button>
-                                        <button onClick={() => handleClick(floor, "Delete")}>Delete</button>
-                                    </>
-                                )}
+                            <td>
+                                <button onClick={() => handleClick(floor, "Edit")}>Edit</button>
+                                <button onClick={() => handleClick(floor, "Delete")}>Delete</button>  
                             </td>
                         </tr>
                     ))}
