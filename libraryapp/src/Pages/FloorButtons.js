@@ -47,6 +47,7 @@ const FloorButtons = () => {
                 console.log(response.data)
                 console.log("Add Record Successful")
             }
+            getFloors();
         })
 
         //inputRef.current.focus();
@@ -126,7 +127,7 @@ const FloorButtons = () => {
 
     const getFloors = () => {
         console.log("floors called")
-        axios.get("http://localhost:5000/floor", {
+        axios.get("http://localhost:5000/floor/all", {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken"),
                 userId: sessionStorage.getItem("id")
@@ -300,7 +301,10 @@ const FloorButtons = () => {
                             <div className='buildings'>
                                 {buttonData.map((buttonObj, index) => (
                                     <div className='building-option'
-                                        tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => chooseFloor(buttonObj.id, buttonObj.name)}>
+                                        tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => {
+                                            if (buttonObj.status === "Closed" || buttonObj.status === "Full") {
+                                                return;
+                                              }chooseFloor(buttonObj.id, buttonObj.name);}}>
                                         <div className="label" id="tag1">
                                             <h1>L{buttonObj.level}</h1>
                                         </div>
