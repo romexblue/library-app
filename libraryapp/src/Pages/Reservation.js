@@ -57,42 +57,49 @@ function Reservation() {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [confabs, setConfabs] = useState([]);
   const [selectedConfab, setSelectedConfab] = useState("");
-  const [reason, setReason] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("")
+  const [ruData, setRuData] = useState({});
   const [studentList, setStudentList] = useState();
   const [showForm, setShowForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleConfirm = () => {
-    // const date = selectedDate.toISOString().slice(0, 10);
-    // const start = convertTo24Hour(startTime);
-    // const end = convertTo24Hour(endTime);
-    // const purpose = reason;
-    // const phone = phoneNumber;
-    // const confId = selectedConfab.id;
+    const date = selectedDate.toISOString().slice(0, 10);
+    const start = convertTo24Hour(startTime);
+    const end = convertTo24Hour(endTime);
+    const purpose = ruData.reason;
+    const phone = ruData.phone;
+    const confId = selectedConfab.id;
     const guestList = [...studentList];
+    console.log(ruData)
     console.log(guestList);
-    // const data = { date: date, start_time: start, end_time: end, confirmation_status: "Pending", reason: purpose, ConfabId: confId, phone: phone, guestList: guestList }
-    // axios
-    //   .post(`http://localhost:5000/reservation`, data, {
-    //     headers: {
-    //       accessToken: sessionStorage.getItem("accessToken"),
-    //       userId: sessionStorage.getItem("id"),
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response.data)
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.response.data)
-    //     console.log(data)
-    //   });
+    const data = { date: date, start_time: start, end_time: end, confirmation_status: "Pending", reason: purpose, ConfabId: confId, phone: phone, guestList: guestList }
+    console.log(data);
+    console.log("YAWA")
+    axios
+      .post(`http://localhost:5000/reservation`, data, {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken"),
+          userId: sessionStorage.getItem("id"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+        console.log(data)
+      });
   };
 
   const handleCancel = () => {
     setShowConfirmation(false);
   };
+
+  const setChildData = useCallback((data) => {
+    const newData = data;
+    setRuData(newData);
+  }, []);
 
   const setList = useCallback((list) => {
     const newListData = list.filter((value) => value !== '');
@@ -354,7 +361,7 @@ function Reservation() {
         <>  
           <ReservationUsers 
           confab={{capacity: selectedConfab.max_capacity ?? 0, name: selectedConfab.name ?? ""}} 
-          timeData={{timeIn: startTime, timeOut: endTime}} updateData={setList} 
+          timeData={{timeIn: startTime, timeOut: endTime}} updateData={setList} childData={setChildData}
           cancel={nextPage} 
           confirm={submitRec}/>
         </>
