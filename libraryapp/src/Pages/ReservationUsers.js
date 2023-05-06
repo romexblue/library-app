@@ -323,15 +323,9 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                         </div>
                         <div className="btn-holder" id="btnHolder1">
                             <div className='buttonContainer'>
-                                <button className="cancelbtn" onClick={() => cancel()} >Cancel</button>
-                                <button className="submitbtn">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="section" id="rssec15">
-                        <div className="btn-holder" id="holder1">
                             <button className="cancelbtn" onClick={() => cancel()} >Cancel</button>
                             <button className="submitbtn" onClick={() => confirm()}>Submit</button>
+                            </div>
                         </div>
                     </div>
                 </div>
