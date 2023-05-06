@@ -30,7 +30,7 @@ const FloorButtons = () => {
         const today = new Date();
         const formattedDate = today.toISOString().slice(0, 10);
         const formattedTime = today.toLocaleTimeString('en-US', { hour12: false });
-        const data = { date: formattedDate, time_in: formattedTime, StudentId: studentID, FloorId: floorID, rfid: studentRFID }
+        const data = { date: formattedDate, time_in: formattedTime, StudentSchoolId: studentID, FloorId: floorID, rfid: studentRFID }
 
         axios.post("http://localhost:5000/record/", data,
             {
@@ -79,11 +79,10 @@ const FloorButtons = () => {
         setFloorName('');
         setShowConfirmation(false);
     };
-
     useEffect(() => {
         //inputRef.current.focus();
         if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id")) {
-            axios.get("http://localhost:5000/floor", {
+            axios.get("http://localhost:5000/floor/all", {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken"),
                     userId: sessionStorage.getItem("id")
@@ -287,8 +286,7 @@ const FloorButtons = () => {
                             </div>
                             <div className='buildings'>
                                 {buttonData.map((buttonObj, index) => (
-                                    <div className='building-option'
-                                        tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => {
+                                    <div className='building-option'                                         tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => {
                                             if (buttonObj.status === "Closed" || buttonObj.status === "Full") {
                                                 return;
                                               }chooseFloor(buttonObj.id, buttonObj.name);}}>

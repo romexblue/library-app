@@ -248,14 +248,14 @@ function Reservation() {
                     {confabs.map(confab => (
                       <div key={confab.id} className="square-button">
                         <div className="room-name">
-                          <p className="roomName">Not database data</p>
+                          <p className="roomName">{confab.name}</p>
                         </div>
-                        <div className="room-icon">
-                          <p className="roomIcon">{confab.name}</p>
-                        </div>
+                        {/* <div className="room-icon">
+                          <p className="roomIcon"></p>
+                        </div> */}
                         <div className="room-info">
                           <p className="room-capacity">Capacity: <span className="rdata">{confab.max_capacity}</span> pax</p>
-                          <p className="room-type">Type: <span className="rdata">{confab.description}</span></p>
+                          {/* <p className="room-type">Type: <span className="rdata">{confab.description}</span></p> */}
                           <p className="room-loc">Location: <span className="rdata">Level {confab.level}</span></p>
                         </div>
                         <div className="room-reserve">
@@ -295,8 +295,10 @@ function Reservation() {
                 </div>
                 <div className="section" id="rsec3">
                   <div className="table-header">
-                    <div className="header" id="header2">From</div>
-                    <div className="header" id="header3">Until</div>
+                    <div className="header" id="header1">No.</div>
+                    <div className="header" id="header2">Desc</div>
+                    <div className="header" id="header3">From</div>
+                    <div className="header" id="header4">Until</div>
                   </div>
                 </div>
                 <div className="section" id="rsec4">
@@ -306,7 +308,9 @@ function Reservation() {
                         availableSlots.map((slot, index) => (
                           <div key={index} className="table-content">
                             <div className="column" id="column1">{convertTo12Hour(slot.start)}</div>
-                            <div className="column" id="column2">{convertTo12Hour(slot.end)}</div>
+                            <div className="column" id="column2">{convertTo12Hour(slot.start)}</div>
+                            <div className="column" id="column3">{convertTo12Hour(slot.end)}</div>
+                            <div className="column" id="column4">{convertTo12Hour(slot.end)}</div>
                           </div>
                         ))
                       ) : (
@@ -335,7 +339,7 @@ function Reservation() {
                       End Time
                     </div>
                     <div className="drop-down">
-                      <TimeSelect
+                      <TimeSelect className="timeSelect"
                         options={endTimeOptions}
                         value={endTime}
                         onChange={handleEndTimeChange}

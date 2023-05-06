@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import AuthContext from '../helpers/AuthContext';
+import image1 from '../images/XuLib.png';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -64,6 +65,12 @@ const Login = () => {
 
   return (
     <div className="login-page">
+      <div className='systemTitle'>
+        <p className='sysTitle'>XU-Lib Sentry</p>
+      </div>
+      <div className='xulibLogo'>
+        <img className='libLogo' src={image1}></img>
+      </div>
     <form onSubmit={handleSubmit}>
         <h1>LOGIN</h1>
         <div className="form-group">

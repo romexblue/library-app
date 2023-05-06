@@ -96,3 +96,76 @@
     height: 400px;
     width: 100%;
 }
+.tableHeaders{
+    width: 100% !important;
+}
+thead{
+    width: 100%;
+    background-color: red;
+}
+
+
+/* TABLE DECORATIONS */
+
+.tableHeaders table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+.tableHeaders th, td {
+    text-align: center;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Ubuntu', sans-serif;
+
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  td button {
+    padding: 6px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+
+
+.tableContents {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: red;
+  }
+  
+.tableContents tr, td {
+    text-align: center;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Ubuntu', sans-serif;
+
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  td button {
+    padding: 6px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }

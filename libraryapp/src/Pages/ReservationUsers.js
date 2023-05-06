@@ -98,6 +98,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                 <label className='inputlabel'>
                     User 2
                 </label>
+                <div className='inputCase'>
                 <input
                     className='userinput'
                     type="text"
@@ -108,7 +109,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                     placeholder={i === 0 ? "Scan Your ID or input School ID" : ""}
                     data-index={i} //for the css 
                 />
-                <button type="button"
+                <button className='deleteInput' type="button"
                     disabled={!inputValues[i]}
                     onClick={() => {
                         inputRefs.current[i].disabled = false;
@@ -117,8 +118,9 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                         updatedInputValues[i] = "";
                         setInputValues(updatedInputValues);
                     }}>
-                    X
+                    x
                 </button>
+                </div>
             </form>
         );
     };
@@ -274,12 +276,15 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                             <p>You may select a field and tap your ID on the ID reader to add user. Alternately, you
                                 may manually type the user’s school ID number.</p>
                         </div>
+                        <div className="btn-holder" id="btnHolder1">
+                            <div className='buttonContainer'>
+                                <button className="cancelbtn" onClick={() => cancel()} >Cancel</button>
+                                <button className="submitbtn">Submit</button>
+                            </div>
+                        </div>
                     </div>
                     <div className="section" id="rssec15">
-                        <div className="btn-holder" id="holder1">
-                            <button className="cancelbtn" onClick={() => cancel()} >Cancel</button>
-                            <button className="submitbtn">Submit</button>
-                        </div>
+
                     </div>
                 </div>
             </div>
