@@ -161,73 +161,50 @@ const AdminReservation = () => {
                 </div>
             </div>
             <div>
-            <div className={res.reservationTable} id='reservetable'>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Reservation ID</th>
-                        <th>Users List</th>
-                        <th>Date</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Reason</th>
-                        <th>Phone</th>
-                        <th>Status</th>
-                        <th>Confab ID</th>
-                        <th>Handler</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                </table>
+                <div className={res.reservationTable} id='reservetable'>
+                    <table className={res.tableHeaders}>
+                        <thead className='theaders'>
+                            <tr>
+                                <th>ID</th>
+                                <th>Users List</th>
+                                <th>Date</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Reason</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Confab ID</th>
+                                <th>Handler</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
                 <div style={{ height: "370px", overflowY: "scroll" }}>
-                    <table>
+                    <table className={res.tableContents}>
                         <tbody>
-                            {reservationData && reservationData.length !== 0 ? (
-                                reservationData.map((resObj, index) => {
-                                    return (
-                                        <tr key={index}
-                                            onMouseEnter={() => handleMouseEnter(index)}
-                                            onMouseLeave={handleMouseLeave}
-                                        >
-                                            <td>{resObj?.id}</td>
-                                            <td>
-                                                <select>
-                                                    {resObj?.Students?.map((student, index) => (
-                                                        <option key={index} value={student.school_id}>{student.school_id}</option>
-                                                    ))}
-                                                </select>
-                                            </td>
-                                            <td>{resObj?.date}</td>
-                                            <td>{resObj?.start_time}</td>
-                                            <td>{resObj?.end_time}</td>
-                                            <td>{resObj?.reason}</td>
-                                            <td>{resObj?.phone}</td>
-                                            <td>{resObj?.confirmation_status}</td>
-                                            <td>{resObj?.ConfabId}</td>
-                                            <td>{resObj?.confirmed_by}</td>
-                                            {resObj?.confirmation_status === 'Pending' && (
-                                                <td style={{ border: 'none' }}>
-                                                        <>
-                                                            <button onClick={() => handleClick(resObj?.id, 'Confirmed')}>Confirm</button>
-                                                            <button onClick={() => handleClick(resObj?.id, 'Cancelled')}>Cancel</button>
-                                                        </>
-                                                </td>
-                                            )}
-                                        </tr>
-                                    )
-                                })
-                            ) : (
-                                <tr>
-                                    <td colSpan="10" style={{ textAlign: "center" }}>{searching ? 'No data found' : 'No Data Found'}</td>
-                                </tr>
-                            )}
+                            <tr>
+                                <td>01</td>
+                                <td>Names</td>
+                                <td>2023-01-01</td>
+                                <td>8:00am</td>
+                                <td>10:00am</td>
+                                <td>sadfsggsdfasdfasfas</td>
+                                <td>099723232412</td>
+                                <td>Pending</td>
+                                <td>01</td>
+                                <td>Chiong</td>
+                                <td style={{ border: 'none' }}>
+                                    <button>Confirm</button>
+                                    <button>Cancel</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
                 <ReactPaginate
                     pageCount={pageCount}
-                    pageRangeDisplayed={5}
+                    pageRangeDisplayed={10}
                     marginPagesDisplayed={2}
                     onPageChange={handlePageChange}
                     containerClassName={"pagination"}

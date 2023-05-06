@@ -79,7 +79,6 @@ const FloorButtons = () => {
         setFloorName('');
         setShowConfirmation(false);
     };
-
     useEffect(() => {
         //inputRef.current.focus();
         if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id")) {
@@ -287,8 +286,7 @@ const FloorButtons = () => {
                             </div>
                             <div className='buildings'>
                                 {buttonData.map((buttonObj, index) => (
-                                    <div className='building-option'
-                                        tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => {
+                                    <div className='building-option'                                         tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => {
                                             if (buttonObj.status === "Closed" || buttonObj.status === "Full") {
                                                 return;
                                               }chooseFloor(buttonObj.id, buttonObj.name);}}>

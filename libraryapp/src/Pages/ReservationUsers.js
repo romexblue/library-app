@@ -142,6 +142,7 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                 <label className='inputlabel'>
                     User {i + 2}
                 </label>
+                <div className='inputCase'>
                 <input
                     className='userinput'
                     type="text"
@@ -152,7 +153,7 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                     placeholder={i === 0 ? "Scan Your ID or input School ID" : ""}
                     data-index={i} //for the css 
                 />
-                <button type="button"
+                <button className='deleteInput' type="button"
                     disabled={!inputValues[i]}
                     onClick={() => {
                         inputRefs.current[i].disabled = false;
@@ -161,8 +162,9 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                         updatedInputValues[i] = "";
                         setInputValues(updatedInputValues);
                     }}>
-                    X
+                    x
                 </button>
+                </div>
             </form>
         );
     };
@@ -318,6 +320,12 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                         <div className="inputnotes">
                             <p>You may select a field and tap your ID on the ID reader to add user. Alternately, you
                                 may manually type the user’s school ID number.</p>
+                        </div>
+                        <div className="btn-holder" id="btnHolder1">
+                            <div className='buttonContainer'>
+                                <button className="cancelbtn" onClick={() => cancel()} >Cancel</button>
+                                <button className="submitbtn">Submit</button>
+                            </div>
                         </div>
                     </div>
                     <div className="section" id="rssec15">
