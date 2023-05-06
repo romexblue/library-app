@@ -223,7 +223,7 @@ router.post('/', validateToken, async (req, res) => {
       for (let i = 0; i < guestList.length; i++) {
         const school_id = guestList[i];
         const student = await Students.findOne({ where: { school_id } });
-        await ReservationStudent.create({ reservationId: newId, StudentSchoolId: student.id }); //add data to ReservationStudent
+        await ReservationStudent.create({ reservationId: newId, StudentSchoolId: student.school_id }); //add data to ReservationStudent
       }
       res.json({ success: `reservation successful. Reservation ID is ${newReservation.id}`, reservationId: newReservation.id })
     }
@@ -236,7 +236,7 @@ router.post('/', validateToken, async (req, res) => {
           where: { id: newId }
         });
       }
-      console.error(error);
+      console.log(error)
       res.status(500).json({ error: 'Error creating reservation. Please Try Again' });
     }
   }

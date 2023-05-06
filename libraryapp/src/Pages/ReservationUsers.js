@@ -3,7 +3,7 @@ import '../styles/ReservationUsers.css';
 import axios from 'axios';
 import image1 from '../images/Reminder_Icon.png';
 
-function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
+function ReservationUsers({ confab, timeData, updateData, childData, cancel, confirm }) {
     const [counter, setCounter] = useState(0);
     const [inputValues, setInputValues] = useState(Array(confab.capacity).fill(''));
     const inputRefs = useRef(Array(confab.capacity).fill(null));
@@ -11,6 +11,7 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [rep, setRep] = useState("");
     const [studentData, setStudentData] = useState({});
+    const [errorMessage, setErrorMessage] = useState('');
     const repInputRef = useRef(null);
 
     // useEffect(() => {
@@ -42,6 +43,22 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
     //   }
     // }, [capacity]);
 
+    const handleConfirm = () => {
+        const regex = /^09\d{9}$/;
+        if (rep === "" || inputValues.length === 0 || !regex.test(phoneNumber) || reason === "") {
+            setErrorMessage("Please fill in all required fields with (*)")
+        }else{
+            setErrorMessage("")
+            confirm();
+        }
+    }
+
+    const reasonChange = (event) => {
+        setErrorMessage("")
+        setReason(event.target.value);
+        childData({ reason: event.target.value, phone: phoneNumber })
+    }
+
     const submitRep = async (event) => {
         event.preventDefault();
         const response = await findStudent(rep);
@@ -57,11 +74,13 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
     }
 
     const handlePhoneNumberChange = (event) => {
+        setErrorMessage("")
         const inputValue = event.target.value;
         const phoneNumberRegex = /^0/;
         if (inputValue === '' || (phoneNumberRegex.test(inputValue) && inputValue.length < 12)) {
             setPhoneNumber(inputValue);
         }
+        childData({ reason: reason, phone: inputValue })
     };
 
     const handleInputChange = (event, index) => {
@@ -97,7 +116,7 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                     return;
                 };
 
-                updateData([rep,...newInputValues]);
+                updateData([rep, ...newInputValues]);
                 setInputValues(newInputValues);
 
                 // Disable the current input field
@@ -129,7 +148,10 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
 
     const handleSelectChange = (event) => {
         setCounter(event.target.value);
-
+        const newValues = [...inputValues];
+        newValues.length = event.target.value - 1;
+        setInputValues(newValues);
+        updateData([rep, ...newValues]);
     };
 
     //data from reservationusers to parent component
@@ -143,27 +165,27 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                     User {i + 2}
                 </label>
                 <div className='inputCase'>
-                <input
-                    className='userinput'
-                    type="text"
-                    value={inputValues[i] ?? ""}
-                    onChange={(event) => handleInputChange(event, i)}
-                    ref={(el) => inputRefs.current[i] = el}
+                    <input
+                        className='userinput'
+                        type="text"
+                        value={inputValues[i] ?? ""}
+                        onChange={(event) => handleInputChange(event, i)}
+                        ref={(el) => inputRefs.current[i] = el}
 
-                    placeholder={i === 0 ? "Scan Your ID or input School ID" : ""}
-                    data-index={i} //for the css 
-                />
-                <button className='deleteInput' type="button"
-                    disabled={!inputValues[i]}
-                    onClick={() => {
-                        inputRefs.current[i].disabled = false;
-                        inputRefs.current[i].value = '';
-                        const updatedInputValues = [...inputValues];
-                        updatedInputValues[i] = "";
-                        setInputValues(updatedInputValues);
-                    }}>
-                    x
-                </button>
+                        placeholder={i === 0 ? "Scan Your ID or input School ID" : ""}
+                        data-index={i} //for the css 
+                    />
+                    <button className='deleteInput' type="button"
+                        disabled={!inputValues[i]}
+                        onClick={() => {
+                            inputRefs.current[i].disabled = false;
+                            inputRefs.current[i].value = '';
+                            const updatedInputValues = [...inputValues];
+                            updatedInputValues[i] = "";
+                            setInputValues(updatedInputValues);
+                        }}>
+                        x
+                    </button>
                 </div>
             </form>
         );
@@ -287,7 +309,7 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                                     Purpose
                                 </div>
                                 <div className='purpose' id='pinput'>
-                                    <textarea value={reason} onChange={(event) => setReason(event.target.value)} className='purposebox' placeholder='Write the purpose of using the library space.' />
+                                    <textarea value={reason} onChange={(event) => reasonChange(event)} className='purposebox' placeholder='Write the purpose of using the library space.' />
                                 </div>
                             </div>
                             <div className="component" id="compo2">
@@ -323,8 +345,9 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                         </div>
                         <div className="btn-holder" id="btnHolder1">
                             <div className='buttonContainer'>
-                            <button className="cancelbtn" onClick={() => cancel()} >Cancel</button>
-                            <button className="submitbtn" onClick={() => confirm()}>Submit</button>
+                                <p>{errorMessage}</p>
+                                <button className="cancelbtn" onClick={() => cancel()} >Cancel</button>
+                                <button className="submitbtn" onClick={() => handleConfirm()}>Submit</button>
                             </div>
                         </div>
                     </div>

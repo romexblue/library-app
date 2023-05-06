@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
                 key: 'id'
             }
         },
-        studentId: {
-            type: DataTypes.INTEGER,
+        StudentSchoolId: {
+            type: DataTypes.STRING,
             primaryKey: true,
             allowNull: false,
             references: {
