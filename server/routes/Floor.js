@@ -15,7 +15,9 @@ router.post('/', validateToken, async (req, res) => {
 
 router.get('/all', validateToken, async (req, res) => {
     try {
-        const listOfFloors = await Floor.findAll()
+        const listOfFloors = await Floor.findAll({
+            order: [['name', 'ASC']]
+        })
         res.json(listOfFloors)
     } catch (err) {
         res.status(500).json({ error: err })

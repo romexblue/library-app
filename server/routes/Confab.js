@@ -15,7 +15,9 @@ router.post('/', validateToken, async (req, res) => {
 
 router.get('/all', validateToken, async (req, res) => {
     try {
-        const listOfConfabs = await Confab.findAll()
+        const listOfConfabs = await Confab.findAll({
+            order: [['name', 'ASC']]
+        })
         res.json(listOfConfabs)
     } catch (err) {
         res.status(500).json({ error: err })

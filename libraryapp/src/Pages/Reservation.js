@@ -105,8 +105,6 @@ function Reservation() {
     setSelectedDate(date);
     setSelectedConfab(con);
     setErrorMessage("");
-    console.log("hello")
-    console.log(conId)
     if (conId && date) {
       axios
         .get(`http://localhost:5000/reservation/${conId}/${newDate}`, {
@@ -126,7 +124,7 @@ function Reservation() {
 
   const getConfabs = useCallback(() => {
     axios
-      .get("http://localhost:5000/confab", {
+      .get("http://localhost:5000/confab/all", {
         headers: {
           accessToken: sessionStorage.getItem("accessToken"),
           userId: sessionStorage.getItem("id"),
@@ -223,7 +221,7 @@ function Reservation() {
     setErrorMessage("");
     setShowForm(!showForm);
     } else {
-      setErrorMessage("Please Select Confab");
+      setErrorMessage("*Please select a Confab to proceed");
     }
   };
 
@@ -301,9 +299,9 @@ function Reservation() {
                       {availableSlots.length > 0 ? (
                         availableSlots.map((slot, index) => (
                           <div key={index} className="table-content">
-                            <div className="column" id="column1">{convertTo12Hour(slot.start)}</div>
-                            <div className="column" id="column2">{convertTo12Hour(slot.start)}</div>
-                            <div className="column" id="column3">{convertTo12Hour(slot.end)}</div>
+                            <div className="column" id="column1">{index+1}</div>
+                            <div className="column" id="column2">{selectedConfab.description}</div>
+                            <div className="column" id="column3">{convertTo12Hour(slot.start)}</div>
                             <div className="column" id="column4">{convertTo12Hour(slot.end)}</div>
                           </div>
                         ))
@@ -342,9 +340,9 @@ function Reservation() {
                   </div>
                 </div>
                 <div className="section" id="rsec6">
-                  <div className="btn-holder" id="holder1">
+                <p className='errorReminder'>{errorMessage}</p>
+                  <div className="btn-holder" id="holder1-1">
                     <button className="submitbtn" onClick={() => nextPage()}>Next</button>
-                    <p>{errorMessage}</p>
                   </div>
                 </div>
               </div>

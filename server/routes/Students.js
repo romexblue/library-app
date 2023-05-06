@@ -30,7 +30,7 @@ router.get('/all/:page', validateToken, async (req, res) => {
         const page = parseInt(req.params.page) || 1;
         const limit = 10;
         const offset= (page - 1) * limit;
-        const students = await Students.findAll({limit, offset});
+        const students = await Students.findAll({limit, offset, order: [['last_name', 'ASC']]});
         const count = await Students.count();
         res.json({students, count});
     } catch (error) {

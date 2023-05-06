@@ -23,6 +23,8 @@
     width: 40%;
     display: flex;
     flex-direction: column;
+    background-color: rgb(253, 253, 253);
+    border-radius: 10px;
 }
 #c1{
     width: 100%;
@@ -77,6 +79,7 @@
     height: 175px;
     border: 1px solid #162451;
     border-radius: 10px;
+    background-color: rgb(255, 255, 255);
 }
 .roomName{
     text-align: center;
@@ -427,11 +430,18 @@
     display: flex;
     justify-content: flex-end;
 }
-#holder1{
+#holder1-1{
     margin-top: 20px;
-    width: 300px;
+    width: 200px;
     display: flex;
   }
+.errorReminder{
+    font-size: 16px;
+    color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 #rsec6 .submitbtn{
     font-family: 'Ubuntu', sans-serif;
     font-size: 14px;

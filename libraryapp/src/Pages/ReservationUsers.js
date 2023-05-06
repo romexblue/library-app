@@ -12,6 +12,8 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
     const [rep, setRep] = useState("");
     const [studentData, setStudentData] = useState({});
     const repInputRef = useRef(null);
+    const [searchResult, setSearchResult] = useState(''); //value of result
+
 
     // useEffect(() => {
     //     // Update the reservation data
@@ -49,6 +51,7 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
         if (response.data.error) {
             setRep('');
             setStudentData({});
+            setSearchResult('');
         } else {
             setRep(response.data.school_id);
             setStudentData(response.data);
@@ -140,7 +143,7 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
         inputFields.push(
             <form className='inputcontainer' id='inputbox' key={i} onSubmit={(event) => handleSubmit(event, i)}>
                 <label className='inputlabel'>
-                    User {i + 2}
+                    User {i + 2} *
                 </label>
                 <div className='inputCase'>
                 <input
@@ -217,24 +220,22 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                     <div className="section" id="rssec7">
                         <div className="partition" id="part4">
                             <div className="comp" id="rscomp7">
-                                Id Number ( Tap your XU ID )
+                                Id Number ( Tap your XU ID ) *
                             </div>
-                            <form onSubmit={(event) => submitRep(event)} className="comp" id="rscomp8">
-                                <input
-                                    value={rep}
-                                    onChange={(event) => setRep(event.target.value)}
-                                    ref={repInputRef} type="text"
-                                    className="idnumber" id="idnum" placeholder="XU ID Number" />
-                            </form>
-
+                            <div className='comp' id='rscomp8'>
+                                <form onSubmit={(event) => submitRep(event)} className="inputHold" id="InputID">
+                                    <input
+                                        value={rep}
+                                        onChange={(event) => setRep(event.target.value)}
+                                        ref={repInputRef} type="text"
+                                        className="idnumber" id="idnum" placeholder="XU ID Number" />
+                                </form>
+                                <button className='buttonx' onClick={() => { setRep(''); repInputRef.current.disabled = false; setStudentData({}); }}>X</button>
+                            </div>
                         </div>
-                        <button onClick={() => { setRep(''); repInputRef.current.disabled = false; setStudentData({}); }}>X</button>
                         <div className="partition" id="part5">
                             <div className="comp" id="rscomp9">
-                                <img className="info_icon" src={image1} alt="note" />
-                            </div>
-                            <div className="comp" id="rscomp10">
-                                <button className="scanid" >SCAN</button>
+                               <p className='noteReminder'>Alternatively, you may manually type your School ID number and press "Enter".</p> 
                             </div>
                         </div>
                     </div>
@@ -267,7 +268,7 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                         </div>
                         <div className="partition" id="part9">
                             <div className="comp" id="rscomp17">
-                                Contact No.
+                                Contact No.*
                             </div>
                             <div className="comp" id="rscomp18">
                                 <input value={phoneNumber} onChange={(event) => handlePhoneNumberChange(event)} type="text" className="contact" id="contactno" placeholder="0912345678" />
@@ -284,7 +285,7 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                         <div className="comp" id="rscomp19">
                             <div className="component" id='compo1'>
                                 <div className='label' id='plabel'>
-                                    Purpose
+                                    Purpose *
                                 </div>
                                 <div className='purpose' id='pinput'>
                                     <textarea value={reason} onChange={(event) => setReason(event.target.value)} className='purposebox' placeholder='Write the purpose of using the library space.' />
@@ -292,7 +293,7 @@ function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
                             </div>
                             <div className="component" id="compo2">
                                 <div className="label" id='dlabel'>
-                                    Pax
+                                    Pax *
                                 </div>
                                 <div className="drop-down">
                                     <select className="dropdown2" list="browsers" name="browser" placeholder="3" id="browsers" onChange={handleSelectChange}>
