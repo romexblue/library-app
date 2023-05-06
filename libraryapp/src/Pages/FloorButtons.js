@@ -83,7 +83,7 @@ const FloorButtons = () => {
     useEffect(() => {
         //inputRef.current.focus();
         if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id")) {
-            axios.get("http://localhost:5000/floor", {
+            axios.get("http://localhost:5000/floor/all", {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken"),
                     userId: sessionStorage.getItem("id")

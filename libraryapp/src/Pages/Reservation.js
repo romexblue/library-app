@@ -65,45 +65,38 @@ function Reservation() {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleConfirm = () => {
-    const date = selectedDate.toISOString().slice(0, 10);
-    const start = convertTo24Hour(startTime);
-    const end = convertTo24Hour(endTime);
-    const purpose = reason;
-    const phone = phoneNumber;
-    const confId = selectedConfab.id;
+    // const date = selectedDate.toISOString().slice(0, 10);
+    // const start = convertTo24Hour(startTime);
+    // const end = convertTo24Hour(endTime);
+    // const purpose = reason;
+    // const phone = phoneNumber;
+    // const confId = selectedConfab.id;
     const guestList = [...studentList];
-
-    const data = { date: date, start_time: start, end_time: end, confirmation_status: "Pending", reason: purpose, ConfabId: confId, phone: phone, guestList: guestList }
-    axios
-      .post(`http://localhost:5000/reservation`, data, {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
-          userId: sessionStorage.getItem("id"),
-        },
-      })
-      .then((response) => {
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.log(error.response.data)
-        console.log(data)
-      });
+    console.log(guestList);
+    // const data = { date: date, start_time: start, end_time: end, confirmation_status: "Pending", reason: purpose, ConfabId: confId, phone: phone, guestList: guestList }
+    // axios
+    //   .post(`http://localhost:5000/reservation`, data, {
+    //     headers: {
+    //       accessToken: sessionStorage.getItem("accessToken"),
+    //       userId: sessionStorage.getItem("id"),
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data)
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.response.data)
+    //     console.log(data)
+    //   });
   };
 
   const handleCancel = () => {
     setShowConfirmation(false);
   };
 
-  const handlePhoneNumberChange = (event) => {
-    const inputValue = event.target.value;
-    const phoneNumberRegex = /^0/;
-    if (phoneNumberRegex.test(inputValue) && inputValue.length < 12) {
-      setPhoneNumber(inputValue);
-    }
-  };
-
   const setList = useCallback((list) => {
-    setStudentList(list);
+    const newListData = list.filter((value) => value !== '');
+    setStudentList(newListData);
   }, []);
 
   const getAvailableTime = (con, date) => {
@@ -111,6 +104,7 @@ function Reservation() {
     const newDate = date.toISOString().slice(0, 10);
     setSelectedDate(date);
     setSelectedConfab(con);
+    setErrorMessage("");
     console.log("hello")
     console.log(conId)
     if (conId && date) {
@@ -212,25 +206,25 @@ function Reservation() {
   const endTimeOptions = TIMES[startTime];
 
   const submitRec = () => {
-    const phone = phoneNumber;
-    const guestList = [...studentList];
-    const regex = /^09\d{9}$/;
+    // const phone = phoneNumber;
+    // const guestList = [...studentList];
+    // const regex = /^09\d{9}$/;
 
-    if (guestList.length === 0 || !regex.test(phone)) {
-      setErrorMessage("Please Enter A Valid Phone Number and Fill Up User List")
-    } else {
-      setErrorMessage("")
+    // if (guestList.length === 0 || !regex.test(phone)) {
+    //   setErrorMessage("Please Enter A Valid Phone Number and Fill Up User List")
+    // } else {
+    //   setErrorMessage("")
       setShowConfirmation(true);
-    }
+    // }
   };
 
   const nextPage = () => {
-    //if (reason !== "" && selectedConfab) {
+    if (selectedConfab) {
     setErrorMessage("");
     setShowForm(!showForm);
-    // } else {
-    //   setErrorMessage("Please Select Confab and Fill Purpose Field");
-    // }
+    } else {
+      setErrorMessage("Please Select Confab");
+    }
   };
 
   return (
@@ -346,6 +340,7 @@ function Reservation() {
                 <div className="section" id="rsec6">
                   <div className="btn-holder" id="holder1">
                     <button className="submitbtn" onClick={() => nextPage()}>Next</button>
+                    <p>{errorMessage}</p>
                   </div>
                 </div>
               </div>
@@ -354,14 +349,18 @@ function Reservation() {
         </>
       )}
       {!showForm && (
-        <>
-          <ReservationUsers capacity={selectedConfab.max_capacity ?? 0} updateData={setList} cancel={nextPage}/>
+        <>  
+          <ReservationUsers 
+          confab={{capacity: selectedConfab.max_capacity ?? 0, name: selectedConfab.name ?? ""}} 
+          timeData={{timeIn: startTime, timeOut: endTime}} updateData={setList} 
+          cancel={nextPage} 
+          confirm={submitRec}/>
         </>
       )}
       {showConfirmation && (
         <ConfModal
           title="Reservation Confirmation"
-          message={`Confab: ${selectedConfab.name} Time: ${startTime}-${endTime} Users: ${studentList.join(", ")}`} //Pending pani kay di ma format
+          message={`Confab: ${selectedConfab.name} Time: ${startTime}-${endTime} Users: ${studentList ? studentList.join(", ") : "No students available"}`} //Pending pani kay di ma format
           onConfirm={handleConfirm}
           onCancel={handleCancel}
         />

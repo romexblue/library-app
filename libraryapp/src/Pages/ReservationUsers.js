@@ -3,15 +3,22 @@ import '../styles/ReservationUsers.css';
 import axios from 'axios';
 import image1 from '../images/Reminder_Icon.png';
 
-function ReservationUsers({ capacity, updateData, cancel }) {
-    const [inputValues, setInputValues] = useState(Array(capacity).fill(''));
-    const inputRefs = useRef(Array(capacity).fill(null));
+function ReservationUsers({ confab, timeData, updateData, cancel, confirm }) {
+    const [counter, setCounter] = useState(0);
+    const [inputValues, setInputValues] = useState(Array(confab.capacity).fill(''));
+    const inputRefs = useRef(Array(confab.capacity).fill(null));
+    const [reason, setReason] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [rep, setRep] = useState("");
+    const [studentData, setStudentData] = useState({});
+    const repInputRef = useRef(null);
 
-    useEffect(() => {
-        // Update the reservation data
-        const newListData = inputValues.filter((value) => value !== '');
-        updateData(newListData);
-    }, [inputValues, updateData]);
+    // useEffect(() => {
+    //     // Update the reservation data
+    //     const newListData = inputValues.filter((value) => value !== '');
+    //     console.log("yawa")
+    //     updateData(newListData);
+    // }, [inputValues, updateData]);
 
     // useEffect(() => {
     //   setInputValues(Array(capacity).fill(''));
@@ -35,6 +42,28 @@ function ReservationUsers({ capacity, updateData, cancel }) {
     //   }
     // }, [capacity]);
 
+    const submitRep = async (event) => {
+        event.preventDefault();
+        const response = await findStudent(rep);
+
+        if (response.data.error) {
+            setRep('');
+            setStudentData({});
+        } else {
+            setRep(response.data.school_id);
+            setStudentData(response.data);
+            repInputRef.current.disabled = true;
+        }
+    }
+
+    const handlePhoneNumberChange = (event) => {
+        const inputValue = event.target.value;
+        const phoneNumberRegex = /^0/;
+        if (inputValue === '' || (phoneNumberRegex.test(inputValue) && inputValue.length < 12)) {
+            setPhoneNumber(inputValue);
+        }
+    };
+
     const handleInputChange = (event, index) => {
         const newInputValues = [...inputValues];
         newInputValues[index] = event.target.value;
@@ -46,57 +75,72 @@ function ReservationUsers({ capacity, updateData, cancel }) {
         const studentId = inputValues[index];
 
         // Send a request to look up the student's information
-        await axios.get(`http://localhost:5000/student/find/${studentId}`, {
+        const response = await findStudent(studentId);
+
+        if (response.data.error) {
+            // If the student ID is not valid, clear the input value
+            const newInputValues = [...inputValues];
+            newInputValues[index] = "";
+            setInputValues(newInputValues);
+        } else {
+            const studentData = response.data;
+            if (studentData) {
+                const newInputValues = [...inputValues];
+                newInputValues[index] = studentData.school_id;
+
+                // Check for duplicate school IDs
+                const isDuplicate = [...newInputValues, rep].filter((value, i) => i !== index && value !== '').includes(studentData.school_id);
+                if (isDuplicate) {
+                    const newInputValues = [...inputValues];
+                    newInputValues[index] = '';
+                    setInputValues(newInputValues);
+                    return;
+                };
+
+                updateData([rep,...newInputValues]);
+                setInputValues(newInputValues);
+
+                // Disable the current input field
+                inputRefs.current[index].disabled = true;
+
+                // Find the next available input field that is disabled and has no value
+                const nextIndex = newInputValues.findIndex((value, i) => i > index && value === '');
+                if (nextIndex >= 0 && inputRefs.current[nextIndex]) {
+                    inputRefs.current[nextIndex].disabled = false;
+                    inputRefs.current[nextIndex].setAttribute("placeholder", "Scan Your ID or input School ID");
+                    inputRefs.current[nextIndex].focus();
+                }
+
+            }
+        }
+
+    };
+
+    const findStudent = async (id) => {
+        console.log(id)
+        const response = await axios.get(`http://localhost:5000/student/find/${id}`, {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken"),
                 userId: sessionStorage.getItem("id")
             },
         })
-            .then((response) => {
-                if (response.data.error) {
-                    // If the student ID is not valid, clear the input value
-                    const newInputValues = [...inputValues];
-                    newInputValues[index] = "";
-                    setInputValues(newInputValues);
-                } else {
-                    const studentData = response.data;
-                    if (studentData) {
-                        const newInputValues = [...inputValues];
-                        newInputValues[index] = studentData.school_id;
+        return response;
+    }
 
-                        // Check for duplicate school IDs
-                        const isDuplicate = newInputValues.filter((value, i) => i !== index && value !== '').includes(studentData.school_id);
-                        if (isDuplicate) {
-                            const newInputValues = [...inputValues];
-                            newInputValues[index] = '';
-                            setInputValues(newInputValues);
-                            return;
-                        };
+    const handleSelectChange = (event) => {
+        setCounter(event.target.value);
 
-                        setInputValues(newInputValues);
-
-                        // Disable the current input field
-                        inputRefs.current[index].disabled = true;
-
-                        // Find the next available input field that is disabled and has no value
-                        const nextIndex = newInputValues.findIndex((value, i) => i > index && value === '');
-                        if (nextIndex >= 0) {
-                            inputRefs.current[nextIndex].disabled = false;
-                            inputRefs.current[nextIndex].setAttribute("placeholder", "Scan Your ID or input School ID");
-                            inputRefs.current[nextIndex].focus();
-                        }
-
-                    }
-                }
-            })
     };
 
+    //data from reservationusers to parent component
+
     const inputFields = [];
-    for (let i = 0; i < capacity; i++) {
+    for (let i = 0; i < counter - 1; i++) {
+
         inputFields.push(
             <form className='inputcontainer' id='inputbox' key={i} onSubmit={(event) => handleSubmit(event, i)}>
                 <label className='inputlabel'>
-                    User 2
+                    User {i + 2}
                 </label>
                 <input
                     className='userinput'
@@ -104,7 +148,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                     value={inputValues[i] ?? ""}
                     onChange={(event) => handleInputChange(event, i)}
                     ref={(el) => inputRefs.current[i] = el}
-                    disabled={i > 0 ? true : false}
+
                     placeholder={i === 0 ? "Scan Your ID or input School ID" : ""}
                     data-index={i} //for the css 
                 />
@@ -142,7 +186,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                                 Confab Room
                             </div>
                             <div className="comp" id="rscomp2">
-                                <input type="text" className="conf" required />
+                                <p className="conf">{confab.name}</p>
                             </div>
                         </div>
                         <div className="rspartition" id="part2">
@@ -150,7 +194,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                                 From
                             </div>
                             <div className="comp" id="rscomp4">
-                                <input type="text" className="from" required />
+                                <p className="from">{timeData.timeIn}</p>
                             </div>
                         </div>
                         <div className="rspartition" id="part3">
@@ -158,7 +202,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                                 Until
                             </div>
                             <div className="comp" id="rscomp6">
-                                <input type="text" className="until" required />
+                                <p className="until">{timeData.timeOut}</p>
                             </div>
                         </div>
                     </div>
@@ -173,10 +217,16 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                             <div className="comp" id="rscomp7">
                                 Id Number ( Tap your XU ID )
                             </div>
-                            <div className="comp" id="rscomp8">
-                                <input type="text" className="idnumber" id="idnum" required placeholder="XU ID Number" />
-                            </div>
+                            <form onSubmit={(event) => submitRep(event)} className="comp" id="rscomp8">
+                                <input
+                                    value={rep}
+                                    onChange={(event) => setRep(event.target.value)}
+                                    ref={repInputRef} type="text"
+                                    className="idnumber" id="idnum" placeholder="XU ID Number" />
+                            </form>
+
                         </div>
+                        <button onClick={() => { setRep(''); repInputRef.current.disabled = false; setStudentData({}); }}>X</button>
                         <div className="partition" id="part5">
                             <div className="comp" id="rscomp9">
                                 <img className="info_icon" src={image1} alt="note" />
@@ -192,7 +242,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                                 Name
                             </div>
                             <div className="comp" id="rscomp12">
-                                <input type="text" className="name" required />
+                                <div className="name">{studentData.last_name} {studentData.first_name} </div>
                             </div>
                         </div>
                     </div>
@@ -202,7 +252,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                                 Course
                             </div>
                             <div className="comp" id="rscomp14">
-                                <input type="text" className="course" required />
+                                <div className="course">{studentData.college}</div>
                             </div>
                         </div>
                         <div className="partition" id="part8">
@@ -210,7 +260,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                                 Year
                             </div>
                             <div className="comp" id="rscomp16">
-                                <input type="text" className="year" required />
+                                <div className="year">{studentData.year ? studentData.year.match(/\d+/)?.[0] || '' : ''}</div>
                             </div>
                         </div>
                         <div className="partition" id="part9">
@@ -218,7 +268,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                                 Contact No.
                             </div>
                             <div className="comp" id="rscomp18">
-                                <input type="text" className="contact" id="contactno" placeholder="+63912345678" required />
+                                <input value={phoneNumber} onChange={(event) => handlePhoneNumberChange(event)} type="text" className="contact" id="contactno" placeholder="0912345678" />
                             </div>
                         </div>
                     </div>
@@ -235,7 +285,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                                     Purpose
                                 </div>
                                 <div className='purpose' id='pinput'>
-                                    <textarea className='purposebox' placeholder='Write the purpose of using the library space.'></textarea>
+                                    <textarea value={reason} onChange={(event) => setReason(event.target.value)} className='purposebox' placeholder='Write the purpose of using the library space.' />
                                 </div>
                             </div>
                             <div className="component" id="compo2">
@@ -243,16 +293,11 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                                     Pax
                                 </div>
                                 <div className="drop-down">
-                                    <select className="dropdown2" list="browsers" name="browser" placeholder="3" id="browsers" >
-                                        <option >No. of users...</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
+                                    <select className="dropdown2" list="browsers" name="browser" placeholder="3" id="browsers" onChange={handleSelectChange}>
+                                        <option value={0}>No. of users...</option>
+                                        {Array.from({ length: confab.capacity - 2 }, (_, i) => (
+                                            <option key={i} value={i + 3}>{i + 3}</option>
+                                        ))}
                                     </select>
                                 </div>
                             </div>
@@ -267,7 +312,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                         Confab Users
                     </div>
                     <div className='section' id="rssec13">
-                       {inputFields}
+                        {inputFields}
                     </div>
                     <div className='section' id='rssec14'>
                         <div className="inputnotes">
@@ -278,7 +323,7 @@ function ReservationUsers({ capacity, updateData, cancel }) {
                     <div className="section" id="rssec15">
                         <div className="btn-holder" id="holder1">
                             <button className="cancelbtn" onClick={() => cancel()} >Cancel</button>
-                            <button className="submitbtn">Submit</button>
+                            <button className="submitbtn" onClick={() => confirm()}>Submit</button>
                         </div>
                     </div>
                 </div>

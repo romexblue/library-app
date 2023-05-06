@@ -3,7 +3,7 @@
     height: 70px;
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .pageFilter1{
     margin: 0 10px 0;
