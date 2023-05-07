@@ -4,7 +4,7 @@ const { Students } = require('../models');
 const { Op } = require('sequelize');
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.get('/find/:school_id', validateToken, async (req, res) => {
+router.get('/find/:school_id', async (req, res) => {
     try {
         const rfid = req.params.school_id;
         const student = await Students.findOne({

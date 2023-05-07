@@ -92,6 +92,7 @@ function Reservation() {
         console.log(error.response.data)
         console.log(data)
       });
+      window.location.reload();
   };
 
   const handleCancel = () => {
@@ -157,27 +158,28 @@ function Reservation() {
   };
 
   useEffect(() => {
-    if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
-      axios.get("http://localhost:5000/auth/allow", {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
-          userId: sessionStorage.getItem("id")
-        },
-      })
-        .then((response) => {
-          if (response.data.error) {
-            authContext.logout()
-            navigate('/')
-          } else {
-            authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
-            navigate('/reservation')
-          }
-        })
-    }
+    // if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
+    //   axios.get("http://localhost:5000/auth/allow", {
+    //     headers: {
+    //       accessToken: sessionStorage.getItem("accessToken"),
+    //       userId: sessionStorage.getItem("id")
+    //     },
+    //   })
+    //     .then((response) => {
+    //       if (response.data.error) {
+    //         authContext.logout()
+    //         navigate('/')
+    //       } else {
+    //         authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
+    //         navigate('/reservation')
+    //       }
+    //     })
+    // }
 
-    if (!authContext.isLoggedIn) {
-      navigate('/')
-    };
+    // if (!authContext.isLoggedIn) {
+    //   navigate('/')
+    // };
+    authContext.logout();
     getConfabs();
   }, [getConfabs, authContext, navigate]);
 
@@ -324,7 +326,7 @@ function Reservation() {
                         ))
                       ) : (
                         <div className="table-content">
-                          <div style={{ marginTop: "10px" }}>Choose a Confab</div>
+                          <div style={{ marginTop: "10px" }}>{selectedConfab ? "All Times Vacant" : "Please Choose a Confab"}</div>
                         </div>
                       )}
                     </div>

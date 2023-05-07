@@ -76,7 +76,7 @@ router.get('/requests/:confId/:status/:date/:page', validateToken, async (req, r
 
 
 
-router.get('/:confId/:date', validateToken, async (req, res) => {
+router.get('/:confId/:date', async (req, res) => {
   if (!req.params.confId || !req.params.date) {
     res.status(500).json({ error: "Date and ConfabId is required" })
   }
@@ -123,7 +123,7 @@ router.get('/:confId/:date', validateToken, async (req, res) => {
 });
 
 
-router.post('/', validateToken, async (req, res) => {
+router.post('/', async (req, res) => {
   const { guestList, ...rec } = req.body; //separate guest list from the request
   let newId; //for record deletion if error in student list
 
@@ -139,7 +139,6 @@ router.post('/', validateToken, async (req, res) => {
       where: {
         representative_id: repId,
         date: date,
-        ConfabId: confID
       }
     });
   

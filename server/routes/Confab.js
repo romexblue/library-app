@@ -13,7 +13,7 @@ router.post('/', validateToken, async (req, res) => {
     }
 });
 
-router.get('/all', validateToken, async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const listOfConfabs = await Confab.findAll({
             order: [['name', 'ASC']]
