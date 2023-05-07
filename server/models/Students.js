@@ -41,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
          onDelete: "cascade",
       });
       Students.belongsToMany(models.Reservation, { through: 'ReservationStudents', timestamps: false, });
+      Students.hasMany(models.Reservation, { foreignKey: "representative_id" });
    };
 
    return Students

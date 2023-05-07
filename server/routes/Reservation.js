@@ -33,14 +33,14 @@ router.patch('/requests/find-by/:id', validateToken, async (req, res) => {
   try {
     const reservation = await Reservation.findByPk(reservationId);
     if (!reservation) {
-      return res.status(404).json({error:'Reservation not found'});
+      return res.status(404).json({ error: 'Reservation not found' });
     }
 
-    await reservation.update({ confirmed_by: confirmed_by,  confirmation_status: confirmation_status });
-    return res.status(200).json({success:'Reservation updated successfully'});
+    await reservation.update({ confirmed_by: confirmed_by, confirmation_status: confirmation_status });
+    return res.status(200).json({ success: 'Reservation updated successfully' });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({error:'Something went wrong'});
+    return res.status(500).json({ error: 'Something went wrong' });
   }
 });
 
@@ -88,34 +88,35 @@ router.get('/:confId/:date', validateToken, async (req, res) => {
         date: date,
         ConfabId: confId,
       },
-      attributes: ['start_time', 'end_time'],
+      attributes: ['start_time', 'end_time', 'confirmation_status'],
+      order: [['start_time', 'ASC']]
     });
 
-    const availableSlots = [];
-    let lastEndTime = moment('08:00', 'HH:mm');
+    // const availableSlots = [];
+    // let lastEndTime = moment('08:00', 'HH:mm');
 
-    reservations.forEach((reservation) => {
-      const startTime = moment(reservation.start_time, 'HH:mm');
-      const endTime = moment(reservation.end_time, 'HH:mm');
+    // reservations.forEach((reservation) => {
+    //   const startTime = moment(reservation.start_time, 'HH:mm');
+    //   const endTime = moment(reservation.end_time, 'HH:mm');
 
-      if (lastEndTime.isBefore(startTime)) {
-        availableSlots.push({
-          start: lastEndTime.format('HH:mm'),
-          end: startTime.format('HH:mm'),
-        });
-      }
+    //   if (lastEndTime.isBefore(startTime)) {
+    //     availableSlots.push({
+    //       start: lastEndTime.format('HH:mm'),
+    //       end: startTime.format('HH:mm'),
+    //     });
+    //   }
 
-      lastEndTime = moment.max(lastEndTime, endTime);
-    });
+    //   lastEndTime = moment.max(lastEndTime, endTime);
+    // });
 
-    if (lastEndTime.isBefore(moment('19:00', 'HH:mm'))) {
-      availableSlots.push({
-        start: lastEndTime.format('HH:mm'),
-        end: moment('19:00', 'HH:mm').format('HH:mm'),
-      });
-    }
+    // if (lastEndTime.isBefore(moment('19:00', 'HH:mm'))) {
+    //   availableSlots.push({
+    //     start: lastEndTime.format('HH:mm'),
+    //     end: moment('19:00', 'HH:mm').format('HH:mm'),
+    //   });
+    // }
 
-    res.json({ availableSlots });
+    res.json({ reservations });
   } catch (err) {
     res.status(400).json({ error: err });
   }
@@ -130,8 +131,21 @@ router.post('/', validateToken, async (req, res) => {
   const end_time = moment(req.body.end_time, 'HH:mm:ss');
   const date = req.body.date;
   const confID = req.body.ConfabId;
+  const repId = req.body.representative_id;
 
   try {
+
+    const existingRep = await Reservation.findOne({
+      where: {
+        representative_id: repId,
+        date: date,
+        ConfabId: confID
+      }
+    });
+  
+    if (existingRep) {
+      return res.status(400).json({ error: 'No double booking allowed' });
+    }
 
     const existingReservation = await Reservation.findOne({
       where: {
@@ -236,7 +250,6 @@ router.post('/', validateToken, async (req, res) => {
           where: { id: newId }
         });
       }
-      console.log(error)
       res.status(500).json({ error: 'Error creating reservation. Please Try Again' });
     }
   }

@@ -194,6 +194,14 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
         );
     };
 
+    const formatDate = (date) => {
+        return date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        });
+      };
+
     return (
         <div className="rsmaindiv">
             <div className="rscenterdiv">
@@ -202,7 +210,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
                         <p>RESERVATION DATE</p>
                     </div>
                     <div className="section" id="rssec2">
-                        <p>April 10, 2023</p>
+                        <p>{formatDate(timeData.date)}</p>
                     </div>
                     <div className="section" id="rssec3">
                         <p>Room Assignment</p>

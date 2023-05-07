@@ -64,7 +64,9 @@ function Reservation() {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleConfirm = () => {
-    const date = selectedDate.toISOString().slice(0, 10);
+    console.log(selectedDate)
+    const date = convertDate(selectedDate);
+    console.log(date)
     const start = convertTo24Hour(startTime);
     const end = convertTo24Hour(endTime);
     const purpose = ruData.reason;
@@ -73,7 +75,7 @@ function Reservation() {
     const guestList = [...studentList];
     console.log(ruData)
     console.log(guestList);
-    const data = { date: date, start_time: start, end_time: end, confirmation_status: "Pending", reason: purpose, ConfabId: confId, phone: phone, guestList: guestList }
+    const data = { date: date, start_time: start, end_time: end, confirmation_status: "Pending", reason: purpose, ConfabId: confId, phone: phone, representative_id: guestList[0], guestList: guestList }
     console.log(data);
     console.log("YAWA")
     axios
@@ -108,8 +110,9 @@ function Reservation() {
 
   const getAvailableTime = (con, date) => {
     const conId = con.id;
-    const newDate = date.toISOString().slice(0, 10);
+    const newDate = convertDate(date);
     setSelectedDate(date);
+    console.log(selectedDate)
     setSelectedConfab(con);
     setErrorMessage("");
     if (conId && date) {
@@ -121,7 +124,7 @@ function Reservation() {
           },
         })
         .then((response) => {
-          setAvailableSlots(response.data.availableSlots);
+          setAvailableSlots(response.data.reservations);
         })
         .catch((error) => {
           console.log(error);
@@ -145,8 +148,12 @@ function Reservation() {
       });
   }, []);
 
-  const setDate = (date) => {
-    setSelectedDate(date);
+  const convertDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const newDate = `${year}-${month}-${day}`;
+    return newDate;
   };
 
   useEffect(() => {
@@ -280,8 +287,11 @@ function Reservation() {
                 <div className={"section"} id="rsec2">
                   <div className="Infosec" id="isec1">
                     <div className="Infolabel" id='ilabel1'>Date:</div>
-                    <div className="ConfInfo" id="roomInfo1"><DatePicker wrapperClassName="datePicker" showIcon selected={selectedDate}
-                      onChange={date => getAvailableTime(selectedConfab, date)} minDate={new Date()} popperPlacement="bottom" required /></div>
+                    <div className="ConfInfo" id="roomInfo1">
+                      <DatePicker wrapperClassName="datePicker" 
+                      showIcon selected={selectedDate}
+                      onChange={date => getAvailableTime(selectedConfab, date)} 
+                      minDate={new Date()} popperPlacement="bottom" required /></div>
                   </div>
                   <div className="Infosec" id="isec2">
                     <div className="Infolabel" id='ilabel2'>Room:</div>
@@ -307,9 +317,9 @@ function Reservation() {
                         availableSlots.map((slot, index) => (
                           <div key={index} className="table-content">
                             <div className="column" id="column1">{index+1}</div>
-                            <div className="column" id="column2">{selectedConfab.description}</div>
-                            <div className="column" id="column3">{convertTo12Hour(slot.start)}</div>
-                            <div className="column" id="column4">{convertTo12Hour(slot.end)}</div>
+                            <div className="column" id="column2">{slot.confirmation_status}</div>
+                            <div className="column" id="column3">{convertTo12Hour(slot.start_time)}</div>
+                            <div className="column" id="column4">{convertTo12Hour(slot.end_time)}</div>
                           </div>
                         ))
                       ) : (
@@ -361,7 +371,7 @@ function Reservation() {
         <>  
           <ReservationUsers 
           confab={{capacity: selectedConfab.max_capacity ?? 0, name: selectedConfab.name ?? ""}} 
-          timeData={{timeIn: startTime, timeOut: endTime}} updateData={setList} childData={setChildData}
+          timeData={{timeIn: startTime, timeOut: endTime, date: selectedDate}} updateData={setList} childData={setChildData}
           cancel={nextPage} 
           confirm={submitRec}/>
         </>
