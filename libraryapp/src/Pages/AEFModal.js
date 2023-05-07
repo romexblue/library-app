@@ -1,4 +1,4 @@
-import '../styles/Modal.css'
+import aef from '../styles/ModalAEF.module.css'
 import React, { useState } from "react";
 import axios from 'axios';
 
@@ -57,31 +57,43 @@ const FloorModal = ({ title, data, update, cancel, updateUi, action }) => {
 
     return (
         showModal && (
-            <div className="modal">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h3>{title}</h3>
+            <div className={aef.confModal}>
+                <div className={aef.modalContent}>
+                    <div className={aef.modalHeader}>
+                        <p className={aef.modalTitle}>{title}</p>
+                        <div className={aef.modalClose} onClick={handleCancel}>x</div>
                     </div>
-                    <div className="modal-body">
-                        <p>Name: <input type="text" value={name} onChange={(event) => { setName(event.target.value) }} /></p>
-                        <p>Max Capacity: <input type="number" value={maxCapacity} onChange={(event) => { setMaxCapacity(event.target.value) }} /></p>
-                        <p>Level: <input type="number" value={level} onChange={(event) => { setLevel(event.target.value) }} /></p>
-                        <p>Bldg No:
-                            <select className="Bldg" value={bldg} onChange={(event) => setBldg(event.target.value)}>
+                    <div className={aef.modalBody}>
+                        <div className={aef.nameSection} >
+                            <label className={aef.nameLabel}>Name:</label>
+                            <input className={aef.nameInput} type="text" placeholder='Floor #' value={name} onChange={(event) => { setName(event.target.value) }} />
+                            <div className={aef.nameHint}>Set the floor level/number using figure</div></div>
+                        <div className={aef.capacitySection} >
+                            <label className={aef.capacityLabel}>Max Capacity:</label>
+                            <input className={aef.capacityInput} type="number" value={maxCapacity} onChange={(event) => { setMaxCapacity(event.target.value) }} /></div>
+                        <div className={aef.levelSection} >
+                            <label className={aef.levelLabel}>Level:</label>
+                            <input className={aef.levelInput}type="number" value={level} onChange={(event) => { setLevel(event.target.value) }} />
+                            <div className={aef.nameHint}>Set the floor level/number based on the floor name.</div>
+                            </div>
+                        <div className={aef.buildingSection} >
+                            <label className={aef.buildingLabel}>Building No.:</label>
+                            <select className={aef.buildingInput} value={bldg} onChange={(event) => setBldg(event.target.value)}>
                                 <option value="Bldg1"> 1</option>
                                 <option value="Bldg2"> 2</option>
                             </select>
-                        </p>
-                        <p>Status:
-                            <select className="status" value={status} onChange={(event) => setStatus(event.target.value)}>
+                        </div>
+                        <p className={aef.statusSection}>
+                            <label className={aef.statusLabel}>Status:</label>
+                            <select className={aef.statusInput} value={status} onChange={(event) => setStatus(event.target.value)}>
                                 <option value="Open">Open</option>
                                 <option value="Closed">Closed</option>
                             </select>
                         </p>
                     </div>
-                    <div className="modal-footer">
-                        <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
-                        <button className="confirm-btn" onClick={handleConfirm}>Confirm</button>
+                    <div className={aef.modalFooter}>
+                        <button className={aef.cancelBtn} onClick={handleCancel}>Cancel</button>
+                        <button className={aef.confirmBtn} onClick={handleConfirm}>Confirm</button>
                     </div>
                 </div>
             </div>

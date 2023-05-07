@@ -127,7 +127,7 @@ const Admin = () => {
                                             className={activeComponent === 'AdminStudent' ? 'active' : 'buttonColor'}
 
                                             onClick={() => handleTabClick('AdminStudent')} id='button4'>
-                                            Students
+                                            Patrons
                                         </button>
                                     </div>
                                 </li>

@@ -3,6 +3,9 @@ import us from '../styles/AdminUsers.module.css';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import AEUModal from './AEUModal';
+import image1 from '../images/Edit_Icon.png';
+import image2 from '../images/Delete_Icon.png';
+
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState({});
@@ -32,14 +35,6 @@ const AdminUsers = () => {
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected + 1);
-  };
-
-  const handleMouseEnter = (index) => {
-    setHoveredRow(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredRow(null);
   };
 
   const handleClick = (user, type) => {
@@ -81,37 +76,46 @@ const AdminUsers = () => {
   };
 
   return (
-    <div>
-      <table>
-        <thead>
+    <div className={us.confabPage}>
+    <div className={us.pageHeader}>
+              <div className={us.section1}>
+                  <p>User</p>
+              </div>
+              <div className={us.section2}>
+
+              </div>
+              <div className={us.section3}>
+                  <div className={us.button1}>
+                  <button className={us.addBtn} onClick={() => handleClick([], "Add")}><div className={us.plusSign}
+                  >+</div><p>Add User</p></button>
+                  </div>
+              </div>
+        </div>
+      <div className={us.mainTable}>
+      <table className={us.tableContainer}>
+        <thead className={us.tableHeader} >
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Username</th>
+            <th>Usernames</th>
             <th>Type</th>
             <th>Password</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {users && users.length !== 0 ? (
             users.map((userObj, index) => {
               return (
-                <tr key={index}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={handleMouseLeave}
-                >
+                <tr key={index}>
                   <td>{userObj?.id}</td>
                   <td>{userObj?.name}</td>
                   <td>{userObj?.username}</td>
                   <td>{userObj?.type}</td>
                   <td>{userObj?.password}</td>
-                  <td style={{ border: 'none' }}>
-                    {hoveredRow === index && (
-                      <>
-                        <button onClick={() => handleClick(userObj, 'Edit')}>Edit</button>
-                        <button onClick={() => handleClick(userObj, 'Delete')}>Delete</button>
-                      </>
-                    )}
+                  <td>
+                        <button className={us.editButton} onClick={() => handleClick(userObj, 'Edit')}><img src={image1}></img></button>
+                        <button className={us.deleteButton} onClick={() => handleClick(userObj, 'Delete')}><img src={image2}></img></button>
                   </td>
                 </tr>
               )
@@ -123,6 +127,7 @@ const AdminUsers = () => {
           )}
         </tbody>
       </table>
+      </div>
       <ReactPaginate
         pageCount={Math.ceil(count / 10)} // number of pages
         pageRangeDisplayed={5}
@@ -131,7 +136,6 @@ const AdminUsers = () => {
         containerClassName="pagination"
         activeClassName="active"
       />
-      <button onClick={() => handleClick([], "Add")}>Add User</button>
       {showEditModal && (
         <AEUModal
           title={`${action} User`}
@@ -142,7 +146,7 @@ const AdminUsers = () => {
           action={action}
         />
       )}
-    </div>
+      </div>
   )
 }
 

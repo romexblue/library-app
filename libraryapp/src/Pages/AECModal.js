@@ -1,4 +1,4 @@
-import '../styles/Modal.css'
+import aec from '../styles/ModalAEC.module.css'
 import React, { useState } from "react";
 import axios from 'axios';
 
@@ -57,26 +57,35 @@ const ConfabModal = ({ title, data, update, cancel, updateUi, action }) => {
 
     return (
         showModal && (
-            <div className="modal">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h3>{title}</h3>
+            <div className={aec.confModal}>
+                <div className={aec.modalContent}>
+                    <div className={aec.modalHeader}>
+                        <p className={aec.modalTitle}>{title}</p>
+                        <div className={aec.modalClose} onClick={handleCancel}>x</div>
                     </div>
-                    <div className="modal-body">
-                        <p>Name: <input type="text" value={name} onChange={(event) => { setName(event.target.value) }} /></p>
-                        <p>Max Capacity: <input type="number" value={maxCapacity} onChange={(event) => { setMaxCapacity(event.target.value) }} /></p>
-                        <p>Level: <input type="number" value={level} onChange={(event) => { setLevel(event.target.value) }} /></p>
-                        <p>Description:<input type="text" value={description} onChange={(event) => { setDescription(event.target.value) }} /></p>
-                        <p>Status:
-                            <select className="status" value={status} onChange={(event) => setStatus(event.target.value)}>
+                    <div className={aec.modalBody}>
+                        <p className={aec.nameSection} >
+                        <label className={aec.nameLabel}>Name:</label> 
+                        <input className={aec.nameInput} type="text" value={name} onChange={(event) => { setName(event.target.value) }} /></p>
+                        <p className={aec.maxCapSection} >
+                            <label className={aec.maxLabel} >Max Capacity:</label> 
+                            <input className={aec.maxInput} type="number" value={maxCapacity} onChange={(event) => { setMaxCapacity(event.target.value) }} /></p>
+                        <p className={aec.levelSection} >
+                            <label className={aec.levelLabel}>Level:</label>
+                            <input className={aec.levelInput} type="number" value={level} onChange={(event) => { setLevel(event.target.value) }} /></p>
+                        <p className={aec.descSection} >
+                            <label className={aec.descLabel}>Description:</label>
+                            <textarea className={aec.descInput} placeholder='Write the description of the space' type="text" value={description} onChange={(event) => { setDescription(event.target.value) }} /></p>
+                        <p className={aec.statusSection} >Status:
+                            <select className={aec.status} value={status} onChange={(event) => setStatus(event.target.value)}>
                                 <option value="Open">Open</option>
                                 <option value="Closed">Closed</option>
                             </select>
                         </p>
                     </div>
-                    <div className="modal-footer">
-                        <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
-                        <button className="confirm-btn" onClick={handleConfirm}>Confirm</button>
+                    <div className={aec.modalFooter}>
+                        <button className={aec.cancelBtn} onClick={handleCancel}>Cancel</button>
+                        <button className={aec.confirmBtn} onClick={handleConfirm}>Confirm</button>
                     </div>
                 </div>
             </div>

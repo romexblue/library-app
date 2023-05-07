@@ -1,0 +1,194 @@
+.confModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    height: 550px;
+    width: 700px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #F7F7F7;
+  }
+
+  .modalBody{
+    width: 100%;
+    height: 360px;
+    background-color: white;
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px 0 20px;
+  }
+  .modalFooter{
+    margin-top: 30px;
+    height: 60px;
+    width: 100%;
+  }
+  .confirmBtn,
+  .cancelBtn {
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .confirmBtn {
+    background-color: #283971;
+    color: white;
+    border: none;
+  }
+
+  .cancelBtn {
+    border: 1px solid #283971;
+    color: #283971;
+    border: none;
+    background: none;
+  }
+  .cancelBtn:hover{
+    background-color: #a9a9a9;
+    color: white;
+  }
+  
+  .modalHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    height: 20px;
+    width: 100%;
+  }
+.modalTitle{
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: auto;
+}
+.modalClose{
+  cursor: pointer;
+}
+  /* Sections */
+
+  .nameSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: 35px;
+    padding: 0 20px 0;
+    margin: 10px 0 10px;
+  }
+  .nameLabel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  .nameInput{
+    width: 300px;
+    height: 35px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 0 10px 0;
+    font-size: 18px;
+    margin: 0 10px 0;
+  }
+  .maxCapSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: 35px;
+    padding: 0 20px 0;
+    margin: 10px 0 10px;
+  }
+  .maxLabel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  .maxInput{
+    width: 120px;
+    height: 35px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 0 10px 0;
+    font-size: 18px;
+    margin: 0 10px 0;
+  }
+  .levelSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: 35px;
+    padding: 0 20px 0;
+    margin: 10px 0 10px;
+  }
+  .levelLabel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  .levelInput{
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 0 10px 0;
+    font-size: 18px;
+    margin: 0 10px 0;
+  }
+  .descSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100px;
+    padding: 0 20px 0;
+    margin: 10px 0 10px;
+  }
+  .descLabel{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+  }
+  .descInput{
+    width: 500px;
+    height: 100px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 10px 10px 10px;
+    font-size: 14px;
+    margin: 0 10px 0;
+    resize: none;
+  }
+  .statusSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: 40px;
+    padding: 0 20px 0;
+    margin: 10px 0 10px;
+  }

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios';
 import AEFModal from './AEFModal'
 import image1 from '../images/search_icon.png';
+import image2 from '../images/Edit_Icon.png';
+import image3 from '../images/Delete_Icon.png';
 
 const AdminFloor = () => {
     const [floors, setFloors] = useState([]);
@@ -98,6 +100,7 @@ const AdminFloor = () => {
                         <th>Capacity</th>
                         <th>Building No.</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody className={flo.tableContent}>
@@ -114,8 +117,8 @@ const AdminFloor = () => {
                             <td>{floor.label}</td>
                             <td>{floor.status}</td>
                             <td>
-                                <button onClick={() => handleClick(floor, "Edit")}>Edit</button>
-                                <button onClick={() => handleClick(floor, "Delete")}>Delete</button>  
+                                <button className={flo.editButton} onClick={() => handleClick(floor, "Edit")}><img src={image2}></img></button>
+                                <button className={flo.deleteButton} onClick={() => handleClick(floor, "Delete")}><img src={image3}></img></button>  
                             </td>
                         </tr>
                     ))}

@@ -2,6 +2,8 @@ import con from '../styles/AdminConfab.module.css';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import AECModal from './AECModal'
+import image1 from '../images/Edit_Icon.png';
+import image2 from '../images/Delete_Icon.png';
 
 const AdminConfab = () => {
   const [confabs, setConfabs] = useState([]);
@@ -27,14 +29,6 @@ const AdminConfab = () => {
   useEffect(() => {
     serverReq();
   }, [])
-
-  const handleMouseEnter = (index) => {
-    setHoveredRow(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredRow(null);
-  };
 
   const handleClick = (confab, type) => {
     if (type === "Delete") {
@@ -89,35 +83,29 @@ const AdminConfab = () => {
                 </div>
           </div>
         <div>
-        <table>
-          <thead>
+        <table className={con.tableContainer}>
+          <thead className={con.tableHeader}>
             <tr>
               <th>Level</th>
               <th>Name</th>
               <th>Description</th>
               <th>Capacity</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {confabs.map((confab, index) => (
               <tr
-                key={confab.id}
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave}
-              >
+                key={confab.id}>
                 <td>{confab.level}</td>
                 <td>{confab.name}</td>
                 <td>{confab.description}</td>
                 <td>{confab.max_capacity}</td>
                 <td>{confab.status}</td>
-                <td style={{ border: 'none' }}>
-                  {hoveredRow === index && (
-                    <>
-                      <button onClick={() => handleClick(confab, "Edit")}>Edit</button>
-                      <button onClick={() => handleClick(confab, "Delete")}>Delete</button>
-                    </>
-                  )}
+                <td>
+                      <button className={con.editButton} onClick={() => handleClick(confab, "Edit")}><img src={image1}></img></button>
+                      <button className={con.editButton} onClick={() => handleClick(confab, "Delete")}><img src={image2}></img></button>
                 </td>
               </tr>
             ))}
@@ -125,7 +113,7 @@ const AdminConfab = () => {
         </table>
         {showEditModal && (
           <AECModal
-            title={`${action} Confab`}
+            title={`${action} Space`}
             data={confabData}
             update={handleConfirmConfab}
             cancel={handleCancelConfab}

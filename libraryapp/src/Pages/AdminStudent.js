@@ -86,7 +86,7 @@ const AdminStudent = () => {
     <div>
       <div className={stu.pageHeader}>
                 <div className={stu.section1}>
-                    <p>Space</p>
+                    <p>Patrons</p>
                 </div>
                 <div className={stu.section2}>
                     <form className={stu.searchForm}>

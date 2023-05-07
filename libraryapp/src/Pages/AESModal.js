@@ -1,4 +1,4 @@
-import '../styles/Modal.css'
+import aes from '../styles/ModalAES.module.css'
 import React, { useState } from "react";
 import axios from 'axios';
 
