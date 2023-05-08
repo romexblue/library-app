@@ -11,7 +11,6 @@ const AdminReservation = () => {
     const [value, setValue] = useState('');
     const [confabData, setConfabData] = useState([]);
     const [reservationData, setReservationData] = useState([]);
-    const [hoveredRow, setHoveredRow] = useState(null);
     const [searching, setSearching] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [currentPage, setCurrentPage] = useState(1);
@@ -79,7 +78,8 @@ const AdminReservation = () => {
         })
     };
 
-    const getReservationById = () => {
+    const getReservationById = (event) => {
+        event.preventDefault();
         if (!value) { return; }
         setSearching(true);
         axios.get(`http://localhost:5000/reservation/requests/find-by/${value}`, {
@@ -122,14 +122,6 @@ const AdminReservation = () => {
         })
     };
 
-    const handleMouseEnter = (index) => {
-        setHoveredRow(index);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredRow(null);
-    };
-
     const handlePageChange = (data) => {
         setCurrentPage(data.selected + 1);
     };
@@ -139,9 +131,8 @@ const AdminReservation = () => {
             <div className={res.pageTop} id=''>
                 <div className={res.pageFilter1} id=''>
                 <select className={res.tab} disabled={searching} id="status-select" onChange={handleStatusSelectChange}>
-                <option>Pending</option>
-                <option>Confirmed</option>
-                <option>Cancelled</option>
+                <option valeu="Pending">Pending</option>
+                <option value="Confirmed">Accepted</option>
                 </select>
                     <select className={res.selectInput} disabled={searching} id="confab-select" onChange={handleConfabSelectChange}>
                     {confabData.map((confab) => (
@@ -160,9 +151,9 @@ const AdminReservation = () => {
                     </div>
                 </div>
                 <div className={res.pageFilter3} id=''>
-                    <form className={res.searchForm}>
+                    <form onSubmit={(event) => getReservationById(event)} className={res.searchForm}>
                         <input className={res.searchInput}type="number" placeholder="Find by ID" onChange={handleInputChange} value={value}></input>
-                        <button className={res.searchBtnBox}onClick={() => getReservationById()}><img className={res.searchBtn} src={image1}></img></button>
+                        <button className={res.searchBtnBox} type="submit"><img className={res.searchBtn} src={image1}></img></button>
                     </form>
                 </div>
             </div>
@@ -188,10 +179,7 @@ const AdminReservation = () => {
                         {reservationData && reservationData.length !== 0 ? (
                         reservationData.map((resObj, index) => {
                             return (
-                                <tr key={index}
-                                    onMouseEnter={() => handleMouseEnter(index)}
-                                    onMouseLeave={handleMouseLeave}
-                                >
+                                <tr key={index}>
                                 <td>{resObj?.id}</td>
                                 <td>{resObj?.date}</td>
                                 <td>{resObj?.start_time}</td>
@@ -208,7 +196,7 @@ const AdminReservation = () => {
                         })
                     ) : (
                         <tr>
-                            <td colSpan="10" style={{ textAlign: "center" }}>{searching ? 'No data found' : 'No Data Found'}</td>
+                            <td colSpan="10" style={{ textAlign: "center" }}>{searching ? 'No Data Found' : 'No Data Found'}</td>
                         </tr>
                     )}
                         </tbody>

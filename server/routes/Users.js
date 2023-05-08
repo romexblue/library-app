@@ -17,7 +17,7 @@ router.post("/login", async (req, res) => {
                 secretkey
             )
 
-            res.json({ accessToken: accessToken, userId: user.id, type: user.type })
+            res.json({ accessToken: accessToken, userId: user.id, name:user.name, type: user.type })
             }   
     } catch (err) {
         res.json({ error: err })
@@ -33,7 +33,7 @@ router.get('/admin-auth/:id', validateToken, async (req, res) => {
             }
         });
         if (user) {
-            res.json({ success: "User Verified", type: user.type })
+            res.json({ success: "User Verified", name: user.name, type: user.type })
         } else {
             res.json({ error : "Admin Not Verified" })
         }

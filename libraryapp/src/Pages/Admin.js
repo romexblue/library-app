@@ -15,25 +15,26 @@ const Admin = () => {
     const [activeComponent, setActiveComponent] = useState('AdminReservation');
     const location = useLocation();
     const [date, setDate] = useState(new Date());
-    const [isAdmin, setIsAdmin] = useState((location.state || {}).userType === 'Admin' ? true : false);
+    const [adminName, setAdminName] = useState((location.state || {}).name);
+    const [isAdmin, setIsAdmin] = useState((location.state || {}).userType);
     const handleTabClick = (component) => {
         setActiveComponent(component);
     };
     const formatDate = (date) => {
         return date.toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric"
+            month: "short",
+            day: "numeric",
+            year: "numeric"
         });
-      };
-    
-      const formatTime = (date) => {
+    };
+
+    const formatTime = (date) => {
         return date.toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
-          hour12: true
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true
         });
-      };
+    };
     useEffect(() => {
         //to check token then check if admin
         if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
@@ -48,10 +49,12 @@ const Admin = () => {
                     authContext.logout();
                     navigate('/');
                 } else {
-                    
+
                     //if admin
                     if (response.data.type === "Admin" || response.data.type === "Librarian" || response.data.type === "Assistant") {
-                        navigate('/admin', { state: { userType: response.data.type } })
+                        navigate('/admin');
+                        setAdminName(response.data.name);
+                        setIsAdmin(response.data.type);
                     } else {
                         navigate('/choose') // for guard 
                     }
@@ -66,10 +69,10 @@ const Admin = () => {
         }
         const timer = setInterval(() => {
             setDate(new Date())
-            },1000);
-            return () => clearInterval(timer);
-        
-        }, [authContext, navigate]);
+        }, 1000);
+        return () => clearInterval(timer);
+
+    }, [authContext, navigate]);
 
     return (
 
@@ -77,7 +80,7 @@ const Admin = () => {
             <div className="sidebar">
                 <div className='section' id='accountInfo'>
                     <div className='systemUser' id='userTag'>
-                        Chiong, M.
+                        {adminName}
                     </div>
                 </div>
                 <div className='section' id='boundary'>
@@ -85,18 +88,20 @@ const Admin = () => {
                 </div>
                 <div className='section' id='dashBtns'>
                     <ul>
-                        <li>
-                            <div className='sideButton' id='btn1'>
-                                <button
-
-                                    className={activeComponent === 'AdminReservation' ? 'active' : 'buttonColor'}
-
-                                    onClick={() => handleTabClick('AdminReservation')} id='button1' >
-                                    Reservations
-                                </button>
-                            </div>
-                        </li>
-                        {isAdmin && (
+                        {(isAdmin === "Admin" || isAdmin === "Librarian" || isAdmin === "Assistant")  && (
+                            <>
+                                <li>
+                                    <div className='sideButton' id='btn1'>
+                                        <button
+                                            className={activeComponent === 'AdminReservation' ? 'active' : 'buttonColor'}
+                                            onClick={() => handleTabClick('AdminReservation')} id='button1' >
+                                            Reservations
+                                        </button>
+                                    </div>
+                                </li>
+                            </>
+                        )}
+                        {(isAdmin === "Admin" || isAdmin === "Librarian") && (
                             <>
                                 <li>
                                     <div className='sideButton' id='btn2'>
@@ -115,7 +120,7 @@ const Admin = () => {
 
                                             className={activeComponent === 'AdminConfab' ? 'active' : 'buttonColor'}
 
-                                           
+
                                             onClick={() => handleTabClick('AdminConfab')} id='button3'>
                                             Space Manager
                                         </button>
@@ -131,6 +136,10 @@ const Admin = () => {
                                         </button>
                                     </div>
                                 </li>
+                            </>
+                        )}
+                        {isAdmin === "Admin"&& (
+                            <>
                                 <li>
                                     <div className='sideButton' id='btn5'>
                                         <button
@@ -147,15 +156,15 @@ const Admin = () => {
                     </ul>
                 </div>
                 <div className='section' id='boundary'>
-                    
+
                 </div>
                 <div className='section' id='sTime'>
                     <div className='comp' id='timeDiv'>
-                    <div className='comp' id='timeContainer'>
-                        <div className='dateData' id='dateD'>{formatDate(date)}</div>
-                        <div className='dateData' id='timeDivider'> | </div>
-                        <div className='dateData' id='timeD'> {formatTime(date)}</div>
-                    </div>
+                        <div className='comp' id='timeContainer'>
+                            <div className='dateData' id='dateD'>{formatDate(date)}</div>
+                            <div className='dateData' id='timeDivider'> | </div>
+                            <div className='dateData' id='timeD'> {formatTime(date)}</div>
+                        </div>
                     </div>
                 </div>
             </div>
