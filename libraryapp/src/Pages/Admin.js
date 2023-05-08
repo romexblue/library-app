@@ -162,7 +162,7 @@ const Admin = () => {
             <div className="pagecontainer">
                 <div className="navbar">
                     <div className='systemName' id='sysname'>
-                        E-Lib Desk Mate
+                        XU-Lib Sentry
                     </div>
                 </div>
                 <div className='page-window'>

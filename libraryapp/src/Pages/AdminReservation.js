@@ -4,7 +4,8 @@ import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 import res from '../styles/AdminReservation.module.css';
 import image1 from '../images/search_icon.png';
-import '../styles/AdminReservation.module.css';
+import image2 from '../images/Accept_Icon.png';
+import image3 from '../images/Decline_Icon.png';
 
 const AdminReservation = () => {
     const [value, setValue] = useState('');
@@ -137,6 +138,11 @@ const AdminReservation = () => {
         <div>
             <div className={res.pageTop} id=''>
                 <div className={res.pageFilter1} id=''>
+                <select className={res.tab} disabled={searching} id="status-select" onChange={handleStatusSelectChange}>
+                <option>Pending</option>
+                <option>Confirmed</option>
+                <option>Cancelled</option>
+                </select>
                     <select className={res.selectInput} disabled={searching} id="confab-select" onChange={handleConfabSelectChange}>
                     {confabData.map((confab) => (
                     <option className={res.optionSelect} key={confab.id} value={confab.id}>{confab.name}</option>
@@ -161,43 +167,50 @@ const AdminReservation = () => {
                 </div>
             </div>
             <div>
-                <div className={res.reservationTable} id='reservetable'>
-                    <table className={res.tableHeaders}>
-                        <thead className='theaders'>
+                <div className={res.mainTable} id='reservetable'>
+                    <table className={res.tableContainer}>
+                        <thead className={res.tableHeader}>
                             <tr>
                                 <th>ID</th>
-                                <th>Users List</th>
                                 <th>Date</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
                                 <th>Reason</th>
-                                <th>Phone</th>
                                 <th>Status</th>
                                 <th>Confab ID</th>
-                                <th>Handler</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                     </table>
-                <div style={{ height: "370px", overflowY: "scroll" }}>
+                <div>
                     <table className={res.tableContents}>
-                        <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>Names</td>
-                                <td>2023-01-01</td>
-                                <td>8:00am</td>
-                                <td>10:00am</td>
-                                <td>sadfsggsdfasdfasfas</td>
-                                <td>099723232412</td>
-                                <td>Pending</td>
-                                <td>01</td>
-                                <td>Chiong</td>
-                                <td style={{ border: 'none' }}>
-                                    <button>Confirm</button>
-                                    <button>Cancel</button>
+                        <tbody className={res.tableBody}>
+                        {reservationData && reservationData.length !== 0 ? (
+                        reservationData.map((resObj, index) => {
+                            return (
+                                <tr key={index}
+                                    onMouseEnter={() => handleMouseEnter(index)}
+                                    onMouseLeave={handleMouseLeave}
+                                >
+                                <td>{resObj?.id}</td>
+                                <td>{resObj?.date}</td>
+                                <td>{resObj?.start_time}</td>
+                                <td>{resObj?.end_time}</td>
+                                <td>{resObj?.reason}</td>
+                                <td>{resObj?.confirmation_status}</td>
+                                <td>{resObj?.ConfabId}</td>
+                                <td>
+                                    <button className={res.editButton} onClick={() => handleClick(resObj?.id, 'Confirmed')}>✔</button>
+                                    <button className={res.deleteButton} onClick={() => handleClick(resObj?.id, 'Cancelled')}>✖</button>
                                 </td>
-                            </tr>
+                                </tr>
+                            )
+                        })
+                    ) : (
+                        <tr>
+                            <td colSpan="10" style={{ textAlign: "center" }}>{searching ? 'No data found' : 'No Data Found'}</td>
+                        </tr>
+                    )}
                         </tbody>
                     </table>
                 </div>

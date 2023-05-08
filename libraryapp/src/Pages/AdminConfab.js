@@ -94,7 +94,7 @@ const AdminConfab = () => {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={con.tableContent}>
             {confabs.map((confab, index) => (
               <tr
                 key={confab.id}>
@@ -104,8 +104,8 @@ const AdminConfab = () => {
                 <td>{confab.max_capacity}</td>
                 <td>{confab.status}</td>
                 <td>
-                      <button className={con.editButton} onClick={() => handleClick(confab, "Edit")}><img src={image1}></img></button>
-                      <button className={con.editButton} onClick={() => handleClick(confab, "Delete")}><img src={image2}></img></button>
+                    <button className={con.editButton} onClick={() => handleClick(confab, "Edit")}><img src={image1}></img></button>
+                    <button className={con.editButton} onClick={() => handleClick(confab, "Delete")}><img src={image2}></img></button>
                 </td>
               </tr>
             ))}

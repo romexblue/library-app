@@ -280,13 +280,12 @@ function Reservation() {
               <div className="rright-panel">
                 <div className="section" id="rsec1">
                   <div className="comp" id="rcomp1">
-                    <p>Usage</p>
+                    <p>Usage:</p>
                   </div>
                   <div className="comp" id="rcomp2">
-                    <img src={image1} alt="" />
                   </div>
                 </div>
-                <div className={"section"} id="rsec2">
+                <div className="section" id="rsec2">
                   <div className="Infosec" id="isec1">
                     <div className="Infolabel" id='ilabel1'>Date:</div>
                     <div className="ConfInfo" id="roomInfo1">
@@ -300,14 +299,17 @@ function Reservation() {
                     <div className="ConfInfo" id="roomInfo2">{selectedConfab.name}</div>
                   </div>
                   <div className="Infosec" id="isec3">
-                    <div className="Infolabel" id='ilabel3'>Type:</div>
-                    <div className="ConfInfo" id="roomInfo2">Confab Room</div>
+                    <div className="Infolabel" id='ilabel3'>Capacity:</div>
+                    <div className="ConfInfo" id="roomInfo2">{selectedConfab.max_capacity} pax</div>
                   </div>
+                </div>
+                <div className="section" id='rsec2_5'>
+                  Reserved Slots:
                 </div>
                 <div className="section" id="rsec3">
                   <div className="table-header">
                     <div className="header" id="header1">No.</div>
-                    <div className="header" id="header2">Desc</div>
+                    <div className="header" id="header2">Status</div>
                     <div className="header" id="header3">From</div>
                     <div className="header" id="header4">Until</div>
                   </div>
@@ -326,40 +328,43 @@ function Reservation() {
                         ))
                       ) : (
                         <div className="table-content">
-                          <div style={{ marginTop: "10px" }}>{selectedConfab ? "All Times Vacant" : "Please Choose a Confab"}</div>
+                          <div style={{ marginTop: "10px" }}>{selectedConfab ? "All Slots Vacant" : "Please Choose a Confab"}</div>
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
                 <div className="section" id="rsec5">
-                  <div className="comp" id="drop3">
-                    <div className="label">
-                      Start Time
-                    </div>
-                    <div className="drop-down">
-                      <TimeSelect
-                        options={Object.keys(TIMES)}
-                        value={startTime}
-                        onChange={handleStartTimeChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="comp" id="drop4">
-                    <div className="label">
-                      End Time
-                    </div>
-                    <div className="drop-down">
-                      <TimeSelect className="timeSelect"
-                        options={endTimeOptions}
-                        value={endTime}
-                        onChange={handleEndTimeChange}
-                      />
-                    </div>
-                  </div>
+                  <div className='comp' id='drop1'>Usage Time Range:</div>
+                  <div className='comp' id='drop2'><p className='errorReminder'>{errorMessage}</p></div>
                 </div>
                 <div className="section" id="rsec6">
-                <p className='errorReminder'>{errorMessage}</p>
+                  <div className='comp' id='rcompo1'>
+                    <div className="comp" id="drop3">
+                      <div className="label">
+                        Start Time
+                      </div>
+                      <div className="drop-down">
+                        <TimeSelect
+                          options={Object.keys(TIMES)}
+                          value={startTime}
+                          onChange={handleStartTimeChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="comp" id="drop4">
+                      <div className="label">
+                        End Time
+                      </div>
+                      <div className="drop-down">
+                        <TimeSelect className="timeSelect"
+                          options={endTimeOptions}
+                          value={endTime}
+                          onChange={handleEndTimeChange}
+                        />
+                      </div>
+                    </div>
+                  </div>
                   <div className="btn-holder" id="holder1-1">
                     <button className="submitbtn" onClick={() => nextPage()}>Next</button>
                   </div>

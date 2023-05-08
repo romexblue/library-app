@@ -36,13 +36,6 @@ const AdminStudent = () => {
     setCurrentPage(data.selected + 1);
   };
 
-  const handleMouseEnter = (index) => {
-    setHoveredRow(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredRow(null);
-  };
 
   const handleClick = (student, type) => {
 
@@ -86,7 +79,7 @@ const AdminStudent = () => {
     <div>
       <div className={stu.pageHeader}>
                 <div className={stu.section1}>
-                    <p>Patrons</p>
+                    <p>Patron</p>
                 </div>
                 <div className={stu.section2}>
                     <form className={stu.searchForm}>
@@ -96,20 +89,13 @@ const AdminStudent = () => {
                 </div>
                 <div className={stu.section3}>
                   <div className={stu.button1}>
-                      <button className={stu.addBtn} onClick={() => handleClick([], "Add")}><div className={stu.plusSign}
-                      >+</div><p>Add Space</p></button>
+                      <button className={stu.addBtn} onClick={() => handleClick([], "Add")}><p>Registration Wizard</p></button>
                       </div>
                   </div>
-                <div className={stu.section4}>
-                    <div className={stu.button2}>
-                    <button className={stu.addBtn} onClick={() => handleClick([], "Add")}><div className={stu.plusSign}
-                    >+</div><p>Add Space</p></button>
-                    </div>
-                </div>
           </div>
-      <div>
-      <table>
-        <thead>
+      <div className={stu.mainTable}>
+      <table className={stu.tableContainer}>
+        <thead className={stu.tableHeader}>
           <tr>
             <th>School ID</th>
             <th>Type</th>
@@ -122,14 +108,13 @@ const AdminStudent = () => {
             <th>RFID</th>
           </tr>
         </thead>
-        <tbody>
+        </table>
+        <table className={stu.tableContents}>
+        <tbody className={stu.tableBody}>
           {students && students.length !== 0 ? (
             students.map((studentObj, index) => {
               return (
-                <tr key={index}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={handleMouseLeave}
-                >
+                <tr key={index}>
                   <td>{studentObj?.school_id}</td>
                   <td>{studentObj?.type}</td>
                   <td>{studentObj?.first_name}</td>
@@ -139,13 +124,9 @@ const AdminStudent = () => {
                   <td>{studentObj?.college}</td>
                   <td>{studentObj?.year}</td>
                   <td>{studentObj?.rfid}</td>
-                  <td style={{ border: 'none' }}>
-                    {hoveredRow === index && (
-                      <>
-                        <button onClick={() => handleClick(studentObj, 'Edit')}>Edit</button>
-                        <button onClick={() => handleClick(studentObj, 'Delete')}>Delete</button>
-                      </>
-                    )}
+                  <td>
+                      <button onClick={() => handleClick(studentObj, 'Edit')}>Edit</button>
+                      <button onClick={() => handleClick(studentObj, 'Delete')}>Delete</button>     
                   </td>
                 </tr>
               )

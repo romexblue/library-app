@@ -514,7 +514,7 @@
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: flex-start;
-  background-color: rgb(247, 247, 247);
+  background: none;
   overflow-x: auto;
 }
 
