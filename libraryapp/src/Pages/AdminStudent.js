@@ -61,9 +61,9 @@ const AdminStudent = ({ adminData }) => {
   };
 
   const handleClick = (student, type) => {
-
+    console.log(student)
     if (type === "Delete") {
-      axios.delete(`http://localhost:5000/student/${student.id}`, {
+      axios.delete(`http://localhost:5000/student/${student.school_id}`, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken"),
           userId: sessionStorage.getItem("id")

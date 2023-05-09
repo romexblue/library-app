@@ -1,55 +1,79 @@
 const express = require('express');
 const router = express.Router();
-const { Op } = require('sequelize');
+const moment = require('moment');
+const { Op, Sequelize } = require('sequelize');
 const { Records, Students, Floor } = require('../models')
 const { validateToken } = require("../middlewares/AuthMiddleware")
 
-router.get('/stats/:year', validateToken, async (req, res) => {
-    const { year } = req.params;
+router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
     try {
+        const startDate = req.params.startDate;
+        const endDate = req.params.endDate;
+        const college = req.params.college;
+        // Query the Records table for all records in the selected date range where both time_in and time_out are not null
         const records = await Records.findAll({
             where: {
-                time_in: { [Op.not]: null },
-                time_out: { [Op.not]: null },
-                date: { [Op.startsWith]: `${year}-` }
-            }
+                date: {
+                    [Op.between]: [startDate, endDate]
+                },
+                time_in: {
+                    [Op.not]: null
+                },
+                time_out: {
+                    [Op.not]: null
+                }
+            },
+            attributes: [
+                [Sequelize.fn('COUNT', Sequelize.col('Records.id')), 'count'],
+                [Sequelize.fn('AVG', Sequelize.literal('TIME_TO_SEC(TIMEDIFF(time_out, time_in))')), 'averageStayTime'],
+                [Sequelize.fn('MAX', Sequelize.literal('TIME_TO_SEC(TIMEDIFF(time_out, time_in))')), 'highestStayTime'],
+                [Sequelize.fn('MIN', Sequelize.literal('TIME_TO_SEC(TIMEDIFF(time_out, time_in))')), 'lowestStayTime']
+            ],
+            include: [
+                {
+                    model: Students,
+                    attributes: [],
+                    where: college ? { college: college } : {}
+                },
+                {
+                  model: Floor,
+                  attributes: ['name']
+                }
+              ],
+            group: ['Records.FloorId'],
+            raw: true
         });
-        let totalTime = 0;
-        const monthData = {};
-        for (let i = 0; i < records.length; i++) {
-            const date = new Date(records[i].date);
-            const month = date.toLocaleString('default', { month: 'long' });
-            const timeInMs = new Date(`1970-01-01T${records[i].time_in}Z`).getTime();
-            const timeOutMs = new Date(`1970-01-01T${records[i].time_out}Z`).getTime();
-            const diffMs = timeOutMs - timeInMs;
-            totalTime += diffMs;
-            if (!monthData[month]) {
-                monthData[month] = { totalTime: 0, count: 0 };
-            }
-            monthData[month].totalTime += diffMs;
-            monthData[month].count++;
-        }
-        const totalAverageMs = totalTime / records.length;
-        const totalAverageTime = formatTime(totalAverageMs);
-        const monthAverages = {};
-        for (const month in monthData) {
-            const { totalTime, count } = monthData[month];
-            const monthAverageMs = totalTime / count;
-            monthAverages[month] = formatTime(monthAverageMs);
-        }
-        res.json({ totalAverage: totalAverageTime, ...monthAverages });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+
+        // Calculate the overall statistics
+        const overallCount = records.reduce((total, record) => total + record.count, 0);
+        const overallStayTime = records.reduce((total, record) => total + record.averageStayTime * record.count, 0) / overallCount;
+        const overallHighestStayTime = records.reduce((maxStayTime, record) => record.highestStayTime > maxStayTime ? record.highestStayTime : maxStayTime, 0);
+        const overallLowestStayTime = records.reduce((minStayTime, record) => record.lowestStayTime < minStayTime || minStayTime === 0 ? record.lowestStayTime : minStayTime, 0);
+
+        res.json({
+            overall: {
+                count: overallCount,
+                averageStayTime: overallStayTime,
+                highestStayTime: overallHighestStayTime,
+                lowestStayTime: overallLowestStayTime
+            },
+            floors: records
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: 'An error occurred while processing your request'
+        });
     }
 });
 
 //convert millisecond to HH:mm:ss
-function formatTime(timeMs) {
-    const hours = Math.floor(timeMs / (1000 * 60 * 60));
-    const minutes = Math.floor((timeMs % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeMs % (1000 * 60)) / 1000);
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+function formatTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
 }
 
 //for time in

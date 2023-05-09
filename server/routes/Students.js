@@ -29,10 +29,10 @@ router.get('/all/:page', validateToken, async (req, res) => {
     try {
         const page = parseInt(req.params.page) || 1;
         const limit = 7;
-        const offset= (page - 1) * limit;
-        const students = await Students.findAll({limit, offset, order: [['last_name', 'ASC']]});
+        const offset = (page - 1) * limit;
+        const students = await Students.findAll({ limit, offset, order: [['last_name', 'ASC']] });
         const count = await Students.count();
-        res.json({students, count});
+        res.json({ students, count });
     } catch (error) {
         res.status(500).json({ error: "Internal Server Errror" })
     }
@@ -42,7 +42,7 @@ router.post('/', validateToken, async (req, res) => {
     const student = req.body
     try {
         await Students.create(student);
-        res.status(200).json({success: "Create Student Successful"});
+        res.status(200).json({ success: "Create Student Successful" });
     } catch (err) {
         res.status(500).json({ error: err })
     }
@@ -52,7 +52,7 @@ router.put('/', validateToken, async (req, res) => {
     const student = req.body
     try {
         await Students.upsert(student);
-        res.status(200).json({success: "Transaction Successful"});
+        res.status(200).json({ success: "Transaction Successful" });
     } catch (err) {
         console.log(err)
         res.status(500).json({ error: err })
@@ -83,7 +83,7 @@ router.patch('/:id', validateToken, async (req, res) => {
 router.delete('/:id', validateToken, async (req, res) => {
     const { id } = req.params
     try {
-        await Students.destroy({ where: { school_id } });
+        await Students.destroy({ where: { school_id:id } });
         res.status(204).json({ success: "Deletion Successful" });
     } catch (err) {
         res.status(500).json({ error: err });
