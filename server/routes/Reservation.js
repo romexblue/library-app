@@ -5,22 +5,45 @@ const router = express.Router();
 const { Reservation, ReservationStudent, Students, Confab } = require('../models')
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.get('/stats/:startDate/:endDate', async (req, res) => {
+router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
   try {
     const startDate = req.params.startDate;
     const endDate = req.params.endDate;
+    const college = req.params.college;
 
     const approvedReservationsCount = await Reservation.count({
       where: {
         date: {
           [Op.between]: [startDate, endDate]
         },
-        confirmation_status: 'Confirmed'
-      }
+        confirmation_status: "Confirmed"
+      },
+      include: [
+        {
+          model: Students,
+          where: {
+            college: college || { [Op.ne]: null }
+          },
+          include: [
+            {
+              model: Reservation,
+              where: {
+                date: {
+                  [Op.between]: [startDate, endDate]
+                },
+                confirmation_status: "Confirmed"
+              }
+            }
+
+          ]
+        }, {
+          model: Confab,
+          attributes: ['name']
+        }
+      ], group: ['Reservation.ConfabId'],
     });
 
     const approvedReservationsStudentsCount = await ReservationStudent.count({
-
       col: 'StudentSchoolId',
       include: [
         {
@@ -32,13 +55,17 @@ router.get('/stats/:startDate/:endDate', async (req, res) => {
             confirmation_status: 'Confirmed'
           }
         },
-        Students
-      ]
+        {
+          model: Students,
+          where: {
+            college: college || { [Op.ne]: null }
+          }
+        }]
     });
 
     res.json({
       approvedReservationsCount,
-      approvedReservationsStudentsCount
+      approvedReservationsStudentsCount,
     });
   } catch (error) {
     console.error(error);
@@ -47,6 +74,7 @@ router.get('/stats/:startDate/:endDate', async (req, res) => {
     });
   }
 });
+
 
 router.get('/requests/find-by/:id', validateToken, async (req, res) => {
   try {

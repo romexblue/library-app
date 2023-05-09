@@ -3,7 +3,7 @@ import axios from "axios"
 import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../helpers/AuthContext';
-import ConfModal from './ConfModal';
+import ConFFModal from './ConFFModal';
 import InfoPage from './InfoPage';
 import image1 from '../images/Num_1.png';
 import image2 from '../images/Tag_1.png';
@@ -319,7 +319,7 @@ const FloorButtons = () => {
             </div>
         )}
         {showConfirmation && (
-            <ConfModal
+            <ConFFModal
                 title="CONFIRM"
                 message={`Visiting Level: ${floorName}`}
                 onConfirm={handleConfirm}
