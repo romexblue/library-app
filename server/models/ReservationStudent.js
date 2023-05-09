@@ -22,6 +22,15 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         timestamps: false,
     });
+    
+    ReservationStudent.associate = (models) => {
+        ReservationStudent.belongsTo(models.Students, {
+            foreignKey: 'StudentSchoolId',
+        });
+        ReservationStudent.belongsTo(models.Reservation, {
+            foreignKey: 'ReservationId',
+        });
+    };
 
     return ReservationStudent;
 };

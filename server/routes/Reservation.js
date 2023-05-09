@@ -1,9 +1,80 @@
 const express = require('express');
-const { Op } = require('sequelize');
+const { Op, Sequelize } = require('sequelize');
 const moment = require('moment');
 const router = express.Router();
 const { Reservation, ReservationStudent, Students, Confab } = require('../models')
 const { validateToken } = require("../middlewares/AuthMiddleware");
+
+router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
+  try {
+    const startDate = req.params.startDate;
+    const endDate = req.params.endDate;
+    const college = req.params.college;
+
+    const approvedReservationsCount = await Reservation.count({
+      where: {
+        date: {
+          [Op.between]: [startDate, endDate]
+        },
+        confirmation_status: "Confirmed"
+      },
+      include: [
+        {
+          model: Students,
+          where: {
+            college: college || { [Op.ne]: null }
+          },
+          include: [
+            {
+              model: Reservation,
+              where: {
+                date: {
+                  [Op.between]: [startDate, endDate]
+                },
+                confirmation_status: "Confirmed"
+              }
+            }
+
+          ]
+        }, {
+          model: Confab,
+          attributes: ['name']
+        }
+      ], group: ['Reservation.ConfabId'],
+    });
+
+    const approvedReservationsStudentsCount = await ReservationStudent.count({
+      col: 'StudentSchoolId',
+      include: [
+        {
+          model: Reservation,
+          where: {
+            date: {
+              [Op.between]: [startDate, endDate]
+            },
+            confirmation_status: 'Confirmed'
+          }
+        },
+        {
+          model: Students,
+          where: {
+            college: college || { [Op.ne]: null }
+          }
+        }]
+    });
+
+    res.json({
+      approvedReservationsCount,
+      approvedReservationsStudentsCount,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'An error occurred while processing your request'
+    });
+  }
+});
+
 
 router.get('/requests/find-by/:id', validateToken, async (req, res) => {
   try {
@@ -74,8 +145,6 @@ router.get('/requests/:confId/:status/:date/:page', validateToken, async (req, r
   }
 });
 
-
-
 router.get('/:confId/:date', async (req, res) => {
   if (!req.params.confId || !req.params.date) {
     res.status(500).json({ error: "Date and ConfabId is required" })
@@ -122,7 +191,6 @@ router.get('/:confId/:date', async (req, res) => {
   }
 });
 
-
 router.post('/', async (req, res) => {
   const { guestList, ...rec } = req.body; //separate guest list from the request
   let newId; //for record deletion if error in student list
@@ -141,7 +209,7 @@ router.post('/', async (req, res) => {
         date: date,
       }
     });
-  
+
     if (existingRep) {
       return res.status(400).json({ error: 'No double booking allowed' });
     }

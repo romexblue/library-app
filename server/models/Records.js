@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
       Records.belongsTo(models.Students, {
          foreignKey: 'StudentSchoolId'
       });
+      Records.belongsTo(models.Floor, {
+         foreignKey: 'FloorId'
+      });
    };
 
    return Records

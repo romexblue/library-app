@@ -8,10 +8,9 @@ import AdminReservation from './AdminReservation';
 import AdminConfab from './AdminConfab';
 import AdminStudent from './AdminStudent';
 import AdminUsers from './AdminUsers';
+import AdminStatistics from './AdminStatistics';
 import image1 from '../images/Logout_Icon.png';
 import image2 from '../images/Options_Icon.png';
-import image3 from '../images/Exit_Icon.png';
-import image4 from '../images/Entry_Icon.png';
 
 const Admin = () => {
     const navigate = useNavigate();
@@ -21,7 +20,7 @@ const Admin = () => {
     const [date, setDate] = useState(new Date());
     const [adminName, setAdminName] = useState((location.state || {}).name);
     const [isAdmin, setIsAdmin] = useState((location.state || {}).userType);
-    
+
     const handleTabClick = (component) => {
         setActiveComponent(component);
     };
@@ -93,7 +92,7 @@ const Admin = () => {
                 </div>
                 <div className='section' id='dashBtns'>
                     <ul>
-                        {(isAdmin === "Admin" || isAdmin === "Librarian" || isAdmin === "Assistant")  && (
+                        {(isAdmin === "Admin" || isAdmin === "Librarian" || isAdmin === "Assistant") && (
                             <>
                                 <li>
                                     <div className='sideButton' id='btn1'>
@@ -112,10 +111,10 @@ const Admin = () => {
                                     <div className='sideButton' id='btn2'>
                                         <button
 
-                                            className={activeComponent === 'AdminFloor' ? 'active' : 'buttonColor'}
+                                            className={activeComponent === 'AdminStatistics' ? 'active' : 'buttonColor'}
 
-                                            onClick={() => handleTabClick('AdminFloor')} id='button2'>
-                                            Floor Manager
+                                            onClick={() => handleTabClick('AdminStatistics')} id='button2'>
+                                            Statistics
                                         </button>
                                     </div>
                                 </li>
@@ -123,35 +122,46 @@ const Admin = () => {
                                     <div className='sideButton' id='btn3'>
                                         <button
 
-                                            className={activeComponent === 'AdminConfab' ? 'active' : 'buttonColor'}
+                                            className={activeComponent === 'AdminFloor' ? 'active' : 'buttonColor'}
 
-
-                                            onClick={() => handleTabClick('AdminConfab')} id='button3'>
-                                            Space Manager
+                                            onClick={() => handleTabClick('AdminFloor')} id='button3'>
+                                            Floor Manager
                                         </button>
                                     </div>
                                 </li>
                                 <li>
                                     <div className='sideButton' id='btn4'>
                                         <button
+
+                                            className={activeComponent === 'AdminConfab' ? 'active' : 'buttonColor'}
+
+
+                                            onClick={() => handleTabClick('AdminConfab')} id='button4'>
+                                            Space Manager
+                                        </button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className='sideButton' id='btn5'>
+                                        <button
                                             className={activeComponent === 'AdminStudent' ? 'active' : 'buttonColor'}
 
-                                            onClick={() => handleTabClick('AdminStudent')} id='button4'>
+                                            onClick={() => handleTabClick('AdminStudent')} id='button5'>
                                             Patrons
                                         </button>
                                     </div>
                                 </li>
                             </>
                         )}
-                        {isAdmin === "Admin"&& (
+                        {isAdmin === "Admin" && (
                             <>
                                 <li>
-                                    <div className='sideButton' id='btn5'>
+                                    <div className='sideButton' id='btn6'>
                                         <button
 
                                             className={activeComponent === 'AdminUsers' ? 'active' : 'buttonColor'}
 
-                                            onClick={() => handleTabClick('AdminUsers')} id='button5'>
+                                            onClick={() => handleTabClick('AdminUsers')} id='button6'>
                                             Users
                                         </button>
                                     </div>
@@ -175,8 +185,8 @@ const Admin = () => {
             </div>
             <div className="pagecontainer">
                 <div className="navbar">
-                <div className='section' id='navbarPart1'>
-                            
+                    <div className='section' id='navbarPart1'>
+
                     </div>
                     <div className='section' id='navbarPart2'>
                         XU-Lib Sentry
@@ -194,6 +204,11 @@ const Admin = () => {
                                 <AdminReservation />
                             </div>
                         )}
+                         {activeComponent === 'AdminStatistics' && (
+                            <div>
+                                <AdminStatistics />
+                            </div>
+                        )}
                         {activeComponent === 'AdminFloor' && (
                             <div>
                                 <AdminFloor />
@@ -206,7 +221,7 @@ const Admin = () => {
                         )}
                         {activeComponent === 'AdminStudent' && (
                             <div>
-                                <AdminStudent adminData={{type: isAdmin, name: adminName}}/>
+                                <AdminStudent adminData={{ type: isAdmin, name: adminName }} />
                             </div>
                         )}
                         {activeComponent === 'AdminUsers' && (
