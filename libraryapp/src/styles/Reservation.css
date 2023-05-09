@@ -529,7 +529,7 @@
     display: inline-block;
   }
   
-  select {
+  .timeSelect {
     padding: 10px;
     margin-right: 30px;
     font-size: 16px;
@@ -540,7 +540,7 @@
   }
   
   /* Style the dropdown arrow */
-  select::after {
+  .timeSelect::after {
     content: "\25BC";
     font-size: 16px;
     color: #aaa;

@@ -11,20 +11,20 @@
     align-items: center;
   }
   
-  .modal-content {
+  .modalContent {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    height: 300px;
-    width: 400px;
+    height: 500px;
+    width: 800px;
     text-align: center;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   }
-  .modal-footer{
+  .modalFooter{
     margin-top: 30px;
   }
-  .confirm-btn,
-  .cancel-btn {
+  .confirmBtn,
+  .cancelBtn {
     padding: 10px 20px;
     margin: 10px;
     border-radius: 5px;
@@ -32,7 +32,7 @@
     cursor: pointer;
   }
   
-  .confirm-btn {
+  .confirmBtn {
     background-color: #283971;
     color: white;
     border: none;
@@ -40,13 +40,13 @@
   .cancelbtn{
     color: rgb(205, 205, 205)
   }
-  .cancel-btn {
+  .cancelBtn {
     border: 1px solid #283971;
     background-color: white;
     color: #283971;
     border: none;
   }
-  .cancel-btn:hover{
+  .cancelBtn:hover{
     background-color: #a9a9a9;
     color: white;
   }
@@ -57,8 +57,222 @@
     font-family: 'Ubuntu', sans-serif;
     font-size: 20px;
   }
-  .modal-header img{
+  .modalHeader img{
     margin-top: 20px;
     height: 40px;
     width: 40px;
+  }
+
+  .section1{
+    width: 100%;
+    height:50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .compo1{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 40%;
+    margin-left: 20px;
+  }
+  .compo1 p{
+    text-align: start;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .compo1 input{
+    height: 30px;
+    width: 250px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px;  
+    border: 1px solid black;
+  }
+  .compo2{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    margin-left: 20px;
+  }
+  .compo2 p{
+    text-align: start;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+.typeSelect{
+    height: 30px;
+    width: 190px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 16px;  
+    padding: 0 10px 0;
+    border: 1px solid black;
+  }
+.section2{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  height: 50px;
+  margin: 5px 0 5px;
+
+  }
+.compo3{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 40%;
+    margin-left: 20px;
+  }
+  .compo3 p{
+    text-align: left;
+  }
+  .compo3 input{
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .compo4{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 40%;
+    margin-left: 20px;
+  }
+  .compo4 p{
+    text-align: left;
+    font-size: 14px;
+  }
+  .compo4 input{
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .section3{
+    width: 100%;
+    height: 50px;
+    margin: 5px 0 5px;
+
+  }
+
+  .compo5{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  .compo5 p{
+    text-align: left;
+    font-size: 14px;
+  }
+  .compo5 input{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 14px;
+
+  }
+  .section4{
+    width: 100%;
+    height:50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 5px 0 5px;
+
+  }
+  .compo6{
+    margin: 0 10px 0;
+    width: 200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  .compo6 p{
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+  .compo6 .genderSelect{
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 14px;
+    padding: 0 10px 0;
+    
+  }
+  .compo7{
+    width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  .compo7 p{
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .compo7 .genderSelect{
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+  .compo8{
+    width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .compo8 p{
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .compo8 input{
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 14px;
+  }
+  .section5{
+    width: 100%;
+    height:50px;
+    margin: 5px 0 5px;
+  }
+  .compo9{
+    width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  .compo9 p{
+    font-size: 14px;
+    text-align: left;
+  }
+  .compo9 input{
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: none;
   }

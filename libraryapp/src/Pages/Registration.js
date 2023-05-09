@@ -45,7 +45,6 @@ const Registration = () => {
     };
 
     const clearData = () => {
-        setType("");
         setFName("");
         setLName("");
         setGender("");

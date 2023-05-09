@@ -37,7 +37,7 @@ const TIMES = {
 function TimeSelect({ options, value, onChange }) {
   return (
     <div>
-      <select value={value} onChange={onChange}>
+      <select className='timeSelect' value={value} onChange={onChange}>
         {options.map((option) => (
           <option key={option} value={option}>
             {option}

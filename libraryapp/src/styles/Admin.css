@@ -154,6 +154,7 @@ ul li{
   background:none;
   border-radius: 10px;
   border: none;
+  cursor: pointer;
 }
 #adminOptions{
   width: 35px;
@@ -162,6 +163,7 @@ ul li{
   background:none;
   border-radius: 10px;
   border: none;
+  cursor:pointer;
 }
 #adminlogoutBtn img{
   margin: 5px;
@@ -190,4 +192,60 @@ ul li{
   width: 100%;
   padding: 0 10px 10px;
   border-radius: 10px;
+}
+/* paginate */
+
+.paginateContainer{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;  
+}
+.paginate{
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  font-size: 14px;
+  line-height: 30px;
+
+}
+.classPaginate{
+  text-align: center;
+  border-radius: 5px;
+  min-width: 30px;
+  max-width: auto;
+  height: 100%;
+  background:none;
+  border: 1px solid #283971;
+  margin: 0 5px 0;
+  cursor: pointer;
+}
+.activePaginate{
+  width: 30px;
+  height: 100%;
+  background-color: #283971;
+  color: white;
+  cursor: pointer;
+}
+.nextPaginate{
+  background-color: rgb(88, 88, 88);
+  color: white;
+  width: 70px;
+  border-radius: 5px;
+  text-align: center;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.prevPaginate{
+  background-color: rgb(88, 88, 88);
+  color: white;
+  width: 70px;
+  border-radius: 5px;
+  text-align: center;
+  margin-right: 20px;
+  cursor: pointer;
 }

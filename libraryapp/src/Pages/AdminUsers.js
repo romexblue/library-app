@@ -128,14 +128,21 @@ const AdminUsers = () => {
         </tbody>
       </table>
       </div>
+      <div className='paginateContainer'>
       <ReactPaginate
-        pageCount={Math.ceil(count / 10)} // number of pages
-        pageRangeDisplayed={5}
-        marginPagesDisplayed={2}
+        pageCount={Math.ceil(count / 7)} // number of pages
+        pageRangeDisplayed={15}
+        previousLabel={'Prev'}
+        previousClassName='prevPaginate'
+        nextLabel={'Next'}
+        nextClassName='nextPaginate'
+        marginPagesDisplayed={0}
         onPageChange={handlePageClick} // callback function for page change
-        containerClassName="pagination"
-        activeClassName="active"
+        containerClassName='paginate'
+        activeClassName='activePaginate'
+        pageClassName='classPaginate'
       />
+      </div>
       {showEditModal && (
         <AEUModal
           title={`${action} User`}
