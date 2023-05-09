@@ -103,7 +103,7 @@
     justify-content:space-around;
     border: 1px solid #283971;
     border-radius: 10px;
-    z-index: 5;
+    z-index: 0;
 }
 .searchInput{
     font-size: 18px;

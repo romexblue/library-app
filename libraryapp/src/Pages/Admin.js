@@ -182,8 +182,8 @@ const Admin = () => {
                         XU-Lib Sentry
                     </div>
                     <div className='section' id='navbarPart3'>
-                        <button className='buttons' id='adminOptions'><img src={image2}></img></button>
-                        <button className='buttons' id='adminlogoutBtn'><img src={image1}></img></button>
+                        <button className='buttons' id='adminOptions' onClick={()=>navigate('/choose')}><img src={image2}></img></button>
+                        <button className='buttons' id='adminlogoutBtn' onClick={()=>authContext.logout()}><img src={image1}></img></button>
                     </div>
                 </div>
                 <div className='page-window'>

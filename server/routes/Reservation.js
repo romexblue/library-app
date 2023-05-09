@@ -47,7 +47,7 @@ router.patch('/requests/find-by/:id', validateToken, async (req, res) => {
 router.get('/requests/:confId/:status/:date/:page', validateToken, async (req, res) => {
   try {
     const { confId, status, date, page } = req.params;
-    const limit = 10; // limit number of records per page
+    const limit = 7; // limit number of records per page
     const offset = (page - 1) * limit; // calculate offset based on current page
     const reservations = await Reservation.findAndCountAll({
       where: {
