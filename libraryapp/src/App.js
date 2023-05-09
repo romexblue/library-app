@@ -8,6 +8,7 @@ import Chooser from './Pages/Chooser';
 import Exit from './Pages/Exit';
 import Admin from './Pages/Admin';
 import Reservation from './Pages/Reservation';
+import Registration from './Pages/Registration';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,6 +45,7 @@ function App() {
             <Route path="/exit" exact element={<Exit />} />
             <Route path="/reservation" exact element={<Reservation />} />
             <Route path="/admin" exact element={<Admin />}/>
+            <Route path="/registration" exact element={<Registration/>}/>
           </Routes>
         </div>
       </Router>

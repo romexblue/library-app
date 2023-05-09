@@ -21,6 +21,7 @@ const Admin = () => {
     const [date, setDate] = useState(new Date());
     const [adminName, setAdminName] = useState((location.state || {}).name);
     const [isAdmin, setIsAdmin] = useState((location.state || {}).userType);
+    
     const handleTabClick = (component) => {
         setActiveComponent(component);
     };
@@ -205,7 +206,7 @@ const Admin = () => {
                         )}
                         {activeComponent === 'AdminStudent' && (
                             <div>
-                                <AdminStudent />
+                                <AdminStudent adminData={{type: isAdmin, name: adminName}}/>
                             </div>
                         )}
                         {activeComponent === 'AdminUsers' && (

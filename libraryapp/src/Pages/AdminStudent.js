@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
+import { useNavigate } from "react-router-dom";
 import AESModal from './AESModal';
 import stu from '../styles/AdminStudent.module.css';
 import image1 from '../images/search_icon.png'
 import image2 from '../images/Edit_Icon.png';
 import image3 from '../images/Delete_Icon.png';
 
-const AdminStudent = () => {
+const AdminStudent = ({ adminData }) => {
+  const navigate = useNavigate();
   const [idValue, setIdValue] = useState('');
   const [students, setStudents] = useState([]);
   const [studentData, setStudentData] = useState({});
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [hoveredRow, setHoveredRow] = useState(null);
   const [action, setAction] = useState('Delete');
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -28,9 +29,9 @@ const AdminStudent = () => {
       },
     })
       .then((response) => {
-        if(response.data.error){
+        if (response.data.error) {
           setStudents([])
-        }else{
+        } else {
           setStudents([response.data])
         }
         setCount(0);
@@ -41,8 +42,8 @@ const AdminStudent = () => {
   const handleValueChange = (event) => {
     setIdValue(event.target.value);
     if (event.target.value === '') {
-      fetchStudents(currentPage); 
-  }
+      fetchStudents(currentPage);
+    }
   }
 
   const fetchStudents = async (page) => {
@@ -120,7 +121,7 @@ const AdminStudent = () => {
         </div>
         <div className={stu.section3}>
           <div className={stu.button1}>
-            <button className={stu.addBtn} onClick={() => handleClick([], "Add")}><p>Registration Wizard</p></button>
+            <button className={stu.addBtn} onClick={() => navigate('/registration', { state: { userType: adminData.type, name: adminData.name } })}><p>Registration Wizard</p></button>
           </div>
         </div>
       </div>
