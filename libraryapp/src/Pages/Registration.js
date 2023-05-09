@@ -2,6 +2,13 @@ import { useEffect, useContext, useState } from "react"
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import AuthContext from "../helpers/AuthContext";
+import image1 from '../images/XuLib.png';
+import image2 from '../images/ID_Design.png';
+import image3 from '../images/Rfid_Icon.png';
+import image4 from '../images/Back_Icon.png';
+import reg from "../styles/regWiz.module.css";
+import reg2 from  "../styles/regWiz2.module.css";
+
 
 const Registration = () => {
     const navigate = useNavigate();
@@ -92,7 +99,7 @@ const Registration = () => {
     const checkMatch = (event) => {
         setRfid2(event.target.value);
         if (event.target.value !== rfid) {
-            setMatchMessage("Does Not Match");
+            setMatchMessage("Does Not Match *");
         } else {
             setMatchMessage("")
         }
@@ -140,62 +147,73 @@ const Registration = () => {
 
     return (
         <div>
-            <button onClick={() => navigate('/admin', { state: { userType: isAdmin, name: adminName } })}>Back</button>
-            <div className="mainWindow">
-                <div className="centerWindow">
-                    <div className="windowTitle">
+            <button className={reg.mainBackBtn} onClick={() => navigate('/admin', { state: { userType: isAdmin, name: adminName } })}><img alt="" src={image4}></img></button>
+            <div className={reg.mainWindow}>
+                <div className={reg.centerWindow}>
+                    <div className={reg.windowTitle}>
                         REGISTRATION WIZARD
                     </div>
-                    <div className="windowSubTitle">
+                    <div className={reg.windowSubTitle}>
                         ID Registration System
                     </div>
-                    <div className="progressBar">
-                        <div className="progressStatus">
-                            <div className="perInfo"><p>Personal Information</p></div>
-                            <div className="rfidData">RFID Data</div>
+                    <div className={reg.progressBar}>
+                        <div className={reg.progressStatus}>
+                            <div className={reg.perInfo}
+                            style={{ backgroundColor: showForm  ? "rgb(40, 57, 113)" : "rgb(217, 217, 217)",
+                            color: showForm ? "rgb(255, 255, 255)" : "rgb(0, 0, 0)" }}
+                            ><p>Personal Information</p></div>
+                            <div className={reg.rfidData}
+                            style={{ backgroundColor: showForm  ? "rgb(217, 217, 217)" : "rgb(40, 57, 113)",
+                            color: showForm ? "rgb(0, 0, 0)" : "rgb(255, 255, 255)" }}
+                            >RFID Data</div>
                         </div>
                     </div>
                     {showForm && (
                         <>
-                            <div className="formInput">
-                                <div className="leftPanel">
-                                    <div className="panelImage">
-                                        <img className="pImage" src="images/ID_Design.png" alt="" />
+                            <div className={reg.formInput}>
+                                <div className={reg.leftPanel}>
+                                    <div className={reg.panelImage}>
+                                        <img className={reg.pImage} src={image2} alt="" />
                                     </div>
                                 </div>
-                                <div className="rightPanel">
-                                    <select id="status-select" value={type} onChange={(event) => setType(event.target.value)}>
-                                        <option value="FACULTY">Faculty</option>
-                                        <option value="SHSFACULTY">SHS Faculty</option>
-                                        <option value="STUDENT">Student</option>
-                                        <option value="SHSSTUDENT">SHS Student</option>
-                                    </select>
-                                    <div className="section1">
-                                        <label className="label1">School ID</label>
-                                        <input value={schoolId} onChange={(event) => findStudent(event)} className="input1" type="" />
+                                <div className={reg.rightPanel}>
+                                    <div className={reg.section1}>
+                                        <label className={reg.label1}>School ID</label>
+                                        <input placeholder="Type ID and press enter" value={schoolId} onChange={(event) => findStudent(event)} className={reg.input1} type="" />
                                     </div>
-                                    <div className="section2">
-                                        <div className="comp1">
-                                            <label className="label2" >Last Name</label>
-                                            <input value={lName} onChange={(event) => setLName(event.target.value)} className="input2" type="text" />
+                                    <div className={reg.section2}>
+                                        <div className={reg.comp1}>
+                                            <label className={reg.label2} >Last Name</label>
+                                            <input value={lName} onChange={(event) => setLName(event.target.value)} className={reg.input2} type="text" />
                                         </div>
                                     </div>
-                                    <div className="section3">
-                                        <label className="label4">Given Name</label>
-                                        <input value={fName} onChange={(event) => setFName(event.target.value)} className="input4" type="text" />
+                                    <div className={reg.section3}>
+                                        <label className={reg.label4}>Given Name</label>
+                                        <input value={fName} onChange={(event) => setFName(event.target.value)} className={reg.input4} type="text" />
                                     </div>
-                                    <div className="section4">
-                                        <label className="label5">Course</label>
-                                        <input value={college} onChange={(event) => setCollege(event.target.value)} className="input5" type="text" />
-                                    </div>
-                                    <div className="section5">
-                                        <div className="comp3">
-                                            <label className="label6" >Year</label>
-                                            <input value={year} onChange={(event) => setYear(event.target.value)} className="input6" type="text" />
+                                    <div className={reg.section4}>
+                                        <div className={reg.compo1}>
+                                            <label className={reg.label5}>Course</label>
+                                            <input value={college} onChange={(event) => setCollege(event.target.value)} className={reg.input5} type="text" />
                                         </div>
-                                        <div className="comp4">
-                                            <label className="label7">Gender</label>
-                                            <select id="status-select" value={gender} onChange={(event) => setGender(event.target.value)}>
+                                        <div className={reg.compo2}>
+                                            <label className={reg.label5a}>Type:</label>
+                                            <select className={reg.statusSelect} value={type} onChange={(event) => setType(event.target.value)}>
+                                            <option value="FACULTY">Faculty</option>
+                                            <option value="SHSFACULTY">SHS Faculty</option>
+                                            <option value="STUDENT">Student</option>
+                                            <option value="SHSSTUDENT">SHS Student</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className={reg.section5}>
+                                        <div className={reg.comp3}>
+                                            <label className={reg.label6} >Year</label>
+                                            <input value={year} onChange={(event) => setYear(event.target.value)} className={reg.input6} type="text" />
+                                        </div>
+                                        <div className={reg.comp4}>
+                                            <label className={reg.label7}>Gender</label>
+                                            <select className={reg.input7} value={gender} onChange={(event) => setGender(event.target.value)}>
                                                 <option value="M">Male</option>
                                                 <option value="F">Female</option>
                                                 <option value="U">Others</option>
@@ -205,46 +223,55 @@ const Registration = () => {
                                 </div>
 
                             </div>
-                            <div className="nxtButtonSection">
-                                <div className="btnHolder1">
-                                    <button className="nxtButton" onClick={() => nextPage()}>
+                            <div className={reg.nxtButtonSection}>
+                                <div className={reg.btnHolder1}>
+                                    <button className={reg.nxtButton} onClick={() => nextPage()}>
                                         Next
                                     </button>
                                 </div>
                             </div>
                         </>
                     )}
+
+                    {!showForm && (
+                        <div className={reg2.formInput}>
+                            <div className={reg2.leftPanel}>
+                                <div className={reg2.panelImage}>
+                                    <img className={reg2.pImage} src={image3} alt=""/>
+                                </div> 
+                            </div>
+                            <div className={reg2.rightPanel}>
+                                <div className={reg2.section1}>
+                                    <label className={reg2.label1}>Personal Info</label>
+                                    <div className={reg2.input1}>{schoolId}</div>
+                                    <div className={reg2.input2}>{`${fName} ${lName}`}</div>
+                                </div>
+                                <div className={reg2.section2}>
+                                    <label className={reg2.label2} >RFID</label>
+                                    <input value={rfid} onChange={(event) => setRfid(event.target.value)} className={reg2.input3} type="password" />
+                                </div>
+                                <div className={reg2.section3}>
+                                    <label className={reg2.label3}>Confirm RFID</label>
+                                    <input value={rfid2} onChange={(event) => checkMatch(event)} className={reg2.input4} type="password" />
+                                    <p className={reg2.warningMessage}>{matchMessage}</p>
+                                </div>
+                            </div>
+                            <div className={reg2.nxtButtonSection}>
+                                <div className={reg2.sectionButtons}>
+                                <button className={reg2.backButton} onClick={() => nextPage()}>
+                                    Back
+                                </button>
+                                <button className={reg2.nxtButton} onClick={() => handleSubmit()}>
+                                    Submit
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
-            {!showForm && (
-                <>
-                    <div className="section1">
-                        <label className="label1">Personal Info</label>
-                        <div className="input1">{schoolId}</div>
-                        <div className="input2">{`${fName} ${lName}`}</div>
-                    </div>
-                    <div className="section2">
-                        <label className="label2" >RFID</label>
-                        <input value={rfid} onChange={(event) => setRfid(event.target.value)} className="input3" type="password" />
-                    </div>
-                    <div className="section3">
-                        <label className="label3">Confirm RFID</label>
-                        <input value={rfid2} onChange={(event) => checkMatch(event)} className="input4" type="password" />
-                        <p>{matchMessage}</p>
-                    </div>
-                    <button className="nxtButton" onClick={() => nextPage()}>
-                        Back
-                    </button>
-                    <button onClick={() => handleSubmit()}>
-                        Submit
-                    </button>
-                </>
-            )}
-            <div className="xulibIcon">
-                <img className="libIcon" src="images/XuLib.png" alt="" />
-            </div>
-            <div className="systemTime">
-
+            <div className={reg2.xulibIcon}>
+                <img className={reg2.libIcon} src={image1} alt="" />
             </div>
         </div>
     )
