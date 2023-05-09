@@ -115,18 +115,63 @@ ul li{
   background-color: white;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   padding: 5px 0 5px;
 }
-#sysname{
+#navbarPart1{
   font-size: 22px;
   font-weight: 500;
   padding: 5px;
   text-align: center;
-  height: 40px;
-  width: 200px;
+  height: 100%;
+  width: 35%;
+}
+#navbarPart2{
+  font-size: 22px;
+  font-weight: 500;
+  padding: 5px;
+  text-align: center;
+  height: 100%;
+  width: 30%;
+}
+#navbarPart3{
+  font-size: 22px;
+  font-weight: 500;
+  padding: 5px;
+  text-align: center;
+  height: 100%;
+  width: 35%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  padding-right: 20px;
 }
 
+#adminlogoutBtn{
+  width: 35px;
+  height: 35px;
+  margin: 0 5px 0;
+  background:none;
+  border-radius: 10px;
+  border: none;
+}
+#adminOptions{
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  background:none;
+  border-radius: 10px;
+  border: none;
+}
+#adminlogoutBtn img{
+  margin: 5px;
+  width: 25px;
+  height: auto;
+}
+#adminOptions img{
+  margin: 0;
+  width: 30px;
+}
 .page-window{
   padding: 0 10px 10px;
   height: 90%;

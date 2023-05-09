@@ -175,7 +175,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
                         onChange={(event) => handleInputChange(event, i)}
                         ref={(el) => inputRefs.current[i] = el}
 
-                        placeholder={i === 0 ? "Scan Your ID or input School ID" : ""}
+                        placeholder={i === 0 ? "Tap Your ID or input School ID" : ""}
                         data-index={i} //for the css 
                     />
                     <button className='deleteInput' type="button"

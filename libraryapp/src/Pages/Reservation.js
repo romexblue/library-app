@@ -386,7 +386,7 @@ function Reservation() {
       {showConfirmation && (
         <ConfModal
           title="Reservation Confirmation"
-          message={`Confab: ${selectedConfab.name} Time: ${startTime}-${endTime} Users: ${studentList ? studentList.join(", ") : "No students available"}`} //Pending pani kay di ma format
+          message={{ confab: selectedConfab.name, stime: startTime, etime: endTime, users: studentList ? studentList : ["No students available",] }}
           onConfirm={handleConfirm}
           onCancel={handleCancel}
         />

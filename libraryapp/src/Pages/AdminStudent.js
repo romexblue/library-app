@@ -4,6 +4,8 @@ import ReactPaginate from 'react-paginate';
 import AESModal from './AESModal';
 import stu from '../styles/AdminStudent.module.css';
 import image1 from '../images/search_icon.png'
+import image2 from '../images/Edit_Icon.png';
+import image3 from '../images/Delete_Icon.png';
 
 const AdminStudent = () => {
   const [idValue, setIdValue] = useState('');
@@ -130,11 +132,10 @@ const AdminStudent = () => {
               <th>Type</th>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Gender</th>
-              <th>Email</th>
+              <th>Sex</th>
               <th>College</th>
               <th>Year</th>
-              <th>RFID</th>
+              <th>Action</th>
             </tr>
           </thead>
         </table>
@@ -149,13 +150,11 @@ const AdminStudent = () => {
                     <td>{studentObj?.first_name}</td>
                     <td>{studentObj?.last_name}</td>
                     <td>{studentObj?.gender}</td>
-                    <td>{studentObj?.email}</td>
                     <td>{studentObj?.college}</td>
                     <td>{studentObj?.year}</td>
-                    <td>{studentObj?.rfid}</td>
                     <td>
-                      <button onClick={() => handleClick(studentObj, 'Edit')}>Edit</button>
-                      <button onClick={() => handleClick(studentObj, 'Delete')}>Delete</button>
+                      <button className={stu.editButton} onClick={() => handleClick(studentObj, 'Edit')}><img alt='edit' src={image2}></img></button>
+                      <button className={stu.deleteButton} onClick={() => handleClick(studentObj, 'Delete')}><img alt='edit' src={image3}></img></button>
                     </td>
                   </tr>
                 )

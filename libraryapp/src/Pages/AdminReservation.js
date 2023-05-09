@@ -130,17 +130,19 @@ const AdminReservation = () => {
         <div>
             <div className={res.pageTop} id=''>
                 <div className={res.pageFilter1} id=''>
-                <select className={res.tab} disabled={searching} id="status-select" onChange={handleStatusSelectChange}>
-                <option valeu="Pending">Pending</option>
-                <option value="Confirmed">Accepted</option>
-                </select>
+                    <select className={res.tab} placeholder='Status' disabled={searching} id="status-select" onChange={handleStatusSelectChange}>
+                    <option value="Pending">Pending</option>
+                    <option value="Confirmed">Accepted</option>
+                    </select>
+                </div>
+                <div className={res.pageFilter2} id=''>
                     <select className={res.selectInput} disabled={searching} id="confab-select" onChange={handleConfabSelectChange}>
                     {confabData.map((confab) => (
                     <option className={res.optionSelect} key={confab.id} value={confab.id}>{confab.name}</option>
                     ))}
                     </select>
                 </div>
-                <div className={res.pageFilter2} id=''>
+                <div className={res.pageFilter3} id=''>
                     <div className={res.dateInput}>
                     <DatePicker className={res.datePicker}
                     disabled={searching}
@@ -150,7 +152,7 @@ const AdminReservation = () => {
                     />
                     </div>
                 </div>
-                <div className={res.pageFilter3} id=''>
+                <div className={res.pageFilter4} id=''>
                     <form onSubmit={(event) => getReservationById(event)} className={res.searchForm}>
                         <input className={res.searchInput}type="number" placeholder="Find by ID" onChange={handleInputChange} value={value}></input>
                         <button className={res.searchBtnBox} type="submit"><img className={res.searchBtn} src={image1}></img></button>

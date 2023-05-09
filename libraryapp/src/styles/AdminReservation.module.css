@@ -4,14 +4,22 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    background-color: rgb(228, 228, 228);
+    border-radius: 10px;
 }
 .pageFilter1{
     margin: 0 10px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-right: auto;
 }
-
+.tab{
+    border-radius: 10px;
+}
+.tab option{
+    font-size: 20px;
+}
 .selectInput{
     font-size: 20px;
     width: 150px;
@@ -36,6 +44,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 150px;
 }
 
 
@@ -66,6 +75,12 @@
     border: 1px solid #283971;
     border-radius: 10px;
     z-index: 5;
+}
+.pageFilter4{
+    margin: 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .searchInput{
     font-size: 18px;
@@ -224,3 +239,33 @@ thead{
 .tableBody td:nth-child(8){
     width: 150px;
 }
+
+.pagination {
+    display: flex !important;
+    justify-content: center !important;
+    list-style: none !important;
+    padding: 0;
+    width: 100% !important;
+    background-color: red !important;
+  }
+  
+  .pagination li {
+    display: inline-block;
+    margin: 0 5px;
+  }
+  
+  .pagination li a {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #555;
+  }
+  
+  .pagination li.active a {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .pagination li a:hover {
+    background-color: #f0f0f0;
+  }

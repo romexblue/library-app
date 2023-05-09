@@ -8,6 +8,10 @@ import AdminReservation from './AdminReservation';
 import AdminConfab from './AdminConfab';
 import AdminStudent from './AdminStudent';
 import AdminUsers from './AdminUsers';
+import image1 from '../images/Logout_Icon.png';
+import image2 from '../images/Options_Icon.png';
+import image3 from '../images/Exit_Icon.png';
+import image4 from '../images/Entry_Icon.png';
 
 const Admin = () => {
     const navigate = useNavigate();
@@ -170,8 +174,15 @@ const Admin = () => {
             </div>
             <div className="pagecontainer">
                 <div className="navbar">
-                    <div className='systemName' id='sysname'>
+                <div className='section' id='navbarPart1'>
+                            
+                    </div>
+                    <div className='section' id='navbarPart2'>
                         XU-Lib Sentry
+                    </div>
+                    <div className='section' id='navbarPart3'>
+                        <button className='buttons' id='adminOptions'><img src={image2}></img></button>
+                        <button className='buttons' id='adminlogoutBtn'><img src={image1}></img></button>
                     </div>
                 </div>
                 <div className='page-window'>
