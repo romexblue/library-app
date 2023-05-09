@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import AuthContext from '../helpers/AuthContext';
 import image1 from '../images/XuLib.png';
+import image2 from '../images/Xentry_Icon.png';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -66,7 +67,7 @@ const Login = () => {
   return (
     <div className="login-page">
       <div className='systemTitle'>
-        <p className='sysTitle'>XU-Lib Sentry</p>
+        <p className='sysTitle'><img alt='' src={image2}/></p>
       </div>
       <div className='xulibLogo'>
         <img className='libLogo' src={image1}></img>

@@ -11,6 +11,7 @@ import AdminUsers from './AdminUsers';
 import AdminStatistics from './AdminStatistics';
 import image1 from '../images/Logout_Icon.png';
 import image2 from '../images/Options_Icon.png';
+import image3 from '../images/Xentry_Icon.png';
 
 const Admin = () => {
     const navigate = useNavigate();
@@ -189,7 +190,7 @@ const Admin = () => {
 
                     </div>
                     <div className='section' id='navbarPart2'>
-                        XU-Lib Sentry
+                        <img alt='' src={image3}/>
                     </div>
                     <div className='section' id='navbarPart3'>
                         <button className='buttons' id='adminOptions' onClick={()=>navigate('/choose')}><img src={image2}></img></button>

@@ -484,7 +484,9 @@
     color: red;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
+    text-align: right;
+    margin-top: 10px;
 }
 
 #rcompo1{

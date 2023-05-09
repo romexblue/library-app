@@ -265,7 +265,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
                         </div>
                         <div className="partition" id="part5">
                             <div className="comp" id="rscomp9">
-                               <p className='noteReminder'>Alternatively, you may manually type your School ID number and press "Enter".</p> 
+                               <p className='noteReminder'>Click the Field and tap your ID on the reader. You may also type your ID number and press "Enter".</p> 
                             </div>
                         </div>
                     </div>
@@ -301,7 +301,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
                                 Contact No.*
                             </div>
                             <div className="comp" id="rscomp18">
-                                <input value={phoneNumber} onChange={(event) => handlePhoneNumberChange(event)} type="text" className="contact" id="contactno" placeholder="0912345678" />
+                                <input value={phoneNumber} onChange={(event) => handlePhoneNumberChange(event)} type="text" className="contact" id="contactno" placeholder="09XX XXX XXXX" />
                             </div>
                         </div>
                     </div>
@@ -349,8 +349,8 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
                     </div>
                     <div className='section' id='rssec14'>
                         <div className="inputnotes">
-                            <p>You may select a field and tap your ID on the ID reader to add user. Alternately, you
-                                may manually type the user’s school ID number.</p>
+                            <p>Select a field and tap your ID on the Card Reader to add user. Alternately, you
+                                may manually type the user’s school ID number and Press "Enter".</p>
                         </div>
                         <div className="btn-holder" id="btnHolder1">
                             <div className='buttonContainer'>

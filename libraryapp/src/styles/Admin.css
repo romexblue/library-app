@@ -134,6 +134,9 @@ ul li{
   height: 100%;
   width: 30%;
 }
+#navbarPart2 img{
+  height:40px;
+}
 #navbarPart3{
   font-size: 22px;
   font-weight: 500;
