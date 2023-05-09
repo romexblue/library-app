@@ -48,6 +48,17 @@ router.post('/', validateToken, async (req, res) => {
     }
 });
 
+router.put('/', validateToken, async (req, res) => {
+    const student = req.body
+    try {
+        await Students.upsert(student);
+        res.status(200).json({success: "Transaction Successful"});
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: err })
+    }
+});
+
 router.patch('/:id', validateToken, async (req, res) => {
     const { id } = req.params;
     const data = req.body;

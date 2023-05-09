@@ -92,7 +92,7 @@ function Reservation() {
         console.log(error.response.data)
         console.log(data)
       });
-      window.location.reload();
+    window.location.reload();
   };
 
   const handleCancel = () => {
@@ -228,14 +228,14 @@ function Reservation() {
     //   setErrorMessage("Please Enter A Valid Phone Number and Fill Up User List")
     // } else {
     //   setErrorMessage("")
-      setShowConfirmation(true);
+    setShowConfirmation(true);
     // }
   };
 
   const nextPage = () => {
     if (selectedConfab) {
-    setErrorMessage("");
-    setShowForm(!showForm);
+      setErrorMessage("");
+      setShowForm(!showForm);
     } else {
       setErrorMessage("*Please select a Confab to proceed");
     }
@@ -267,7 +267,7 @@ function Reservation() {
                           <p className="room-loc">Location: <span className="rdata">Level {confab.level}</span></p>
                         </div>
                         <div className="room-reserve">
-                          <button onClick={()=> getAvailableTime(confab, selectedDate)} className="reserve-btn" id="reservebtn">Reserve</button>
+                          <button onClick={() => getAvailableTime(confab, selectedDate)} className="reserve-btn" id="reservebtn">Reserve</button>
                         </div>
                       </div>
                     ))}
@@ -289,10 +289,10 @@ function Reservation() {
                   <div className="Infosec" id="isec1">
                     <div className="Infolabel" id='ilabel1'>Date:</div>
                     <div className="ConfInfo" id="roomInfo1">
-                      <DatePicker wrapperClassName="datePicker" 
-                      showIcon selected={selectedDate}
-                      onChange={date => getAvailableTime(selectedConfab, date)} 
-                      minDate={new Date()} popperPlacement="bottom" required /></div>
+                      <DatePicker wrapperClassName="datePicker"
+                        showIcon selected={selectedDate}
+                        onChange={date => getAvailableTime(selectedConfab, date)}
+                        minDate={new Date()} popperPlacement="bottom" required /></div>
                   </div>
                   <div className="Infosec" id="isec2">
                     <div className="Infolabel" id='ilabel2'>Room:</div>
@@ -320,7 +320,7 @@ function Reservation() {
                       {availableSlots.length > 0 ? (
                         availableSlots.map((slot, index) => (
                           <div key={index} className="table-content">
-                            <div className="column" id="column1">{index+1}</div>
+                            <div className="column" id="column1">{index + 1}</div>
                             <div className="column" id="column2">{slot.confirmation_status}</div>
                             <div className="column" id="column3">{convertTo12Hour(slot.start_time)}</div>
                             <div className="column" id="column4">{convertTo12Hour(slot.end_time)}</div>
@@ -375,12 +375,12 @@ function Reservation() {
         </>
       )}
       {!showForm && (
-        <>  
-          <ReservationUsers 
-          confab={{capacity: selectedConfab.max_capacity ?? 0, name: selectedConfab.name ?? ""}} 
-          timeData={{timeIn: startTime, timeOut: endTime, date: selectedDate}} updateData={setList} childData={setChildData}
-          cancel={nextPage} 
-          confirm={submitRec}/>
+        <>
+          <ReservationUsers
+            confab={{ capacity: selectedConfab.max_capacity ?? 0, name: selectedConfab.name ?? "" }}
+            timeData={{ timeIn: startTime, timeOut: endTime, date: selectedDate }} updateData={setList} childData={setChildData}
+            cancel={nextPage}
+            confirm={submitRec} />
         </>
       )}
       {showConfirmation && (
