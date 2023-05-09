@@ -11,7 +11,8 @@ router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
     const endDate = req.params.endDate;
     const college = req.params.college;
 
-    const approvedReservationsCount = await Reservation.count({
+    const totalReservations = await Reservation.count({
+      distinct: true,
       where: {
         date: {
           [Op.between]: [startDate, endDate]
@@ -36,14 +37,10 @@ router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
             }
 
           ]
-        }, {
-          model: Confab,
-          attributes: ['name']
         }
-      ], group: ['Reservation.ConfabId'],
+      ],
     });
-
-    const approvedReservationsStudentsCount = await ReservationStudent.count({
+    const totalStudentUsage = await ReservationStudent.count({
       col: 'StudentSchoolId',
       include: [
         {
@@ -63,9 +60,74 @@ router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
         }]
     });
 
+    const totalStudentUsageByConfab = await ReservationStudent.count({
+      col: 'StudentSchoolId',
+      include: [
+        {
+          model: Reservation,
+          where: {
+            date: {
+              [Op.between]: [startDate, endDate]
+            },
+            confirmation_status: 'Confirmed'
+          },
+          include: [
+            {
+              model: Confab,
+              attributes: ['name'],
+            }
+          ]
+        },
+        {
+          model: Students,
+          where: {
+            college: college || { [Op.ne]: null }
+          }
+        },
+      ],
+      group: ['Reservation.Confab.name']
+    });
+    
+
+    const totalReservationByConfab = await Reservation.count({
+      distinct: true,
+      where: {
+        date: {
+          [Op.between]: [startDate, endDate]
+        },
+        confirmation_status: "Confirmed"
+      },
+      include: [
+        {
+          model: Students,
+          where: {
+            college: college || { [Op.ne]: null }
+          },
+          include: [
+            {
+              model: Reservation,
+              where: {
+                date: {
+                  [Op.between]: [startDate, endDate]
+                },
+                confirmation_status: "Confirmed"
+              }
+            }
+          ]
+        },
+        {
+          model: Confab,
+          attributes: ['name']
+        }
+      ],
+      group: ['Confab.name']
+    });
+    
     res.json({
-      approvedReservationsCount,
-      approvedReservationsStudentsCount,
+      totalReservations,
+      totalStudentUsage,
+      totalStudentUsageByConfab,
+      totalReservationByConfab,
     });
   } catch (error) {
     console.error(error);
