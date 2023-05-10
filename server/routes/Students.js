@@ -1,8 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const { Students } = require('../models');
-const { Op } = require('sequelize');
+const { Op, Sequelize } = require('sequelize');
 const { validateToken } = require("../middlewares/AuthMiddleware");
+
+router.get('/all/college', async (req, res) => {
+    try {
+        const uniqueColleges = await Students.findAll({
+            attributes: [
+                [Sequelize.fn('DISTINCT', Sequelize.col('college')), 'college']
+            ]
+        })
+        res.json(uniqueColleges)
+    } catch (err) {
+        console.error(err)
+        res.json({ error: err })
+    }
+});
 
 router.get('/find/:school_id', async (req, res) => {
     try {
@@ -83,7 +97,7 @@ router.patch('/:id', validateToken, async (req, res) => {
 router.delete('/:id', validateToken, async (req, res) => {
     const { id } = req.params
     try {
-        await Students.destroy({ where: { school_id:id } });
+        await Students.destroy({ where: { school_id: id } });
         res.status(204).json({ success: "Deletion Successful" });
     } catch (err) {
         res.status(500).json({ error: err });

@@ -85,7 +85,7 @@ router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
           }
         },
       ],
-      group: ['Reservation.Confab.name']
+      group: ['Reservation.Confab.name'],
     });
     
 
