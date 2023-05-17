@@ -62,7 +62,6 @@ const Chooser = () => {
         navigate('/reservation');
         break;
       default:
-        console.log("Default");
         break;
     }
   };

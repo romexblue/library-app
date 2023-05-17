@@ -2,14 +2,12 @@ import flo from '../styles/AdminFloor.module.css';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import AEFModal from './AEFModal'
-import image1 from '../images/search_icon.png';
 import image2 from '../images/Edit_Icon.png';
 import image3 from '../images/Delete_Icon.png';
 
 const AdminFloor = () => {
     const [floors, setFloors] = useState([]);
     const [floorData, setFloorData] = useState({});
-    const [hoveredRow, setHoveredRow] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const [action, setAction] = useState('Delete');
 
@@ -29,14 +27,6 @@ const AdminFloor = () => {
     useEffect(() => {
         serverReq();
     },[])
-
-    const handleMouseEnter = (index) => {
-        setHoveredRow(index);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredRow(null);
-    };
 
     const handleClick = (floor, type) => {
         if (type === "Delete") {
@@ -105,11 +95,7 @@ const AdminFloor = () => {
                 </thead>
                 <tbody className={flo.tableContent}>
                     {floors.map((floor, index) => (
-                        <tr
-                            key={floor.id}
-                            onMouseEnter={() => handleMouseEnter(index)}
-                            onMouseLeave={handleMouseLeave}
-                        >
+                        <tr key={floor.id}>
                             <td>{floor.level}</td>
                             <td>{floor.name}</td>
                             <td>{floor.current_count}</td>
@@ -117,8 +103,8 @@ const AdminFloor = () => {
                             <td>{floor.label}</td>
                             <td>{floor.status}</td>
                             <td>
-                                <button className={flo.editButton} onClick={() => handleClick(floor, "Edit")}><img src={image2}></img></button>
-                                <button className={flo.deleteButton} onClick={() => handleClick(floor, "Delete")}><img src={image3}></img></button>  
+                                <button className={flo.editButton} onClick={() => handleClick(floor, "Edit")}><img src={image2} alt=""></img></button>
+                                <button className={flo.deleteButton} onClick={() => handleClick(floor, "Delete")}><img src={image3} alt=""></img></button>  
                             </td>
                         </tr>
                     ))}

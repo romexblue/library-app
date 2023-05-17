@@ -1,6 +1,6 @@
 import '../styles/FButton.css'
 import axios from "axios"
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../helpers/AuthContext';
 import ConFFModal from './ConFFModal';
@@ -9,14 +9,12 @@ import image1 from '../images/Num_1.png';
 import image2 from '../images/Tag_1.png';
 import image3 from '../images/Num_2.png';
 import image4 from '../images/Tag_2.png';
-import image5 from '../images/Num_3.png';
-import image6 from '../images/Tag_3.png';
 import image7 from '../images/Reminder_Icon.png';
 
 
 const FloorButtons = () => {
     const [buttonData, setButtonData] = useState([]);// array of button text values based on database data
-    const buttonRefs = useRef([]);
+    //const buttonRefs = useRef([]);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [studentID, setStudentID] = useState('');
     const [studentRFID, setStudentRFID] = useState('');
@@ -41,10 +39,7 @@ const FloorButtons = () => {
             },
         ).then((response) => {
             if (response.data.error) {
-                console.log(response.data)
             } else {
-                console.log(response.data)
-                console.log("Add Record Successful")
             }
             getFloors();
         })
@@ -74,7 +69,6 @@ const FloorButtons = () => {
         });
     };
     const handleCancel = () => {
-        console.log('Cancelled!');
         setFloorID('');
         setFloorName('');
         setShowConfirmation(false);
@@ -107,12 +101,13 @@ const FloorButtons = () => {
         // }, 3000);
 
         // return () => clearInterval(interval);
+
         const timer = setInterval(() => setDate(new Date()), 1000);
         return () => clearInterval(timer);
     }, [navigate, authContext,]);
 
     const getFloors = () => {
-        console.log("floors called")
+        console.log("i am called")
         axios.get("http://localhost:5000/floor/all", {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken"),
@@ -124,20 +119,20 @@ const FloorButtons = () => {
             })
     };
 
-    const handleKeyDown = (event, index, id, name) => {
-        const buttonCount = buttonData.length;
+    // const handleKeyDown = (event, index, id, name) => {
+    //     const buttonCount = buttonData.length;
 
-        if (event.key === 'ArrowUp') {
-            event.preventDefault();
-            buttonRefs.current[(index - 1 + buttonCount) % buttonCount].focus();
-        } else if (event.key === 'ArrowDown') {
-            event.preventDefault();
-            buttonRefs.current[(index + 1) % buttonCount].focus();
-        } else if (event.key === 'Enter') {
-            event.preventDefault(); //prevents calling function twice
-            chooseFloor(id, name);
-        }
-    };
+    //     if (event.key === 'ArrowUp') {
+    //         event.preventDefault();
+    //         buttonRefs.current[(index - 1 + buttonCount) % buttonCount].focus();
+    //     } else if (event.key === 'ArrowDown') {
+    //         event.preventDefault();
+    //         buttonRefs.current[(index + 1) % buttonCount].focus();
+    //     } else if (event.key === 'Enter') {
+    //         event.preventDefault(); //prevents calling function twice
+    //         chooseFloor(id, name);
+    //     }
+    // };
 
     const chooseFloor = (id, name) => {
         setFloorID(id);
@@ -145,7 +140,7 @@ const FloorButtons = () => {
         if (studentID) {
             setShowConfirmation(true);
         } else {
-            console.log("No Such Student In Database")
+            //console.log("No Such Student In Database")
             //inputRef.current.focus();
         }
 
@@ -209,7 +204,7 @@ const FloorButtons = () => {
                                 </div>
                                 <div className="partition" id="part2">
                                     <div className="comp" id="comp10">
-                                        Middle Name:
+                                        Type:
                                     </div>
                                     <div className="comp" id="comp11">
                                         {studentData.type}
@@ -267,7 +262,7 @@ const FloorButtons = () => {
                                 </div>
                             </div>
                             <div className="note-down" id="lowernote">
-                                <button className="cancelbtn" onClick={() => { setStudentID(''); setStudentRFID(''); }}>Back</button>
+                                <button className="cancelbtn" onClick={() => { setStudentID(''); setStudentRFID(''); getFloors();}}>Back</button>
                             </div>
                         </div>
                     </div>

@@ -17,7 +17,7 @@ const StudentModal = ({ title, data, update, cancel, updateUi, action }) => {
     const handleConfirm = () => {
         if (action === "Edit") {
             const dataChanged = { school_id: schoolId, type: type, first_name: fName, last_name: lName, gender: gender, email: email, college: college, year: year, rfid: rfid };
-            console.log(dataChanged)
+      
             axios.patch(`http://localhost:5000/student/${data.school_id}`, dataChanged, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken"),

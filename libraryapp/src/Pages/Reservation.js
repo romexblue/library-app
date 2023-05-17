@@ -7,8 +7,6 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 import ReservationUsers from "./ReservationUsers";
 import ConfModal from './ConfModal';
-import image1 from '../images/Home.png';
-
 
 const TIMES = {
   "8:00am": ["9:00am", "10:00am"],
@@ -64,20 +62,15 @@ function Reservation() {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleConfirm = () => {
-    console.log(selectedDate)
     const date = convertDate(selectedDate);
-    console.log(date)
     const start = convertTo24Hour(startTime);
     const end = convertTo24Hour(endTime);
     const purpose = ruData.reason;
     const phone = ruData.phone;
     const confId = selectedConfab.id;
     const guestList = [...studentList];
-    console.log(ruData)
-    console.log(guestList);
     const data = { date: date, start_time: start, end_time: end, confirmation_status: "Pending", reason: purpose, ConfabId: confId, phone: phone, representative_id: guestList[0], guestList: guestList }
-    console.log(data);
-    console.log("YAWA")
+    
     axios
       .post(`http://localhost:5000/reservation`, data, {
         headers: {
@@ -86,11 +79,8 @@ function Reservation() {
         },
       })
       .then((response) => {
-        console.log(response.data)
       })
       .catch((error) => {
-        console.log(error.response.data)
-        console.log(data)
       });
     window.location.reload();
   };
@@ -113,7 +103,6 @@ function Reservation() {
     const conId = con.id;
     const newDate = convertDate(date);
     setSelectedDate(date);
-    console.log(selectedDate)
     setSelectedConfab(con);
     setErrorMessage("");
     if (conId && date) {
@@ -128,7 +117,6 @@ function Reservation() {
           setAvailableSlots(response.data.reservations);
         })
         .catch((error) => {
-          console.log(error);
         });
     }
   };
@@ -145,7 +133,6 @@ function Reservation() {
         setConfabs(response.data);
       })
       .catch((error) => {
-        console.log(error);
       });
   }, []);
 
@@ -300,7 +287,7 @@ function Reservation() {
                   </div>
                   <div className="Infosec" id="isec3">
                     <div className="Infolabel" id='ilabel3'>Capacity:</div>
-                    <div className="ConfInfo" id="roomInfo2">{selectedConfab.max_capacity} pax</div>
+                    <div className="ConfInfo" id="roomInfo2">{`${selectedConfab.max_capacity ? `${selectedConfab.max_capacity} pax` : ""}`} </div>
                   </div>
                 </div>
                 <div className="section" id='rsec2_5'>

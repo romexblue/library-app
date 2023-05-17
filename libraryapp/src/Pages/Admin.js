@@ -193,8 +193,8 @@ const Admin = () => {
                         <img alt='' src={image3}/>
                     </div>
                     <div className='section' id='navbarPart3'>
-                        <button className='buttons' id='adminOptions' onClick={()=>navigate('/choose')}><img src={image2}></img></button>
-                        <button className='buttons' id='adminlogoutBtn' onClick={()=>authContext.logout()}><img src={image1}></img></button>
+                        <button className='buttons' id='adminOptions' onClick={()=>navigate('/choose')}><img src={image2} alt=""></img></button>
+                        <button className='buttons' id='adminlogoutBtn' onClick={()=>authContext.logout()}><img src={image1} alt=""></img></button>
                     </div>
                 </div>
                 <div className='page-window'>

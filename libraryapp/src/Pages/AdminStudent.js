@@ -22,7 +22,7 @@ const AdminStudent = ({ adminData }) => {
     event.preventDefault();
     if (!idValue) { return; }
 
-    axios.get(`http://localhost:5000/student/find/${idValue}`, {
+    axios.get(`http://localhost:5000/student/find-one/${idValue}`, {
       headers: {
         accessToken: sessionStorage.getItem("accessToken"),
         userId: sessionStorage.getItem("id")
@@ -61,7 +61,6 @@ const AdminStudent = ({ adminData }) => {
   };
 
   const handleClick = (student, type) => {
-    console.log(student)
     if (type === "Delete") {
       axios.delete(`http://localhost:5000/student/${student.school_id}`, {
         headers: {
@@ -116,7 +115,7 @@ const AdminStudent = ({ adminData }) => {
         <div className={stu.section2}>
           <form onSubmit={(event) => findStudentById(event)} className={stu.searchForm}>
             <input value={idValue} onChange={(event) => handleValueChange(event)} className={stu.searchInput} type="number" placeholder="Find by ID" ></input>
-            <button type="submit" className={stu.searchBtnBox} ><img className={stu.searchBtn} src={image1}></img></button>
+            <button type="submit" className={stu.searchBtnBox} ><img className={stu.searchBtn} src={image1} alt=""></img></button>
           </form>
         </div>
         <div className={stu.section3}>
@@ -155,7 +154,7 @@ const AdminStudent = ({ adminData }) => {
                     <td>{studentObj?.year}</td>
                     <td>
                       <button className={stu.editButton} onClick={() => handleClick(studentObj, 'Edit')}><img alt='edit' src={image2}></img></button>
-                      <button className={stu.deleteButton} onClick={() => handleClick(studentObj, 'Delete')}><img alt='edit' src={image3}></img></button>
+                      <button className={stu.deleteButton} onClick={() => handleClick(studentObj, 'Delete')}><img alt='delete' src={image3}></img></button>
                     </td>
                   </tr>
                 )

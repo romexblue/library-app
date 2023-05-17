@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import '../styles/ReservationUsers.css';
 import axios from 'axios';
-import image1 from '../images/Reminder_Icon.png';
 
 function ReservationUsers({ confab, timeData, updateData, childData, cancel, confirm }) {
     const [counter, setCounter] = useState(0);
@@ -13,8 +12,6 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
     const [studentData, setStudentData] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
     const repInputRef = useRef(null);
-    const [searchResult, setSearchResult] = useState(''); //value of result
-
 
     // useEffect(() => {
     //     // Update the reservation data
@@ -68,7 +65,6 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
         if (response.data.error) {
             setRep('');
             setStudentData({});
-            setSearchResult('');
         } else {
             setRep(response.data.school_id);
             setStudentData(response.data);
@@ -139,8 +135,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
     };
 
     const findStudent = async (id) => {
-        console.log(id)
-        const response = await axios.get(`http://localhost:5000/student/find/${id}`, {
+        const response = await axios.get(`http://localhost:5000/student/find-one/${id}`, {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken"),
                 userId: sessionStorage.getItem("id")
@@ -253,7 +248,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
                                 Id Number ( Tap your XU ID ) *
                             </div>
                             <div className='comp' id='rscomp8'>
-                                <form onSubmit={(event) => submitRep(event)} className="inputHold" id="InputID">
+                                <form onSubmit={(event) => submitRep(event)} className="inputHold">
                                     <input
                                         value={rep}
                                         onChange={(event) => setRep(event.target.value)}

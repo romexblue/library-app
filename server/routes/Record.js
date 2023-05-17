@@ -36,10 +36,10 @@ router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
                     where: college ? { college: college } : {}
                 },
                 {
-                  model: Floor,
-                  attributes: ['name']
+                    model: Floor,
+                    attributes: ['name']
                 }
-              ],
+            ],
             group: ['Records.FloorId'],
             raw: true
         });
@@ -83,7 +83,7 @@ router.post('/', validateToken, async (req, res) => {
 
         const floor = await Floor.findByPk(req.body.FloorId);
         if (floor.current_count === floor.max_capacity - 1) {
-            await floor.update({ status: "Full" }) //set to close if it is full capacity
+            await floor.update({ status: "Full" }) //set to full if it is full capacity
         }
 
         const stud = await Students.findOne({

@@ -8,7 +8,6 @@ import image2 from '../images/Delete_Icon.png';
 const AdminConfab = () => {
   const [confabs, setConfabs] = useState([]);
   const [confabData, setConfabData] = useState({});
-  const [hoveredRow, setHoveredRow] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [action, setAction] = useState('Delete');
 
@@ -104,8 +103,8 @@ const AdminConfab = () => {
                 <td>{confab.max_capacity}</td>
                 <td>{confab.status}</td>
                 <td>
-                    <button className={con.editButton} onClick={() => handleClick(confab, "Edit")}><img src={image1}></img></button>
-                    <button className={con.editButton} onClick={() => handleClick(confab, "Delete")}><img src={image2}></img></button>
+                    <button className={con.editButton} onClick={() => handleClick(confab, "Edit")}><img src={image1} alt=""></img></button>
+                    <button className={con.editButton} onClick={() => handleClick(confab, "Delete")}><img src={image2} alt=""></img></button>
                 </td>
               </tr>
             ))}

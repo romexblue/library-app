@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
+import '../styles/AdminStatistics.module.css';
+
 
 const AdminStatistics = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -46,7 +48,6 @@ const AdminStatistics = () => {
       .then(response => {
         if (response.data) {
           setReservationStats(response.data);
-          console.log(response.data);
         }
       })
   };
@@ -61,7 +62,6 @@ const AdminStatistics = () => {
       .then(response => {
         if (response.data) {
           setRecordStats(response.data);
-          console.log(response.data);
         }
       })
   };
@@ -85,18 +85,19 @@ const AdminStatistics = () => {
   }, [])
 
   return (
-    <div style={{ overflowY: 'scroll', height: "550px" }}>
-      <DatePicker className=""
+    <div style={{ overflowY: 'scroll', height: "550px"}}>
+      <div className='datePickerContainer' style={{width: "40%", height: "30px", display: "flex", flexDirection:"row", justifyContent:"start"}}>
+      <DatePicker className="pdateStart"
         selected={startDate}
         onChange={date => handleStartDateChange(date)}
         popperPlacement="bottom"
       />
-      <DatePicker className=""
+      <DatePicker className="pdateEnd"
         selected={endDate}
         onChange={date => handleEndDateChange(date)}
         popperPlacement="bottom"
       />
-      <select value={college} onChange={handleCollegeChange}>
+      <select className='allSelect' value={college} onChange={handleCollegeChange}>
         <option value="">All</option>
         {collegeSelect.map((college, index) => (
           <option key={index} value={college.college}>
@@ -104,6 +105,7 @@ const AdminStatistics = () => {
           </option>
         ))}
       </select>
+      </div>
       <div>
         <h2>Library Entry/Exit Statistics {college ? `for ${college}` : ""} </h2>
         {recordStats && (

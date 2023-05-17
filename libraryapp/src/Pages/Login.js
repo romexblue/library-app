@@ -9,15 +9,18 @@ import image2 from '../images/Xentry_Icon.png';
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
+    setMessage("");
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+    setMessage("");
   };
 
   const handleSubmit = (event) => {
@@ -25,7 +28,7 @@ const Login = () => {
     const data = { username: username, password: password }
     axios.post("http://localhost:5000/auth/login", data).then((response) => {
       if (response.data.error) {
-        alert(response.data.error)
+        setMessage("Incorrect Username or Password")
       } else {
         sessionStorage.setItem("accessToken", response.data.accessToken)
         sessionStorage.setItem("id", response.data.userId)
@@ -70,17 +73,18 @@ const Login = () => {
         <p className='sysTitle'><img alt='' src={image2}/></p>
       </div>
       <div className='xulibLogo'>
-        <img className='libLogo' src={image1}></img>
+        <img className='libLogo' src={image1} alt=""></img>
       </div>
     <form onSubmit={handleSubmit}>
         <h1>LOGIN</h1>
         <div className="form-group">
-            <label htmlFor="">Email</label>
+            <label htmlFor="">Username</label>
             <input type="text" className="form-control" value={username} onChange={handleUsernameChange} required />
         </div>
         <div className="form-group">
             <label htmlFor="">Password</label>
             <input type="password" className="form-control" value={password} onChange={handlePasswordChange} required />
+            <p style={{color:"red"}}>{message}</p>
         </div>
         <input type="submit" className="btn" value="SUBMIT"/>
     </form>

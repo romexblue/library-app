@@ -6,7 +6,6 @@ const ConFFModal = ({title, message, onConfirm, onCancel}) => {
   const [showModal, setShowModal] = useState(true);
   const confirmButtonRef = useRef(null);
   const cancelButtonRef = useRef(null);
-  const [isChecked, setIsChecked] = useState(false);
 
   const handleConfirm = () => {
     setShowModal(false);

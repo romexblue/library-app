@@ -4,8 +4,6 @@ import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 import res from '../styles/AdminReservation.module.css';
 import image1 from '../images/search_icon.png';
-import image2 from '../images/Accept_Icon.png';
-import image3 from '../images/Decline_Icon.png';
 
 const AdminReservation = () => {
     const [value, setValue] = useState('');
@@ -112,6 +110,7 @@ const AdminReservation = () => {
     const handleClick = (id, status) => {
         const admin = sessionStorage.getItem("id");
         const data = { confirmed_by: admin, confirmation_status: status }
+        if (status === "Cancelled")
         axios.patch(`http://localhost:5000/reservation/requests/find-by/${id}`, data, {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken"),
@@ -155,7 +154,7 @@ const AdminReservation = () => {
                 <div className={res.pageFilter4} id=''>
                     <form onSubmit={(event) => getReservationById(event)} className={res.searchForm}>
                         <input className={res.searchInput}type="number" placeholder="Find by ID" onChange={handleInputChange} value={value}></input>
-                        <button className={res.searchBtnBox} type="submit"><img className={res.searchBtn} src={image1}></img></button>
+                        <button className={res.searchBtnBox} type="submit"><img className={res.searchBtn} src={image1} alt=""></img></button>
                     </form>
                 </div>
             </div>

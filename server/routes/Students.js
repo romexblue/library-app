@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Students } = require('../models');
+const { Students, Records } = require('../models');
 const { Op, Sequelize } = require('sequelize');
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
@@ -18,6 +18,25 @@ router.get('/all/college', async (req, res) => {
     }
 });
 
+//find student by id
+router.get('/find-one/:school_id', async (req, res) => {
+    try {
+        const rfid = req.params.school_id;
+        const student = await Students.findOne({
+            where: {
+                [Op.or]: [
+                    { rfid: rfid },
+                    { school_id: rfid }
+                ]
+            }
+        });
+        res.json(student)
+    } catch (err) {
+        res.status(400).json({ error: err })
+    }
+});
+
+//for entry-exit route only
 router.get('/find/:school_id', async (req, res) => {
     try {
         const rfid = req.params.school_id;
@@ -30,11 +49,23 @@ router.get('/find/:school_id', async (req, res) => {
             }
         });
         if (student) {
-            res.json(student);
+            const findRecord = await Records.findOne({ //find record to get floor id
+                where: {
+                    StudentSchoolId: student.school_id,
+                    time_out: null
+                },
+                limit: 1
+            })
+            if (findRecord) {
+                res.json({ error: "You are currently Timed In. Please Time Out" })
+            } else {
+                res.json({ student })
+            }
         } else {
-            res.json({ error: "Student Not Found" })
+            res.json({ error: "No Record Found" })
         }
     } catch (err) {
+        console.error(err)
         res.status(400).json({ error: err })
     }
 });

@@ -85,7 +85,6 @@ const Exit = () => {
                 setValue('')
             }
         } catch (error) {
-            console.error(error);
         }
     }
     const formatDate = (date) => {

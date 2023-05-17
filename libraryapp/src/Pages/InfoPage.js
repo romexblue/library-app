@@ -58,16 +58,17 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
                 })
                     .then((response) => {
                         if (response.data.error) {
-                            setSearchResult('User not found');
+                            setSearchResult(response.data.error);
                             setStudentData([]);
                             setStudentID('');
                             setStudentRFID('');
                             setValue('');
                         } else {
                             setSearchResult('User Found');
-                            setStudentData(response.data);
-                            setStudentID(response.data.school_id);
-                            setStudentRFID(response.data.rfid);
+                            setStudentData(response.data.student);
+                            setStudentID(response.data.student.school_id);
+                            setStudentRFID(response.data.student.rfid);
+                         
                         }
                     })
             } else {
@@ -76,7 +77,7 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
                 setStudentRFID('');
             }
         } catch (error) {
-            console.error(error);
+            //console.error(error);
         }
       }
     const handleChange = (event) => {
@@ -110,8 +111,8 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
             <div className="IdInput">
                 <label htmlFor="fname">Library User</label>
                 <input type="text"  ref={inputRef} id="fname"  placeholder="Tap Your ID" value={value} onChange={handleChange}
-                style={{ borderColor: searchResult === "User not found" ? "red" : "",
-                         backgroundColor: searchResult === "User not found" ? "rgb(255, 251, 251)" : "" }}/>
+                style={{ borderColor: searchResult ? "red" : "",
+                         backgroundColor: searchResult ? "rgb(255, 251, 251)" : "" }}/>
             </div>
             </form>
         </div>

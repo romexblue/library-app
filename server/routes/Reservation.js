@@ -137,7 +137,6 @@ router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
   }
 });
 
-
 router.get('/requests/find-by/:id', validateToken, async (req, res) => {
   try {
     const { id } = req.params;

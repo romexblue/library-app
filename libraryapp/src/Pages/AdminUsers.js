@@ -11,7 +11,6 @@ const AdminUsers = () => {
   const [userData, setUserData] = useState({});
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [hoveredRow, setHoveredRow] = useState(null);
   const [action, setAction] = useState('Delete');
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -114,8 +113,8 @@ const AdminUsers = () => {
                   <td>{userObj?.type}</td>
                   <td>{userObj?.password}</td>
                   <td>
-                        <button className={us.editButton} onClick={() => handleClick(userObj, 'Edit')}><img src={image1}></img></button>
-                        <button className={us.deleteButton} onClick={() => handleClick(userObj, 'Delete')}><img src={image2}></img></button>
+                        <button className={us.editButton} onClick={() => handleClick(userObj, 'Edit')}><img src={image1} alt=""></img></button>
+                        <button className={us.deleteButton} onClick={() => handleClick(userObj, 'Delete')}><img src={image2} alt=""></img></button>
                   </td>
                 </tr>
               )
