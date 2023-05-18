@@ -94,7 +94,7 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
             <div className="Back" onClick={()=>navigate('/')}>
                 <button className="back-icon" >
                   <img className="BackIcon" id="BackBtn" src={image1} alt="img"/>
-                  <p>BACK</p>
+                  <p></p>
                 </button>
             </div>
         </div>
@@ -120,7 +120,14 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
             <div className="LibrarySeal">
                 <img src={image3} alt="img"/>
             </div>
-            <div className="feedback" ><p>{searchResult}</p></div>
+            <div className="centerText" >
+                <div className='feedbackContainer'>
+                    <p className="feedback">{searchResult}</p>
+                </div>
+                <div className='rightsText'>
+                <p><b>XU Lib Xentry System</b> by M. Chiong, K. Sobiono, & G. Tahud. All rights reserved.</p>
+                </div>
+                </div>
             <div className="systemtime">
                 <div className="display-date">
                     <span id="month">{formatDate(date)}</span>

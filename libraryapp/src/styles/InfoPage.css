@@ -100,16 +100,37 @@ input:focus{
 .LibrarySeal img{
   width: 100%;
 }
-.feedback{
-  text-align: center;
-  color: red;
+.centerText{
   font-family: 'Ubuntu', sans-serif;
-  width: 300px;
+  width: 800px;
   height: 100%;
   position: absolute;
   left: 50%;
   top: 5px;
   transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+.feedbackContainer{
+  text-align: center;
+  color: red;
+  height: 50%;
+  width: 100%;
+}
+.rightsText{
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: center;
+  color: rgb(105, 105, 105);
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.rightsText p{
+
 }
 .systemtime{
   color: #283971;

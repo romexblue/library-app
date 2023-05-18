@@ -1,11 +1,247 @@
+.mainPage{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.topBar{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.dpStart{
+    margin: 0 10px 0;
+    height: 100%;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.dpEnd{
+    margin: 0 10px 0;
+    height: 100%;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.category{
+    margin: 0 30px 0;
+    height: 100%;
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.allSelect{
+    width: 160px;
+    height: 40px;
+    border-radius: 10px;
+}
 .pdateStart{
-    height: 30px;
-    background-color: red;
-    width: 100px;
+    height: 40px !important;
+    width: 140px !important;
+    border-radius: 10px !important;
 }
 
-.datePickerContainer{
+.pdateEnd{
+    height: 40px !important;
+    width: 140px !important;
+    border-radius: 10px !important;
+}
+.allStatistics{
+    height: 580px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.headerStatistics{
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.StatisticsContainer1{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.panel1Title{
+    font-size: 20px;
+    font-weight: 500;
+}
+.generalStatistics{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}   
+.panel1{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.tableTitle{
+    font-size: 20px;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+.floorStatitics{
+    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+.perfloorStats{
+    height: 200px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0 20px 0;
+}
+.allperfloor{
+    margin-top: 10px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.statsboxA{
+    width: 45%;
+    height: 80px;
+    padding: 0 10px 0;
+    margin: 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: rgb(237, 237, 237);
+    border-radius: 10px;
+    color: #2a2a2a;
+}
+.statsboxA h4{
+    align-items: flex-start;
+    font-weight: 100;
+}
+.statsboxA p{
+    font-size: 30px;
+}
+.floorTitleA{
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    margin:0;
+}
+.stats1a{
+    width: 50%;
+    height: 100%;
+    padding: 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.stats1a h4{
+    align-items: flex-start;
+    font-weight: 100;
+}
+.stats1a p{
+    font-size: 30px;
+}
+.stats2a{
+    width: 50%;
+    height: 100%;
+    padding: 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.stats2a h4{
+    align-items: flex-start;
+    font-weight: 100;
+}
+.stats2a p{
+    font-size: 30px;
+}
+.stats3a{
+    width: 50%;
+    height: 100%;
+    padding: 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.stats3a h4{
+    align-items: flex-start;
+    font-weight: 100;
+}
+.stats3a p{
+    font-size: 30px;
+}
+.stats4a{
+    width: 50%;
+    height: 100%;
+    padding: 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.stats4a h4{
+    align-items: flex-start;
+    font-weight: 100;
+}
+.stats4a p{
+    font-size: 30px;
+}
+.ptable2{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.table2Row1{
+    margin: 10px 0 10px;
+    width: 100%;
     height: 100px;
-    width: 100px;
-    background-color: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.boundary{
+    margin: 0px 30px 0;
+    display: relative;
+    width: auto;
+    height: 0.2px;
+    background-color: #747e92;
+}
+
+.panel2{
+    width: 50%;
+    height: 100%;
+}
+.panel2Title{
+    font-size: 20px;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+@media screen and (max-height: 700px) {
+    .allStatistics{
+        height: 520px;
+    }
 }
