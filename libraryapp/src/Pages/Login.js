@@ -84,7 +84,7 @@ const Login = () => {
         <div className="form-group">
             <label htmlFor="">Password</label>
             <input type="password" className="form-control" value={password} onChange={handlePasswordChange} required />
-            <p style={{color:"red"}}>{message}</p>
+            <p className='errorMessage' style={{color:"red"}}>{message}</p>
         </div>
         <input type="submit" className="btn" value="SUBMIT"/>
     </form>

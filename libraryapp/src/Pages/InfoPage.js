@@ -125,7 +125,7 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
                     <p className="feedback">{searchResult}</p>
                 </div>
                 <div className='rightsText'>
-                <p><b>XU Lib Xentry System</b> by M. Chiong, K. Sobiono, & G. Tahud. All rights reserved.</p>
+                <p><b>XU Lib Sentry System</b> by M. Chiong, K. Sobiono, & G. Tahud 2023. All rights reserved.</p>
                 </div>
                 </div>
             <div className="systemtime">

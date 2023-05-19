@@ -5,6 +5,7 @@ import axios from 'axios';
 import image1 from '../images/Back_Icon.png';
 import image2 from '../images/Rfid_Icon.png';
 import image3 from '../images/XuLib.png';
+import '../styles/InfoPage.css'
 
 const Exit = () => {
     const [response, setResponse] = useState("");
@@ -110,7 +111,7 @@ const Exit = () => {
                 <div className="Back" onClick={() => navigate('/choose')}>
                     <button className="back-icon" >
                         <img className="BackIcon" id="BackBtn" src={image1} alt="img" />
-                        <p>BACK</p>
+                        <p></p>
                     </button>
                 </div>
             </div>
@@ -138,7 +139,14 @@ const Exit = () => {
                 <div className="LibrarySeal">
                     <img src={image3} alt="img" />
                 </div>
-                <div className="feedback" ><p style={{ color: response === "Time Out Successful" ? "#385DBB" : "" }}>{response}</p></div>
+                <div className="centerText" >
+                <div className='feedbackContainer'>
+                    <p className="feedback"><p style={{ color: response === "Time Out Successful" ? "#385DBB" : "" }}>{response}</p></p>
+                </div>
+                <div className='rightsText'>
+                <p><b>XU Lib Sentry System</b> by M. Chiong, K. Sobiono, & G. Tahud 2023. All rights reserved.</p>
+                </div>
+                </div>
                 <div className="systemtime">
                     <div className="display-date">
                         <span id="month">{formatDate(date)}</span>

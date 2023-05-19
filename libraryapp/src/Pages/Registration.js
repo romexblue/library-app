@@ -28,6 +28,7 @@ const Registration = () => {
     const [matchMessage, setMatchMessage] = useState("");
     const rfid_1 = useRef(null);
     const rfid_2 = useRef(null);
+    const [collegeSelect, setCollegeSelect] = useState([]);
 
     const handleSubmit = () => {
         if (rfid === "" || rfid2 === "") {
@@ -62,7 +63,9 @@ const Registration = () => {
             }
         })
     };
-
+    const handleCollegeChange = (event) => {
+        setCollege(event.target.value)
+    }
     const clearData = () => {
         setFName("");
         setLName("");
@@ -114,7 +117,19 @@ const Registration = () => {
             }
         }
     };
-
+    useEffect(() => {
+    axios.get(`http://localhost:5000/student/all/college`, {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken"),
+          userId: sessionStorage.getItem("id")
+        },
+      })
+        .then(response => {
+          if (response.data) {
+            setCollegeSelect(response.data)
+          }
+        })
+    },[])
     useEffect(() => {
         //to check token then check if admin
         if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
@@ -217,7 +232,14 @@ const Registration = () => {
                                     <div className={reg.section4}>
                                         <div className={reg.compo1}>
                                             <label className={reg.label5}>College</label>
-                                            <input required value={college} onChange={(event) => setCollege(event.target.value)} className={reg.input5} type="text" />
+                                            <select className={reg.input5} value={college} onChange={handleCollegeChange}>
+                                                <option value="">All</option>
+                                                {collegeSelect.map((college, index) => (
+                                                    <option key={index} value={college.college}>
+                                                    {college.college}
+                                                    </option>
+                                                ))}
+                                            </select>
                                         </div>
                                         <div className={reg.compo2}>
                                             <label className={reg.label5a}>Type:</label>

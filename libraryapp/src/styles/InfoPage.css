@@ -14,7 +14,6 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 100%;
 }
 .Back{
-  cursor: pointer;
   display: block;
   text-align: center;
   justify-content: center;
@@ -30,9 +29,11 @@ input[type="number"]::-webkit-outer-spin-button {
 .Back img{
   height: 40px;
   width: 40px;
+  cursor:pointer;
 }
-
-
+.BackIcon img{
+  cursor: pointer;
+}
 .sec2{
   margin-top: 30px;
   font-family: 'Ubuntu', sans-serif;
@@ -129,9 +130,7 @@ input:focus{
   flex-direction: column;
   justify-content: flex-end;
 }
-.rightsText p{
 
-}
 .systemtime{
   color: #283971;
   font-family: 'Ubuntu', sans-serif;
