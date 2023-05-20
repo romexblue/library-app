@@ -72,7 +72,7 @@ const Chooser = () => {
           <div className="Logout">
             <button className="back-icon" style={{cursor: "pointer"}} onClick={()=>authContext.logout()}>
               <img className="BackIcon" id="BackBtn" alt="img" src={image1}/>
-              <p>LOGOUT</p>
+              <p></p>
             </button>
           </div>
           <div className="title" >
