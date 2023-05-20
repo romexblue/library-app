@@ -226,6 +226,7 @@ const Registration = () => {
                                                 <option value="SHSFACULTY">SHS Faculty</option>
                                                 <option value="STUDENT">Student</option>
                                                 <option value="SHSSTUDENT">SHS Student</option>
+                                                <option value="STAFF">Staff</option>
                                             </select>
                                         </div>
                                     </div>

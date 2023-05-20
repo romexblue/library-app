@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = express();
 
 const db = require('./models');
+const { Users } = require('./models');
 
 app.use(express.json())
 app.use(cors());
@@ -27,8 +28,24 @@ app.use("/reservation", reservationRouter);
 const confabRouter = require('./routes/Confab');
 app.use("/confab", confabRouter);
 
-db.sequelize.sync().then(()=>{
-    app.listen(port, ()=> {
+db.sequelize.sync().then(async () => {
+    const adminUser = await Users.findOne({ where: { type: 'Admin' } });
+
+    if (!adminUser) {
+        // Create admin user
+        Users.create({
+            name: 'Admin',
+            username: 'superAdmin',
+            password: 'capstone2023',
+            type: 'Admin'
+        }).then(() => {
+            console.log('Admin user created');
+        }).catch(error => {
+            console.error('Error creating admin user:', error);
+        });
+    }
+
+    app.listen(port, () => {
         console.log(`Server running on port ${port}`)
     });
 })
