@@ -65,31 +65,56 @@ const FloorModal = ({ title, data, update, cancel, updateUi, action }) => {
                     </div>
                     <div className={aef.modalBody}>
                         <div className={aef.nameSection} >
+                            <div className={aef.comp1}>
                             <label className={aef.nameLabel}>Name:</label>
+                            </div>
+                            <div className={aef.comp2}>
                             <input className={aef.nameInput} type="text" placeholder='Floor #' value={name} onChange={(event) => { setName(event.target.value) }} />
-                            <div className={aef.nameHint}>Set the floor level/number using figure</div></div>
+                            </div>
+                            <div className={aef.comp3}>
+                            <div className={aef.nameHint}>Set the floor level/number using figure</div>
+                            </div>
+                            </div>
                         <div className={aef.capacitySection} >
+                            <div className={aef.comp1}>
                             <label className={aef.capacityLabel}>Max Capacity:</label>
+                            </div>
+                            <div className={aef.comp2}>
                             <input className={aef.capacityInput} type="number" value={maxCapacity} onChange={(event) => { setMaxCapacity(event.target.value) }} /></div>
+                            </div>
                         <div className={aef.levelSection} >
+                            <div className={aef.comp1}>
                             <label className={aef.levelLabel}>Level:</label>
+                            </div>
+                            <div className={aef.comp2}>
                             <input className={aef.levelInput}type="number" value={level} onChange={(event) => { setLevel(event.target.value) }} />
-                            <div className={aef.nameHint}>Set the floor level/number based on the floor name.</div>
+                            </div>
+                            <div className={aef.comp4}>
+                            <div className={aef.levelHint}>Set the floor's location</div>
+                            </div>
                             </div>
                         <div className={aef.buildingSection} >
+                            <div className={aef.comp1}>
                             <label className={aef.buildingLabel}>Building No.:</label>
+                            </div>
+                            <div className={aef.comp2}>
                             <select className={aef.buildingInput} value={bldg} onChange={(event) => setBldg(event.target.value)}>
                                 <option value="Bldg1"> 1</option>
                                 <option value="Bldg2"> 2</option>
                             </select>
+                            </div>
                         </div>
-                        <p className={aef.statusSection}>
+                        <div className={aef.statusSection}>
+                            <div className={aef.comp1}>
                             <label className={aef.statusLabel}>Status:</label>
+                            </div>
+                            <div className={aef.comp2}>
                             <select className={aef.statusInput} value={status} onChange={(event) => setStatus(event.target.value)}>
                                 <option value="Open">Open</option>
                                 <option value="Closed">Closed</option>
-                            </select>
-                        </p>
+                            </select> 
+                            </div>
+                        </div>
                     </div>
                     <div className={aef.modalFooter}>
                         <button className={aef.cancelBtn} onClick={handleCancel}>Cancel</button>

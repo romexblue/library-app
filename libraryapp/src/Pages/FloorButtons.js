@@ -254,7 +254,7 @@ const FloorButtons = () => {
                                 <div className="reminder">
                                     <div className="note-div">
                                         <p>Please confirm that all information
-                                            are correct before clicking SUBMIT.</p>
+                                            are correct before selecting your desired floor .</p>
                                     </div>
                                     <div className="note-icon">
                                         <img src={image7} alt='Img' />

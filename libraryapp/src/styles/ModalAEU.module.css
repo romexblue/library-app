@@ -12,17 +12,42 @@
   }
   
   .modalContent {
-    background-color: white;
     border-radius: 10px;
-    height: 400px;
-    width: 500px;
+    padding: 20px;
+    height: 450px;
+    width: 700px;
     text-align: center;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #F7F7F7;
   }
   .modalHeader{
-    margin-top: 20px;
-    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    height: 20px;
     width: 100%;
+  }
+  .modalBody{
+    width: 100%;
+    height: 360px;
+    background-color: white;
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px 0 20px;
+  }
+  .modalTitle{
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: auto;
+    text-align: left;
+  }
+  .modalClose{
+    cursor: pointer;
   }
   .modalBody{
     width: 100%;
@@ -31,16 +56,22 @@
   .section1{
     width: 100%;
     height: 60px;
+    margin: 10px 0 10px;
     padding: 0 30px 0;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
   }
   .secLabel1{
-    width: 100%;
+    text-align: left;
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
   }
   .secInput1{
     width: 350px;
-    height: 40px;
+    height: 35px;
     border-radius: 10px;
     border: 1px solid black;
     outline: none;
@@ -51,16 +82,22 @@
   .section2{
     width: 100%;
     height: 60px;
+    margin: 10px 0 10px;
     padding: 0 30px 0;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
   }
   .secLabel2{
-    width: 100%;
+    text-align: left;
     display: flex;
-    align-items: flex-start;  
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
   }
   .secInput2{
     width: 310px;
-    height: 40px;
+    height: 35px;
     border-radius: 10px;
     border: 1px solid black;
     outline: none;
@@ -71,16 +108,22 @@
   .section3{
     width: 100%;
     height: 60px;
+    margin: 10px 0 10px;
     padding: 0 30px 0;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
   }
   .secLabel3{
-    width: 100%;
+    text-align: left;
     display: flex;
-    align-items: flex-start;  
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
   }
   .secType3{
     width: 200px;
-    height: 40px;
+    height: 35px;
     border-radius: 10px;
     border: 1px solid black;
     outline: none;
@@ -91,36 +134,61 @@
   .section4{
     width: 100%;
     height: 60px;
+    margin: 10px 0 10px;
     padding: 0 30px 0;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
   }
   .secLabel4{
-    width: 100%;
+    text-align: left;
     display: flex;
-    align-items: flex-start;    
-  }
-  .secInput4{
-    width: 240px;
-    height: 40px;
-    border-radius: 10px;
-    border: 1px solid black;
-    outline: none;
-    padding: 10px;
-    font-size: 16px;
-    margin-right: 10px;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%; 
   }
   .passMaker{
-    width: 100%;
-    height: 40px;
+    width: 250px;
+    height: 35px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 16px;
+    margin-right: 10px; 
     display: flex;
-    justify-content: row;
+    flex-direction: row;
   }
+  .secInput4{
+    border: none;
+    background: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    padding-left: 10px;
+  }
+.visiButton{
+  background:none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+  width: 30px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.visiButton img{
+  height: auto;
+  width: 100%;
+}
   .passGenerate{
     border-radius: 10px;
     border: none;
     background-color: #474747;
     color: white;
     width: 150px;
-    height: 40px;
+    height: 35px;
     cursor: pointer;
   }
   .modalFooter{
@@ -147,9 +215,9 @@
   }
   .cancelBtn {
     border: 1px solid #283971;
-    background-color: white;
     color: #283971;
     border: none;
+    background: none;
   }
   .cancelBtn:hover{
     background-color: #a9a9a9;
@@ -162,4 +230,22 @@
     font-family: 'Ubuntu', sans-serif;
     font-size: 20px;
   }
-  
+  .comp1{
+    height: 100%;
+    width: 20%;
+  }
+  .comp2{
+    height: 100%;
+    width: 60%;
+  }
+  .comp2a{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .comp3{
+    height: 100%;
+    width: 20%;
+  }

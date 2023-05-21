@@ -14,6 +14,7 @@ const AdminUsers = () => {
   const [action, setAction] = useState('Delete');
   const [showEditModal, setShowEditModal] = useState(false);
 
+
   const fetchUsers = async (page) => {
     await axios.get(`http://localhost:5000/auth/all/${page}`, {
       headers: {
@@ -111,7 +112,12 @@ const AdminUsers = () => {
                   <td>{userObj?.name}</td>
                   <td>{userObj?.username}</td>
                   <td>{userObj?.type}</td>
-                  <td>{userObj?.password}</td>
+                  <td><div className={us.passMaker}>
+                    <input className={us.secInput4}
+                           type="password"
+                           value={userObj?.password} disabled/>
+                        </div>
+                  </td>
                   <td>
                         <button className={us.editButton} onClick={() => handleClick(userObj, 'Edit')}><img src={image1} alt=""></img></button>
                         <button className={us.deleteButton} onClick={() => handleClick(userObj, 'Delete')}><img src={image2} alt=""></img></button>

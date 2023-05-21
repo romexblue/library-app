@@ -12,7 +12,6 @@
   }
   
   .modalContent {
-    background-color: white;
     padding: 20px;
     border-radius: 10px;
     height: 550px;
@@ -191,4 +190,31 @@
     height: 40px;
     padding: 0 20px 0;
     margin: 10px 0 10px;
+  }
+  .status{
+    height: 35px;
+    width: 150px;
+    outline: none;
+    border-radius: 10px;
+  }
+  .statusLabel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin-right: 10px;
+  }
+  .comp1{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .comp2{
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
   }

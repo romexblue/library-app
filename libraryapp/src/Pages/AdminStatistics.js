@@ -119,7 +119,7 @@ const AdminStatistics = () => {
           </div>
           {recordStats && (
             <div className={stat.StatisticsContainer1}>
-              <div className={stat.stats1a}><h4>Total Usage (person):</h4> <p> {recordStats.overall.count}</p></div>
+              <div className={stat.stats1a}><h4>Total Library Users (person):</h4> <p> {recordStats.overall.count}</p></div>
               <div className={stat.stats2a}><h4>Avg. Time Stayed (sec):</h4><p> {recordStats.overall.averageStayTime}</p></div>
               <div className={stat.stats3a}><h4>Highest Time Stayed (sec):</h4><p> {recordStats.overall.highestStayTime}</p></div>
               <div className={stat.stats4a}><h4>Lowest Time Stayed (sec):</h4><p> {recordStats.overall.lowestStayTime}</p></div>
@@ -134,7 +134,7 @@ const AdminStatistics = () => {
             <div>
               {recordStats.floors.map((floor, index) => (
                 <div className={stat.perfloorStats} key={index}>
-                  <p className={stat.floorTitleA}>{floor['Floor.name']}:</p>
+                  <p className={stat.floorTitleA}>{floor['Floor.name']}:<div className={stat.divider}></div></p>
                   <div className={stat.allperfloor}>
                     <div className={stat.statsboxA}><h4>Usage Count (person):</h4><p> {floor.count}</p></div>
                     <div className={stat.statsboxA}><h4>Avg. Time Stayed (sec):</h4><p> {floor.averageStayTime}</p></div>

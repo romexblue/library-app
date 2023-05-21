@@ -52,11 +52,11 @@
     color: #555353;
 }
 .Logout{
-    display: block;
+    display: flex;
     text-align: center;
     justify-content: center;
     position: absolute;
-    width: 100px;
+    width: 220px;
     height: 80px;
     right: 40px;
     top: 40px;
@@ -75,6 +75,30 @@
     width: 40px;
 }
 
+.registrationWizard{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.regButton{
+    width: 150px;
+    height: 40px;
+    background-color: #283971;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+.regButton:hover{
+    cursor: pointer;
+    background-color: #0e1b43;
+}
+.regButton p{
+    font-size: 12px;
+    font-weight: 100;
+}
 /* Media queries */
   
   @media screen and (max-height: 700px) {

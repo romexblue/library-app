@@ -1,6 +1,9 @@
 import aeu from '../styles/ModalAEU.module.css'
 import React, { useState } from "react";
 import axios from 'axios';
+import icon1 from '../images/hide.png';
+import icon2 from '../images/unhide.png';
+
 
 const UserModal = ({ title, data, update, cancel, updateUi, action }) => {
     const [name, setName] = useState(data.name ?? "");
@@ -8,6 +11,8 @@ const UserModal = ({ title, data, update, cancel, updateUi, action }) => {
     const [type, setType] = useState(data.type ?? "Librarian");
     const [password, setPassword] = useState(data.password ?? "")
     const [showModal, setShowModal] = useState(true);
+    const [showPassword, setShowPassword] = useState(false);
+    const [buttonImg, setButtonImg] = useState(icon1);
 
     const handleConfirm = () => {
         if (action === "Edit") {
@@ -54,6 +59,16 @@ const UserModal = ({ title, data, update, cancel, updateUi, action }) => {
         setShowModal(false);
     };
 
+    const handleMouseDown = () => {
+        setShowPassword(true);
+        setButtonImg(icon2);
+      };
+    
+      const handleMouseUp = () => {
+        setShowPassword(false);
+        setButtonImg(icon1);
+      };
+
     function generatePassword() {
         const length = 12;
         let pswd = '';
@@ -72,36 +87,53 @@ const UserModal = ({ title, data, update, cancel, updateUi, action }) => {
             <div className={aeu.modal}>
                 <div className={aeu.modalContent}>
                     <div className={aeu.modalHeader}>
-                        <h3>{title}</h3>
+                        <p className={aeu.modalTitle}>{title}</p>
+                        <div className={aeu.modalClose} onClick={handleCancel}>x</div>
                     </div>
                     <div className={aeu.modalBody}>
                         <div className={aeu.section1}>
-                            <p className={aeu.secLabel1}>Name:</p>
-                            <input className={aeu.secInput1} type="text" value={name} onChange={(event) => { setName(event.target.value) }} />
+                            <div className={aeu.comp1}>
+                                <p className={aeu.secLabel1}>Name:</p>
+                            </div>
+                            <div className={aeu.comp2}>
+                                <input className={aeu.secInput1} type="text" value={name} onChange={(event) => { setName(event.target.value) }} />
+                            </div>
                         </div>
                         <div className={aeu.section2}>
-                            <p className={aeu.secLabel2}>Username:</p> 
-                            <input className={aeu.secInput2}type="text" value={username} onChange={(event) => { setUserName(event.target.value) }} />
+                            <div className={aeu.comp1}>
+                                <p className={aeu.secLabel2}>Username:</p> 
+                            </div>
+                            <div className={aeu.comp2}>
+                                <input className={aeu.secInput2}type="text" value={username} onChange={(event) => { setUserName(event.target.value) }} />
+                            </div>
                         </div>
                         <div className={aeu.section3}>
-                            <p className={aeu.secLabel3}>Type:</p>
+                            <div className={aeu.comp1}>
+                                <p className={aeu.secLabel3}>Type:</p>
+                            </div>
+                            <div className={aeu.comp2}>
                             <select className={aeu.secType3} value={type} onChange={(event) => setType(event.target.value)}>
                                 <option value="Admin"> Admin</option>
                                 <option value="Librarian"> Librarian</option>
                                 <option value="Assistant"> Assistant</option>
                                 <option value="Guard"> Guard </option>
                             </select>
+                            </div>
                         </div>
                         <div className={aeu.section4}>
-                            <p className={aeu.secLabel4}>Password </p>
+                            <div className={aeu.comp1}>
+                                <p className={aeu.secLabel4}>Password </p>
+                            </div>
+                            <div className={aeu.comp2a}>
                             <div className={aeu.passMaker}>
                                 <input className={aeu.secInput4}
-                                    type="text"
+                                    type={showPassword ? 'text' : 'password'}
                                     value={password}
-                                    onChange={(event) => setPassword(event.target.value)}
-                                />
+                                    onChange={(event) => setPassword(event.target.value)}/>
+                                    <button className={aeu.visiButton} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} ><img src={buttonImg} alt="Toggle Button" /></button>
+                                </div>
                                 <button className={aeu.passGenerate} onClick={()=>generatePassword()}>Generate Password</button>
-                            </div>
+                                </div>
                         </div>
                     </div>
                     <div className={aeu.modalFooter}>

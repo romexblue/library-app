@@ -6,6 +6,8 @@ import image1 from '../images/XuLib.png';
 import image2 from '../images/ID_Design.png';
 import image3 from '../images/Rfid_Icon.png';
 import image4 from '../images/Back_Icon.png';
+import image5 from '../images/Success_Icon.png';
+import image6 from '../images/Failed_Icon.png';
 import reg from "../styles/regWiz.module.css";
 import reg2 from "../styles/regWiz2.module.css";
 
@@ -183,6 +185,19 @@ const Registration = () => {
         <div>
             <button className={reg.mainBackBtn} onClick={() => navigate('/admin', { state: { userType: isAdmin, name: adminName } })}><img alt="" src={image4}></img></button>
             <div className={reg.mainWindow}>
+                <div className={reg.confirmModal}>
+                    <div className={reg.comps1}>
+                        <div className={reg.imgHolder1}>
+                        {/* <img src={image5}></img> */}
+                        <img src={image6}></img>
+                        </div>
+                    </div>
+                    <div className={reg.comps2}>
+                        <h3>Success!</h3>
+                        <p>Patron has been registered succesfully.</p>
+                    </div>
+
+                </div>
                 <div className={reg.centerWindow}>
                     <div className={reg.windowTitle}>
                         REGISTRATION WIZARD
