@@ -39,7 +39,10 @@ router.get('/find-one/:school_id', async (req, res) => {
 //for entry-exit route only
 router.get('/find/:school_id', async (req, res) => {
     try {
-        const rfid = req.params.school_id;
+        let rfid = req.params.school_id;
+        if (rfid.startsWith("00")) {
+            rfid = rfid.slice(2);
+        }
         const student = await Students.findOne({
             where: {
                 [Op.or]: [
