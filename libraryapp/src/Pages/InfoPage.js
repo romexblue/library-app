@@ -4,6 +4,7 @@ import axios from "axios";
 import image1 from '../images/Back_Icon.png';
 import image2 from '../images/Rfid_Icon.png';
 import image3 from '../images/XuLib.png';
+import image4 from '../images/Xentry_Banner.png';
 import { useNavigate } from "react-router-dom";
 
 const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStudentData}) => {
@@ -94,9 +95,9 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
             <div className="Back" onClick={()=>navigate('/')}>
                 <button className="back-icon" >
                   <img className="BackIcon" id="BackBtn" src={image1} alt="img"/>
-                  <p></p>
                 </button>
             </div>
+            <div className="systemName"> <img src={image4}></img></div>
         </div>
         <div className="sec2">
             <div className="RFID-Icon">
@@ -125,7 +126,7 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
                     <p className="feedback">{searchResult}</p>
                 </div>
                 <div className='rightsText'>
-                <p><b>XU Lib Sentry System</b> by M. Chiong, K. Sobiono, & G. Tahud 2023. All rights reserved.</p>
+                <p>Developed by M. Chiong, K. Sobiono, & G. Tahud 2023 of CCS-BSIT 4. All rights reserved.</p>
                 </div>
                 </div>
             <div className="systemtime">

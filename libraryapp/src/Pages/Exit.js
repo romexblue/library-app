@@ -5,6 +5,8 @@ import axios from 'axios';
 import image1 from '../images/Back_Icon.png';
 import image2 from '../images/Rfid_Icon.png';
 import image3 from '../images/XuLib.png';
+import image4 from '../images/Xentry_Banner.png';
+
 import '../styles/InfoPage.css'
 
 const Exit = () => {
@@ -114,6 +116,7 @@ const Exit = () => {
                         <p></p>
                     </button>
                 </div>
+                <div className="systemName"> <img src={image4}></img></div>
             </div>
             <div className="sec2">
                 <div className="RFID-Icon">
@@ -144,7 +147,7 @@ const Exit = () => {
                     <p className="feedback"><p style={{ color: response === "Time Out Successful" ? "#385DBB" : "" }}>{response}</p></p>
                 </div>
                 <div className='rightsText'>
-                <p><b>XU Lib Sentry System</b> by M. Chiong, K. Sobiono, & G. Tahud 2023. All rights reserved.</p>
+                <p>Developed by M. Chiong, K. Sobiono, & G. Tahud 2023 of CCS-BSIT 4. All rights reserved.</p>
                 </div>
                 </div>
                 <div className="systemtime">

@@ -10,18 +10,45 @@
     justify-content: center;
     align-items: center;
   }
-  
   .modalContent {
-    background-color: white;
     padding: 20px;
     border-radius: 10px;
-    height: 500px;
+    height: 560px;
     width: 800px;
     text-align: center;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #F7F7F7;
+  }
+  .modalHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    height: 20px;
+    width: 100%;
+  }
+  .modalTitle{
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: auto;
+  }
+  .modalClose{
+    cursor: pointer;
+  }
+  .modalBody{
+    width: 100%;
+    height: 400px;
+    background-color: white;
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px 0 20px; 
   }
   .modalFooter{
-    margin-top: 30px;
+    margin-top: 10px;
   }
   .confirmBtn,
   .cancelBtn {
@@ -65,7 +92,7 @@
 
   .section1{
     width: 100%;
-    height:50px;
+    height: 60px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -83,14 +110,14 @@
     margin-bottom: 5px;
   }
   .compo1 input{
-    height: 30px;
-    width: 250px;
+    height: 35px;
+    width: 100%;
     border: none;
     outline: none;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
     font-size: 18px;  
-    border: 1px solid black;
+    background-color: rgb(226, 226, 226);
   }
   .compo2{
     display: flex;
@@ -105,11 +132,11 @@
     margin-bottom: 5px;
   }
 .typeSelect{
-    height: 30px;
+    height: 35px;
     width: 190px;
     border: none;
     outline: none;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 16px;  
     padding: 0 10px 0;
     border: 1px solid black;
@@ -119,9 +146,8 @@
   flex-direction: row;
   justify-content: flex-start;
   width: 100%;
-  height: 50px;
-  margin: 5px 0 5px;
-
+  height: 60px;
+  margin: 20px 0 5px;
   }
 .compo3{
     display: flex;
@@ -134,10 +160,10 @@
     text-align: left;
   }
   .compo3 input{
-    width: 300px;
-    height: 30px;
+    width: 100%;
+    height: 35px;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
   }
   .compo4{
@@ -152,21 +178,20 @@
     font-size: 14px;
   }
   .compo4 input{
-    width: 300px;
-    height: 30px;
+    width: 100%;
+    height: 35px;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
   }
   .section3{
     width: 100%;
-    height: 50px;
+    height: 60px;
     margin: 5px 0 5px;
-
   }
 
   .compo5{
-    width: 50%;
+    width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -177,9 +202,9 @@
     font-size: 14px;
   }
   .compo5 input{
-    width: 300px;
-    height: 30px;
-    border-radius: 5px;
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
     border: 1px solid black;
     padding: 10px;
     font-size: 14px;
@@ -187,37 +212,42 @@
   }
   .section4{
     width: 100%;
-    height:50px;
+    height:60px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin: 5px 0 5px;
+    margin: 20px 0 5px;
 
   }
+  .parentCompo67{
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+  }
   .compo6{
-    margin: 0 10px 0;
-    width: 200px;
+    width: 80%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
   }
   .compo6 p{
     font-size: 14px;
     text-align: left;
     margin-bottom: 5px;
   }
-  .compo6 .genderSelect{
+  .compo6 .collegeSelect{
     width: 200px;
-    height: 30px;
-    border-radius: 5px;
+    height: 35px;
+    border-radius: 10px;
     border: 1px solid black;
     font-size: 14px;
     padding: 0 10px 0;
     
   }
   .compo7{
-    width: 300px;
+    width: 100px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -228,10 +258,11 @@
     font-size: 14px;
     margin-bottom: 5px;
   }
-  .compo7 .genderSelect{
-    height: 30px;
-    width: 200px;
-    border-radius: 5px;
+  .compo7 input{
+    height: 35px;
+    width: 100%;
+    padding-left: 10px;
+    border-radius: 10px;
     border: 1px solid black;
   }
   .compo8{
@@ -239,40 +270,99 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    margin-left: 20px;
   }
   .compo8 p{
     text-align: left;
     font-size: 14px;
     margin-bottom: 5px;
   }
-  .compo8 input{
+  .compo8 .genderSelect{
     width: 150px;
-    height: 30px;
-    border-radius: 5px;
+    height: 35px;
+    border-radius: 10px;
     border: 1px solid black;
     padding: 10px;
     font-size: 14px;
   }
   .section5{
     width: 100%;
-    height:50px;
-    margin: 5px 0 5px;
+    height:60px;
+    margin: 20px 0 5px;
+    display: flex;
+    flex-direction: row;
   }
   .compo9{
     width: 300px;
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin-left: 20px;
   }
   .compo9 p{
     font-size: 14px;
     text-align: left;
   }
-  .compo9 input{
-    height: 30px;
-    width: 200px;
-    border-radius: 5px;
+  .passMaker{
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-right: 10px; 
+    display: flex;
+    flex-direction: row;
     border: 1px solid black;
-    background-color: none;
+    outline: none;
+    background-color: white;
   }
+    .secInput4{
+    border: none;
+    background: none;
+    outline: none;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    padding-left: 10px;
+  }
+.visiButton{
+  background:none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+  width: 30px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.visiButton img{
+  height: auto;
+  width: 100%;
+}
+.compo10{
+  height: 100%;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.editButton{
+  height: 35px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.editButton button{
+  height: 100%;
+  width: 50px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-left: 20px;
+  background-color: gray;
+  color: white;
+}

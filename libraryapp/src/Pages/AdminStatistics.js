@@ -151,7 +151,7 @@ const AdminStatistics = () => {
         <div className={stat.panel2}>
           <div className={stat.panel2Title}>Spaces Usage Statistics  {college ? `for ${college}` : ""} </div>
           <p style={{ fontSize: "13px" }}>
-            Note: Reservations total per College is based from the representative since reservation may contain students from different collegs
+            Note: Reservations total per College is based from the representative as reservation may contain students from different collegs
           </p>
           <br></br>
           {reservationStats && (
