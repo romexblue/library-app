@@ -100,10 +100,9 @@ router.put('/', validateToken, async (req, res) => {
     const student = req.body
     try {
         await Students.upsert(student);
-        res.status(200).json({ success: "Transaction Successful" });
+        res.status(200).json({ success: "Patron Registration Successful" });
     } catch (err) {
-        console.log(err)
-        res.status(500).json({ error: err })
+        res.status(500).json({ error: "Something Went Wrong" })
     }
 });
 

@@ -71,7 +71,7 @@ const Chooser = () => {
 <div className="main_div">  
           <div className="Logout">
             <div className="registrationWizard">
-            <button className="regButton"><p>Registration Wizard</p></button>
+            <button className="regButton" onClick={() => navigate('/registration')}><p>Registration Wizard</p></button>
             </div>
             <button className="back-icon" style={{cursor: "pointer"}} onClick={()=>authContext.logout()}>
               <img className="BackIcon" id="BackBtn" alt="img" src={image1}/>

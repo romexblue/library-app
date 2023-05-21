@@ -2,6 +2,7 @@ import con from '../styles/AdminConfab.module.css';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import AECModal from './AECModal'
+import DeleteModal from './DeleteModal';
 import image1 from '../images/Edit_Icon.png';
 import image2 from '../images/Delete_Icon.png';
 
@@ -9,6 +10,7 @@ const AdminConfab = () => {
   const [confabs, setConfabs] = useState([]);
   const [confabData, setConfabData] = useState({});
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [action, setAction] = useState('Delete');
 
   const serverReq = () => {
@@ -31,17 +33,9 @@ const AdminConfab = () => {
 
   const handleClick = (confab, type) => {
     if (type === "Delete") {
-      axios.delete(`http://localhost:5000/confab/${confab.id}`, {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
-          userId: sessionStorage.getItem("id")
-        },
-      })
-        .then(response => {
-          serverReq();
-        })
-        .catch(error => {
-        });
+      setConfabData(confab);
+      setAction(type);
+      setShowDeleteModal(true);
     }
     if (type === "Add") {
       setConfabData([]);
@@ -63,6 +57,27 @@ const AdminConfab = () => {
   const handleCancelConfab = () => {
     setShowEditModal(false);
     setAction('');
+  };
+
+  const handleDeleteConfirm = () => {
+    axios.delete(`http://localhost:5000/confab/${confabData.id}`, {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken"),
+          userId: sessionStorage.getItem("id")
+        },
+      })
+        .then(response => {
+          serverReq();
+        })
+        .catch(error => {
+        });
+    setShowDeleteModal(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+    setAction('');
+    setConfabData([]);
   };
 
   return (
@@ -118,6 +133,14 @@ const AdminConfab = () => {
             cancel={handleCancelConfab}
             updateUi={serverReq}
             action={action}
+          />
+        )}
+        {showDeleteModal && (
+          <DeleteModal
+            title={`${action} Space`}
+            message={`Deleting ${confabData.name}`}
+            onConfirm={handleDeleteConfirm}
+            onCancel={handleDeleteCancel}
           />
         )}
       </div>

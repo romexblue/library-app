@@ -13,8 +13,13 @@
     display: flex;
     flex-direction: row;
     box-shadow: 12px 10px 10px -4px rgba(0,0,0,0.31);
-    /* background-color: rgb(60, 184, 120,0.80); */
+    
+}
+.bgFail{
     background-color: rgb(223, 68, 53,0.80);
+}
+.bgSuccess{
+    background-color: rgb(60, 184, 120,0.80);
 }
 .comps1{
     height: 100%;

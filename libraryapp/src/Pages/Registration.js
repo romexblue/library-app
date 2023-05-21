@@ -31,6 +31,7 @@ const Registration = () => {
     const rfid_1 = useRef(null);
     const rfid_2 = useRef(null);
     const [collegeSelect, setCollegeSelect] = useState([]);
+    const [regResponse, setRegResponse] = useState("");
 
     const handleSubmit = () => {
         if (rfid === "" || rfid2 === "") {
@@ -57,12 +58,16 @@ const Registration = () => {
             },
         }).then((response) => {
             if (response.data.error) {
-                //pass
+                setRegResponse(response.data.error);
             } else {
+                setRegResponse(response.data.success);
                 nextPage();
                 setSchoolId("");
                 clearData();
             }
+            setTimeout(() => {
+                setRegResponse("");
+            }, 5000);
         })
     };
     const handleCollegeChange = (event) => {
@@ -120,18 +125,18 @@ const Registration = () => {
         }
     };
     useEffect(() => {
-    axios.get(`http://localhost:5000/student/all/college`, {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
-          userId: sessionStorage.getItem("id")
-        },
-      })
-        .then(response => {
-          if (response.data) {
-            setCollegeSelect(response.data)
-          }
+        axios.get(`http://localhost:5000/student/all/college`, {
+            headers: {
+                accessToken: sessionStorage.getItem("accessToken"),
+                userId: sessionStorage.getItem("id")
+            },
         })
-    },[])
+            .then(response => {
+                if (response.data) {
+                    setCollegeSelect(response.data)
+                }
+            })
+    }, [])
     useEffect(() => {
         //to check token then check if admin
         if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
@@ -183,21 +188,21 @@ const Registration = () => {
 
     return (
         <div>
-            <button className={reg.mainBackBtn} onClick={() => navigate('/admin', { state: { userType: isAdmin, name: adminName } })}><img alt="" src={image4}></img></button>
+            {/* <button className={reg.mainBackBtn} onClick={() => navigate('/admin', { state: { userType: isAdmin, name: adminName } })}><img alt="" src={image4}></img></button> */}
             <div className={reg.mainWindow}>
-                <div className={reg.confirmModal}>
-                    <div className={reg.comps1}>
-                        <div className={reg.imgHolder1}>
-                        {/* <img src={image5}></img> */}
-                        <img src={image6}></img>
+                {regResponse !== "" && (
+                    <div className={`${reg.confirmModal} ${regResponse === "Something Went Wrong" ? reg.bgFail : reg.bgSuccess}`}>
+                        <div className={reg.comps1}>
+                            <div className={reg.imgHolder1}>
+                                <img src={regResponse==="Something Went Wrong" ? image6: image5}></img>
+                            </div>  
+                        </div>
+                        <div className={reg.comps2}>
+                            <h3>{regResponse==="Something Went Wrong" ? "Failed!": "Success!"}</h3>
+                            <p>{regResponse}</p>
                         </div>
                     </div>
-                    <div className={reg.comps2}>
-                        <h3>Success!</h3>
-                        <p>Patron has been registered succesfully.</p>
-                    </div>
-
-                </div>
+                )}
                 <div className={reg.centerWindow}>
                     <div className={reg.windowTitle}>
                         REGISTRATION WIZARD
@@ -248,10 +253,9 @@ const Registration = () => {
                                         <div className={reg.compo1}>
                                             <label className={reg.label5}>College</label>
                                             <select className={reg.input5} value={college} onChange={handleCollegeChange}>
-                                                <option value="">All</option>
                                                 {collegeSelect.map((college, index) => (
                                                     <option key={index} value={college.college}>
-                                                    {college.college}
+                                                        {college.college}
                                                     </option>
                                                 ))}
                                             </select>
