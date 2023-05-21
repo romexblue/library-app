@@ -1,6 +1,6 @@
-import mof from '../styles/ModalFF.module.css';
+import mof from '../styles/deleteModal.module.css';
 import React, { useState, useEffect, useRef } from "react";
-import image1 from '../images/Confirm_Icon.png';
+import image1 from '../images/Delete_Icon2.png';
 
 const DeleteModal = ({title, message, onConfirm, onCancel}) => {
   const [showModal, setShowModal] = useState(true);
@@ -34,17 +34,22 @@ const DeleteModal = ({title, message, onConfirm, onCancel}) => {
     showModal && (
       <div className={mof.modalContainer} onKeyDown={handleKeyDown}>
         <div className={mof.centerModal}>
-        <div className={mof.modalHeader}><img alt="" src={image1}/>
+          <div className={mof.section1}>
+                <img src={image1}/>
             </div>
-            <div className={mof.confirmMessage}>
-              <p>{title}</p>
+          <div className={mof.section2}>
+            <h2>Are you sure?</h2>
             </div>
-        <div className={mof.messageModal}>
-          <p>{message}</p>
+        <div className={mof.section3}>
+        <p className={mof.toDeleteMessage}>Do you really want to delete <b>{message}</b>? <br/>This process cannot be undone.</p>
         </div>
-            <div className={mof.modalFooter}>
-                <button className={mof.cancelBtn} ref={cancelButtonRef} onClick={handleCancel}>Cancel</button>
-                <button className={mof.confirmBtn} ref={confirmButtonRef} onClick={handleConfirm}>Confirm</button>
+            <div className={mof.section4}>
+            <div class={mof.comp1}>
+                    <button class={mof.cancelButton} ref={cancelButtonRef} onClick={handleCancel}>Cancel</button>
+                </div>
+                <div class={mof.comp2}>
+                    <button class={mof.confirmButton} ref={confirmButtonRef} onClick={handleConfirm}>Yes,Delete</button>
+                </div>
             </div>
         </div>
       </div>

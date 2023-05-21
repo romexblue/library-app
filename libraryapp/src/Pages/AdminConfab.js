@@ -138,7 +138,7 @@ const AdminConfab = () => {
         {showDeleteModal && (
           <DeleteModal
             title={`${action} Space`}
-            message={`Deleting ${confabData.name}`}
+            message={`${confabData.name}`}
             onConfirm={handleDeleteConfirm}
             onCancel={handleDeleteCancel}
           />
