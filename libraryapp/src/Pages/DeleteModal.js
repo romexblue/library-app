@@ -35,7 +35,7 @@ const DeleteModal = ({title, message, onConfirm, onCancel}) => {
       <div className={mof.modalContainer} onKeyDown={handleKeyDown}>
         <div className={mof.centerModal}>
           <div className={mof.section1}>
-                <img src={image1}/>
+                <img src={image1} alt=''/>
             </div>
           <div className={mof.section2}>
             <h2>Are you sure?</h2>

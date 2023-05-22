@@ -9,7 +9,7 @@ const AdminStatistics = () => {
   const [endDate, setEndDate] = useState(new Date());
   const [college, setCollege] = useState("");
   const [collegeSelect, setCollegeSelect] = useState([]);
-  const [reservationStats, setReservationStats] = useState('');
+  // const [reservationStats, setReservationStats] = useState('');
   const [recordStats, setRecordStats] = useState('');
 
   const handleCollegeChange = (event) => {
@@ -47,7 +47,7 @@ const AdminStatistics = () => {
     })
       .then(response => {
         if (response.data) {
-          setReservationStats(response.data);
+          // setReservationStats(response.data);
         }
       })
   };
@@ -82,7 +82,7 @@ const AdminStatistics = () => {
     const link2 = `http://localhost:5000/record/stats/${startDate}/${endDate}/`;
     getReservationStats(link);
     getRecordStats(link2);
-  }, [])
+  }, [startDate, endDate])
 
   return (
     <div className={stat.mainPage}>

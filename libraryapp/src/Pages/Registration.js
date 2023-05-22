@@ -1,11 +1,11 @@
 import { useEffect, useContext, useState, useRef } from "react"
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../helpers/AuthContext";
 import image1 from '../images/XuLib.png';
 import image2 from '../images/ID_Design.png';
 import image3 from '../images/Rfid_Icon.png';
-import image4 from '../images/Back_Icon.png';
+// import image4 from '../images/Back_Icon.png';
 import image5 from '../images/Success_Icon.png';
 import image6 from '../images/Failed_Icon.png';
 import reg from "../styles/regWiz.module.css";
@@ -14,9 +14,9 @@ import reg2 from "../styles/regWiz2.module.css";
 const Registration = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
-    const location = useLocation();
-    const [adminName, setAdminName] = useState((location.state || {}).name);
-    const [isAdmin, setIsAdmin] = useState((location.state || {}).userType);
+    // const location = useLocation();
+    // const [adminName, setAdminName] = useState((location.state || {}).name);
+    // const [isAdmin, setIsAdmin] = useState((location.state || {}).userType);
     const [schoolId, setSchoolId] = useState("");
     const [type, setType] = useState("STUDENT");
     const [fName, setFName] = useState("");
@@ -155,8 +155,8 @@ const Registration = () => {
                     //if admin
                     if (response.data.type === "Admin" || response.data.type === "Librarian" || response.data.type === "Assistant") {
                         navigate('/registration');
-                        setAdminName(response.data.name);
-                        setIsAdmin(response.data.type);
+                        // setAdminName(response.data.name);
+                        // setIsAdmin(response.data.type);
                     } else {
                         navigate('/choose') // for guard 
                     }
@@ -194,7 +194,7 @@ const Registration = () => {
                     <div className={`${reg.confirmModal} ${regResponse === "Something Went Wrong" ? reg.bgFail : reg.bgSuccess}`}>
                         <div className={reg.comps1}>
                             <div className={reg.imgHolder1}>
-                                <img src={regResponse==="Something Went Wrong" ? image6: image5}></img>
+                                <img src={regResponse==="Something Went Wrong" ? image6: image5} alt=''></img>
                             </div>  
                         </div>
                         <div className={reg.comps2}>
