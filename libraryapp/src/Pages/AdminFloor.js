@@ -2,6 +2,7 @@ import flo from '../styles/AdminFloor.module.css';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import AEFModal from './AEFModal'
+import DeleteModal from './DeleteModal';
 import image2 from '../images/Edit_Icon.png';
 import image3 from '../images/Delete_Icon.png';
 
@@ -9,6 +10,7 @@ const AdminFloor = () => {
     const [floors, setFloors] = useState([]);
     const [floorData, setFloorData] = useState({});
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [action, setAction] = useState('Delete');
 
     const serverReq = () => {
@@ -26,21 +28,13 @@ const AdminFloor = () => {
     };
     useEffect(() => {
         serverReq();
-    },[])
+    }, [])
 
     const handleClick = (floor, type) => {
         if (type === "Delete") {
-            axios.delete(`http://localhost:5000/floor/${floor.id}`, {
-                headers: {
-                    accessToken: sessionStorage.getItem("accessToken"),
-                    userId: sessionStorage.getItem("id")
-                },
-            })
-                .then(response => {
-                    serverReq();
-                })
-                .catch(error => {
-                });
+            setFloorData(floor);
+            setAction(type);
+            setShowDeleteModal(true);
         }
         if (type === "Add") {
             setFloorData([]);
@@ -65,6 +59,27 @@ const AdminFloor = () => {
         setAction('');
     };
 
+    const handleDeleteConfirm = () => {
+        axios.delete(`http://localhost:5000/floor/${floorData.id}`, {
+            headers: {
+                accessToken: sessionStorage.getItem("accessToken"),
+                userId: sessionStorage.getItem("id")
+            },
+        })
+            .then(response => {
+                serverReq();
+            })
+            .catch(error => {
+            });
+        setShowDeleteModal(false);
+    };
+
+    const handleDeleteCancel = () => {
+        setShowDeleteModal(false);
+        setFloorData({});
+        setAction('');
+    };
+
     return (
         <div className={flo.floorPage}>
             <div className={flo.pageHeader}>
@@ -76,8 +91,8 @@ const AdminFloor = () => {
                 </div>
                 <div className={flo.section3}>
                     <div className={flo.button1}>
-                    <button className={flo.addBtn} onClick={() => handleClick([], "Add")}><div className={flo.plusSign}
-                    >+</div><p>Add Floor</p></button>
+                        <button className={flo.addBtn} onClick={() => handleClick([], "Add")}><div className={flo.plusSign}
+                        >+</div><p>Add Floor</p></button>
                     </div>
                 </div>
             </div>
@@ -104,7 +119,7 @@ const AdminFloor = () => {
                             <td>{floor.status}</td>
                             <td>
                                 <button className={flo.editButton} onClick={() => handleClick(floor, "Edit")}><img src={image2} alt=""></img></button>
-                                <button className={flo.deleteButton} onClick={() => handleClick(floor, "Delete")}><img src={image3} alt=""></img></button>  
+                                <button className={flo.deleteButton} onClick={() => handleClick(floor, "Delete")}><img src={image3} alt=""></img></button>
                             </td>
                         </tr>
                     ))}
@@ -118,6 +133,14 @@ const AdminFloor = () => {
                     cancel={handleCancelFloor}
                     updateUi={serverReq}
                     action={action}
+                />
+            )}
+            {showDeleteModal && (
+                <DeleteModal
+                    title={`${action} Floor`}
+                    message={`${floorData.name}`}
+                    onConfirm={handleDeleteConfirm}
+                    onCancel={handleDeleteCancel}
                 />
             )}
         </div>

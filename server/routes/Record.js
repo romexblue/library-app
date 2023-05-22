@@ -110,9 +110,12 @@ router.post('/', validateToken, async (req, res) => {
 
 //for timeout
 router.patch('/find/:school_id', validateToken, async (req, res) => {
-    const rfid = req.params.school_id;
+ 
     const rec = req.body
-
+    let rfid = req.params.school_id;
+    if (rfid.startsWith("00")) {
+        rfid = rfid.slice(2);
+    }
     const user = await Students.findOne({
         where: {
             [Op.or]: [

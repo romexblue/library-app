@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import { useNavigate } from "react-router-dom";
 import AESModal from './AESModal';
+import DeleteModal from './DeleteModal';
 import stu from '../styles/AdminStudent.module.css';
 import image1 from '../images/search_icon.png'
 import image2 from '../images/Edit_Icon.png';
@@ -17,6 +18,7 @@ const AdminStudent = ({ adminData }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [action, setAction] = useState('Delete');
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const findStudentById = (event) => {
     event.preventDefault();
@@ -62,17 +64,9 @@ const AdminStudent = ({ adminData }) => {
 
   const handleClick = (student, type) => {
     if (type === "Delete") {
-      axios.delete(`http://localhost:5000/student/${student.school_id}`, {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
-          userId: sessionStorage.getItem("id")
-        },
-      })
-        .then(response => {
-          fetchStudents(currentPage);
-        })
-        .catch(error => {
-        });
+      setStudentData(student);
+      setAction(type);
+      setShowDeleteModal(true);
     }
     if (type === "Add") {
       setStudentData([]);
@@ -96,6 +90,27 @@ const AdminStudent = ({ adminData }) => {
   const handleCancelStudent = () => {
     setShowEditModal(false);
     setAction('');
+  };
+
+  const handleDeleteConfirm = () => {
+    axios.delete(`http://localhost:5000/student/${studentData.school_id}`, {
+      headers: {
+        accessToken: sessionStorage.getItem("accessToken"),
+        userId: sessionStorage.getItem("id")
+      },
+    })
+      .then(response => {
+        fetchStudents(currentPage);
+      })
+      .catch(error => {
+      });
+    setShowDeleteModal(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+    setAction('');
+    setStudentData({});
   };
 
   useEffect(() => {
@@ -168,19 +183,19 @@ const AdminStudent = ({ adminData }) => {
         </table>
       </div>
       <div className='paginateContainer'>
-      <ReactPaginate
-        pageCount={Math.ceil(count / 7)} // number of pages
-        pageRangeDisplayed={7}
-        previousLabel={'Prev'}
-        previousClassName='prevPaginate'
-        nextLabel={'Next'}
-        nextClassName='nextPaginate'
-        marginPagesDisplayed={0}
-        onPageChange={handlePageClick} // callback function for page change
-        containerClassName='paginate'
-        activeClassName='activePaginate'
-        pageClassName='classPaginate'
-      />
+        <ReactPaginate
+          pageCount={Math.ceil(count / 7)} // number of pages
+          pageRangeDisplayed={7}
+          previousLabel={'Prev'}
+          previousClassName='prevPaginate'
+          nextLabel={'Next'}
+          nextClassName='nextPaginate'
+          marginPagesDisplayed={0}
+          onPageChange={handlePageClick} // callback function for page change
+          containerClassName='paginate'
+          activeClassName='activePaginate'
+          pageClassName='classPaginate'
+        />
       </div>
       {showEditModal && (
         <AESModal
@@ -190,6 +205,14 @@ const AdminStudent = ({ adminData }) => {
           cancel={handleCancelStudent}
           updateUi={fetchStudents}
           action={action}
+        />
+      )}
+      {showDeleteModal && (
+        <DeleteModal
+          title={`${action} User`}
+          message={`${studentData.last_name}`}
+          onConfirm={handleDeleteConfirm}
+          onCancel={handleDeleteCancel}
         />
       )}
     </div>

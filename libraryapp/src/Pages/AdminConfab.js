@@ -77,7 +77,7 @@ const AdminConfab = () => {
   const handleDeleteCancel = () => {
     setShowDeleteModal(false);
     setAction('');
-    setConfabData([]);
+    setConfabData({});
   };
 
   return (

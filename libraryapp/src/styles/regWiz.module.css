@@ -39,19 +39,20 @@
 }
 .comps2{
     height: 100%;
-    width: 60%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     padding-left: 10px;
 }
 .comps2 h3{
     font-size: 16px;
-    margin: 10px 0 0;
+    margin: 15px 0 0;
     color: white;
 }
 .comps2 p{
     width: 100%;
     font-size: 12px;
+    margin: 2px 0 0;
     color: white;
 }
 
