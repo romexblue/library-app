@@ -90,7 +90,7 @@ const FloorModal = ({ title, data, update, cancel, updateUi, action }) => {
                             <input className={aef.levelInput}type="number" value={level} onChange={(event) => { setLevel(event.target.value) }} />
                             </div>
                             <div className={aef.comp4}>
-                            <div className={aef.levelHint}>Set the floor's location</div>
+                            <div className={aef.levelHint}>Set the floor level no.</div>
                             </div>
                             </div>
                         <div className={aef.buildingSection} >

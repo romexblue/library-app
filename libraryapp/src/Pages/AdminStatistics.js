@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import stat from '../styles/AdminStatistics.module.css';
+import image1 from '../images/Export_Icon.png';
 
 
 const AdminStatistics = () => {
@@ -88,34 +89,42 @@ const AdminStatistics = () => {
     <div className={stat.mainPage}>
       <div className={stat.topBar}>
         <div className={stat.dpStart}>
-      <DatePicker className={stat.pdateStart}
-        selected={startDate}
-        onChange={date => handleStartDateChange(date)}
-        popperPlacement="bottom"
-      />
+          <label className={stat.label}>Start Date</label>
+          <DatePicker className={stat.pdateStart}
+            selected={startDate}
+            onChange={date => handleStartDateChange(date)}
+            popperPlacement="bottom"
+          />
         </div>
         <div className={stat.dpEnd}>
-        <DatePicker className={stat.pdateEnd}
-          selected={endDate}
-          onChange={date => handleEndDateChange(date)}
-          popperPlacement="bottom"
-        />
+        <label className={stat.label}>End Date</label>
+          <DatePicker className={stat.pdateEnd}
+            selected={endDate}
+            onChange={date => handleEndDateChange(date)}
+            popperPlacement="bottom"
+          />
         </div>
         <div className={stat.category}>
-        <select className={stat.allSelect} value={college} onChange={handleCollegeChange}>
-          <option value="">All</option>
-          {collegeSelect.map((college, index) => (
-            <option key={index} value={college.college}>
-              {college.college}
-            </option>
-          ))}
-        </select>
+        <label className={stat.label}>Filter by College</label>
+          <select className={stat.allSelect} value={college} onChange={handleCollegeChange}>
+            <option value="">All</option>
+            {collegeSelect.map((college, index) => (
+              <option key={index} value={college.college}>
+                {college.college}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className={stat.export}> {/*Export Button*/}
+          <div className={stat.exportContainer}>
+            <img className={stat.exportIcon} src={image1} alt='export' />
+          </div>
         </div>
       </div>
       <div className={stat.allStatistics}>
         <div className={stat.headerStatistics}>
-        <div className={stat.panel1Title}>
-          <p>Entry/Exit General Statistics {college ? `for [${college}]` : ""} </p>
+          <div className={stat.panel1Title}>
+            <p>Entry/Exit General Statistics {college ? `for [${college}]` : ""} </p>
           </div>
           {recordStats && (
             <div className={stat.StatisticsContainer1}>
@@ -125,31 +134,31 @@ const AdminStatistics = () => {
               <div className={stat.stats4a}><h4>Lowest Time Stayed (sec):</h4><p> {recordStats.overall.lowestStayTime}</p></div>
             </div>
           )}
-          </div>
+        </div>
         <div className={stat.generalStatistics}>
-        <div className={stat.panel1}>    
-          <div className={stat.tableTitle}>Library Entry/Exit Statistics by Floor</div>
-          <div className={stat.floorStatitics}>
-          {recordStats.floors && recordStats.floors.length > 0 && (
-            <div>
-              {recordStats.floors.map((floor, index) => (
-                <div className={stat.perfloorStats} key={index}>
-                  <p className={stat.floorTitleA}>{floor['Floor.name']}:<div className={stat.divider}></div></p>
-                  <div className={stat.allperfloor}>
-                    <div className={stat.statsboxA}><h4>Usage Count (person):</h4><p> {floor.count}</p></div>
-                    <div className={stat.statsboxA}><h4>Avg. Time Stayed (sec):</h4><p> {Math.round(floor.averageStayTime)  }</p></div>
-                    <div className={stat.statsboxA}><h4>Highest Time Stayed (sec):</h4><p> {floor.highestStayTime}</p></div>
-                    <div className={stat.statsboxA}><h4>Lowest Time Stayed (sec):</h4><p> {floor.lowestStayTime}</p></div>
+          <div className={stat.panel1}>
+            <div className={stat.tableTitle}>Library Entry/Exit Statistics by Floor</div>
+            <div className={stat.floorStatitics}>
+              {recordStats.floors && recordStats.floors.length > 0 && (
+                <div>
+                  {recordStats.floors.map((floor, index) => (
+                    <div className={stat.perfloorStats} key={index}>
+                      <p className={stat.floorTitleA}>{floor['Floor.name']}:<div className={stat.divider}></div></p>
+                      <div className={stat.allperfloor}>
+                        <div className={stat.statsboxA}><h4>Usage Count (person):</h4><p> {floor.count}</p></div>
+                        <div className={stat.statsboxA}><h4>Avg. Time Stayed (sec):</h4><p> {Math.round(floor.averageStayTime)}</p></div>
+                        <div className={stat.statsboxA}><h4>Highest Time Stayed (sec):</h4><p> {floor.highestStayTime}</p></div>
+                        <div className={stat.statsboxA}><h4>Lowest Time Stayed (sec):</h4><p> {floor.lowestStayTime}</p></div>
+                      </div>
+                    </div>
+                  ))}
+
                 </div>
-                </div>
-              ))}
-              
+              )}
             </div>
-          )}
           </div>
-          </div>
-        <div className={stat.panel2}>
-          {/* <div className={stat.panel2Title}>Spaces Usage Statistics  {college ? `for ${college}` : ""} </div>
+          <div className={stat.panel2}>
+            {/* <div className={stat.panel2Title}>Spaces Usage Statistics  {college ? `for ${college}` : ""} </div>
           <p style={{ fontSize: "13px" }}>
             Note: Reservations total per College is based from the representative as reservation may contain students from different collegs
           </p>
@@ -186,9 +195,9 @@ const AdminStatistics = () => {
               ))}
             </div>
           )} */}
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
     </div>
   )
 }

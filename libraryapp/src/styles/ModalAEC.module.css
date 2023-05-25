@@ -125,7 +125,7 @@
     height: 100%;
   }
   .maxInput{
-    width: 120px;
+    width: 30%;
     height: 35px;
     border-radius: 10px;
     border: 1px solid black;
@@ -149,7 +149,7 @@
     height: 100%;
   }
   .levelInput{
-    width: 150px;
+    width: 30%;
     height: 35px;
     border-radius: 10px;
     border: 1px solid black;
@@ -193,7 +193,7 @@
   }
   .status{
     height: 35px;
-    width: 150px;
+    width: 30%;
     outline: none;
     border-radius: 10px;
   }

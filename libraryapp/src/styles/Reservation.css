@@ -401,7 +401,8 @@
     width: 95%;
     height: 40px;
     border-radius: 10px;
-    background-color: rgb(254, 254, 254);
+    background-color: #A19158;
+    color: white;
 }
 #column1{
     width: 80px;
