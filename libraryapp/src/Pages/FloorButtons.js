@@ -102,12 +102,14 @@ const FloorButtons = () => {
 
         // return () => clearInterval(interval);
 
-        const timer = setInterval(() => setDate(new Date()), 1000);
+        const timer = setInterval(() => {
+            setDate(new Date());
+            getFloors();
+        }, 1000);
         return () => clearInterval(timer);
     }, [navigate, authContext,]);
 
     const getFloors = () => {
-        console.log("i am called")
         axios.get("http://localhost:5000/floor/all", {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken"),
@@ -148,31 +150,31 @@ const FloorButtons = () => {
 
     return (
         <>
-        {!studentID && (
-            <InfoPage
-                studentID={studentID} setStudentID={setStudentID}
-                studentRFID={studentRFID} setStudentRFID={setStudentRFID}
-                setStudentData={setStudentData}
-            // inputRef={inputRef} 
-            />
-        )}
+            {!studentID && (
+                <InfoPage
+                    studentID={studentID} setStudentID={setStudentID}
+                    studentRFID={studentRFID} setStudentRFID={setStudentRFID}
+                    setStudentData={setStudentData}
+                // inputRef={inputRef} 
+                />
+            )}
 
-        {studentID && (
+            {studentID && (
 
-            <div className="info">
-                <div className="left-panel">
-                    <div className="info-student">
-                        <div className="stud-info" id="sec1-a">
-                        </div>
-                        <div className="stud-info1" id="sec2-a">
-                            <div className="comp" id="comp1">
-                                <img src={image1} alt='Img' />
+                <div className="info">
+                    <div className="left-panel">
+                        <div className="info-student">
+                            <div className="stud-info" id="sec1-a">
                             </div>
-                            <div className="comp" id="comp2">
-                                <img src={image2} alt='Img' />
-                            </div>
-                            <div className="comp" id="comp3">
-                            </div>
+                            <div className="stud-info1" id="sec2-a">
+                                <div className="comp" id="comp1">
+                                    <img src={image1} alt='Img' />
+                                </div>
+                                <div className="comp" id="comp2">
+                                    <img src={image2} alt='Img' />
+                                </div>
+                                <div className="comp" id="comp3">
+                                </div>
 
                             </div>
                             <div className="stud-info" id="sec3-a">
@@ -262,7 +264,7 @@ const FloorButtons = () => {
                                 </div>
                             </div>
                             <div className="note-down" id="lowernote">
-                                <button className="cancelbtn" onClick={() => { setStudentID(''); setStudentRFID(''); getFloors();}}>Back</button>
+                                <button className="cancelbtn" onClick={() => { setStudentID(''); setStudentRFID(''); getFloors(); }}>Back</button>
                             </div>
                         </div>
                     </div>
@@ -281,16 +283,17 @@ const FloorButtons = () => {
                             </div>
                             <div className='buildings'>
                                 {buttonData.map((buttonObj, index) => (
-                                    <div className='building-option'                                         tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => {
-                                            if (buttonObj.status === "Closed" || buttonObj.status === "Full") {
-                                                return;
-                                              }chooseFloor(buttonObj.id, buttonObj.name);}}>
+                                    <div className='building-option' tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => {
+                                        if (buttonObj.status === "Closed" || buttonObj.status === "Full") {
+                                            return;
+                                        } chooseFloor(buttonObj.id, buttonObj.name);
+                                    }}>
                                         <div className="label" id="tag1">
                                             <h1>L{buttonObj.level}</h1>
                                         </div>
                                         <div className="label" id="tag2">
                                             <div className="division" id="divup">
-                                                <h2 className="building-text">{buttonObj.name}</h2>
+                                                <h2 className="building-text">{buttonObj.label}, {buttonObj.name}</h2>
                                             </div>
                                             <div className="division" id="divdown">
                                                 <h2 className="building-text">Current Capacity: {buttonObj.current_count}</h2>
@@ -298,30 +301,36 @@ const FloorButtons = () => {
                                         </div>
                                         <div className="label" id="tag3">
                                             <div className="division" id="label-div">
-                                                <div className='labelcolor' id='labelc' style={{ backgroundColor: buttonObj.label === "Bldg1" ? "rgb(205, 205, 205)" : "rgb(31, 82, 158)" }}>
+                                                <div className='labelcolor' id='labelc' style={{
+                                                    backgroundColor: buttonObj.status === "Full"
+                                                        ? "rgb(245, 57, 35)"
+                                                        : buttonObj.status === "Closed"
+                                                            ? "rgb(182, 182, 182)"
+                                                            : "rgb(58, 187, 60)"
+                                                }}>
 
+                                                </div>
+                                            </div>
+                                            <div className="division" id="stat-div">
+                                                <p>Status: {buttonObj.status}</p>
                                             </div>
                                         </div>
-                                        <div className="division" id="stat-div">
-                                            <p>Status: {buttonObj.status}</p>
-                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )}
-        {showConfirmation && (
-            <ConFFModal
-                title="CONFIRM"
-                message={`Visiting Level: ${floorName}`}
-                onConfirm={handleConfirm}
-                onCancel={handleCancel}
-            />
-        )}
-    </>
+            )}
+            {showConfirmation && (
+                <ConFFModal
+                    title="CONFIRM"
+                    message={`Visiting Level: ${floorName}`}
+                    onConfirm={handleConfirm}
+                    onCancel={handleCancel}
+                />
+            )}
+        </>
     );
 }
 

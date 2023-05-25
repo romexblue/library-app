@@ -15,9 +15,19 @@ router.post('/', validateToken, async (req, res) => {
 
 router.get('/all', validateToken, async (req, res) => {
     try {
-        const listOfFloors = await Floor.findAll({
+        const list1 = await Floor.findAll({
+            where: {
+                label: 'Main'
+              },
             order: [['name', 'ASC']]
         })
+        const list2 = await Floor.findAll({
+            where: {
+                label: 'Annex'
+              },
+            order: [['name', 'ASC']]
+        })
+        const listOfFloors = list1.concat(list2);
         res.json(listOfFloors)
     } catch (err) {
         res.status(500).json({ error: err })

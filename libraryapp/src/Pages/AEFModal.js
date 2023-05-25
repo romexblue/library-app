@@ -7,7 +7,7 @@ const FloorModal = ({ title, data, update, cancel, updateUi, action }) => {
     const [maxCapacity, setMaxCapacity] = useState(data.max_capacity ?? 0);
     const [status, setStatus] = useState(data.status ?? "Open");
     const [level, setLevel] = useState(data.level ?? 0);
-    const [bldg, setBldg] = useState(data.bldg ?? "Bldg1")
+    const [bldg, setBldg] = useState(data.label ?? "Annex")
     const [showModal, setShowModal] = useState(true);
 
     const handleConfirm = () => {
@@ -95,12 +95,12 @@ const FloorModal = ({ title, data, update, cancel, updateUi, action }) => {
                             </div>
                         <div className={aef.buildingSection} >
                             <div className={aef.comp1}>
-                            <label className={aef.buildingLabel}>Building No.:</label>
+                            <label className={aef.buildingLabel}>Building:</label>
                             </div>
                             <div className={aef.comp2}>
                             <select className={aef.buildingInput} value={bldg} onChange={(event) => setBldg(event.target.value)}>
-                                <option value="Bldg1"> 1</option>
-                                <option value="Bldg2"> 2</option>
+                                <option value="Annex"> Annex Building</option>
+                                <option value="Main"> Main Building</option>
                             </select>
                             </div>
                         </div>

@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         label:{
-            type: DataTypes.ENUM('Bldg1', 'Bldg2'),
+            type: DataTypes.ENUM('Annex', 'Main'),
             allowNull: false
         },
         status:{
