@@ -16,6 +16,8 @@
 }
 .tab{
     border-radius: 10px;
+    padding-left: 10px;
+
 }
 .tab option{
     font-size: 20px;
@@ -31,6 +33,7 @@
     width: 150px;
     height: 40px;
     border-radius: 10px;
+    padding-left: 10px;
 }
 
 .selectInput::after {
@@ -244,21 +247,4 @@ thead{
 }
 .tableBody td:nth-child(8){
     width: 150px;
-}
-.paginate{
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-}
-.subPaginate{
-    width: 40px;
-    height: 100%;
-    background-color: red;
-}
-.activePaginate{
-    width: 30px;
-    height: 100%;
-    background-color: blue;
 }

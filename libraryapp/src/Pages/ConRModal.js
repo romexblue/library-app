@@ -36,8 +36,8 @@ const ConRModal = ({title, message, onConfirm}) => {
               <p>{title}</p>
             </div>
         <div className={mof.messageModal}>
-          <p>{message}</p>
-          <p>{title==="Success!" ? "Please take note of the Reservation ID for smoother transaction" : ""}</p>
+          <p className={mof.message1}>{message}</p>
+          <p className={mof.message2}>{title==="Success!" ? "Please take note of the Reservation ID for smoother transaction" : ""}</p>
         </div>
             <div className={mof.modalFooter}>
                 <button className={mof.confirmBtn} ref={confirmButtonRef} onClick={handleConfirm}>Ok</button>

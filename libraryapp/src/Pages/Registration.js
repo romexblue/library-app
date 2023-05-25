@@ -281,7 +281,7 @@ const Registration = () => {
                                             <input required disabled={searching} value={year} onChange={(event) => setYear(event.target.value)} className={reg.input6} type="text" />
                                         </div>
                                         <div className={reg.comp4}>
-                                            <label className={reg.label7}>Gender</label>
+                                            <label className={reg.label7}>Sex</label>
                                             <select disabled={searching} className={reg.input7} value={gender} onChange={(event) => setGender(event.target.value)}>
                                                 <option value="M">Male</option>
                                                 <option value="F">Female</option>

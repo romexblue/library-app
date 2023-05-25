@@ -218,7 +218,7 @@ const FloorButtons = () => {
                             <div className="stud-info" id="sec8-a">
                                 <div className="partition" id="part3">
                                     <div className="comp" id="comp12">
-                                        Gender:
+                                        Sex:
                                     </div>
                                     <div className="comp" id="comp13">
                                         {studentData.gender}

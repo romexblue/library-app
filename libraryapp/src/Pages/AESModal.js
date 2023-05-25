@@ -142,6 +142,14 @@ const StudentModal = ({ title, data, update, cancel, updateUi, action }) => {
                             <div className={aes.compo5}>
                                 <p>Email:</p> <input type="text" value={email} onChange={(event) => { setEmail(event.target.value) }} />
                             </div>
+                            <div className={aes. compo5a}>
+                                <p>Sex:</p>
+                                    <select className={aes.genderSelect} value={gender} onChange={(event) => setGender(event.target.value)}>
+                                        <option value="M"> Male</option>
+                                        <option value="F"> Female</option>
+                                        <option value="U"> Undefined </option>
+                                    </select>
+                            </div>
                         </div>
                         <div className={aes.section4}>
                             <div className={aes.parentCompo67}>
@@ -161,12 +169,7 @@ const StudentModal = ({ title, data, update, cancel, updateUi, action }) => {
                                 </div>
                             </div>
                             <div className={aes.compo8}>
-                                <p>Gender:</p>
-                                <select className={aes.genderSelect} value={gender} onChange={(event) => setGender(event.target.value)}>
-                                    <option value="M"> Male</option>
-                                    <option value="F"> Female</option>
-                                    <option value="U"> Undefined </option>
-                                </select>
+                               
 
                             </div>
                         </div>

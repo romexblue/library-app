@@ -115,7 +115,7 @@
     border: none;
     outline: none;
     border-radius: 10px;
-    padding: 10px;
+    padding-left: 10px;
     font-size: 18px;  
     background-color: rgb(226, 226, 226);
   }
@@ -164,7 +164,7 @@
     height: 35px;
     border: 1px solid black;
     border-radius: 10px;
-    padding: 10px;
+    padding-left: 10px;
   }
   .compo4{
     display: flex;
@@ -182,12 +182,15 @@
     height: 35px;
     border: 1px solid black;
     border-radius: 10px;
-    padding: 10px;
+    padding-left: 10px;
   }
   .section3{
     width: 100%;
     height: 60px;
     margin: 5px 0 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
   }
 
   .compo5{
@@ -195,6 +198,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     margin-left: 20px;
   }
   .compo5 p{
@@ -206,9 +210,28 @@
     height: 35px;
     border-radius: 10px;
     border: 1px solid black;
-    padding: 10px;
+    padding-left: 10px;
     font-size: 14px;
 
+  }
+  .compo5a{
+    width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  .compo5a p{
+    text-align: left;
+    font-size: 14px;
+  }
+  .compo5a .genderSelect{
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding-left: 10px;
+    font-size: 14px;
   }
   .section4{
     width: 100%;
@@ -216,7 +239,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin: 20px 0 5px;
+    margin: 0 0 10px;
 
   }
   .parentCompo67{
@@ -264,26 +287,6 @@
     padding-left: 10px;
     border-radius: 10px;
     border: 1px solid black;
-  }
-  .compo8{
-    width: 300px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-left: 20px;
-  }
-  .compo8 p{
-    text-align: left;
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-  .compo8 .genderSelect{
-    width: 150px;
-    height: 35px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 10px;
-    font-size: 14px;
   }
   .section5{
     width: 100%;

@@ -31,9 +31,13 @@
     flex-direction: column;
     justify-content: center;
   }
-  .messageModal p{
-    font-size: 24px;
+  .message1{
     font-weight: 500;
+    font-size: 16px;
+  }
+  .message2{
+    margin-top: 10px;
+    font-size: 14px;
   }
   .modalFooter{
     margin-top: 10px;
