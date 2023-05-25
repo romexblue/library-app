@@ -97,7 +97,7 @@ const ConfModal = ({title, message, onConfirm, onCancel}) => {
                 <div className={cmod.divSection2}>
                     <div className={cmod.usersList}>
                         <label className={cmod.confLabel}>Users:</label>
-                        <textarea readonly className={cmod.users}>{message.users.join(',')}</textarea> 
+                        <p className={cmod.users}>{message.users.join(', ')}</p> 
                     </div>
                 </div>
             </div>

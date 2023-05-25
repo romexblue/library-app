@@ -32,7 +32,8 @@ const Registration = () => {
     const rfid_2 = useRef(null);
     const [collegeSelect, setCollegeSelect] = useState([]);
     const [regResponse, setRegResponse] = useState("");
-
+    const [searching, setSearching] = useState(false);
+    
     const handleSubmit = () => {
         if (rfid === "" || rfid2 === "") {
             setMatchMessage("Required *")
@@ -96,6 +97,7 @@ const Registration = () => {
                 .then((response) => {
                     if (!response.data) {
                         clearData();
+                        setSearching(false);
                     } else {
                         setType(response.data.type);
                         setFName(response.data.first_name);
@@ -103,6 +105,7 @@ const Registration = () => {
                         setGender(response.data.gender);
                         setCollege(response.data.college);
                         setYear(response.data.year);
+                        setSearching(true);
                     }
                 })
         }
@@ -194,11 +197,11 @@ const Registration = () => {
                     <div className={`${reg.confirmModal} ${regResponse === "Something Went Wrong" ? reg.bgFail : reg.bgSuccess}`}>
                         <div className={reg.comps1}>
                             <div className={reg.imgHolder1}>
-                                <img src={regResponse==="Something Went Wrong" ? image6: image5} alt=''></img>
-                            </div>  
+                                <img src={regResponse === "Something Went Wrong" ? image6 : image5} alt=''></img>
+                            </div>
                         </div>
                         <div className={reg.comps2}>
-                            <h3>{regResponse==="Something Went Wrong" ? "Failed!": "Success!"}</h3>
+                            <h3>{regResponse === "Something Went Wrong" ? "Failed!" : "Success!"}</h3>
                             <p>{regResponse}</p>
                         </div>
                     </div>
@@ -242,17 +245,18 @@ const Registration = () => {
                                     <div className={reg.section2}>
                                         <div className={reg.comp1}>
                                             <label className={reg.label2} >Last Name</label>
-                                            <input required value={lName} onChange={(event) => setLName(event.target.value)} className={reg.input2} type="text" />
+                                            <input required disabled={searching} value={lName} onChange={(event) => setLName(event.target.value)} className={reg.input2} type="text" />
                                         </div>
                                     </div>
                                     <div className={reg.section3}>
                                         <label className={reg.label4}>Given Name</label>
-                                        <input required value={fName} onChange={(event) => setFName(event.target.value)} className={reg.input4} type="text" />
+                                        <input required disabled={searching} value={fName} onChange={(event) => setFName(event.target.value)} className={reg.input4} type="text" />
                                     </div>
                                     <div className={reg.section4}>
                                         <div className={reg.compo1}>
                                             <label className={reg.label5}>College</label>
-                                            <select className={reg.input5} value={college} onChange={handleCollegeChange}>
+                                            <select disabled={searching} className={reg.input5} value={college} onChange={handleCollegeChange}>
+                                                <option value="">None</option>
                                                 {collegeSelect.map((college, index) => (
                                                     <option key={index} value={college.college}>
                                                         {college.college}
@@ -262,7 +266,7 @@ const Registration = () => {
                                         </div>
                                         <div className={reg.compo2}>
                                             <label className={reg.label5a}>Type:</label>
-                                            <select required className={reg.statusSelect} value={type} onChange={(event) => setType(event.target.value)}>
+                                            <select disabled={searching} required className={reg.statusSelect} value={type} onChange={(event) => setType(event.target.value)}>
                                                 <option value="FACULTY">Faculty</option>
                                                 <option value="SHSFACULTY">SHS Faculty</option>
                                                 <option value="STUDENT">Student</option>
@@ -274,11 +278,11 @@ const Registration = () => {
                                     <div className={reg.section5}>
                                         <div className={reg.comp3}>
                                             <label className={reg.label6} >Year</label>
-                                            <input required value={year} onChange={(event) => setYear(event.target.value)} className={reg.input6} type="text" />
+                                            <input required disabled={searching} value={year} onChange={(event) => setYear(event.target.value)} className={reg.input6} type="text" />
                                         </div>
                                         <div className={reg.comp4}>
                                             <label className={reg.label7}>Gender</label>
-                                            <select className={reg.input7} value={gender} onChange={(event) => setGender(event.target.value)}>
+                                            <select disabled={searching} className={reg.input7} value={gender} onChange={(event) => setGender(event.target.value)}>
                                                 <option value="M">Male</option>
                                                 <option value="F">Female</option>
                                                 <option value="U">Others</option>

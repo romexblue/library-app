@@ -120,6 +120,20 @@ const Admin = () => {
                                     </div>
                                 </li>
                                 <li>
+                                    <div className='sideButton' id='btn5'>
+                                        <button
+                                            className={activeComponent === 'AdminStudent' ? 'active' : 'buttonColor'}
+
+                                            onClick={() => handleTabClick('AdminStudent')} id='button5'>
+                                            Patrons
+                                        </button>
+                                    </div>
+                                </li>
+                            </>
+                        )}
+                        {isAdmin === "Admin" && (
+                            <>
+                                <li>
                                     <div className='sideButton' id='btn3'>
                                         <button
 
@@ -142,20 +156,6 @@ const Admin = () => {
                                         </button>
                                     </div>
                                 </li>
-                                <li>
-                                    <div className='sideButton' id='btn5'>
-                                        <button
-                                            className={activeComponent === 'AdminStudent' ? 'active' : 'buttonColor'}
-
-                                            onClick={() => handleTabClick('AdminStudent')} id='button5'>
-                                            Patrons
-                                        </button>
-                                    </div>
-                                </li>
-                            </>
-                        )}
-                        {isAdmin === "Admin" && (
-                            <>
                                 <li>
                                     <div className='sideButton' id='btn6'>
                                         <button
@@ -190,11 +190,11 @@ const Admin = () => {
 
                     </div>
                     <div className='section' id='navbarPart2'>
-                        <img alt='' src={image3}/>
+                        <img alt='' src={image3} />
                     </div>
                     <div className='section' id='navbarPart3'>
-                        <button className='buttons' id='adminOptions' onClick={()=>navigate('/choose')}><img src={image2} alt=""></img></button>
-                        <button className='buttons' id='adminlogoutBtn' onClick={()=>authContext.logout()}><img src={image1} alt=""></img></button>
+                        <button className='buttons' id='adminOptions' onClick={() => navigate('/choose')}><img src={image2} alt=""></img></button>
+                        <button className='buttons' id='adminlogoutBtn' onClick={() => authContext.logout()}><img src={image1} alt=""></img></button>
                     </div>
                 </div>
                 <div className='page-window'>
@@ -205,7 +205,7 @@ const Admin = () => {
                                 <AdminReservation />
                             </div>
                         )}
-                         {activeComponent === 'AdminStatistics' && (
+                        {activeComponent === 'AdminStatistics' && (
                             <div>
                                 <AdminStatistics />
                             </div>

@@ -43,10 +43,15 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
     // }, [capacity]);
 
     const handleConfirm = () => {
+        const newListData = inputValues.filter((value) => value !== '');
+     
         const regex = /^09\d{9}$/;
-        if (rep === "" || inputValues.length === 0 || !regex.test(phoneNumber) || reason === "") {
+        if (rep === "" || inputValues.length === 0 || reason === "" || newListData.length < counter - 1) {
             setErrorMessage("Please fill in all required fields with (*)")
-        }else{
+        }
+        else if (!regex.test(phoneNumber)) {
+            setErrorMessage("Invalid Phone Number")
+        } else {
             setErrorMessage("")
             confirm();
         }
@@ -62,13 +67,19 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
         event.preventDefault();
         const response = await findStudent(rep);
 
-        if (response.data.error) {
+        if (!response.data) {
             setRep('');
             setStudentData({});
         } else {
-            setRep(response.data.school_id);
-            setStudentData(response.data);
-            repInputRef.current.disabled = true;
+            if (inputValues.includes(response.data.school_id)) {
+                setRep('');
+                setStudentData({});
+            } else {
+                setRep(response.data.school_id);
+                setStudentData(response.data);
+                updateData([rep, ...inputValues])
+                repInputRef.current.disabled = true;
+            }
         }
     }
 
@@ -95,7 +106,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
         // Send a request to look up the student's information
         const response = await findStudent(studentId);
 
-        if (response.data.error) {
+        if (!response.data) {
             // If the student ID is not valid, clear the input value
             const newInputValues = [...inputValues];
             newInputValues[index] = "";
@@ -147,7 +158,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
     const handleSelectChange = (event) => {
         setCounter(event.target.value);
         const newValues = [...inputValues];
-        newValues.length = event.target.value - 1;
+        newValues.length = event.target.value;
         setInputValues(newValues);
         updateData([rep, ...newValues]);
     };
@@ -181,6 +192,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
                             const updatedInputValues = [...inputValues];
                             updatedInputValues[i] = "";
                             setInputValues(updatedInputValues);
+                            updateData([rep, ...updatedInputValues]);
                         }}>
                         x
                     </button>
@@ -191,11 +203,11 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
 
     const formatDate = (date) => {
         return date.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric"
+            month: "long",
+            day: "numeric",
+            year: "numeric"
         });
-      };
+    };
 
     return (
         <div className="rsmaindiv">
@@ -260,7 +272,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
                         </div>
                         <div className="partition" id="part5">
                             <div className="comp" id="rscomp9">
-                               <p className='noteReminder'>Click the Field and tap your ID on the reader. You may also type your ID number and press "Enter".</p> 
+                                <p className='noteReminder'>Click the Field and tap your ID on the reader. You may also type your ID number and press "Enter".</p>
                             </div>
                         </div>
                     </div>
@@ -337,7 +349,7 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
                 </div>
                 <div className="rsright-panel">
                     <div className="section" id="rssec12">
-                        Confab Users
+                        Confab Users *
                     </div>
                     <div className='section' id="rssec13">
                         {inputFields}

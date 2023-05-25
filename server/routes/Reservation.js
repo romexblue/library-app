@@ -272,7 +272,7 @@ router.post('/', async (req, res) => {
     });
 
     if (existingRep) {
-      return res.status(400).json({ error: 'No double booking allowed' });
+      return res.json({ error: 'No double booking allowed' });
     }
 
     const existingReservation = await Reservation.findOne({
@@ -354,10 +354,7 @@ router.post('/', async (req, res) => {
           ConfabName: reservation['Confab.name']
         }
       });
-      res.status(400).json({
-        'Conflicting reservations:': conflictingReservations,
-        'Overlapping time periods:': overlappingTimePeriods
-      })
+      res.json({error: "There is an overlapping/conflicting time period. Please refresh"})
     } else {
       const newReservation = await Reservation.create(rec);
       newId = newReservation.id; //take ID for record deletion if error in student info
@@ -371,14 +368,14 @@ router.post('/', async (req, res) => {
     }
   } catch (error) {
     if (error.name === 'SequelizeUniqueConstraintError') {
-      res.status(400).json({ error: 'Reservation already exists' });
+      res.json({ error: 'Reservation already exists' });
     } else {
       if (newId) {
         await Reservation.destroy({
           where: { id: newId }
         });
       }
-      res.status(500).json({ error: 'Error creating reservation. Please Try Again' });
+      res.json({ error: 'Error creating reservation. Please Try Again' });
     }
   }
 })

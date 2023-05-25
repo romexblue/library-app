@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 import ReservationUsers from "./ReservationUsers";
 import ConfModal from './ConfModal';
+import ConRModal from './ConRModal';
 
 const TIMES = {
   "8:00am": ["9:00am", "10:00am"],
@@ -60,8 +61,10 @@ function Reservation() {
   const [showForm, setShowForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     const date = convertDate(selectedDate);
     const start = convertTo24Hour(startTime);
     const end = convertTo24Hour(endTime);
@@ -70,23 +73,33 @@ function Reservation() {
     const confId = selectedConfab.id;
     const guestList = [...studentList];
     const data = { date: date, start_time: start, end_time: end, confirmation_status: "Pending", reason: purpose, ConfabId: confId, phone: phone, representative_id: guestList[0], guestList: guestList }
-    
-    axios
+
+    const response = await axios
       .post(`http://localhost:5000/reservation`, data, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken"),
           userId: sessionStorage.getItem("id"),
         },
       })
-      .then((response) => {
-      })
-      .catch((error) => {
-      });
-    window.location.reload();
+
+    if (response.data.success) {
+      setShowSuccess(true);
+      setSuccessMessage(response.data.success);
+    } else if (response.data.error) {
+      setShowSuccess(true);
+      setSuccessMessage(response.data.error);
+    }
+
+
   };
 
   const handleCancel = () => {
     setShowConfirmation(false);
+  };
+
+  const handleOk = () => {
+    setShowSuccess(false);
+    window.location.reload();
   };
 
   const setChildData = useCallback((data) => {
@@ -376,6 +389,13 @@ function Reservation() {
           message={{ confab: selectedConfab.name, stime: startTime, etime: endTime, users: studentList ? studentList : ["No students available",] }}
           onConfirm={handleConfirm}
           onCancel={handleCancel}
+        />
+      )}
+      {showSuccess && (
+        <ConRModal
+          title={successMessage.includes("successful") ? "Success!" : "Error!"}
+          message={successMessage}
+          onConfirm={handleOk}
         />
       )}
     </>
