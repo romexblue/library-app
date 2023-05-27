@@ -143,7 +143,7 @@ const AdminStatistics = () => {
                 <div>
                   {recordStats.floors.map((floor, index) => (
                     <div className={stat.perfloorStats} key={index}>
-                      <p className={stat.floorTitleA}>{floor['Floor.name']}:<div className={stat.divider}></div></p>
+                      <div className={stat.floorTitleA}>{floor['Floor.name']}:<div className={stat.divider}></div></div>
                       <div className={stat.allperfloor}>
                         <div className={stat.statsboxA}><h4>Usage Count (person):</h4><p> {floor.count}</p></div>
                         <div className={stat.statsboxA}><h4>Avg. Time Stayed (sec):</h4><p> {Math.round(floor.averageStayTime)}</p></div>

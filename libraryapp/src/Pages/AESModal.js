@@ -123,8 +123,8 @@ const StudentModal = ({ title, data, update, cancel, updateUi, action }) => {
                                 <p>Type:</p>
                                 <select className={aes.typeSelect} value={type} onChange={(event) => setType(event.target.value)}>
                                     <option value="FACULTY">Faculty</option>
-                                    <option value="SHSFACULTY">SHS Faculty</option>
                                     <option value="STUDENT">Student</option>
+                                    <option value="SHSFACULTY">SHS Faculty</option>
                                     <option value="SHSSTUDENT">SHS Student</option>
                                     <option value="STAFF">Staff</option>
                                 </select>
@@ -142,7 +142,7 @@ const StudentModal = ({ title, data, update, cancel, updateUi, action }) => {
                             <div className={aes.compo5}>
                                 <p>Email:</p> <input type="text" value={email} onChange={(event) => { setEmail(event.target.value) }} />
                             </div>
-                            <div className={aes. compo5a}>
+                            <div className={aes.compo5a}>
                                 <p>Sex:</p>
                                     <select className={aes.genderSelect} value={gender} onChange={(event) => setGender(event.target.value)}>
                                         <option value="M"> Male</option>

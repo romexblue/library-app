@@ -293,7 +293,7 @@ const FloorButtons = () => {
                                         </div>
                                         <div className="label" id="tag2">
                                             <div className="division" id="divup">
-                                                <h2 className="building-text">{buttonObj.label}, {buttonObj.name}</h2>
+                                                <h2 className="building-text">{buttonObj.name}</h2>
                                             </div>
                                             <div className="division" id="divdown">
                                                 <h2 className="building-text">Current Capacity: {buttonObj.current_count}</h2>
