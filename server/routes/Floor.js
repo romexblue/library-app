@@ -9,6 +9,7 @@ router.post('/', validateToken, async (req, res) => {
         await Floor.create(floor);
         res.status(200).json({success: "Create Floor Successful"});
     } catch (err) {
+        console.error(err)
         res.status(500).json({ error: err })
     }
 });

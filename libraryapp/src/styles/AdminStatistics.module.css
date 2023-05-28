@@ -65,6 +65,9 @@
     flex-direction: column;
     justify-content: center;
 }
+.imgCont{
+    width: 20px;
+}
 .export img{
     height: 20px;
     margin: auto;

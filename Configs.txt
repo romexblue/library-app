@@ -8,8 +8,6 @@ npx sequelize init
 npm install react-router-dom
 npm install axios
 npm install jsonwebtoken
-npm install react-datepicker //not used
-npm install react-paginate //not used
-npm i @react-pdf/renderers 
-npm i recharts 
-npm install html-to-image
+npm install react-datepicker
+npm install react-paginate 
+npm install react-csv

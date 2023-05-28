@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CSVLink } from 'react-csv';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import stat from '../styles/AdminStatistics.module.css';
@@ -12,6 +13,25 @@ const AdminStatistics = () => {
   const [collegeSelect, setCollegeSelect] = useState([]);
   // const [reservationStats, setReservationStats] = useState('');
   const [recordStats, setRecordStats] = useState('');
+
+  const headers = [
+    { label: "Count", key: "count" },
+    { label: "Average Stay Time", key: "averageStayTime" },
+    { label: "Highest Stay Time", key: "highestStayTime" },
+    { label: "Lowest Stay Time", key: "lowestStayTime" },
+    { label: "Floor Name", key: "Floor.name" }
+  ];
+
+  const csvData = [
+    headers.reduce((obj, { key }) => ({ ...obj, [key]: recordStats?.overall?.[key] || '' }), {}),
+    ...(recordStats?.floors || []).map(floor => headers.reduce((obj, { key }) => ({ ...obj, [key]: floor?.[key] || '' }), {}))
+  ];
+
+  const csvReport = {
+    data: csvData,
+    headers: headers,
+    filename: `${startDate.toISOString().slice(0, 10)}-${endDate.toISOString().slice(0, 10)}-${college=== '' ? 'All':college}`
+  };
 
   const handleCollegeChange = (event) => {
     setCollege(event.target.value)
@@ -33,6 +53,7 @@ const AdminStatistics = () => {
   const handleEndDateChange = (date) => {
     setEndDate(date);
     const end = date.toISOString().slice(0, 10);
+    console.log(end)
     const link = `http://localhost:5000/reservation/stats/${startDate}/${end}/${college}`;
     const link2 = `http://localhost:5000/record/stats/${startDate}/${end}/${college}`;
     getReservationStats(link);
@@ -97,7 +118,7 @@ const AdminStatistics = () => {
           />
         </div>
         <div className={stat.dpEnd}>
-        <label className={stat.label}>End Date</label>
+          <label className={stat.label}>End Date</label>
           <DatePicker className={stat.pdateEnd}
             selected={endDate}
             onChange={date => handleEndDateChange(date)}
@@ -105,7 +126,7 @@ const AdminStatistics = () => {
           />
         </div>
         <div className={stat.category}>
-        <label className={stat.label}>Filter by College</label>
+          <label className={stat.label}>Filter by College</label>
           <select className={stat.allSelect} value={college} onChange={handleCollegeChange}>
             <option value="">All</option>
             {collegeSelect.map((college, index) => (
@@ -117,7 +138,7 @@ const AdminStatistics = () => {
         </div>
         <div className={stat.export}> {/*Export Button*/}
           <div className={stat.exportContainer}>
-            <img className={stat.exportIcon} src={image1} alt='export' />
+            <CSVLink {...csvReport} className={stat.imgCont}><img className={stat.exportIcon} src={image1} alt='export' /></CSVLink>
           </div>
         </div>
       </div>
@@ -158,6 +179,9 @@ const AdminStatistics = () => {
             </div>
           </div>
           <div className={stat.panel2}>
+            {/* 
+              HIDDEN DUE TO DEPLOYMENT
+             */}
             {/* <div className={stat.panel2Title}>Spaces Usage Statistics  {college ? `for ${college}` : ""} </div>
           <p style={{ fontSize: "13px" }}>
             Note: Reservations total per College is based from the representative as reservation may contain students from different collegs
