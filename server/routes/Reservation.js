@@ -167,7 +167,10 @@ router.patch('/requests/find-by/:id', validateToken, async (req, res) => {
     if (!reservation) {
       return res.status(404).json({ error: 'Reservation not found' });
     }
-
+    if(confirmation_status === "Cancelled"){
+      await reservation.destroy();
+      return res.status(200).json({ success: 'Reservation updated successfully' });
+    }
     await reservation.update({ confirmed_by: confirmed_by, confirmation_status: confirmation_status });
     return res.status(200).json({ success: 'Reservation updated successfully' });
   } catch (error) {

@@ -209,7 +209,7 @@ const AdminStudent = ({ adminData }) => {
       )}
       {showDeleteModal && (
         <DeleteModal
-          title={`${action} User`}
+          title={action.toLocaleLowerCase()}
           message={`${studentData.last_name}`}
           onConfirm={handleDeleteConfirm}
           onCancel={handleDeleteCancel}

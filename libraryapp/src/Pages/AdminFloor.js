@@ -137,7 +137,7 @@ const AdminFloor = () => {
             )}
             {showDeleteModal && (
                 <DeleteModal
-                    title={`${action} Floor`}
+                    title={action.toLocaleLowerCase()}
                     message={`${floorData.name}`}
                     onConfirm={handleDeleteConfirm}
                     onCancel={handleDeleteCancel}

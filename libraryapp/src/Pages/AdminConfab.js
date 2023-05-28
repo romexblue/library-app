@@ -137,7 +137,7 @@ const AdminConfab = () => {
         )}
         {showDeleteModal && (
           <DeleteModal
-            title={`${action} Space`}
+            title={action.toLocaleLowerCase()}
             message={`${confabData.name}`}
             onConfirm={handleDeleteConfirm}
             onCancel={handleDeleteCancel}

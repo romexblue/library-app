@@ -41,14 +41,14 @@ const DeleteModal = ({title, message, onConfirm, onCancel}) => {
             <h2>Are you sure?</h2>
             </div>
         <div className={mof.section3}>
-        <p className={mof.toDeleteMessage}>Do you really want to delete <b>{message}</b>? <br/>This process cannot be undone.</p>
+        <p className={mof.toDeleteMessage}>Do you really want to {title} <b>{message}</b>? <br/>This process cannot be undone.</p>
         </div>
             <div className={mof.section4}>
-            <div class={mof.comp1}>
-                    <button class={mof.cancelButton} ref={cancelButtonRef} onClick={handleCancel}>Cancel</button>
+            <div className={mof.comp1}>
+                    <button className={mof.cancelButton} ref={cancelButtonRef} onClick={handleCancel}>Cancel</button>
                 </div>
-                <div class={mof.comp2}>
-                    <button class={mof.confirmButton} ref={confirmButtonRef} onClick={handleConfirm}>Yes,Delete</button>
+                <div className={mof.comp2}>
+                    <button className={mof.confirmButton} ref={confirmButtonRef} onClick={handleConfirm}>Yes,Delete</button>
                 </div>
             </div>
         </div>

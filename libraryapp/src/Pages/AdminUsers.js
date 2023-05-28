@@ -174,7 +174,7 @@ const AdminUsers = () => {
       )}
       {showDeleteModal && (
         <DeleteModal
-          title={`${action} User`}
+          title={action.toLocaleLowerCase()}
           message={`${userData.username}`}
           onConfirm={handleDeleteConfirm}
           onCancel={handleDeleteCancel}
