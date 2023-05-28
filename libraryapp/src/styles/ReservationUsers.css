@@ -629,9 +629,19 @@
 }
 .buttonContainer{
   width: 100%;
-  height: 40px;
-  margin-bottom: 20px;
-
+  height: 100%;
+}
+.upperSection{
+  margin-top: 10px;
+  width: 100%;
+  height: 10px;
+  font-size: 14px;
+  color: red;
+}
+.lowerSection{
+  margin-top: 10px;
+  width: 100%;
+  height: 50px;
 }
 #rssec14 .submitbtn{
   font-family: 'Ubuntu', sans-serif;

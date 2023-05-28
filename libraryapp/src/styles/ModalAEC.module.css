@@ -196,6 +196,7 @@
     width: 30%;
     outline: none;
     border-radius: 10px;
+    margin-left: 10px;
   }
   .statusLabel{
     display: flex;

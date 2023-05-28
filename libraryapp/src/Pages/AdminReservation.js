@@ -239,7 +239,7 @@ const AdminReservation = () => {
                         nextLabel={'Next'}
                         nextClassName='nextPaginate'
                         marginPagesDisplayed={0}
-                        onPageChange={handlePageChange} // callback function for page change
+                        onPageChange={handlePageChange} // callback function for page changes
                         containerClassName='paginate'
                         activeClassName='activePaginate'
                         pageClassName='classPaginate'

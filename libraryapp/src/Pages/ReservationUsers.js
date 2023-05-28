@@ -361,9 +361,13 @@ function ReservationUsers({ confab, timeData, updateData, childData, cancel, con
                         </div>
                         <div className="btn-holder" id="btnHolder1">
                             <div className='buttonContainer'>
-                                <p>{errorMessage}</p>
-                                <button className="cancelbtn" onClick={() => cancel()} >Cancel</button>
-                                <button className="submitbtn" onClick={() => handleConfirm()}>Submit</button>
+                                <div className="upperSection">
+                                    <p>{errorMessage}</p>
+                                </div>
+                                <div className="lowerSection">
+                                    <button className="cancelbtn" onClick={() => cancel()} >Cancel</button>
+                                    <button className="submitbtn" onClick={() => handleConfirm()}>Submit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
