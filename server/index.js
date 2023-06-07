@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-
+const { Op } = require('sequelize');
 const db = require('./models');
-const { Users } = require('./models');
+const { Users, Records, Floor } = require('./models');
 
 app.use(express.json())
 app.use(cors());
@@ -45,6 +45,31 @@ db.sequelize.sync().then(async () => {
         });
     }
 
+    const currentDate = new Date();
+
+    await Records.destroy({
+        where: {
+            date: {
+                [Op.lt]: currentDate.toISOString().slice(0, 10),
+            },
+            time_out: null
+        }
+    })
+        .then(deletedCount => {
+            console.log(`${deletedCount} records deleted successfully.`);
+            if (deletedCount > 0) {
+                Floor.update({ current_count: 0 }, { where: {} })
+                    .then(updatedCount => {
+                        console.log(`${updatedCount} instances updated successfully.`);
+                    })
+                    .catch(err => {
+                        console.error('Error occurred while updating instances:', err);
+                    });
+            }
+        })
+        .catch(err => {
+            console.error('Error occurred while deleting records:', err);
+        });
     app.listen(port, () => {
         console.log(`Server running on port ${port}`)
     });

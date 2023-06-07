@@ -1,6 +1,6 @@
 import '../styles/FButton.css'
 import axios from "axios"
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../helpers/AuthContext';
 import ConFFModal from './ConFFModal';
@@ -14,7 +14,7 @@ import image7 from '../images/Reminder_Icon.png';
 
 const FloorButtons = () => {
     const [buttonData, setButtonData] = useState([]);// array of button text values based on database data
-    //const buttonRefs = useRef([]);
+    const buttonRefs = useRef([]);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [studentID, setStudentID] = useState('');
     const [studentRFID, setStudentRFID] = useState('');
@@ -105,9 +105,20 @@ const FloorButtons = () => {
         const timer = setInterval(() => {
             setDate(new Date());
             getFloors();
+
         }, 1000);
-        return () => clearInterval(timer);
-    }, [navigate, authContext,]);
+        const buttonFocusDelay = setInterval(() => {
+            if (showConfirmation === false && !buttonRefs.current.some(buttonRef => buttonRef === document.activeElement)) {
+                // Set focus to the first button when the InfoPage is hidden and no button has focus
+                buttonRefs.current[0]?.focus();
+            }
+        }, 3000)
+
+        return () =>{ 
+            clearInterval(timer);
+            clearInterval(buttonFocusDelay);
+        };
+    }, [navigate, authContext, showConfirmation]);
 
     const getFloors = () => {
         axios.get("http://localhost:5000/floor/all", {
@@ -121,24 +132,27 @@ const FloorButtons = () => {
             })
     };
 
-    // const handleKeyDown = (event, index, id, name) => {
-    //     const buttonCount = buttonData.length;
+    const handleKeyDown = (event, index, floorObj) => {
+        const buttonCount = buttonData.length;
 
-    //     if (event.key === 'ArrowUp') {
-    //         event.preventDefault();
-    //         buttonRefs.current[(index - 1 + buttonCount) % buttonCount].focus();
-    //     } else if (event.key === 'ArrowDown') {
-    //         event.preventDefault();
-    //         buttonRefs.current[(index + 1) % buttonCount].focus();
-    //     } else if (event.key === 'Enter') {
-    //         event.preventDefault(); //prevents calling function twice
-    //         chooseFloor(id, name);
-    //     }
-    // };
+        if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            buttonRefs.current[(index - 1 + buttonCount) % buttonCount].focus();
+        } else if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            buttonRefs.current[(index + 1) % buttonCount].focus();
+        } else if (event.key === 'Enter') {
+            event.preventDefault(); //prevents calling function twice
+            chooseFloor(floorObj);
+        }
+    };
 
-    const chooseFloor = (id, name) => {
-        setFloorID(id);
-        setFloorName(name);
+    const chooseFloor = (floorObj) => {
+        if (floorObj.status === "Closed" || floorObj.status === "Full") {
+            return;
+        }
+        setFloorID(floorObj.id);
+        setFloorName(floorObj.name);
         if (studentID) {
             setShowConfirmation(true);
         } else {
@@ -283,11 +297,13 @@ const FloorButtons = () => {
                             </div>
                             <div className='buildings'>
                                 {buttonData.map((buttonObj, index) => (
-                                    <div className='building-option' tabIndex="0" id="sec3-b" key={buttonObj.id} onClick={() => {
-                                        if (buttonObj.status === "Closed" || buttonObj.status === "Full") {
-                                            return;
-                                        } chooseFloor(buttonObj.id, buttonObj.name);
-                                    }}>
+                                    <div className='building-option' tabIndex="0" id="sec3-b"
+                                        onKeyDown={event => handleKeyDown(event, index, buttonObj)}
+                                        key={buttonObj.id}
+                                        ref={ref => (buttonRefs.current[index] = ref)}
+                                        onClick={() => {
+                                            chooseFloor(buttonObj);
+                                        }}>
                                         <div className="label" id="tag1">
                                             <h1>L{buttonObj.level}</h1>
                                         </div>

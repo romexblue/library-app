@@ -16,6 +16,7 @@ const Exit = () => {
     const authContext = useContext(AuthContext);
     const inputRef = useRef(null);
     const [date, setDate] = useState(new Date());
+    const [isDisabled, setIsDisabled] =useState(false);
 
     useEffect(() => {
         //for page refresh
@@ -83,6 +84,11 @@ const Exit = () => {
                             setResponse(response.data.success);
                             setValue('');
                         }
+                        setIsDisabled(true);
+                        setTimeout(() => {
+                            setResponse("");
+                            setIsDisabled(false);
+                        }, 800);
                     })
             } else {
                 setValue('')
@@ -116,7 +122,7 @@ const Exit = () => {
                         <p></p>
                     </button>
                 </div>
-                <div className="systemName"> <img src={image4}></img></div>
+                <div className="systemName"> <img src={image4} alt=""></img></div>
             </div>
             <div className="sec2">
                 <div className="RFID-Icon">
@@ -130,7 +136,7 @@ const Exit = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="IdInput">
                         <label htmlFor="fname">Library User</label>
-                        <input type="text" ref={inputRef} id="fname" placeholder="Tap Your ID" value={value} onChange={handleChange}
+                        <input type="text" disabled={isDisabled} ref={inputRef} id="fname" placeholder="Tap Your ID" value={value} onChange={handleChange}
                             style={{
                                 borderColor: response === "Not Timed In" || response === "No existing record" ? "red" : "",
                                 backgroundColor: response === "Not Timed In" || response === "No existing record" ? "rgb(255, 251, 251)" : ""
@@ -144,7 +150,7 @@ const Exit = () => {
                 </div>
                 <div className="centerText" >
                 <div className='feedbackContainer'>
-                    <p className="feedback"><p style={{ color: response === "Time Out Successful" ? "#385DBB" : "" }}>{response}</p></p>
+                    <p className="feedback"><span style={{ color: response === "Time Out Successful" ? "#385DBB" : "" }}>{response}</span></p>
                 </div>
                 <div className='rightsText'>
                 <p>Developed by M. Chiong, K. Sobiono, & G. Tahud 2023 of CCS-BSIT 4. All rights reserved.</p>

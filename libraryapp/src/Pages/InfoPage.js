@@ -97,7 +97,7 @@ const InfoPage = ({studentID, setStudentID, studentRFID, setStudentRFID, setStud
                   <img className="BackIcon" id="BackBtn" src={image1} alt="img"/>
                 </button>
             </div>
-            <div className="systemName"> <img src={image4}></img></div>
+            <div className="systemName"> <img src={image4} alt=""></img></div>
         </div>
         <div className="sec2">
             <div className="RFID-Icon">

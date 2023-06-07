@@ -30,10 +30,11 @@ const Registration = () => {
     const [matchMessage, setMatchMessage] = useState("");
     const rfid_1 = useRef(null);
     const rfid_2 = useRef(null);
+    const sid = useRef(null);
     const [collegeSelect, setCollegeSelect] = useState([]);
     const [regResponse, setRegResponse] = useState("");
     const [searching, setSearching] = useState(false);
-    
+
     const handleSubmit = () => {
         if (rfid === "" || rfid2 === "") {
             setMatchMessage("Required *")
@@ -127,6 +128,14 @@ const Registration = () => {
             }
         }
     };
+
+    const handleRfidPress = (event) => {
+        if (event.key === 'Enter') {
+            // Perform desired action when Enter key is pressed
+            handleSubmit();
+        }
+    };
+
     useEffect(() => {
         axios.get(`http://localhost:5000/student/all/college`, {
             headers: {
@@ -139,7 +148,19 @@ const Registration = () => {
                     setCollegeSelect(response.data)
                 }
             })
+        const interval = setInterval(() => {
+            checkFocus();
+        }, 1000);
+
+        return () => clearInterval(interval);
     }, [])
+
+    function checkFocus() {
+        if (document.activeElement === document.body) {
+            sid.current.focus();
+        }
+    }
+
     useEffect(() => {
         //to check token then check if admin
         if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
@@ -240,7 +261,7 @@ const Registration = () => {
                                 <div className={reg.rightPanel}>
                                     <div className={reg.section1}>
                                         <label className={reg.label1}>School ID</label>
-                                        <input required placeholder="Type School ID" value={schoolId} onChange={(event) => findStudent(event)} className={reg.input1} type="number" />
+                                        <input required placeholder="Type School ID" ref={sid} value={schoolId} onChange={(event) => findStudent(event)} className={reg.input1} type="number" />
                                     </div>
                                     <div className={reg.section2}>
                                         <div className={reg.comp1}>
@@ -332,6 +353,7 @@ const Registration = () => {
                                         className={reg2.input4}
                                         type="password"
                                         ref={rfid_2}
+                                        onKeyDown={handleRfidPress}
                                     />
                                     <p className={reg2.warningMessage}>{matchMessage}</p>
                                 </div>

@@ -43,7 +43,11 @@ router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
             group: ['Records.FloorId'],
             raw: true
         });
-
+        records.forEach(record => {
+            record.averageStayTime = Math.floor(parseFloat(record.averageStayTime) / 60);
+            record.highestStayTime = Math.floor(record.highestStayTime / 60);
+            record.lowestStayTime = Math.floor(record.lowestStayTime / 60);
+        });
         // Calculate the overall statistics
         const overallCount = records.reduce((total, record) => total + record.count, 0);
         const overallStayTime = records.reduce((total, record) => total + record.averageStayTime * record.count, 0) / overallCount;
@@ -66,15 +70,6 @@ router.get('/stats/:startDate/:endDate/:college?', async (req, res) => {
         });
     }
 });
-
-//convert millisecond to HH:mm:ss
-function formatTime(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = seconds % 60;
-
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-}
 
 //for time in
 router.post('/', validateToken, async (req, res) => {
@@ -110,7 +105,7 @@ router.post('/', validateToken, async (req, res) => {
 
 //for timeout
 router.patch('/find/:school_id', validateToken, async (req, res) => {
- 
+
     const rec = req.body
     let rfid = req.params.school_id;
     if (rfid.startsWith("00")) {

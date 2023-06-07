@@ -214,7 +214,7 @@ const AdminReservation = () => {
                                                 <td>{resObj?.reason}</td>
                                                 <td>{resObj?.confirmation_status}</td>
                                                 <td>{resObj?.ConfabId}</td>
-                                                <td>
+                                                <td style={{visibility: resObj?.confirmation_status ==="Confirmed" ? "hidden": ""}}>
                                                     <button className={res.editButton} onClick={() => handleClick(resObj?.id, 'Confirmed')}>✔</button>
                                                     <button className={res.deleteButton} onClick={() => handleClick(resObj?.id, 'Cancelled')}>✖</button>
                                                 </td>
