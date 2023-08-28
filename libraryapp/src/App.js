@@ -1,14 +1,18 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import { useState } from 'react';
-import Login from './Pages/Login';
-import FloorButtons from './Pages/FloorButtons';
+import { useState, lazy, Suspense } from 'react';
+
 import AuthContext from './helpers/AuthContext';
-import Chooser from './Pages/Chooser';
-import Exit from './Pages/Exit';
-import Admin from './Pages/Admin';
-import Reservation from './Pages/Reservation';
-import Registration from './Pages/Registration';
+import ProtectedRoute from './helpers/ProtectedRoute';
+
+import Loading from './components/Loading/Loading';
+import Login from './Pages/Login';
+const FloorButtons = lazy(() => import('./Pages/FloorButtons'))
+const Chooser = lazy(() => import('./Pages/Chooser'))
+const Exit = lazy(() => import('./Pages/Exit'))
+const Admin = lazy(() => import('./Pages/Admin'))
+const Reservation = lazy(() => import('./Pages/Reservation'))
+const Registration = lazy(() => import('./Pages/Registration'))
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,12 +44,16 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" exact element={<Login />} />
-            <Route path="/choose" exact element={<Chooser />} />
+            <ProtectedRoute path="/choose" exact element={
+              <Suspense fallback={<Loading />}>
+                <Chooser />
+              </Suspense>
+            } />
             <Route path="/entry" exact element={<FloorButtons />} />
             <Route path="/exit" exact element={<Exit />} />
             <Route path="/reservation" exact element={<Reservation />} />
-            <Route path="/admin" exact element={<Admin />}/>
-            <Route path="/registration" exact element={<Registration/>}/>
+            <Route path="/admin" exact element={<Admin />} />
+            <Route path="/registration" exact element={<Registration />} />
           </Routes>
         </div>
       </Router>
