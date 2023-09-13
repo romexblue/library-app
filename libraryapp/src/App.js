@@ -44,9 +44,11 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" exact element={<Login />} />
-            <ProtectedRoute path="/choose" exact element={
+            <Route path="/choose" exact element={
               <Suspense fallback={<Loading />}>
-                <Chooser />
+                <ProtectedRoute >
+                  <Chooser />
+                </ProtectedRoute>
               </Suspense>
             } />
             <Route path="/entry" exact element={<FloorButtons />} />
@@ -54,6 +56,7 @@ function App() {
             <Route path="/reservation" exact element={<Reservation />} />
             <Route path="/admin" exact element={<Admin />} />
             <Route path="/registration" exact element={<Registration />} />
+            <Route path="*" element={<p>There's nothing here: 404!</p>} />
           </Routes>
         </div>
       </Router>
