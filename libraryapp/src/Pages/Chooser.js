@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useContext } from 'react';
 import '../styles/Button.css';
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import AuthContext from '../helpers/AuthContext';
 import image1 from '../images/Logout_Icon.png';
 import image2 from '../images/Entry_Icon.png';
@@ -15,29 +14,7 @@ const Chooser = () => {
 
   useEffect(() => {
     buttonsRef.current[0].focus();
-    
-    if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
-      axios.get("http://localhost:5000/auth/allow", {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
-          userId: sessionStorage.getItem("id")
-        },
-      })
-        .then((response) => {
-          if (response.data.error) {
-            authContext.logout()
-            navigate('/')
-          } else {
-            authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
-            navigate('/choose')
-          }
-        })
-    }
-       
-    if (!authContext.isLoggedIn) {
-      navigate('/')
-    }
-  }, [navigate, authContext]);
+  }, []);
 
   const handleKeyDown = (event, index) => {
     if (event.key === 'ArrowUp' && index > 0) {

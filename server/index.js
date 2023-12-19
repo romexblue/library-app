@@ -71,6 +71,6 @@ db.sequelize.sync().then(async () => {
             console.error('Error occurred while deleting records:', err);
         });
     app.listen(port, () => {
-        console.log(`Server running on port ${port}`)
+        console.log(`🚀 Server running on port ${port}`)
     });
 })

@@ -26,16 +26,16 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = { username: username, password: password }
-    axios.post("http://localhost:5000/auth/login", data).then((response) => {
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, data).then((response) => {
       if (response.data.error) {
         setMessage("Incorrect Username or Password")
       } else {
         sessionStorage.setItem("accessToken", response.data.accessToken)
         sessionStorage.setItem("id", response.data.userId)
-        authContext.login(response.data.userId, response.data.accessToken)
-        if(response.data.type === "Admin" || response.data.type === "Librarian" || response.data.type === "Assistant"){
-          navigate('/admin', { state: { userType: response.data.type, name: response.data.name } })
-        }else{
+        authContext.login(response.data.userId, response.data.accessToken, response.data.name, response.data.type)
+        if (response.data.type === "Admin" || response.data.type === "Librarian" || response.data.type === "Assistant") {
+          navigate('/admin')
+        } else {
           navigate('/choose')
         }
       }
@@ -43,10 +43,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    
+
     //for page refresh if already logged in
     if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
-      axios.get("http://localhost:5000/auth/allow", {
+      axios.get(`${process.env.REACT_APP_API_URL}/auth/admin-auth/${sessionStorage.getItem("id")}`, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken"),
           userId: sessionStorage.getItem("id")
@@ -57,7 +57,12 @@ const Login = () => {
           if (response.data.error) {
             authContext.logout()
           } else {
-            authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
+            authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"), response.data.name, response.data.type)
+            if (response.data.type === "Admin" || response.data.type === "Librarian" || response.data.type === "Assistant") {
+              navigate('/admin')
+            } else {
+              navigate('/choose')
+            }
           }
         })
     }
@@ -70,24 +75,24 @@ const Login = () => {
   return (
     <div className="login-page">
       <div className='systemTitle'>
-        <p className='sysTitle'><img alt='' src={image2}/></p>
+        <p className='sysTitle'><img alt='' src={image2} /></p>
       </div>
       <div className='xulibLogo'>
         <img className='libLogo' src={image1} alt=""></img>
       </div>
-    <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <h1>LOGIN</h1>
         <div className="form-group">
-            <label htmlFor="">Username</label>
-            <input type="text" className="form-control" value={username} onChange={handleUsernameChange} required />
+          <label htmlFor="">Username</label>
+          <input type="text" className="form-control" value={username} onChange={handleUsernameChange} required />
         </div>
         <div className="form-group">
-            <label htmlFor="">Password</label>
-            <input type="password" className="form-control" value={password} onChange={handlePasswordChange} required />
-            <p className='errorMessage' style={{color:"red"}}>{message}</p>
+          <label htmlFor="">Password</label>
+          <input type="password" className="form-control" value={password} onChange={handlePasswordChange} required />
+          <p className='errorMessage' style={{ color: "red" }}>{message}</p>
         </div>
-        <input type="submit" className="btn" value="SUBMIT"/>
-    </form>
+        <input type="submit" className="btn" value="SUBMIT" />
+      </form>
     </div>
   )
 }

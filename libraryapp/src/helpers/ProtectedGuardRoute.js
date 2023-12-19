@@ -1,15 +1,15 @@
-import { useContext, lazy, useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from './AuthContext';
+import Loading from '../components/Loading/Loading';
 
-const Login = lazy(() => import('../Pages/Login'))
-
-const ProtectedRoute = ({ children }) => {
+const ProtectedGuardRoute = () => {
     const authContext = useContext(AuthContext);
-    const [isAllowed, setIsAllowed] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-        const checkAuth = async () => {
+    useEffect(() => {
+        const checkAuthentication = async () => {
             if (
                 sessionStorage.getItem("accessToken") &&
                 sessionStorage.getItem("id") &&
@@ -32,20 +32,23 @@ const ProtectedRoute = ({ children }) => {
                             sessionStorage.getItem("id"),
                             sessionStorage.getItem("accessToken")
                         );
-                        setIsAllowed(true);
                     }
                 } catch (error) {
                     console.error(error);
+                    authContext.logout();
                 }
-            } else {
-                setIsAllowed(true);
             }
+            setIsLoading(false);
         };
-        console.log("haha")
-        checkAuth();
-   
 
-    return isAllowed ? children : <Navigate to={"/"} replace />;
+        checkAuthentication();
+    }, [authContext]);
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
+    return authContext.isLoggedIn ? <Outlet /> : <Navigate to="/" replace />;
 };
 
-export default ProtectedRoute;
+export default ProtectedGuardRoute;

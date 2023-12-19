@@ -1,188 +1,319 @@
-import { useState, useEffect } from 'react';
-import { CSVLink } from 'react-csv';
-import DatePicker from 'react-datepicker';
-import axios from 'axios';
-import stat from '../styles/AdminStatistics.module.css';
-import image1 from '../images/Export_Icon.png';
-
+import { useState, useEffect } from "react";
+import { CSVLink } from "react-csv";
+import DatePicker from "react-datepicker";
+import axios from "axios";
+import stat from "../styles/AdminStatistics.module.css";
+import image1 from "../images/Export_Icon.png";
 
 const AdminStatistics = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [college, setCollege] = useState("");
-  const [collegeSelect, setCollegeSelect] = useState([]);
-  // const [reservationStats, setReservationStats] = useState('');
-  const [recordStats, setRecordStats] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [college, setCollege] = useState("");
+    const [collegeSelect, setCollegeSelect] = useState([]);
+    // const [reservationStats, setReservationStats] = useState('');
+    const [recordStats, setRecordStats] = useState("");
 
-  const headers = [
-    { label: "Count", key: "count" },
-    { label: "Average Stay Time", key: "averageStayTime" },
-    { label: "Highest Stay Time", key: "highestStayTime" },
-    { label: "Lowest Stay Time", key: "lowestStayTime" },
-    { label: "Floor Name", key: "Floor.name" }
-  ];
+    const headers = [
+        { label: "Count", key: "count" },
+        { label: "Average Stay Time", key: "averageStayTime" },
+        { label: "Highest Stay Time", key: "highestStayTime" },
+        { label: "Lowest Stay Time", key: "lowestStayTime" },
+        { label: "Floor Name", key: "Floor.name" },
+    ];
 
-  const csvData = [
-    headers.reduce((obj, { key }) => ({ ...obj, [key]: recordStats?.overall?.[key] || '' }), {}),
-    ...(recordStats?.floors || []).map(floor => headers.reduce((obj, { key }) => ({ ...obj, [key]: floor?.[key] || '' }), {}))
-  ];
+    const csvData = [
+        headers.reduce(
+            (obj, { key }) => ({
+                ...obj,
+                [key]: recordStats?.overall?.[key] || "",
+            }),
+            {}
+        ),
+        ...(recordStats?.floors || []).map((floor) =>
+            headers.reduce(
+                (obj, { key }) => ({ ...obj, [key]: floor?.[key] || "" }),
+                {}
+            )
+        ),
+    ];
 
-  const csvReport = {
-    data: csvData,
-    headers: headers,
-    filename: `${startDate.toISOString().slice(0, 10)}-${endDate.toISOString().slice(0, 10)}-${college=== '' ? 'All':college}`
-  };
+    const csvReport = {
+        data: csvData,
+        headers: headers,
+        filename: `${startDate.toISOString().slice(0, 10)}-${endDate
+            .toISOString()
+            .slice(0, 10)}-${college === "" ? "All" : college}`,
+    };
 
-  const handleCollegeChange = (event) => {
-    setCollege(event.target.value)
-    const link = `http://localhost:5000/reservation/stats/${startDate}/${endDate}/${event.target.value}`;
-    const link2 = `http://localhost:5000/record/stats/${startDate}/${endDate}/${event.target.value}`;
-    getReservationStats(link);
-    getRecordStats(link2);
-  };
+    const handleCollegeChange = (event) => {
+        setCollege(event.target.value);
+        const link = `${process.env.REACT_APP_API_URL}/reservation/stats/${startDate}/${endDate}/${event.target.value}`;
+        const link2 = `${process.env.REACT_APP_API_URL}/record/stats/${startDate}/${endDate}/${event.target.value}`;
+        getReservationStats(link);
+        getRecordStats(link2);
+    };
 
-  const handleStartDateChange = (date) => {
-    setStartDate(date);
-    const start = date.toISOString().slice(0, 10);
-    const link = `http://localhost:5000/reservation/stats/${start}/${endDate}/${college}`;
-    const link2 = `http://localhost:5000/record/stats/${start}/${endDate}/${college}`;
-    getReservationStats(link);
-    getRecordStats(link2);
-  };
+    const handleStartDateChange = (date) => {
+        setStartDate(date);
+        const start = date.toISOString().slice(0, 10);
+        const link = `${process.env.REACT_APP_API_URL}/reservation/stats/${start}/${endDate}/${college}`;
+        const link2 = `${process.env.REACT_APP_API_URL}/record/stats/${start}/${endDate}/${college}`;
+        getReservationStats(link);
+        getRecordStats(link2);
+    };
 
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
-    const end = date.toISOString().slice(0, 10);
-    console.log(end)
-    const link = `http://localhost:5000/reservation/stats/${startDate}/${end}/${college}`;
-    const link2 = `http://localhost:5000/record/stats/${startDate}/${end}/${college}`;
-    getReservationStats(link);
-    getRecordStats(link2);
-  };
+    const handleEndDateChange = (date) => {
+        setEndDate(date);
+        const end = date.toISOString().slice(0, 10);
+        console.log(end);
+        const link = `${process.env.REACT_APP_API_URL}/reservation/stats/${startDate}/${end}/${college}`;
+        const link2 = `${process.env.REACT_APP_API_URL}/record/stats/${startDate}/${end}/${college}`;
+        getReservationStats(link);
+        getRecordStats(link2);
+    };
 
-  const getReservationStats = async (link) => {
-    await axios.get(link, {
-      headers: {
-        accessToken: sessionStorage.getItem("accessToken"),
-        userId: sessionStorage.getItem("id")
-      },
-    })
-      .then(response => {
-        if (response.data) {
-          // setReservationStats(response.data);
-        }
-      })
-  };
+    const getReservationStats = async (link) => {
+        await axios
+            .get(link, {
+                headers: {
+                    accessToken: sessionStorage.getItem("accessToken"),
+                    userId: sessionStorage.getItem("id"),
+                },
+            })
+            .then((response) => {
+                if (response.data) {
+                    // setReservationStats(response.data);
+                }
+            });
+    };
 
-  const getRecordStats = async (link) => {
-    await axios.get(link, {
-      headers: {
-        accessToken: sessionStorage.getItem("accessToken"),
-        userId: sessionStorage.getItem("id")
-      },
-    })
-      .then(response => {
-        if (response.data) {
-          setRecordStats(response.data);
-        }
-      })
-  };
+    const getRecordStats = async (link) => {
+        await axios
+            .get(link, {
+                headers: {
+                    accessToken: sessionStorage.getItem("accessToken"),
+                    userId: sessionStorage.getItem("id"),
+                },
+            })
+            .then((response) => {
+                if (response.data) {
+                    setRecordStats(response.data);
+                }
+            });
+    };
 
-  useEffect(() => {
-    axios.get(`http://localhost:5000/student/all/college`, {
-      headers: {
-        accessToken: sessionStorage.getItem("accessToken"),
-        userId: sessionStorage.getItem("id")
-      },
-    })
-      .then(response => {
-        if (response.data) {
-          setCollegeSelect(response.data)
-        }
-      })
-    const link = `http://localhost:5000/reservation/stats/${startDate}/${endDate}`;
-    const link2 = `http://localhost:5000/record/stats/${startDate}/${endDate}/`;
-    getReservationStats(link);
-    getRecordStats(link2);
-  }, [startDate, endDate])
+    useEffect(() => {
+        axios
+            .get(`${process.env.REACT_APP_API_URL}/student/all/college`, {
+                headers: {
+                    accessToken: sessionStorage.getItem("accessToken"),
+                    userId: sessionStorage.getItem("id"),
+                },
+            })
+            .then((response) => {
+                if (response.data) {
+                    setCollegeSelect(response.data);
+                }
+            });
+        const link = `${process.env.REACT_APP_API_URL}/reservation/stats/${startDate}/${endDate}`;
+        const link2 = `${process.env.REACT_APP_API_URL}/record/stats/${startDate}/${endDate}/`;
+        getReservationStats(link);
+        getRecordStats(link2);
+    }, [startDate, endDate]);
 
-  return (
-    <div className={stat.mainPage}>
-      <div className={stat.topBar}>
-        <div className={stat.dpStart}>
-          <label className={stat.label}>Start Date</label>
-          <DatePicker className={stat.pdateStart}
-            selected={startDate}
-            onChange={date => handleStartDateChange(date)}
-            popperPlacement="bottom"
-          />
-        </div>
-        <div className={stat.dpEnd}>
-          <label className={stat.label}>End Date</label>
-          <DatePicker className={stat.pdateEnd}
-            selected={endDate}
-            onChange={date => handleEndDateChange(date)}
-            popperPlacement="bottom"
-          />
-        </div>
-        <div className={stat.category}>
-          <label className={stat.label}>Filter by College</label>
-          <select className={stat.allSelect} value={college} onChange={handleCollegeChange}>
-            <option value="">All</option>
-            {collegeSelect.map((college, index) => (
-              <option key={index} value={college.college}>
-                {college.college}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className={stat.export}> {/*Export Button*/}
-          <div className={stat.exportContainer}>
-            <CSVLink {...csvReport} className={stat.imgCont}><img className={stat.exportIcon} src={image1} alt='export' /></CSVLink>
-          </div>
-        </div>
-      </div>
-      <div className={stat.allStatistics}>
-        <div className={stat.headerStatistics}>
-          <div className={stat.panel1Title}>
-            <p>Entry/Exit General Statistics {college ? `for [${college}]` : ""} </p>
-          </div>
-          {recordStats && (
-            <div className={stat.StatisticsContainer1}>
-              <div className={stat.stats1a}><h4>Total Library Users (person):</h4> <p> {recordStats.overall.count}</p></div>
-              <div className={stat.stats2a}><h4>Avg. Time Stayed (sec):</h4><p> {Math.round(recordStats.overall.averageStayTime)}</p></div>
-              <div className={stat.stats3a}><h4>Highest Time Stayed (sec):</h4><p> {recordStats.overall.highestStayTime}</p></div>
-              <div className={stat.stats4a}><h4>Lowest Time Stayed (sec):</h4><p> {recordStats.overall.lowestStayTime}</p></div>
-            </div>
-          )}
-        </div>
-        <div className={stat.generalStatistics}>
-          <div className={stat.panel1}>
-            <div className={stat.tableTitle}>Library Entry/Exit Statistics by Floor</div>
-            <div className={stat.floorStatitics}>
-              {recordStats.floors && recordStats.floors.length > 0 && (
-                <div>
-                  {recordStats.floors.map((floor, index) => (
-                    <div className={stat.perfloorStats} key={index}>
-                      <div className={stat.floorTitleA}>{floor['Floor.name']}:<div className={stat.divider}></div></div>
-                      <div className={stat.allperfloor}>
-                        <div className={stat.statsboxA}><h4>Usage Count (person):</h4><p> {floor.count}</p></div>
-                        <div className={stat.statsboxA}><h4>Avg. Time Stayed (sec):</h4><p> {Math.round(floor.averageStayTime)}</p></div>
-                        <div className={stat.statsboxA}><h4>Highest Time Stayed (sec):</h4><p> {floor.highestStayTime}</p></div>
-                        <div className={stat.statsboxA}><h4>Lowest Time Stayed (sec):</h4><p> {floor.lowestStayTime}</p></div>
-                      </div>
-                    </div>
-                  ))}
-
+    return (
+        <div className={stat.mainPage}>
+            <div className={stat.topBar}>
+                <div className={stat.dpStart}>
+                    <label className={stat.label}>Start Date</label>
+                    <DatePicker
+                        className={stat.pdateStart}
+                        selected={startDate}
+                        onChange={(date) => handleStartDateChange(date)}
+                        popperPlacement="bottom"
+                    />
                 </div>
-              )}
+                <div className={stat.dpEnd}>
+                    <label className={stat.label}>End Date</label>
+                    <DatePicker
+                        className={stat.pdateEnd}
+                        selected={endDate}
+                        onChange={(date) => handleEndDateChange(date)}
+                        popperPlacement="bottom"
+                    />
+                </div>
+                <div className={stat.category}>
+                    <label className={stat.label}>Filter by College</label>
+                    <select
+                        className={stat.allSelect}
+                        value={college}
+                        onChange={handleCollegeChange}
+                    >
+                        <option value="">All</option>
+                        {collegeSelect.map((college, index) => (
+                            <option key={index} value={college.college}>
+                                {college.college}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className={stat.export}>
+                    {" "}
+                    {/*Export Button*/}
+                    <div className={stat.exportContainer}>
+                        <CSVLink {...csvReport} className={stat.imgCont}>
+                            <img
+                                className={stat.exportIcon}
+                                src={image1}
+                                alt="export"
+                            />
+                        </CSVLink>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div className={stat.panel2}>
-            {/* 
+            <div className={stat.allStatistics}>
+                <div className={stat.headerStatistics}>
+                    <div className={stat.panel1Title}>
+                        <p>
+                            Entry/Exit General Statistics{" "}
+                            {college ? `for [${college}]` : ""}{" "}
+                        </p>
+                    </div>
+                    {recordStats && (
+                        <div className={stat.StatisticsContainer1}>
+                            <div className={stat.stats1a}>
+                                <h4>Total Library Users (person):</h4>{" "}
+                                <p> {recordStats.overall.count}</p>
+                            </div>
+                            <div className={stat.stats2a}>
+                                <h4>Avg. Time Stayed (sec):</h4>
+                                <p>
+                                    {" "}
+                                    {Math.round(
+                                        recordStats.overall.averageStayTime
+                                    )}
+                                </p>
+                            </div>
+                            <div className={stat.stats3a}>
+                                <h4>Highest Time Stayed (sec):</h4>
+                                <p> {recordStats.overall.highestStayTime}</p>
+                            </div>
+                            <div className={stat.stats4a}>
+                                <h4>Lowest Time Stayed (sec):</h4>
+                                <p> {recordStats.overall.lowestStayTime}</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+                <div className={stat.generalStatistics}>
+                    <div className={stat.panel1}>
+                        <div className={stat.tableTitle}>
+                            Library Entry/Exit Statistics by Floor
+                        </div>
+                        <div className={stat.floorStatitics}>
+                            {recordStats.floors &&
+                                recordStats.floors.length > 0 && (
+                                    <div>
+                                        {recordStats.floors.map(
+                                            (floor, index) => (
+                                                <div
+                                                    className={
+                                                        stat.perfloorStats
+                                                    }
+                                                    key={index}
+                                                >
+                                                    <div
+                                                        className={
+                                                            stat.floorTitleA
+                                                        }
+                                                    >
+                                                        {floor["Floor.name"]}:
+                                                        <div
+                                                            className={
+                                                                stat.divider
+                                                            }
+                                                        ></div>
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            stat.allperfloor
+                                                        }
+                                                    >
+                                                        <div
+                                                            className={
+                                                                stat.statsboxA
+                                                            }
+                                                        >
+                                                            <h4>
+                                                                Usage Count
+                                                                (person):
+                                                            </h4>
+                                                            <p>
+                                                                {" "}
+                                                                {floor.count}
+                                                            </p>
+                                                        </div>
+                                                        <div
+                                                            className={
+                                                                stat.statsboxA
+                                                            }
+                                                        >
+                                                            <h4>
+                                                                Avg. Time Stayed
+                                                                (sec):
+                                                            </h4>
+                                                            <p>
+                                                                {" "}
+                                                                {Math.round(
+                                                                    floor.averageStayTime
+                                                                )}
+                                                            </p>
+                                                        </div>
+                                                        <div
+                                                            className={
+                                                                stat.statsboxA
+                                                            }
+                                                        >
+                                                            <h4>
+                                                                Highest Time
+                                                                Stayed (sec):
+                                                            </h4>
+                                                            <p>
+                                                                {" "}
+                                                                {
+                                                                    floor.highestStayTime
+                                                                }
+                                                            </p>
+                                                        </div>
+                                                        <div
+                                                            className={
+                                                                stat.statsboxA
+                                                            }
+                                                        >
+                                                            <h4>
+                                                                Lowest Time
+                                                                Stayed (sec):
+                                                            </h4>
+                                                            <p>
+                                                                {" "}
+                                                                {
+                                                                    floor.lowestStayTime
+                                                                }
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                )}
+                        </div>
+                    </div>
+                    <div className={stat.panel2}>
+                        {/* 
               HIDDEN DUE TO DEPLOYMENT
              */}
-            {/* <div className={stat.panel2Title}>Spaces Usage Statistics  {college ? `for ${college}` : ""} </div>
+                        {/* <div className={stat.panel2Title}>Spaces Usage Statistics  {college ? `for ${college}` : ""} </div>
           <p style={{ fontSize: "13px" }}>
             Note: Reservations total per College is based from the representative as reservation may contain students from different collegs
           </p>
@@ -219,11 +350,11 @@ const AdminStatistics = () => {
               ))}
             </div>
           )} */}
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  )
-}
+    );
+};
 
-export default AdminStatistics
+export default AdminStatistics;

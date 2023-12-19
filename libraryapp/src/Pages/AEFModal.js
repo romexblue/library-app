@@ -13,7 +13,7 @@ const FloorModal = ({ title, data, update, cancel, updateUi, action }) => {
     const handleConfirm = () => {
         if (action === "Edit") {
             const dataChanged = { name: name, max_capacity: maxCapacity, level:level, label:bldg, status: status };
-            axios.patch(`http://localhost:5000/floor/${data.id}`, dataChanged, {
+            axios.patch(`${process.env.REACT_APP_API_URL}/floor/${data.id}`, dataChanged, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken"),
                     userId: sessionStorage.getItem("id")
@@ -29,7 +29,7 @@ const FloorModal = ({ title, data, update, cancel, updateUi, action }) => {
         }
         if (action === "Add") {
             const dataAdd = { name: name, current_count: 0, max_capacity: maxCapacity, level:level, label:bldg, status: status };
-            axios.post("http://localhost:5000/floor/", dataAdd, {
+            axios.post(`${process.env.REACT_APP_API_URL}/floor/`, dataAdd, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken"),
                     userId: sessionStorage.getItem("id")

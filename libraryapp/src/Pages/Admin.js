@@ -1,7 +1,6 @@
 import '../styles/Admin.css';
 import { useEffect, useContext, useState } from "react"
-import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../helpers/AuthContext";
 import AdminFloor from './AdminFloor';
 import AdminReservation from './AdminReservation';
@@ -17,10 +16,10 @@ const Admin = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const [activeComponent, setActiveComponent] = useState('AdminReservation');
-    const location = useLocation();
+    //const location = useLocation();
     const [date, setDate] = useState(new Date());
-    const [adminName, setAdminName] = useState((location.state || {}).name);
-    const [isAdmin, setIsAdmin] = useState((location.state || {}).userType);
+
+    const { userName: adminName, userType: isAdmin } = authContext || {};
 
     const handleTabClick = (component) => {
         setActiveComponent(component);
@@ -41,43 +40,12 @@ const Admin = () => {
         });
     };
     useEffect(() => {
-        //to check token then check if admin
-        if (sessionStorage.getItem("accessToken") && sessionStorage.getItem("id") && !authContext.isLoggedIn) {
-            axios.get(`http://localhost:5000/auth/admin-auth/${sessionStorage.getItem("id")}`, {
-                headers: {
-                    accessToken: sessionStorage.getItem("accessToken"),
-                    userId: sessionStorage.getItem("id")
-                },
-            }).then((response) => {
-                if (response.data.error) {
-                    //if not admin
-                    authContext.logout();
-                    navigate('/');
-                } else {
-
-                    //if admin
-                    if (response.data.type === "Admin" || response.data.type === "Librarian" || response.data.type === "Assistant") {
-                        navigate('/admin');
-                        setAdminName(response.data.name);
-                        setIsAdmin(response.data.type);
-                    } else {
-                        navigate('/choose') // for guard 
-                    }
-                    authContext.login(sessionStorage.getItem("id"), sessionStorage.getItem("accessToken"))
-                }
-
-            })
-        } else {
-            if (!sessionStorage.getItem("accessToken") && !sessionStorage.getItem("id")) {
-                navigate('/')
-            }
-        }
         const timer = setInterval(() => {
             setDate(new Date())
         }, 1000);
         return () => clearInterval(timer);
 
-    }, [authContext, navigate]);
+    }, []);
 
     return (
 
