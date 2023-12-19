@@ -72,7 +72,7 @@ const Exit = () => {
                         setTimeout(() => {
                             setResponse("");
                             setIsDisabled(false);
-                        }, 300);
+                        }, 500);
                     });
             } else {
                 setValue("");
