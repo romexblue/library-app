@@ -114,11 +114,11 @@ router.post(
                 .map((row) => row.split(","));
 
             const createdRows = await Students.bulkCreate(
-                rows.slice(1).map(
-                    (row) =>
-                        row && {
-                            school_id: row[0],
-                            rfid: row[1],
+                rows.slice(1).map((row) => {
+                    if (row) {
+                        return {
+                            school_id: row[0]?.trim(),
+                            rfid: row[1]?.trim(),
                             type: row[2],
                             first_name: row[3],
                             last_name: row[4],
@@ -126,8 +126,12 @@ router.post(
                             email: row[6],
                             college: row[7],
                             year: row[8]?.trim(),
-                        }
-                )
+                        };
+                    }
+                }),
+                {
+                    updateOnDuplicate: ["rfid", "type", "college", "year"],
+                }
             );
 
             res.status(200).json({
