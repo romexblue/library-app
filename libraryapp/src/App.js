@@ -82,18 +82,6 @@ function App() {
               />
 
               <Route
-                path="/reservation"
-                exact
-                element={
-                  <Suspense fallback={<Loading />}>
-                    <Reservation />
-                  </Suspense>
-                }
-              />
-
-            </Route>
-            <Route exact element={<ProtectedAdminRoute />}>
-              <Route
                 path="/registration"
                 element={
                   <Suspense fallback={<Loading />}>
@@ -101,6 +89,9 @@ function App() {
                   </Suspense>
                 }
               />
+              
+            </Route>
+            <Route exact element={<ProtectedAdminRoute />}>
 
               <Route
                 path="/admin"
@@ -111,7 +102,15 @@ function App() {
                 }
               />
             </Route>
-
+            <Route
+              path="/reservation"
+              exact
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Reservation />
+                </Suspense>
+              }
+            />
             <Route path="*" element={<p>There's nothing here: 404!</p>} />
           </Routes>
         </div>
