@@ -81,7 +81,7 @@ function App() {
                 }
               />
             </Route>
-            <Route exact element={<ProtectedAdminRoute />}>
+            <Route exact element={<ProtectedGuardRoute />}>
               <Route
                 path="/registration"
                 element={
