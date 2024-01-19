@@ -80,8 +80,7 @@ function App() {
                   </Suspense>
                 }
               />
-            </Route>
-            <Route exact element={<ProtectedAdminRoute />}>
+
               <Route
                 path="/registration"
                 element={
@@ -90,6 +89,9 @@ function App() {
                   </Suspense>
                 }
               />
+              
+            </Route>
+            <Route exact element={<ProtectedAdminRoute />}>
 
               <Route
                 path="/admin"
