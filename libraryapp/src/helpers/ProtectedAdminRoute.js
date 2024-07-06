@@ -70,7 +70,7 @@ const ProtectedAdminRoute = () => {
     }
 
     if (authContext.isLoggedIn) {
-        if (userType === "Admin") {
+        if (userType === "Admin" || userType === "Librarian") {
             return <Outlet />;
         } else if (userType === "Guard") {
             return <Navigate to="/choose" replace />;

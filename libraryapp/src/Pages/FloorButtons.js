@@ -98,7 +98,11 @@ const FloorButtons = () => {
                         navigate("/");
                         authContext.logout();
                     } else {
-                        setButtonData(response.data);
+                        const filteredButtonData = response?.data?.filter(
+                            (data) =>
+                                !data?.name?.toLowerCase()?.includes("med")
+                        );
+                        setButtonData(filteredButtonData);
                         authContext.login(
                             sessionStorage.getItem("id"),
                             sessionStorage.getItem("accessToken")
@@ -149,7 +153,10 @@ const FloorButtons = () => {
                 },
             })
             .then((response) => {
-                setButtonData(response.data);
+                const filteredButtonData = response?.data?.filter(
+                    (data) => !data?.name?.toLowerCase()?.includes("med")
+                );
+                setButtonData(filteredButtonData);
             });
     };
 
@@ -191,7 +198,7 @@ const FloorButtons = () => {
                     studentRFID={studentRFID}
                     setStudentRFID={setStudentRFID}
                     setStudentData={setStudentData}
-                    // inputRef={inputRef}
+                        // inputRef={inputRef}
                 />
             )}
 

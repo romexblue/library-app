@@ -13,38 +13,6 @@ const AdminStatistics = () => {
     // const [reservationStats, setReservationStats] = useState('');
     const [recordStats, setRecordStats] = useState("");
 
-    const headers = [
-        { label: "Count", key: "count" },
-        { label: "Average Stay Time", key: "averageStayTime" },
-        { label: "Highest Stay Time", key: "highestStayTime" },
-        { label: "Lowest Stay Time", key: "lowestStayTime" },
-        { label: "Floor Name", key: "Floor.name" },
-    ];
-
-    const csvData = [
-        headers.reduce(
-            (obj, { key }) => ({
-                ...obj,
-                [key]: recordStats?.overall?.[key] || "",
-            }),
-            {}
-        ),
-        ...(recordStats?.floors || []).map((floor) =>
-            headers.reduce(
-                (obj, { key }) => ({ ...obj, [key]: floor?.[key] || "" }),
-                {}
-            )
-        ),
-    ];
-
-    const csvReport = {
-        data: csvData,
-        headers: headers,
-        filename: `${startDate.toISOString().slice(0, 10)}-${endDate
-            .toISOString()
-            .slice(0, 10)}-${college === "" ? "All" : college}`,
-    };
-
     const handleCollegeChange = (event) => {
         setCollege(event.target.value);
         const link = `${process.env.REACT_APP_API_URL}/reservation/stats/${startDate}/${endDate}/${event.target.value}`;
@@ -65,7 +33,6 @@ const AdminStatistics = () => {
     const handleEndDateChange = (date) => {
         setEndDate(date);
         const end = date.toISOString().slice(0, 10);
-        console.log(end);
         const link = `${process.env.REACT_APP_API_URL}/reservation/stats/${startDate}/${end}/${college}`;
         const link2 = `${process.env.REACT_APP_API_URL}/record/stats/${startDate}/${end}/${college}`;
         getReservationStats(link);
@@ -121,6 +88,33 @@ const AdminStatistics = () => {
         getRecordStats(link2);
     }, [startDate, endDate]);
 
+    const totalUsers = recordStats?.records?.reduce((acc, val) => {
+        return acc + (val?.record_count ?? 0);
+    }, 0);
+
+    const headers = [
+        { label: "Total Users", key: "total_count" },
+        { label: "Floor Name", key: "floor_name" },
+        { label: "Users Per Floor", key: "count" },
+    ];
+
+    const csvData = [
+        { total_count: totalUsers, floor_name: "", count: "" },
+        ...(recordStats?.records?.map((record) => ({
+            total_count: "",
+            floor_name: record.floor_name,
+            count: record.record_count,
+        })) || []),
+    ];
+
+    const csvReport = {
+        data: csvData,
+        headers: headers,
+        filename: `${startDate.toISOString().slice(0, 10)}-${endDate
+            .toISOString()
+            .slice(0, 10)}-${college === "" ? "All" : college}`,
+    };
+
     return (
         <div className={stat.mainPage}>
             <div className={stat.topBar}>
@@ -158,7 +152,6 @@ const AdminStatistics = () => {
                     </select>
                 </div>
                 <div className={stat.export}>
-                    {" "}
                     {/*Export Button*/}
                     <div className={stat.exportContainer}>
                         <CSVLink {...csvReport} className={stat.imgCont}>
@@ -183,9 +176,9 @@ const AdminStatistics = () => {
                         <div className={stat.StatisticsContainer1}>
                             <div className={stat.stats1a}>
                                 <h4>Total Library Users (person):</h4>{" "}
-                                <p> {recordStats.overall.count}</p>
+                                <p> {totalUsers}</p>
                             </div>
-                            <div className={stat.stats2a}>
+                            {/* <div className={stat.stats2a}>
                                 <h4>Avg. Time Stayed (sec):</h4>
                                 <p>
                                     {" "}
@@ -193,164 +186,126 @@ const AdminStatistics = () => {
                                         recordStats.overall.averageStayTime
                                     )}
                                 </p>
-                            </div>
-                            <div className={stat.stats3a}>
-                                <h4>Highest Time Stayed (sec):</h4>
-                                <p> {recordStats.overall.highestStayTime}</p>
-                            </div>
-                            <div className={stat.stats4a}>
-                                <h4>Lowest Time Stayed (sec):</h4>
-                                <p> {recordStats.overall.lowestStayTime}</p>
+                            </div> */}
+                            <div className={stat.generalStatistics}>
+                                <div className={stat.panel1}>
+                                    <div className={stat.tableTitle}>
+                                        Library Entry/Exit Statistics by Floor
+                                    </div>
+                                    <div className={stat.floorStatitics}>
+                                        {recordStats?.records &&
+                                            recordStats?.records?.length >
+                                                0 && (
+                                                <div>
+                                                    {recordStats?.records.map(
+                                                        (floor, index) => (
+                                                            <div
+                                                                className={
+                                                                    stat.perfloorStats
+                                                                }
+                                                                key={index}
+                                                            >
+                                                                <div
+                                                                    className={
+                                                                        stat.floorTitleA
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        floor?.floor_name
+                                                                    }
+                                                                    :
+                                                                    <div
+                                                                        className={
+                                                                            stat.divider
+                                                                        }
+                                                                    ></div>
+                                                                </div>
+                                                                <div
+                                                                    className={
+                                                                        stat.allperfloor
+                                                                    }
+                                                                >
+                                                                    <div
+                                                                        className={
+                                                                            stat.statsboxA
+                                                                        }
+                                                                    >
+                                                                        <h4>
+                                                                            Usage
+                                                                            Count
+                                                                            (person):
+                                                                        </h4>
+                                                                        <p>
+                                                                            {
+                                                                                floor?.record_count
+                                                                            }
+                                                                        </p>
+                                                                    </div>
+                                                                    {/* <div
+                                                                        className={
+                                                                            stat.statsboxA
+                                                                        }
+                                                                    >
+                                                                        <h4>
+                                                                            Avg.
+                                                                            Time
+                                                                            Stayed
+                                                                            (sec):
+                                                                        </h4>
+                                                                        <p>
+                                                                            {" "}
+                                                                            {Math.round(
+                                                                                floor.averageStayTime
+                                                                            )}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div
+                                                                        className={
+                                                                            stat.statsboxA
+                                                                        }
+                                                                    >
+                                                                        <h4>
+                                                                            Highest
+                                                                            Time
+                                                                            Stayed
+                                                                            (sec):
+                                                                        </h4>
+                                                                        <p>
+                                                                            {" "}
+                                                                            {
+                                                                                floor.highestStayTime
+                                                                            }
+                                                                        </p>
+                                                                    </div>
+                                                                    <div
+                                                                        className={
+                                                                            stat.statsboxA
+                                                                        }
+                                                                    >
+                                                                        <h4>
+                                                                            Lowest
+                                                                            Time
+                                                                            Stayed
+                                                                            (sec):
+                                                                        </h4>
+                                                                        <p>
+                                                                            {" "}
+                                                                            {
+                                                                                floor.lowestStayTime
+                                                                            }
+                                                                        </p>
+                                                                    </div> */}
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    )}
+                                                </div>
+                                            )}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )}
-                </div>
-                <div className={stat.generalStatistics}>
-                    <div className={stat.panel1}>
-                        <div className={stat.tableTitle}>
-                            Library Entry/Exit Statistics by Floor
-                        </div>
-                        <div className={stat.floorStatitics}>
-                            {recordStats.floors &&
-                                recordStats.floors.length > 0 && (
-                                    <div>
-                                        {recordStats.floors.map(
-                                            (floor, index) => (
-                                                <div
-                                                    className={
-                                                        stat.perfloorStats
-                                                    }
-                                                    key={index}
-                                                >
-                                                    <div
-                                                        className={
-                                                            stat.floorTitleA
-                                                        }
-                                                    >
-                                                        {floor["Floor.name"]}:
-                                                        <div
-                                                            className={
-                                                                stat.divider
-                                                            }
-                                                        ></div>
-                                                    </div>
-                                                    <div
-                                                        className={
-                                                            stat.allperfloor
-                                                        }
-                                                    >
-                                                        <div
-                                                            className={
-                                                                stat.statsboxA
-                                                            }
-                                                        >
-                                                            <h4>
-                                                                Usage Count
-                                                                (person):
-                                                            </h4>
-                                                            <p>
-                                                                {" "}
-                                                                {floor.count}
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            className={
-                                                                stat.statsboxA
-                                                            }
-                                                        >
-                                                            <h4>
-                                                                Avg. Time Stayed
-                                                                (sec):
-                                                            </h4>
-                                                            <p>
-                                                                {" "}
-                                                                {Math.round(
-                                                                    floor.averageStayTime
-                                                                )}
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            className={
-                                                                stat.statsboxA
-                                                            }
-                                                        >
-                                                            <h4>
-                                                                Highest Time
-                                                                Stayed (sec):
-                                                            </h4>
-                                                            <p>
-                                                                {" "}
-                                                                {
-                                                                    floor.highestStayTime
-                                                                }
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            className={
-                                                                stat.statsboxA
-                                                            }
-                                                        >
-                                                            <h4>
-                                                                Lowest Time
-                                                                Stayed (sec):
-                                                            </h4>
-                                                            <p>
-                                                                {" "}
-                                                                {
-                                                                    floor.lowestStayTime
-                                                                }
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )
-                                        )}
-                                    </div>
-                                )}
-                        </div>
-                    </div>
-                    <div className={stat.panel2}>
-                        {/* 
-              HIDDEN DUE TO DEPLOYMENT
-             */}
-                        {/* <div className={stat.panel2Title}>Spaces Usage Statistics  {college ? `for ${college}` : ""} </div>
-          <p style={{ fontSize: "13px" }}>
-            Note: Reservations total per College is based from the representative as reservation may contain students from different collegs
-          </p>
-          <br></br>
-          {reservationStats && (
-            <>
-              <div className={stat.stats1c}><p>Approved Reservations Total: {reservationStats.totalReservations}</p></div>
-              <div className={stat.stats2c}><p>Usage Count (person): {reservationStats.totalStudentUsage}</p></div>
-            </>
-          )}
-          <h4>Space Usage Statistics per Floor</h4>
-          {reservationStats.totalReservationByConfab && reservationStats.totalReservationByConfab.length > 0 && (
-            <div>
-              <br></br>
-              <h4>Approved Reseravations by Confab</h4>
-              {reservationStats.totalReservationByConfab.map((usage, index) => (
-                <div key={index}>
-                  <p>Space: {usage.name}</p>
-                  <div className={stat.stats1d}><p>Usage Count (person): {usage.count}</p></div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {reservationStats.totalStudentUsageByConfab && reservationStats.totalStudentUsageByConfab.length > 0 && (
-            <div>
-              <br></br>
-              <h4>Student Usage By Confab</h4>
-              {reservationStats.totalStudentUsageByConfab.map((usage, index) => (
-                <div key={index}>
-                  <p>Space: {usage.name}</p>
-                  <p>Usage Count (person): {usage.count}</p>
-                </div>
-              ))}
-            </div>
-          )} */}
-                    </div>
                 </div>
             </div>
         </div>

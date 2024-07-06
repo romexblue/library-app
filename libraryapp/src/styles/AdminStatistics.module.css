@@ -1,11 +1,11 @@
-.mainPage{
+.mainPage {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-.topBar{
+.topBar {
     width: 100%;
     height: 70px;
     display: flex;
@@ -13,7 +13,7 @@
     justify-content: flex-start;
     margin-bottom: 10px;
 }
-.dpStart{
+.dpStart {
     margin: 0 10px 0;
     height: 100%;
     width: 140px;
@@ -21,7 +21,7 @@
     flex-direction: column;
     justify-content: center;
 }
-.dpEnd{
+.dpEnd {
     margin: 0 10px 0;
     height: 100%;
     width: 140px;
@@ -29,7 +29,7 @@
     flex-direction: column;
     justify-content: center;
 }
-.category{
+.category {
     margin: 0 30px 0;
     height: 100%;
     width: 160px;
@@ -37,101 +37,103 @@
     flex-direction: column;
     justify-content: center;
 }
-.allSelect{
+.allSelect {
     width: 160px;
     height: 40px;
     border-radius: 10px;
 }
-.pdateStart{
+.pdateStart {
     height: 40px !important;
     width: 140px !important;
     border-radius: 10px !important;
 }
 
-.pdateEnd{
+.pdateEnd {
     height: 40px !important;
     width: 140px !important;
     border-radius: 10px !important;
 }
-.export{
+.export {
     height: 100%;
     width: 100px;
     margin-left: auto;
 }
-.exportContainer{
+.exportContainer {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.imgCont{
+.imgCont {
     width: 20px;
 }
-.export img{
+.export img {
     height: 20px;
     margin: auto;
 }
-.export img:hover{
+.export img:hover {
     cursor: pointer;
 }
-.label{
+.label {
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 5px;
 }
-.allStatistics{
+.allStatistics {
+    margin-top: 10px;
     height: 580px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-.headerStatistics{
+.headerStatistics {
     padding: 0 10px 0;
-    height: 20%;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
-.StatisticsContainer1{
+.StatisticsContainer1 {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     justify-content: center;
 }
-.panel1Title{
-    font-family: 'Ubuntu', sans-serif;
+.panel1Title {
+    font-family: "Ubuntu", sans-serif;
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 10px;
 }
-.generalStatistics{
+.generalStatistics {
     height: 80%;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-}   
-.panel1{
-    width: 50%;
-    height: 95%;
+}
+.panel1 {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     padding: 0 10px 0;
 }
-.tableTitle{
+.tableTitle {
     font-size: 16px;
     color: #4c4c4c;
     font-weight: 500;
     width: 100%;
     text-align: center;
     margin-top: 20px;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: "Ubuntu", sans-serif;
 }
-.floorStatitics{
+.floorStatitics {
     margin-top: 10px;
     width: 100%;
     height: 100%;
@@ -143,47 +145,43 @@
 
 .floorStatitics::-webkit-scrollbar {
     width: 14px;
-    
-  }
-  
+}
+
 .floorStatitics::-webkit-scrollbar-track {
     background-color: #f1f1f1;
-    
-  }
-  
+}
+
 .floorStatitics::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 4px;
-    
-  }
-  
+}
+
 .floorStatitics::-webkit-scrollbar-thumb:hover {
     background-color: #555;
-  }
+}
 .floorStatitics::-webkit-scrollbar-thumb:horizontal {
     margin-right: -20px !important;
-  }
-  
+}
+
 .floorStatitics::-webkit-scrollbar-thumb:vertical {
     margin-bottom: -20px;
-    
-  }
-.perfloorStats{
-    height: 200px;
+}
+.perfloorStats {
+    /* height: 200px; */
     width: 100%;
     margin-bottom: 20px;
     padding: 0 20px 0;
 }
-.allperfloor{
+.allperfloor {
     margin-top: 10px;
-    height: 100%;
+    height: auto;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
 }
-.statsboxA{
+.statsboxA {
     width: 45%;
     height: 80px;
     padding: 0 10px 0;
@@ -195,32 +193,52 @@
     border-radius: 10px;
     color: #2a2a2a;
 }
-.statsboxA h4{
+.statsboxA h4 {
     align-items: flex-start;
     font-weight: 100;
 }
-.statsboxA p{
+.statsboxA p {
     font-size: 30px;
 }
-.floorTitleA{
+.floorTitleA {
     font-size: 18px;
     font-weight: 500;
     display: flex;
     flex-direction: row;
-    margin:0;
+    margin: 0;
     color: #283971;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-.divider{
+.divider {
     width: 70%;
     height: 0.2px;
     margin: 10px 0 10px;
     background-color: gray;
 }
-.stats1a{
+.stats1a {
+    width: 300px;
+    /* height: 100%; */
+    padding: 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #283971;
+    color: white;
+    margin: 10px 10px 0;
+    border-radius: 10px;
+}
+.stats1a h4 {
+    font-size: 14px;
+    align-items: flex-start;
+    font-weight: 100;
+}
+.stats1a p {
+    font-size: 30px;
+}
+.stats2a {
     width: 300px;
     height: 100%;
     padding: 10px 10px 10px;
@@ -232,15 +250,15 @@
     margin: 0 10px 0;
     border-radius: 10px;
 }
-.stats1a h4{
+.stats2a h4 {
     font-size: 14px;
     align-items: flex-start;
     font-weight: 100;
 }
-.stats1a p{
+.stats2a p {
     font-size: 30px;
 }
-.stats2a{
+.stats3a {
     width: 300px;
     height: 100%;
     padding: 10px 10px 10px;
@@ -252,15 +270,15 @@
     margin: 0 10px 0;
     border-radius: 10px;
 }
-.stats2a h4{
+.stats3a h4 {
     font-size: 14px;
     align-items: flex-start;
     font-weight: 100;
 }
-.stats2a p{
+.stats3a p {
     font-size: 30px;
 }
-.stats3a{
+.stats4a {
     width: 300px;
     height: 100%;
     padding: 10px 10px 10px;
@@ -272,42 +290,22 @@
     margin: 0 10px 0;
     border-radius: 10px;
 }
-.stats3a h4{
+.stats4a h4 {
     font-size: 14px;
     align-items: flex-start;
     font-weight: 100;
 }
-.stats3a p{
+.stats4a p {
     font-size: 30px;
 }
-.stats4a{
-    width: 300px;
-    height: 100%;
-    padding: 10px 10px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    background-color: #283971;
-    color: white;
-    margin: 0 10px 0;
-    border-radius: 10px;
-}
-.stats4a h4{
-    font-size: 14px;
-    align-items: flex-start;
-    font-weight: 100;
-}
-.stats4a p{
-    font-size: 30px;
-}
-.ptable2{
+.ptable2 {
     width: 100%;
     height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.table2Row1{
+.table2Row1 {
     margin: 10px 0 10px;
     width: 100%;
     height: 100px;
@@ -315,7 +313,7 @@
     flex-direction: row;
     justify-content: space-around;
 }
-.boundary{
+.boundary {
     margin: 0px 30px 0;
     display: relative;
     width: auto;
@@ -323,12 +321,12 @@
     background-color: #747e92;
 }
 
-.panel2{
+.panel2 {
     width: 50%;
     height: 100%;
     padding: 0 10px 0;
 }
-.panel2Title{
+.panel2Title {
     font-size: 20px;
     font-weight: 500;
     width: 100%;
@@ -336,7 +334,7 @@
     margin-top: 20px;
 }
 @media screen and (max-height: 700px) {
-    .allStatistics{
+    .allStatistics {
         height: 520px;
     }
 }

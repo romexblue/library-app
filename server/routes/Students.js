@@ -48,21 +48,21 @@ router.get("/find/:school_id", async (req, res) => {
             },
         });
         if (student) {
-            const findRecord = await Records.findOne({
-                //find record to get floor id
-                where: {
-                    StudentSchoolId: student.school_id,
-                    time_out: null,
-                },
-                limit: 1,
-            });
-            if (findRecord) {
-                res.json({
-                    error: "You are currently Timed In. Please Time Out",
-                });
-            } else {
-                res.json({ student });
-            }
+            // const findRecord = await Records.findOne({
+            //     //find record to get floor id
+            //     where: {
+            //         StudentSchoolId: student.school_id,
+            //         time_out: null,
+            //     },
+            //     limit: 1,
+            // });
+            // if (findRecord) {
+            //     res.json({
+            //         error: "You are currently Timed In. Please Time Out",
+            //     });
+            // } else {
+            res.json({ student });
+            // }
         } else {
             res.json({ error: "No Record Found" });
         }

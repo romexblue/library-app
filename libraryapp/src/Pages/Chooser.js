@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from '../helpers/AuthContext';
 import image1 from '../images/Logout_Icon.png';
 import image2 from '../images/Entry_Icon.png';
-import image3 from '../images/Exit_Icon.png';
-import image4 from '../images/Sched_Icon.png';
+// import image3 from '../images/Exit_Icon.png';
+// import image4 from '../images/Sched_Icon.png';
 
 const Chooser = () => {
   const buttonsRef = useRef([]);
@@ -33,8 +33,11 @@ const Chooser = () => {
         navigate('/entry');
         break;
       case 1:
-        navigate('/exit');
+        navigate('/entry/med')
         break;
+      // case 1:
+      //   navigate('/exit');
+      //   break;
       case 2:
         navigate('/reservation');
         break;
@@ -70,7 +73,15 @@ const Chooser = () => {
               <h3>Entry</h3>
             </div> 
           </button>
-          <button className="box" style={{cursor: "pointer"}}  ref={(el) => (buttonsRef.current[1] = el)} onKeyDown={(event) => handleKeyDown(event, 1)} onClick={() => chooseDes(1)}>
+          <button className="box" style={{cursor: "pointer"}} ref={(el) => (buttonsRef.current[1] = el)} onKeyDown={(event) => handleKeyDown(event, 0)} onClick={() => chooseDes(1)}>
+            <div className="box-icon">
+              <img className="Btn" id="EntryBtn" alt="img" src={image2}/>
+            </div>
+            <div className="box-text">
+              <h3>Entry (MED)</h3>
+            </div> 
+          </button>
+          {/* <button className="box" style={{cursor: "pointer"}}  ref={(el) => (buttonsRef.current[1] = el)} onKeyDown={(event) => handleKeyDown(event, 1)} onClick={() => chooseDes(1)}>
             <div className="box-icon">
               <img className="Btn" id="EntryBtn" alt="img" src={image3}/>
             </div>
@@ -85,7 +96,7 @@ const Chooser = () => {
             <div className="box-text">
               <h3>Reservation</h3>
             </div>
-          </button>
+          </button> */}
         </div>
     </div>
 

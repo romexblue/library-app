@@ -13,6 +13,8 @@ const InfoPage = ({
     studentRFID,
     setStudentRFID,
     setStudentData,
+    onSubmitClicked,
+    isMed = false,
 }) => {
     const [value, setValue] = useState(""); //value of input
     const [searchResult, setSearchResult] = useState(""); //value of result
@@ -81,6 +83,7 @@ const InfoPage = ({
                             setStudentData(response.data.student);
                             setStudentID(response.data.student.school_id);
                             setStudentRFID(response.data.student.rfid);
+                            if (onSubmitClicked) onSubmitClicked();
                         }
                     });
             } else {
@@ -121,7 +124,7 @@ const InfoPage = ({
                     <img src={image2} alt="img" />
                 </div>
                 <div className="TapMessage">
-                    <h1>TAP YOUR ID TO ENTER</h1>
+                    <h1>TAP YOUR ID TO ENTER {isMed && "(MED Library)"}</h1>
                 </div>
             </div>
             <div className="sec3">
@@ -136,10 +139,16 @@ const InfoPage = ({
                             value={value}
                             onChange={handleChange}
                             style={{
-                                borderColor: searchResult ? "red" : "",
-                                backgroundColor: searchResult
-                                    ? "rgb(255, 251, 251)"
-                                    : "",
+                                borderColor:
+                                    searchResult !== "User Found" &&
+                                    searchResult?.length !== 0
+                                        ? "red"
+                                        : "",
+                                backgroundColor:
+                                    searchResult !== "User Found" &&
+                                    searchResult?.length !== 0
+                                        ? "rgb(255, 251, 251)"
+                                        : "",
                             }}
                         />
                     </div>
@@ -151,7 +160,9 @@ const InfoPage = ({
                 </div>
                 <div className="centerText">
                     <div className="feedbackContainer">
-                        <p className="feedback">{searchResult}</p>
+                        <p className="feedback" style={{ color: "black" }}>
+                            {searchResult}
+                        </p>
                     </div>
                     <div className="rightsText">
                         <p>
