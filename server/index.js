@@ -47,39 +47,39 @@ db.sequelize.sync().then(async () => {
             });
     }
 
-    // const currentDate = new Date();
+    const currentDate = new Date();
 
-    // const options = { timeZone: "Asia/Manila" };
-    // const philippineDate = currentDate.toLocaleString("en-US", options).slice(0, 10);
+    const options = { timeZone: "Asia/Manila" };
+    const philippineDate = currentDate.toLocaleString("en-US", options).slice(0, 10);
 
-    // await Records.destroy({
-    //     where: {
-    //         date: {
-    //             [Op.lt]: philippineDate,
-    //         },
-    //         time_out: null,
-    //     },
-    // })
-    //     .then((deletedCount) => {
-    //         console.log(`${deletedCount} records deleted successfully.`);
-    //         if (deletedCount > 0) {
-    //             Floor.update({ current_count: 0 }, { where: {} })
-    //                 .then((updatedCount) => {
-    //                     console.log(
-    //                         `${updatedCount} instances updated successfully.`
-    //                     );
-    //                 })
-    //                 .catch((err) => {
-    //                     console.error(
-    //                         "Error occurred while updating instances:",
-    //                         err
-    //                     );
-    //                 });
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         console.error("Error occurred while deleting records:", err);
-    //     });
+    await Records.destroy({
+        where: {
+            date: {
+                [Op.lt]: philippineDate,
+            },
+            time_out: null,
+        },
+    })
+        .then((deletedCount) => {
+            console.log(`${deletedCount} records deleted successfully.`);
+            if (deletedCount > 0) {
+                Floor.update({ current_count: 0 }, { where: {} })
+                    .then((updatedCount) => {
+                        console.log(
+                            `${updatedCount} instances updated successfully.`
+                        );
+                    })
+                    .catch((err) => {
+                        console.error(
+                            "Error occurred while updating instances:",
+                            err
+                        );
+                    });
+            }
+        })
+        .catch((err) => {
+            console.error("Error occurred while deleting records:", err);
+        });
     app.listen(port, () => {
         console.log(`🚀 Server running on port ${port}`);
     });
